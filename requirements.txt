@@ -1,0 +1,15 @@
+# Core numerical and scientific computing
+numpy>=1.24
+scipy>=1.10
+sympy>=1.12
+
+# Deep learning and differentiable ODE integration
+torch>=2.0
+torchdiffeq>=0.2.3
+pytorch-lightning>=2.0,<3.0
+
+# Configuration, optimization, progress, and plotting
+PyYAML>=6.0
+cvxpy>=1.4
+tqdm>=4.65
+matplotlib>=3.7

@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+lightning_logs/
+outputs/*
+!outputs/.gitkeep
+
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/

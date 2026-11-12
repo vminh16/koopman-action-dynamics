@@ -78,10 +78,14 @@ TensorBoard event for each fraction. Only seed 42 is currently available.
 - The 30% result is close to the paper reference.
 - The 5% and 10% results are substantially higher than the paper references and
   require investigation before claiming reproduction.
-- The reproduction is currently `NEEDS_INVESTIGATION`, not `PASS`, because only
-  seed 42 has been run and the low-data results do not match the reference.
+- P0 is complete with verdict `MISMATCH`; the local runs are valid
+  protocol-variant evidence, not exact paper reproduction.
+- Aggregate reproduction remains open because only seed 42 has been run and the
+  low-data results do not match the reference.
 - The saved checkpoints/configs do not include an explicit seed field; the
   training script currently uses its fixed seed value `42`.
+
+P0 audit manifest: [E00 manifest](outputs/reproduction/E00/manifest.yaml).
 
 ## 4. Commands
 

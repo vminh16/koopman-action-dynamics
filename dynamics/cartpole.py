@@ -24,7 +24,6 @@ class CartPoleDynamics:
         x_pos = x[..., 0]
         x_dot = x[..., 1]
         theta = self.angle_normalize(x[..., 2])
-        x[...,2] = theta
         theta_dot = x[..., 3]
         force = u[..., 0]
 

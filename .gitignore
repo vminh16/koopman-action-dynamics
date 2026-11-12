@@ -5,6 +5,9 @@ __pycache__/
 lightning_logs/
 outputs/*
 !outputs/.gitkeep
+!outputs/reproduction/
+!outputs/reproduction/E00/
+!outputs/reproduction/E00/manifest.yaml
 
 *.egg-info/
 .pytest_cache/

@@ -1,0 +1,91 @@
+experiment_id: E00
+phase: P0
+status: COMPLETED_MISMATCH
+verdict: MISMATCH
+summary: >-
+  Pendulum baseline artifacts, code path, dataset contract, and evaluation
+  outputs were audited. The runs are valid local controllable-Koopman
+  protocol-variant evidence, but they are not an exact paper reproduction.
+
+provenance:
+  repository: vminh16/koopman-action-dynamics
+  git_head: 8901b7b22b7e593d1c25eb14854d69fa254ee31d
+  audited_upstream_commit: ec131bb549c8f7b01519a99acca237b9fdc9c826
+  python: 3.10.12
+  pytorch: 2.14.1+cu130
+  cuda: "13.0"
+  gpu: NVIDIA GeForce RTX 2050
+  seed: 42
+
+dataset:
+  train_path: data/pendulum_train.pt
+  test_path: data/pendulum_test.pt
+  train_trajectories: 5000
+  test_trajectories: 1000
+  trajectory_length: 250
+  state_shape: [1, 2]
+  control_shape: [250, 1]
+  trajectory_state_shape: [250, 1, 2]
+  dt: 0.02
+  train_sha256: 564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f
+  test_sha256: c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020
+  split_identity_overlap: false
+
+training_protocol:
+  model_class: KoopmanLitModule
+  koopman_mode: controllable
+  control_loss: true
+  latent_dim: 16
+  encoder_layers: 3
+  hidden_size: 64
+  window_len: 15
+  windows_per_trajectory: 20
+  window_start_range: [0, 235]
+  optimizer: AdamW
+  learning_rate: 0.001
+  epochs: 100
+  train_fractions:
+    "0.05":
+      trajectories: 250
+      checkpoint: checkpoints/pendulum_mode-controllable_win15_frac0.05_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt
+      config: configs/pendulum_mode-controllable_win15_frac0.05_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml
+      test_mse: 0.106817
+    "0.10":
+      trajectories: 500
+      checkpoint: checkpoints/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt
+      config: configs/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml
+      test_mse: 0.099285
+    "0.30":
+      trajectories: 1500
+      checkpoint: checkpoints/pendulum_mode-controllable_win15_frac0.3_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt
+      config: configs/pendulum_mode-controllable_win15_frac0.3_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml
+      test_mse: 0.006827
+
+evaluation:
+  script: experiments/run_eval.py
+  split: test
+  trajectories: 1000
+  window_len: 15
+  open_loop: true
+  reencode: false
+  paper_reference_mse:
+    "0.05": 0.0318
+    "0.10": 0.0114
+    "0.30": 0.0061
+  trend_matches_paper: true
+  exact_reference_match: false
+
+audit_findings:
+  - "Checkpoint keys contain model.operator.core.A_free/B_free and H_head/H_tail; they are compatible with the controllable Koopman module."
+  - "The corrected local runner explicitly instantiates KoopmanLitModule and passes lr=0.001."
+  - "Train fraction is selected before window construction: 250, 500, and 1500 trajectories."
+  - "Train and test datasets contain 5000 and 1000 distinct loaded trajectory objects."
+  - "The three completed runs used only seed 42."
+  - "The 5% and 10% MSE values are substantially above the paper references."
+  - "The 30% MSE is close to the paper reference."
+  - "This audit does not establish exact paper optimizer, checkpoint-selection, or multi-seed parity."
+
+follow_up:
+  - "Run seeds 43 and 44 before reporting aggregate reproduction statistics."
+  - "Create an independent research/baseline runner and record any paper-vs-code deviations."
+  - "Do not label the current result PASS or use it as exact paper reproduction."

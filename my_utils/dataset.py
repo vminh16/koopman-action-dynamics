@@ -84,8 +84,11 @@ if __name__ == "__main__":
     parser.add_argument("--num", type=int, default=1000, help="Number of trajectories")
     parser.add_argument("--T", type=int, default=50, help="Steps per trajectory")
     parser.add_argument("--split", type=str, default="train", help="Dataset split (train/val/test)")
+    parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
 
+    torch.manual_seed(args.seed)
+    random.seed(args.seed)
     system_class = SYSTEM_REGISTRY[args.system]
     system = system_class()
     system_config = {

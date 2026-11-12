@@ -5,7 +5,7 @@
 **Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
 **Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
 **Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
-**Current state:** Pendulum run **reported completed but not verified**. Next: Pendulum forensic audit → CartPole data + faithful baseline reproduction → controlled stress tests. No H2/H3 training yet.
+**Current state:** P0 Pendulum forensic audit completed with a documented `MISMATCH` verdict. Next: multi-seed Pendulum verification and faithful baseline runner → CartPole data + reproduction → controlled stress tests. No H2/H3 training yet.
 
 > **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; do not reproduce external model baselines at this stage.
 
@@ -147,18 +147,18 @@ koopman-action-dynamics/
 
 ## 3. Phase sequence and evidence gates
 
-### P0 — Local Pendulum forensic audit (START HERE)
+### P0 — Local Pendulum forensic audit (COMPLETED: MISMATCH)
 
 **Goal:** determine what was trained and whether existing result is valid baseline evidence.
 
-- [ ] `git rev-parse HEAD`, `git status --short`, `git diff --stat`, model class from running script, effective flags and optimizer LR.
-- [ ] Inspect checkpoint keys and architecture compatibility. Current upstream `run_train.py` runs **MLP**, not Koopman, unless local edits exist.
-- [ ] Record data hash, sampled window starts, train fraction, train/test split, time step, model dimensions, ODE solver and evaluation script.
-- [ ] Re-evaluate strictly with appropriate class; save per-trajectory MSE and source manifest.
-- [ ] If it was MLP or protocol differs, classify honestly and schedule a Koopman reproduction using a wrapper in `research/baseline/` (without overwriting the old run).
+- [x] `git rev-parse HEAD`, `git status --short`, model class, effective flags and optimizer LR recorded.
+- [x] Checkpoint keys and architecture compatibility audited; the completed local runs use `KoopmanLitModule`.
+- [x] Data hashes, sampled window range, train fractions, train/test split, time step, model dimensions and evaluation script recorded.
+- [x] Re-evaluated open-loop on 1,000 test trajectories; results and source manifest saved.
+- [x] Protocol mismatch classified honestly; exact paper reproduction remains a follow-up, without overwriting existing runs.
 
-**Output:** `outputs/reproduction/E00/manifest.yaml`, checkpoint audit and `PASS / MISMATCH / INDETERMINATE` verdict.  
-**Exit:** no ambiguity about Pendulum run type, config or provenance. A completed training process **is not** proof of paper reproduction.
+**Output:** [manifest](outputs/reproduction/E00/manifest.yaml), checkpoint audit and `MISMATCH` verdict.
+**Exit:** no remaining ambiguity about the local Pendulum run type, config or provenance. The run is not claimed as exact paper reproduction.
 
 ### P1 — Dataset and original-model reproduction (CartPole NEXT)
 

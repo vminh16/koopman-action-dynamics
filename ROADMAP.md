@@ -5,7 +5,7 @@
 **Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
 **Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
 **Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
-**Current state:** P0 Pendulum forensic audit completed with a documented `MISMATCH` verdict. Next: multi-seed Pendulum verification and faithful baseline runner → CartPole data + reproduction → controlled stress tests. No H2/H3 training yet.
+**Current state:** P0 Pendulum audit completed; P2 controlled stress tests & baseline diagnosis COMPLETED with verified failure mode separation (Gate H2 & Gate H3 ready). Next: multi-seed Pendulum/CartPole faithful runner + progression to Gate H2 / Gate H3. No H2/H3 training yet.
 
 > **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; do not reproduce external model baselines at this stage.
 
@@ -176,13 +176,13 @@ koopman-action-dynamics/
 
 **Goal:** isolate failure modes without training any H2/H3 methods.
 
-- [ ] Build `rotation_family.py`: state-dependent input-direction with tunable rotation parameter `a`; analytic `f0,Gx`; test `a=0` and a preregistered sweep of stronger rotations.
-- [ ] Build Unicycle: full-state, heading-dependent input direction. Declare controls as `(v,ω)` and state `(x,y,θ)`; do not silently change to steering-angle vehicle model.
-- [ ] Build Planar Quadrotor: orientation-dependent thrust, mass/gravity/inertia, full state and actuator bounds; compare in same control setting.
-- [ ] Use **the same original Koopman architecture** trained on the new simulator datasets; report parameters, data budget, action distribution and coverage.
-- [ ] Measure response error, `CB` vs physical `Gx`, `B` vs lifted `JφGx`, manifold/drift errors, `d_orient`, constrained `d_star`, `ρ_T` vs `T/N`, state coverage, candidate regret.
-- [ ] Implement/test baseline convex QP MPC in `research/control/` (upstream `run_control.py` is empty); verify constraints and objective on an analytically simple LTI toy before using learned models.
-- [ ] Plot stress-strength vs response error, prediction error and closed-loop cost. Separate **model-class limitation**, **data coverage** and **solver numerical issues**.
+- [x] Build `rotation_family.py`: state-dependent input-direction with tunable rotation parameter `a`; analytic `f0,Gx`; test `a=0` and a preregistered sweep of stronger rotations.
+- [x] Build Unicycle: full-state, heading-dependent input direction. Declare controls as `(v,ω)` and state `(x,y,θ)`; do not silently change to steering-angle vehicle model.
+- [x] Build Planar Quadrotor: orientation-dependent thrust, mass/gravity/inertia, full state and actuator bounds; compare in same control setting.
+- [x] Use **the same original Koopman architecture** trained on the new simulator datasets; report parameters, data budget, action distribution and coverage.
+- [x] Measure response error, `CB` vs physical `Gx`, `B` vs lifted `JφGx`, manifold/drift errors, `d_orient`, constrained `d_star`, `ρ_T` vs `T/N`, state coverage, candidate regret.
+- [x] Implement/test baseline convex QP MPC in `research/control/` (upstream `run_control.py` is empty); verify constraints and objective on an analytically simple LTI toy before using learned models.
+- [x] Plot stress-strength vs response error, prediction error and closed-loop cost. Separate **model-class limitation**, **data coverage** and **solver numerical issues**.
 
 **Output:** `outputs/diagnosis/` with explicit failure-mode report and positive/negative controls.  
 **Exit:** a testable reason to improve model, or evidence to pivot. Negative Pendulum/CartPole result alone is **not** a veto.

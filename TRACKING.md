@@ -87,6 +87,16 @@ TensorBoard event for each fraction. Only seed 42 is currently available.
 
 P0 audit manifest: [E00 manifest](outputs/reproduction/E00/manifest.yaml).
 
+## 3.1. Phase P2 Controlled Stress Tests Summary
+
+Phase P2 đã hoàn tất thực nghiệm chẩn đoán và phân tách lỗi (Gate P2 PASS):
+- **Rotation family sweep ($a \in [0.0, 2.0]$):** $E_{\text{response}}$ tăng từ $0.2397$ lên $1.1561$ ($4.82\times$), $\|CB - G_x\|_F$ tăng từ $0.4896$ lên $1.0207$, trong khi 1-step prediction MSE giữ ở mức rất thấp $\approx 10^{-5}$.
+- **Unicycle:** $E_{\text{lift}} = 1.5617, E_{\text{phys}} = 1.5096, d_{\text{orient}} = 0.5347, \rho_T = 2.80 \times 10^{-3}$.
+- **Planar Quadrotor:** $E_{\text{lift}} = 53.3568, E_{\text{phys}} = 35.3904, d_{\text{orient}} = 1.0677, \rho_T = 4.64 \times 10^{-4}$.
+- **Convex QP MPC:** Đã kiểm thử trên hệ LTI và mô hình Koopman; tracking cost tăng $27.5\%$ trên hệ quay ($a=1.0$ vs $a=0.0$).
+- **Phán quyết Gate H2 / H3:** Đã chứng minh giới hạn cấu trúc model-class của toán tử $B$ tĩnh khi hướng tác động xoay theo trạng thái; đủ bằng chứng mở Gate H2 và Gate H3.
+- Báo cáo chẩn đoán chi tiết: [p2_failure_report.yaml](outputs/diagnosis/p2_failure_report.yaml).
+
 ## 4. Commands
 
 Run from the repository root with the project environment activated:

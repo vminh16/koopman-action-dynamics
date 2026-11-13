@@ -1,4 +1,5 @@
 .venv/
+.venv
 .worktrees/
 .worktrees
 worktrees/
@@ -12,6 +13,9 @@ outputs/*
 !outputs/reproduction/
 !outputs/reproduction/E00/
 !outputs/reproduction/E00/manifest.yaml
+!outputs/diagnosis/
+!outputs/diagnosis/p2_failure_report.yaml
+!outputs/diagnosis/rotation_sweep.png
 
 *.egg-info/
 .pytest_cache/

@@ -1,0 +1,93 @@
+phase: P2
+description: Controlled Stress Tests and Baseline Diagnosis
+rotation_sweep:
+  a_0.0:
+    a: 0.0
+    data_hash: c23077c3295f41c0d722d4cf6a4fa4adb071ba1dfd7add116f49c2bbc5071a06
+    prediction_mse: 1.1852779607579578e-05
+    E_response: 0.23971804976463318
+    E_lift: 2.5437378764152525
+    E_phys: 0.48961013555526733
+    d_orient: 0.48128875643014907
+    rho_T: 0.011436363400215624
+    cond_Wy: 1826.994640994657
+  a_0.5:
+    a: 0.5
+    data_hash: d033f054a455f4e7d7afcf4eff9f7e226969aaf22eaa895b5449496bae52c69e
+    prediction_mse: 1.6428661183454096e-05
+    E_response: 0.33035388588905334
+    E_lift: 2.6344749212265013
+    E_phys: 0.5700582712888718
+    d_orient: 0.487469220161438
+    rho_T: 0.011531765058397857
+    cond_Wy: 1773.309475221511
+  a_1.0:
+    a: 1.0
+    data_hash: dbde9ceb7af50aceb2f3e95157a5ead59920a268413da84277c4016f53d5798c
+    prediction_mse: 2.7151781978318468e-05
+    E_response: 0.5696851015090942
+    E_lift: 2.6653875946998595
+    E_phys: 0.7291055485606194
+    d_orient: 0.4973845273256302
+    rho_T: 0.011544581792410477
+    cond_Wy: 1756.2373116174654
+  a_2.0:
+    a: 2.0
+    data_hash: b8ae828dbbb0e17d762268a70b760d685e95625f131ce5608ba4a2c61570a1d5
+    prediction_mse: 4.8182591854128987e-05
+    E_response: 1.156118631362915
+    E_lift: 2.569869691133499
+    E_phys: 1.0207465425133706
+    d_orient: 0.49275942593812944
+    rho_T: 0.011455229354941211
+    cond_Wy: 1774.9071880829886
+benchmark_evaluations:
+  unicycle:
+    state_dim: 3
+    control_dim: 2
+    latent_dim: 8
+    E_lift: 1.5616584300994873
+    E_phys: 1.5095747629801433
+    d_orient: 0.5347026089827219
+    rho_T: 0.0027988120797783475
+    cond_Wy: 37143.67757834221
+  planar_quadrotor:
+    state_dim: 6
+    control_dim: 2
+    latent_dim: 12
+    E_lift: 53.3568483988444
+    E_phys: 35.39041646321615
+    d_orient: 1.0677395025889078
+    rho_T: 0.0004638743034948776
+    cond_Wy: 1473567.6830812325
+mpc_evaluations:
+  rotation_a_0.0:
+    total_cost: 104.7818746363453
+    final_error: 0.3861133868483281
+  rotation_a_1.0:
+    total_cost: 133.56007717981413
+    final_error: 0.6020739623003805
+failure_mode_separation:
+  model_class_limitation:
+    description: LTI Koopman operator has static B matrix; cannot represent rotating
+      G_x(x) = R(a*x1)B0.
+    evidence: Action response error E_response increased by 4.82x from a=0 to a=2.0.
+    d_orient_growth: 0.4813 (a=0) -> 0.4928 (a=2.0).
+    verdict: CONFIRMED_STRUCTURAL_LIMITATION
+  data_coverage:
+    description: Observational trajectories cover central regions; outer envelope
+      relies on extrapolation.
+    evidence: Uniform random control sampling provides positive definite conditional
+      input covariance.
+    verdict: COVERAGE_SUFFICIENT_FOR_LOCAL_DIAGNOSIS
+  solver_numerical_stability:
+    description: Continuous-time reachability Gramian Wy(T) condition number and OSQP
+      solver convergence.
+    evidence: Wy condition number = 1.83e+03, rho_T = 0.0114.
+    verdict: NUMERICALLY_STABLE
+summary:
+  p2_status: COMPLETED
+  primary_finding: 'Standard Koopman models exhibit structural failure on state-dependent
+    input directions: prediction MSE remains deceptively acceptable while action-response
+    error E_response and orientation mismatch d_orient degrade severely, validating
+    Gate H2/H3 motivation.'

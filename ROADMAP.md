@@ -5,7 +5,7 @@
 **Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
 **Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
 **Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
-**Current state:** P0 Pendulum audit completed; P2 controlled stress tests & baseline diagnosis COMPLETED with verified failure mode separation (Gate H2 & Gate H3 ready). Next: multi-seed Pendulum/CartPole faithful runner + progression to Gate H2 / Gate H3. No H2/H3 training yet.
+**Current state:** P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training.
 
 > **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; do not reproduce external model baselines at this stage.
 
@@ -189,11 +189,19 @@ koopman-action-dynamics/
 
 ### Gate H2 — Independent architecture/learning hypothesis
 
-Proceed only if: (i) at least one meaningful controlled stress case reveals action-response/decision discrepancy not solely due to solver; (ii) action excitation/coverage and identifiability limits are characterized; (iii) a matched-function-class and matched-parameter-budget monolithic comparison is feasible. Do not call branching alone novel. If observational data are uninformative, diagnose it before adding privileged oracle labels.
+**Gate Verdict: NOT_CONFIRMED (Readiness: NO-GO).**
+- Measured response growth ratio $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 0.95 \pm 0.02 < 1.5$ (non-monotone across $a \in \{0.0, 0.5, 1.0, 2.0\}$) under the official baseline `KoopmanLitModule`.
+- Coverage ($\text{state distance p95} \le 0.58 \le 3.0$) and optimization ($\text{one-step MSE} \approx 2.8 \times 10^{-4} \le 0.05$) pass pre-registered gates.
+- Previous 4.82x degradation report was an artifact of fitting an unconstrained linear surrogate on misaligned transitions.
+- Track H2 remains paused until/unless a modified excitation protocol or longer training reveals an identifiable failure mode.
 
 ### Gate H3 — Independent control-theory/certificate hypothesis
 
-Proceed only if: (i) `P-margin` assumptions/proof independently audited; (ii) needed correction fits a **nontrivial**, meaningful certified input-map class (`d_orient`/bounded factorization, **not χ threshold**); (iii) MPC tractability is quantified with physical action bounds. Report whether proposed controller is exact baseline QP, frozen-schedule approximate QP, or NMPC. If certificate is vacuous or NMPC overhead unacceptable, pivot/stop H3 rather than claim success.
+**Gate Verdict: NO-GO.**
+- Controllability margin $\rho_T \approx 0.0235 > 0$ is well-defined, and QP MPC achieves 100% solver success with P95 latency $< 5$ ms.
+- However, orientation error $d_{\text{orient\_p95}} \approx 0.125-0.131 > \rho_T$ and bounded factorization distance $d^*_{\text{p95}} \approx 0.125 > \rho_T$.
+- No certified correction window exists under singular-value bounds $\sigma(M) \in [0.5, 2.0]$.
+- Track H3 remains closed on this baseline architecture.
 
 ### P3-H2 — Research method, only after H2 gate
 
@@ -295,7 +303,8 @@ Branch/commit convention (suggested): `audit/pendulum-run`, `repro/cartpole`, `d
 - 2026-11-12: v0.5 synchronized to RRD: shared P0–P2, H2 and H3 independent, no external baselines before diagnostics.
 - 2026-11-12: Pendulum reported finished; verification remains open due to upstream `MLPLitModule`/`KoopmanLitModule` entrypoint mismatch.
 - 2026-11-12: Select minimal-change overlay for import stability; new code in `research/` and untouched upstream roots.
-- Pending: local upstream diff review, Pendulum verdict, CartPole dataset hash, MPC provenance and H2/H3 gate decision.
+- 2026-11-13: P0 Pendulum config and seed variance probe completed. Effective config is verified; seed variance is bimodal.
+- 2026-11-13: P2 re-run with official baseline `KoopmanLitModule` (fixing surrogate substitution, transition off-by-one, benchmark dt, and multi-input operator device/H buffer bugs). Gate P2 PASS. Gate H2 Fixed-B limitation NOT_CONFIRMED (readiness NO-GO); Gate H3 NO-GO. H2/H3 tracks remain closed.
 
 ---
 

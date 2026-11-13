@@ -14,8 +14,10 @@ outputs/*
 !outputs/reproduction/E00/
 !outputs/reproduction/E00/manifest.yaml
 !outputs/diagnosis/
+outputs/diagnosis/*
 !outputs/diagnosis/p2_failure_report.yaml
 !outputs/diagnosis/rotation_sweep.png
+data/cartpole*.pt
 
 *.egg-info/
 .pytest_cache/

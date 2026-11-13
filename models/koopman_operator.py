@@ -359,25 +359,23 @@ class MultiInputControllableKoopmanOperator(BaseKoopmanOperator):
                 self.H_tail.mul_(0.01)
         self.eps = max(self.eps, 1e-1)
 
-        self.H = nn.Parameter(torch.randn(self.N, self.N))
-        # with torch.no_grad():
-        #     nn.init.normal_(self.A_corelast_free, mean=0.0, std=1e-3)
-        #     if tail_dim > 0:
-        #         nn.init.normal_(self.A_tail_free, mean=0.0, std=1e-3)
-        #         nn.init.normal_(self.B_tail,      mean=0.0, std=1e-3)
-        #     self.H.mul_(0.01)
+        # Legacy dense parameter from an earlier parameterization. It is unused
+        # (P is block-diagonal below) but kept as a buffer so checkpoints that
+        # contain `operator.core.H` still load with strict=True.
+        self.register_buffer("H", torch.zeros(self.N, self.N))
 
     # ---------------- build canonical A_c, B_c ----------------
     def build_Ac(self):
         device = self.A_corelast_free.device
+        dtype = self.A_corelast_free.dtype
         N, n = self.N, self.n
-        Ac = torch.zeros(N, N, device=device)
+        Ac = torch.zeros(N, N, device=device, dtype=dtype)
 
         # (1) put Brunovsky shifts inside top-left n×n blocks (unit superdiagonal; rows outside are zero)
         for (s, e) in self.core_ranges:
             ni = e - s
             if ni > 1:
-                Ac[s : s + ni - 1, s + 1 : s + ni] = torch.eye(ni - 1, device=device)
+                Ac[s : s + ni - 1, s + 1 : s + ni] = torch.eye(ni - 1, device=device, dtype=dtype)
 
         # (2) add free rows (differentiable assembly via padding + sum)
         contribs = []
@@ -397,8 +395,9 @@ class MultiInputControllableKoopmanOperator(BaseKoopmanOperator):
 
     def build_Bc(self):
         device = self.A_corelast_free.device
+        dtype = self.A_corelast_free.dtype
         N, n, m = self.N, self.n, self.m
-        Bc = torch.zeros(N, m, device=device)
+        Bc = torch.zeros(N, m, device=device, dtype=dtype)
 
         # (1) put 1 at each block's core-last row in its input column
         for j, r in enumerate(self.core_last_rows):
@@ -411,13 +410,14 @@ class MultiInputControllableKoopmanOperator(BaseKoopmanOperator):
 
     def build_P(self):
         """Block-diagonal SPD transform: Px on the head (n×n), Pxi on the tail ((N-n)×(N-n))."""
-        # device = self.H_head.device
+        device = self.H_head.device
+        dtype = self.H_head.dtype
         n, N = self.n, self.N
-        Px = self.H_head @ self.H_head.T + self.eps * torch.eye(n, device=device)
+        Px = self.H_head @ self.H_head.T + self.eps * torch.eye(n, device=device, dtype=dtype)
         k = N - n
         if k == 0:
             return Px
-        Pxi = self.H_tail @ self.H_tail.T + self.eps * torch.eye(k, device=device)
+        Pxi = self.H_tail @ self.H_tail.T + self.eps * torch.eye(k, device=device, dtype=dtype)
         return torch.block_diag(Px, Pxi)
         # eye = torch.eye(self.N, device=self.H.device)
         # P = self.H @ self.H.T + self.eps * eye
@@ -459,3 +459,6 @@ class KoopmanOperator(nn.Module):
 
     def dynamics(self, t, z, u):
         return self.core.dynamics(t, z, u)
+
+    def get_AB(self):
+        return self.core.get_AB()

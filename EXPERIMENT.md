@@ -8,7 +8,7 @@
 **Reference:** Miao et al., *Learning Koopman Representations with Controllability Guarantees* (ICLR 2026).  
 **Upstream repository:** `https://github.com/KYMiao/Controllable-Koopman`  
 **Audited upstream `main` commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (static inspection on 2026-11-12).  
-**Evidence status:** Người thực hiện báo đã chạy Pendulum. **Chưa xác minh** lệnh chạy, loại mô hình, checkpoint, dữ liệu hoặc MSE; không ghi “reproduced”.
+**Evidence status:** P0 Pendulum verified (audit showed config drift does not explain performance; seed variance is bimodal, see `TRACKING.md`). P2 baseline stress diagnosis (E06, E07, E08) completed with official `KoopmanLitModule` baseline, verified transition alignment including $x_0$, and consistent $dt$: Gate P2 PASS; Gate H2 Fixed-B limitation NOT_CONFIRMED, Readiness NO-GO; Gate H3 NO-GO (no certified margin window).
 
 > **Nguyên tắc bất biến:** P0–P2 chỉ huấn luyện và kiểm tra **mô hình ICLR 2026** (trên dữ liệu gốc và stress-test mới), không chạy external model baselines. Simulator oracle cho phản thực và đạo hàm **chỉ dùng diagnosis/evaluation** trong Protocol A. Không phát triển/huấn luyện H2 hoặc H3 trước các gate tương ứng. Không coi learned-surrogate controllability là bảo đảm của plant thật.
 
@@ -202,12 +202,12 @@ requires positive definite conditional input covariance and suitable exogeneity/
 | E03 | Pendulum faithful reproduction if E00 invalid | D-PEND | **Official Koopman only** | Eval model, logs, checkpoint |
 | E04 | CartPole faithful reproduction | D-CART | **Official Koopman only** | Multi-seed if resources permit, paper table |
 | E05 | Baseline margin & Jacobian diagnostics | D-PEND/D-CART | NO new models | `rho`, `G_z*`, `E_lift`, `d_orient` |
-| E06 | Controlled rotation toy sweep | D-ROT | **Official Koopman only** | Response-vs-rotation, coverage |
-| E07 | Unicycle & planar quadrotor | D-UNI/D-QUAD | **Official Koopman only** | Failure-mode report, open-loop vs MPC |
-| E08 | MPC harness verification | Held-out | NO new models | QP formulation unit tests, bounded action |
-| E09 | H2 identifiability study | Stress data | NO new methods first | Data excitation and theoretical diagnostics |
-| G-H2 | Independent decision | E05–E09 | NO | GO / PIVOT / NO-GO with evidence |
-| G-H3 | Independent decision | E05–E09 + theory | NO | Proof audit, margin and tractability assessment |
+| E06 | Controlled rotation toy sweep | D-ROT | **Official Koopman only** | COMPLETED; `p2_failure_report.yaml`, `rotation_sweep.png` |
+| E07 | Unicycle & planar quadrotor | D-UNI/D-QUAD | **Official Koopman only** | COMPLETED; unicycle/quadrotor metrics in report |
+| E08 | MPC harness verification | Held-out | NO new models | COMPLETED; OSQP 100% success, learned vs oracle vs zero control |
+| E09 | H2 identifiability study | Stress data | NO new methods first | Data excitation verified (coverage p95 <= 0.58, cond=1.0) |
+| G-H2 | Independent decision | E05–E09 | NO | **NOT_CONFIRMED / Readiness NO-GO** (growth ratio 0.95 < 1.5) |
+| G-H3 | Independent decision | E05–E09 + theory | NO | **NO-GO** ($d_{\text{orient}} > \rho_T$, $d^* > \rho_T$, no certificate window) |
 | H2-01 | Monolithic input-affine vs factorized | Protocol A | **New methods after G-H2 only** | Matched class/params/data/solver |
 | H2-02 | Controlled-intervention optional | Protocol B | AFTER H2-01 | Information-budget ablation |
 | H3-01 | S1, S2 and certified S3 | Protocol A | **New methods after G-H3 only** | Proof/certificate/compute trade-off |
@@ -260,4 +260,5 @@ Each experiment outputs `status={planned,running,failed,complete_verified}`, imm
 - [Upstream source snapshot](https://github.com/KYMiao/Controllable-Koopman/tree/ec131bb549c8f7b01519a99acca237b9fdc9c826).
 - For originality and theory audit see references for Koopman inputs, controllability, LPV-MPC and nonlinear input transformations in `RRD_v0.5.md`. This protocol does not assert novelty.
 
-**Status log — 2026-11-12:** v0.5 updated from H2-only plan. Pendulum self-reported completed, pending forensic verification; baseline-next is CartPole data+training. H2/H3 gates remain independent, with controlled stress tests prior to method design.
+**Status log — 2026-11-12:** v0.5 updated from H2-only plan. Pendulum self-reported completed, pending forensic verification; baseline-next is CartPole data+training. H2/H3 gates remain independent, with controlled stress tests prior to method design.  
+**Status log — 2026-11-13:** P2 diagnostics completed with official baseline `KoopmanLitModule`. Gate P2 PASS. Gate H2 Fixed-B limitation NOT_CONFIRMED (response error flat across $a$, ratio 0.95 < 1.5, readiness NO-GO). Gate H3 NO-GO (margin $\rho_T \approx 0.0235$ but $d_{\text{orient}} \approx 0.13 > \rho_T$ and $d^* \approx 0.125 > \rho_T$, no certificate window). No H2 or H3 models trained.

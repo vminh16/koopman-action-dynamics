@@ -158,14 +158,24 @@ Next: extend to at least 5-10 seeds at 10% to estimate the failure rate, and
 separate the data-subset seed from the model-init seed (currently one `seed`
 controls both).
 
-## 3.1. Phase P2 Controlled Stress Tests Summary
+### 3.3. Phase P2 Controlled Stress Tests Summary
 
-Phase P2 đã hoàn tất thực nghiệm chẩn đoán và phân tách lỗi (Gate P2 PASS):
-- **Rotation family sweep ($a \in [0.0, 2.0]$):** $E_{\text{response}}$ tăng từ $0.2397$ lên $1.1561$ ($4.82\times$), $\|CB - G_x\|_F$ tăng từ $0.4896$ lên $1.0207$, trong khi 1-step prediction MSE giữ ở mức rất thấp $\approx 10^{-5}$.
-- **Unicycle:** $E_{\text{lift}} = 1.5617, E_{\text{phys}} = 1.5096, d_{\text{orient}} = 0.5347, \rho_T = 2.80 \times 10^{-3}$.
-- **Planar Quadrotor:** $E_{\text{lift}} = 53.3568, E_{\text{phys}} = 35.3904, d_{\text{orient}} = 1.0677, \rho_T = 4.64 \times 10^{-4}$.
-- **Convex QP MPC:** Đã kiểm thử trên hệ LTI và mô hình Koopman; tracking cost tăng $27.5\%$ trên hệ quay ($a=1.0$ vs $a=0.0$).
-- **Phán quyết Gate H2 / H3:** Đã chứng minh giới hạn cấu trúc model-class của toán tử $B$ tĩnh khi hướng tác động xoay theo trạng thái; đủ bằng chứng mở Gate H2 và Gate H3.
+Phase P2 đã được thực hiện lại toàn diện và nghiêm ngặt với baseline chính thức `KoopmanLitModule` (thay thế surrogate baseline cũ), khắc phục triệt để lỗi lệch bước thời gian $(x_t, u_t) \to x_{t+1}$ có bao gồm $x_0$, đồng bộ $dt$ theo benchmark, và ghi nhận provenance đầy đủ. Kết quả P0 hoàn toàn được giữ nguyên không thay đổi.
+
+**Kết quả đo đạc chính thức (3 seeds 42, 43, 44; 30 train / 10 eval trajectories; 25 epochs):**
+- **Rotation family sweep ($a \in [0.0, 2.0]$):**
+  - $a=0.0$: 1-step MSE $(2.83 \pm 0.05) \times 10^{-4}$, normalized $E_{\text{response}} = 1.009 \pm 0.009$, $E_{\text{phys}} = 1.005 \pm 0.004$, $E_{\text{lift}} = 1.324 \pm 0.169$, $d_{\text{orient}} = 0.128 \pm 0.007$, $\rho_T = 0.0238 \pm 0.0012$.
+  - $a=0.5$: 1-step MSE $(2.85 \pm 0.05) \times 10^{-4}$, normalized $E_{\text{response}} = 0.991 \pm 0.003$, $E_{\text{phys}} = 0.994 \pm 0.007$, $E_{\text{lift}} = 1.317 \pm 0.163$, $d_{\text{orient}} = 0.118 \pm 0.008$, $\rho_T = 0.0234 \pm 0.0009$.
+  - $a=1.0$: 1-step MSE $(2.87 \pm 0.04) \times 10^{-4}$, normalized $E_{\text{response}} = 0.977 \pm 0.011$, $E_{\text{phys}} = 0.986 \pm 0.011$, $E_{\text{lift}} = 1.246 \pm 0.107$, $d_{\text{orient}} = 0.099 \pm 0.011$, $\rho_T = 0.0234 \pm 0.0007$.
+  - $a=2.0$: 1-step MSE $(2.88 \pm 0.03) \times 10^{-4}$, normalized $E_{\text{response}} = 0.983 \pm 0.023$, $E_{\text{phys}} = 0.988 \pm 0.018$, $E_{\text{lift}} = 1.242 \pm 0.132$, $d_{\text{orient}} = 0.099 \pm 0.007$, $\rho_T = 0.0238 \pm 0.0002$.
+- **Unicycle:** 1-step MSE $(1.01 \pm 0.02) \times 10^{-4}$, $E_{\text{phys}} = 1.255 \pm 0.026$, $E_{\text{lift}} = 1.261 \pm 0.028$, $d_{\text{orient}} = 0.135 \pm 0.015$, candidate regret $(1.20 \pm 0.24) \times 10^{-1}$.
+- **Planar Quadrotor:** 1-step MSE $(3.85 \pm 0.01) \times 10^{-1}$, $E_{\text{phys}} = 35.23 \pm 0.05$, $E_{\text{lift}} = 35.27 \pm 0.05$, $d_{\text{orient}} = 0.238 \pm 0.053$, candidate regret $0.0000 \pm 0.0000$.
+- **Convex QP MPC ($a=0.0$ vs $a=1.0$ across 3 seeds):** OSQP giải thành công 100% các bước (0 failure, 0 fallback, vi phạm ràng buộc input $\le 7.8 \times 10^{-7}$, p95 latency $\approx 4.7-4.9\text{ ms} < 50\text{ ms}$). Chi phí điều khiển của mô hình học được: $196.2 \pm 8.0$ ($a=0.0$) vs $208.5 \pm 1.6$ ($a=1.0$), tốt hơn zero-control ($\approx 232.1$) nhưng kém hơn LTI-oracle ($104.5$ và $131.0$).
+- **Phán quyết Gates chính thức:**
+  - **Gate P2: PASS** (Baseline chính thức `KoopmanLitModule`, transition alignment xác thực trên ground-truth RK4, $dt$ nhất quán, provenance đầy đủ trên toàn bộ 4 cấu hình góc quay và 3 seeds).
+  - **Gate H2 (Fixed-B limitation): NOT_CONFIRMED** (Tỷ lệ tăng trưởng đáp ứng $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 0.95 < 1.5$, không đơn điệu. Mặc dù độ bao phủ dữ liệu và hội tụ tối ưu đều đạt, mô hình baseline chính thức chưa thể hiện sự suy giảm đáp ứng theo giả thuyết).
+  - **Gate H2 Readiness: NO-GO** (Chưa đủ bằng chứng xác nhận giới hạn fixed-B để mở track H2; giữ độc lập với H3).
+  - **Gate H3: NO-GO** (Biên điều khiển $\rho_T \approx 0.0235$, trong khi sai lệch hướng $d_{\text{orient\_p95}} \approx 0.125-0.131 > \rho_T$ và khoảng cách nhân tử $d^*_{\text{p95}} \approx 0.125 > \rho_T$; không tồn tại cửa sổ chứng chỉ khả thi với $\sigma(M) \in [0.5, 2.0]$).
 - Báo cáo chẩn đoán chi tiết: [p2_failure_report.yaml](outputs/diagnosis/p2_failure_report.yaml).
 
 ## 4. Commands

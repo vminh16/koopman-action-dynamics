@@ -1,0 +1,118 @@
+experiment_id: E01
+phase: P0
+status: COMPLETE
+verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG
+summary: >-
+  The legacy config files recorded lambda_control=0.01, but the training
+  entrypoint passed a subset model_config that omitted the key, so the module
+  used its default 0.005. Locked reruns with the corrected, single-source
+  config reproduce the legacy losses and test MSE exactly. The drift is a
+  provenance defect, not the cause of the paper mismatch.
+
+provenance:
+  git_head_at_audit_write: b6abe51a816ab8c89c9782afa7f25733999eeac2
+  git_branch_at_audit_write: main
+  note: repository was active during the audit; each run manifest records its exact commit
+  python: 3.10.12
+  pytorch: 2.14.1+cu130
+  lightning: 2.6.6
+  gpu: NVIDIA GeForce RTX 2050
+
+config_contract:
+  runner: research/baseline/train_koopman.py
+  verifier: research/baseline/verify_checkpoint.py
+  test: tests/test_config_contract.py
+  configs:
+    - configs/research/pendulum_controllable_win15_frac0.05_seed42.yaml
+    - configs/research/pendulum_controllable_win15_frac0.1_seed42.yaml
+  checks:
+    - config values are passed unchanged to KoopmanLitModule
+    - effective model/optimizer/scheduler/loss values equal the YAML
+    - dataset SHA256 equals the YAML
+    - seed, sampler version/source hash, git commit and working-tree state are saved
+  effective_loss_weights:
+    lambda_control: 0.005
+    lambda_encoder_pred: 0.5
+    encoder_loss_flag: true
+    prediction_gamma: 0.8
+  effective_optimizer:
+    name: AdamW
+    lr: 0.001
+    weight_decay: 1.0e-05
+    scheduler: ReduceLROnPlateau
+    scheduler_factor: 0.1
+    scheduler_patience: 10
+    scheduler_monitor: train_total_loss
+
+checkpoint_audit:
+  verdict: PASS
+  model_class: KoopmanLitModule
+  encoder_shapes:
+    linear_0.weight: [64, 2]
+    linear_1.weight: [64, 64]
+    linear_2.weight: [64, 64]
+    output.weight: [14, 64]
+  operator_shapes:
+    A_free: [15, 16]
+    B_free: [14, 1]
+    H_head: [2, 2]
+    H_tail: [14, 14]
+  dataset_hashes:
+    train: 564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f
+    test: c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020
+  config_vs_training_mismatches:
+    lambda_control:
+      config: 0.01
+      effective: 0.005
+  reports:
+    - outputs/reproduction/checkpoint_audit/pendulum_mode-controllable_win15_frac0.05_dz16_hs64_nl3_ul2_uh64_MLPmodel.json
+    - outputs/reproduction/checkpoint_audit/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.json
+    - outputs/reproduction/checkpoint_audit/pendulum_mode-controllable_win15_frac0.3_dz16_hs64_nl3_ul2_uh64_MLPmodel.json
+
+locked_reruns:
+  - run_id: B01-s42-locked
+    fraction: 0.05
+    checkpoint: checkpoints/B01-s42-locked.pt
+    test_mse: 0.106817
+    legacy_test_mse: 0.106817
+    exact_reproduction: true
+    manifest: outputs/reproduction/B01-s42-locked/manifest.yaml
+  - run_id: B02-s42-locked
+    fraction: 0.10
+    checkpoint: checkpoints/B02-s42-locked.pt
+    test_mse: 0.099285
+    legacy_test_mse: 0.099285
+    exact_reproduction: true
+    manifest: outputs/reproduction/B02-s42-locked/manifest.yaml
+
+metric_probe:
+  note: >-
+    Same checkpoints, open loop, no re-encoding. The paper gap is not caused by
+    selecting the first window; broader window sampling makes the error larger.
+  B01-s42-locked:
+    first_window: 0.106817
+    random_20_windows_x1000: 0.422812
+    all_236_windows_x100: 0.344123
+  B02-s42-locked:
+    first_window: 0.099285
+    random_20_windows_x1000: 0.368205
+    all_236_windows_x100: 0.300952
+
+remaining_hypotheses:
+  - id: H2
+    description: seed variance at low data
+    status: RESOLVED_DOMINANT
+    result: >-
+      seeds 43/44 give 0.105053/0.009492 at 5% and 0.006967/0.007141 at 10%,
+      so seed 42 is an outlier and the outcome is bimodal. Three seeds are too
+      few for a mean.
+    next: run seeds 45-51 at 10% and separate data-subset seed from model seed
+  - id: H5
+    description: ReduceLROnPlateau decays LR to near zero while loss is flat
+    next: same config, constant LR, one variable
+  - id: H4
+    description: fixed 20-window sampler vs paper's per-sample random window
+    next: sampler v2 resamples a window each epoch, one variable
+  - id: H6
+    description: encoder-consistency losses are not in the paper objective
+    next: labeled variant only if H2/H4/H5 fail; do not mix with other changes

@@ -1,0 +1,46 @@
+# Locked protocol: Pendulum, 10% trajectories, seed 42.
+# This file is the single source of truth. The runner passes this same dict
+# to KoopmanLitModule and aborts if any effective value differs.
+run_id: B02-s42-locked
+system: pendulum
+seed: 42
+
+model_class: KoopmanLitModule
+koopman_mode: controllable
+control_loss_flag: true
+encoder_loss_flag: true
+use_modulated_u: false
+latent_dim: 16
+num_layers: 3
+hidden_size: 64
+u_encoder_layers: 2
+u_encoder_hidden: 64
+
+window_len: 15
+max_windows_per_traj: 20
+window_start_max: 235
+
+train_fraction: 0.10
+num_train_trajectories: 500
+batch_size: 64
+epochs: 100
+deterministic: false
+
+optimizer: AdamW
+lr: 0.001
+weight_decay: 1.0e-05
+scheduler: ReduceLROnPlateau
+scheduler_factor: 0.1
+scheduler_patience: 10
+
+prediction_gamma: 0.8
+lambda_encoder_pred: 0.5
+lambda_control: 0.005
+gramian_horizon_steps: 15
+
+data_train: data/pendulum_train.pt
+data_test: data/pendulum_test.pt
+data_train_sha256: 564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f
+data_test_sha256: c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020
+
+checkpoint: checkpoints/B02-s42-locked.pt

@@ -1,0 +1,226 @@
+{
+  "config": "configs/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml",
+  "checkpoint": "checkpoints/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt",
+  "checkpoint_sha256": "0dd47a1d20714668d70897a0a2a794387569f16e1d161ad1eff6c057c1be062c",
+  "detected_model_class": "KoopmanLitModule",
+  "config_model_class": "KoopmanLitModule",
+  "architecture_ok": true,
+  "strict_load_ok": true,
+  "strict_load_error": null,
+  "missing_keys": [],
+  "unexpected_keys": [],
+  "shape_mismatch": {},
+  "dataset_hashes_ok": true,
+  "dataset": {
+    "train": {
+      "path": "data/pendulum_train.pt",
+      "sha256": "564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f",
+      "expected_sha256": "564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f",
+      "matches": true
+    },
+    "test": {
+      "path": "data/pendulum_test.pt",
+      "sha256": "c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020",
+      "expected_sha256": "c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020",
+      "matches": true
+    }
+  },
+  "config_effective_match": true,
+  "effective_mismatches": {},
+  "effective": {
+    "model_class": "KoopmanLitModule",
+    "model_config": {
+      "koopman_mode": "controllable",
+      "lambda_encoder_pred": 0.5,
+      "lambda_control": 0.01,
+      "encoder_loss_flag": true,
+      "control_loss_flag": true,
+      "use_modulated_u": false,
+      "latent_dim": 16,
+      "num_layers": 3,
+      "hidden_size": 64,
+      "u_encoder_layers": 2,
+      "u_encoder_hidden": 64
+    },
+    "state_dim": 2,
+    "latent_dim": 16,
+    "dt": 0.02,
+    "optimizer": "AdamW",
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "scheduler": "ReduceLROnPlateau",
+    "scheduler_factor": 0.1,
+    "scheduler_patience": 10,
+    "scheduler_monitor": null,
+    "prediction_gamma": 0.8,
+    "gramian_horizon_steps": 15,
+    "gramian_horizon_seconds": 0.3,
+    "state_dict": {
+      "model.encoder.extra_net.linear_0.weight": [
+        64,
+        2
+      ],
+      "model.encoder.extra_net.linear_0.bias": [
+        64
+      ],
+      "model.encoder.extra_net.linear_1.weight": [
+        64,
+        64
+      ],
+      "model.encoder.extra_net.linear_1.bias": [
+        64
+      ],
+      "model.encoder.extra_net.linear_2.weight": [
+        64,
+        64
+      ],
+      "model.encoder.extra_net.linear_2.bias": [
+        64
+      ],
+      "model.encoder.extra_net.output.weight": [
+        14,
+        64
+      ],
+      "model.encoder.extra_net.output.bias": [
+        14
+      ],
+      "model.operator.core.A_free": [
+        15,
+        16
+      ],
+      "model.operator.core.B_free": [
+        14,
+        1
+      ],
+      "model.operator.core.H_head": [
+        2,
+        2
+      ],
+      "model.operator.core.H_tail": [
+        14,
+        14
+      ]
+    },
+    "parameter_count": 9876
+  },
+  "training_hparams_audit": {
+    "hparams": "outputs/lightning_logs/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64/version_0/hparams.yaml",
+    "recorded_model_config": {
+      "control_loss_flag": true,
+      "hidden_size": 64,
+      "koopman_mode": "controllable",
+      "latent_dim": 16,
+      "num_layers": 3,
+      "u_encoder_hidden": 64,
+      "u_encoder_layers": 2,
+      "use_modulated_u": false
+    },
+    "recorded_lr": 0.001,
+    "effective": {
+      "model_class": "KoopmanLitModule",
+      "model_config": {
+        "koopman_mode": "controllable",
+        "lambda_encoder_pred": 0.5,
+        "lambda_control": 0.005,
+        "encoder_loss_flag": true,
+        "control_loss_flag": true,
+        "use_modulated_u": false,
+        "latent_dim": 16,
+        "num_layers": 3,
+        "hidden_size": 64,
+        "u_encoder_layers": 2,
+        "u_encoder_hidden": 64
+      },
+      "state_dim": 2,
+      "latent_dim": 16,
+      "dt": 0.02,
+      "optimizer": "AdamW",
+      "lr": 0.001,
+      "weight_decay": 1e-05,
+      "scheduler": "ReduceLROnPlateau",
+      "scheduler_factor": 0.1,
+      "scheduler_patience": 10,
+      "scheduler_monitor": null,
+      "prediction_gamma": 0.8,
+      "gramian_horizon_steps": 15,
+      "gramian_horizon_seconds": 0.3,
+      "state_dict": {
+        "model.encoder.extra_net.linear_0.weight": [
+          64,
+          2
+        ],
+        "model.encoder.extra_net.linear_0.bias": [
+          64
+        ],
+        "model.encoder.extra_net.linear_1.weight": [
+          64,
+          64
+        ],
+        "model.encoder.extra_net.linear_1.bias": [
+          64
+        ],
+        "model.encoder.extra_net.linear_2.weight": [
+          64,
+          64
+        ],
+        "model.encoder.extra_net.linear_2.bias": [
+          64
+        ],
+        "model.encoder.extra_net.output.weight": [
+          14,
+          64
+        ],
+        "model.encoder.extra_net.output.bias": [
+          14
+        ],
+        "model.operator.core.A_free": [
+          15,
+          16
+        ],
+        "model.operator.core.B_free": [
+          14,
+          1
+        ],
+        "model.operator.core.H_head": [
+          2,
+          2
+        ],
+        "model.operator.core.H_tail": [
+          14,
+          14
+        ]
+      },
+      "parameter_count": 9876
+    },
+    "config_vs_training_mismatches": {
+      "lambda_control": {
+        "config": 0.01,
+        "effective": 0.005
+      }
+    },
+    "config_vs_training_match": false
+  },
+  "provenance": {
+    "git_head": "b6abe51a816ab8c89c9782afa7f25733999eeac2",
+    "git_branch": "main",
+    "working_tree_clean": false,
+    "source_clean": false,
+    "tracked_changes": [
+      "M ROADMAP.md"
+    ],
+    "untracked_files": [
+      "configs/research/",
+      "data/cartpole_test.pt",
+      "docs/superpowers/",
+      "outputs/reproduction/B01-s42-locked/",
+      "outputs/reproduction/checkpoint_audit/",
+      "research/__init__.py",
+      "research/baseline/__init__.py",
+      "research/baseline/common.py",
+      "research/baseline/train_koopman.py",
+      "research/baseline/verify_checkpoint.py",
+      "research/common/RRD_v0.5.md"
+    ]
+  },
+  "verdict": "PASS"
+}

@@ -50,13 +50,15 @@ Status hợp lệ: `PLANNED`, `RUNNING`, `COMPLETED`, `FAILED`,
 
 | Run ID | Fraction | Seed | Epochs | Status | Config | Checkpoint | Eval MSE | Notes |
 |---|---:|---:|---:|---|---|---|---:|---|
-| B01-s42 | 5% | 42 | 100 | COMPLETED | [config](configs/pendulum_mode-controllable_win15_frac0.05_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml) | [checkpoint](checkpoints/pendulum_mode-controllable_win15_frac0.05_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt) | 0.106817 | Open-loop, 1,000 test trajectories |
-| B01-s43 | 5% | 43 | 100 | PLANNED |  |  |  |  |
-| B01-s44 | 5% | 44 | 100 | PLANNED |  |  |  |  |
-| B02-s42 | 10% | 42 | 100 | COMPLETED | [config](configs/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml) | [checkpoint](checkpoints/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt) | 0.099285 | Open-loop, 1,000 test trajectories |
-| B02-s43 | 10% | 43 | 100 | PLANNED |  |  |  |  |
-| B02-s44 | 10% | 44 | 100 | PLANNED |  |  |  |  |
-| B03-s42 | 30% | 42 | 100 | COMPLETED | [config](configs/pendulum_mode-controllable_win15_frac0.3_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml) | [checkpoint](checkpoints/pendulum_mode-controllable_win15_frac0.3_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt) | 0.006827 | Open-loop, 1,000 test trajectories |
+| B01-s42 | 5% | 42 | 100 | COMPLETED | [config](configs/pendulum_mode-controllable_win15_frac0.05_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml) | [checkpoint](checkpoints/pendulum_mode-controllable_win15_frac0.05_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt) | 0.106817 | Legacy config drift; see §3.1 |
+| B01-s42-locked | 5% | 42 | 100 | COMPLETED | [config](configs/research/pendulum_controllable_win15_frac0.05_seed42.yaml) | [checkpoint](checkpoints/B01-s42-locked.pt) | 0.106817 | Locked config; exact reproduction of B01 |
+| B01-s43 | 5% | 43 | 100 | COMPLETED | [config](configs/research/pendulum_controllable_win15_frac0.05_seed43.yaml) | [checkpoint](checkpoints/B01-s43.pt) | 0.105053 | Seed variance probe; see §3.2 |
+| B01-s44 | 5% | 44 | 100 | COMPLETED | [config](configs/research/pendulum_controllable_win15_frac0.05_seed44.yaml) | [checkpoint](checkpoints/B01-s44.pt) | 0.009492 | Seed variance probe; see §3.2 |
+| B02-s42 | 10% | 42 | 100 | COMPLETED | [config](configs/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml) | [checkpoint](checkpoints/pendulum_mode-controllable_win15_frac0.1_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt) | 0.099285 | Legacy config drift; see §3.1 |
+| B02-s42-locked | 10% | 42 | 100 | COMPLETED | [config](configs/research/pendulum_controllable_win15_frac0.1_seed42.yaml) | [checkpoint](checkpoints/B02-s42-locked.pt) | 0.099285 | Locked config; exact reproduction of B02 |
+| B02-s43 | 10% | 43 | 100 | COMPLETED | [config](configs/research/pendulum_controllable_win15_frac0.1_seed43.yaml) | [checkpoint](checkpoints/B02-s43.pt) | 0.006967 | Seed variance probe; see §3.2 |
+| B02-s44 | 10% | 44 | 100 | COMPLETED | [config](configs/research/pendulum_controllable_win15_frac0.1_seed44.yaml) | [checkpoint](checkpoints/B02-s44.pt) | 0.007141 | Seed variance probe; see §3.2 |
+| B03-s42 | 30% | 42 | 100 | COMPLETED | [config](configs/pendulum_mode-controllable_win15_frac0.3_dz16_hs64_nl3_ul2_uh64_MLPmodel.yaml) | [checkpoint](checkpoints/pendulum_mode-controllable_win15_frac0.3_dz16_hs64_nl3_ul2_uh64_MLPmodel.pt) | 0.006827 | Legacy config drift; see §3.1 |
 | B03-s43 | 30% | 43 | 100 | PLANNED |  |  |  |  |
 | B03-s44 | 30% | 44 | 100 | PLANNED |  |  |  |  |
 
@@ -76,16 +78,85 @@ TensorBoard event for each fraction. Only seed 42 is currently available.
 
 - The expected monotonic trend is present: `MSE(5%) > MSE(10%) > MSE(30%)`.
 - The 30% result is close to the paper reference.
-- The 5% and 10% results are substantially higher than the paper references and
-  require investigation before claiming reproduction.
-- P0 is complete with verdict `MISMATCH`; the local runs are valid
-  protocol-variant evidence, not exact paper reproduction.
-- Aggregate reproduction remains open because only seed 42 has been run and the
-  low-data results do not match the reference.
-- The saved checkpoints/configs do not include an explicit seed field; the
-  training script currently uses its fixed seed value `42`.
+- The 5% and 10% results with seed 42 are substantially higher than the paper
+  references, but seeds 43/44 are at or below them (§3.2). The gap is dominated
+  by seed/protocol variance, not by the config drift.
+- P0 is complete with verdict `CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG`;
+  the local runs are valid protocol-variant evidence.
+- Aggregate reproduction remains open: 3 seeds are too few to report a mean
+  because the outcome is bimodal.
+- The legacy checkpoints/configs do not include an explicit seed field; the
+  locked configs and manifests now do.
 
-P0 audit manifest: [E00 manifest](outputs/reproduction/E00/manifest.yaml).
+P0 audit manifest: [E01 manifest](outputs/reproduction/E01/manifest.yaml).
+
+### 3.1 Config audit (2026-11-13)
+
+The legacy configs record `lambda_control: 0.01`, but `experiments/run_train.py`
+builds a subset `model_config` that omits this key. `KoopmanLitModule` therefore
+used its default `0.005`. The training `hparams.yaml` for all three runs
+confirms the effective value. No other drift was found in lr, loss flags,
+dimensions, or optimizer.
+
+Actions taken:
+
+- New locked configs in `configs/research/` are the single source. The runner
+  passes that exact dict to the model and aborts if any recorded value differs
+  from the effective hyperparameter.
+- Each manifest records seed, sampler version/source hash, git commit and
+  working-tree state, dataset SHA256, and effective optimizer/scheduler/loss
+  weights (`outputs/reproduction/B0*-s42-locked/manifest.yaml`).
+- Existing checkpoints PASS the class/dimension/dataset-hash audit
+  (`research/baseline/verify_checkpoint.py`). All three are
+  `KoopmanLitModule`: encoder `2->64->64->64->14`, operator
+  `A_free (15,16)`, `B_free (14,1)`, `H_head (2,2)`, `H_tail (14,14)`.
+- Locked 5%/10% reruns reproduce B01/B02 exactly: the TensorBoard training
+  curves are identical and eval MSE is `0.106817` / `0.099285`. The config
+  drift is a provenance defect, not the performance cause.
+- Metric probe on the same checkpoints: current first-window eval gives
+  `0.106817` / `0.099285`; 20 random windows per trajectory gives `0.422812` /
+  `0.368205`; all 236 windows over 100 trajectories gives `0.344123` /
+  `0.300952`. The current metric is already optimistic, so the paper gap is not
+  an evaluation-window artifact.
+- Paper Table 10 with input encoder is `0.0067` / `0.0065`, but local
+  `use_modulated_u=false`; compare against Table 1 (`0.0318` / `0.0114`).
+
+Next single-variable checks, in order:
+
+1. Seeds 43/44 at 5% and 10% to measure run-to-run variance. **Done, see §3.2.**
+2. Constant learning rate / no `ReduceLROnPlateau`: the scheduler decays toward
+   `1e-6..1e-8` while epoch-mean loss is flat.
+3. Per-epoch random window resampling. The paper samples a window per
+   trajectory; the current dataset fixes 20 windows when constructed.
+4. Only if 1–3 fail, and as a separately labeled variant: remove the
+   encoder-consistency losses, which are not in the paper's stated objective.
+
+### 3.2 Seed variance probe (2026-11-13)
+
+Same locked protocol, only `seed` changed. Seed also selects the 5%/10%
+trajectory subset, so this measures full protocol variance, not just weight-init
+variance. Eval is deterministic: `random.seed(42)` over 1000 test trajectories.
+
+| Fraction | Seed 42 | Seed 43 | Seed 44 | Mean | Paper (Table 1) |
+|---|---:|---:|---:|---:|---:|
+| 5% | 0.106817 | 0.105053 | 0.009492 | 0.0738 | 0.0318 |
+| 10% | 0.099285 | 0.006967 | 0.007141 | 0.0378 | 0.0114 |
+
+Findings:
+
+- Seed 42 is an outlier at both fractions. Seeds 43/44 are at or below the
+  paper reference; 10% matches the paper's input-encoder numbers
+  (`0.0067`/`0.0065`) even though `use_modulated_u=false`.
+- The outcome is bimodal (training either converges well or stalls), so 3 seeds
+  do not give a usable mean. The seed-42 10% run's train loss also rises from
+  `0.0415` (step 7859) to `0.0518` (end), which points at optimizer/schedule
+  instability rather than a config error.
+- The P0 "3.4x/8.7x worse than paper" claim should be read as one unlucky seed,
+  not a reproducible gap.
+
+Next: extend to at least 5-10 seeds at 10% to estimate the failure rate, and
+separate the data-subset seed from the model-init seed (currently one `seed`
+controls both).
 
 ## 4. Commands
 
@@ -96,34 +167,40 @@ source .venv/bin/activate
 mkdir -p checkpoints configs figures
 ```
 
-Train one run:
+Train a locked run (new canonical entrypoint):
 
 ```bash
-PYTHONPATH=. python experiments/run_train.py \
-    --system pendulum \
-    --koopman_mode controllable \
-    --control_loss_flag \
-    --latent_dim 16 \
-    --num_layers 3 \
-    --hidden_size 64 \
-    --window_len 15 \
-    --train_fraction FRACTION \
-    --batch_size 64 \
-    --epochs 100 \
-    --lr 1e-3 \
-    2>&1 | tee logs/RUN_ID.train.log
+PYTHONPATH=. python -m research.baseline.train_koopman \
+    --config configs/research/pendulum_controllable_win15_frac0.05_seed42.yaml \
+    --dry-run   # validate config/data/model contract first
+PYTHONPATH=. python -m research.baseline.train_koopman \
+    --config configs/research/pendulum_controllable_win15_frac0.05_seed42.yaml \
+    2>&1 | tee /tmp/B01-s42-locked.train.log
 ```
 
-Evaluate the resulting checkpoint:
+Evaluate and verify the resulting checkpoint:
 
 ```bash
 PYTHONPATH=. python experiments/run_eval.py \
-    --config configs/CONFIG.yaml \
+    --config configs/research/pendulum_controllable_win15_frac0.05_seed42.yaml \
     --window_len 15 \
     --max_traj 1000 \
-    --num_plot 5 \
-    2>&1 | tee logs/RUN_ID.eval.log
+    --num_plot 0
+
+PYTHONPATH=. python -m research.baseline.verify_checkpoint \
+    --config configs/research/pendulum_controllable_win15_frac0.05_seed42.yaml \
+    --hparams outputs/lightning_logs/B01-s42-locked/version_0/hparams.yaml
 ```
+
+Run the config contract self-check:
+
+```bash
+PYTHONPATH=. python -m tests.test_config_contract
+```
+
+Legacy entrypoint (`experiments/run_train.py`) is retained only for the old
+runs. It writes the YAML **after** training from CLI arguments, not from the
+effective module, so do not use it for new evidence.
 
 Create the log directory before using `tee`:
 

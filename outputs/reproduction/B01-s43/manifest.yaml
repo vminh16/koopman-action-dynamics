@@ -1,0 +1,178 @@
+experiment_id: B01-s43
+status: complete
+config_path: configs/research/pendulum_controllable_win15_frac0.05_seed43.yaml
+config_sha256: c28e7d2634771c70abea6bd81b14416531a3b79fa1f079cff6ab3c9f28532f3e
+config:
+  run_id: B01-s43
+  system: pendulum
+  seed: 43
+  model_class: KoopmanLitModule
+  koopman_mode: controllable
+  control_loss_flag: true
+  encoder_loss_flag: true
+  use_modulated_u: false
+  latent_dim: 16
+  num_layers: 3
+  hidden_size: 64
+  u_encoder_layers: 2
+  u_encoder_hidden: 64
+  window_len: 15
+  max_windows_per_traj: 20
+  window_start_max: 235
+  train_fraction: 0.05
+  num_train_trajectories: 250
+  batch_size: 64
+  epochs: 100
+  deterministic: false
+  optimizer: AdamW
+  lr: 0.001
+  weight_decay: 1.0e-05
+  scheduler: ReduceLROnPlateau
+  scheduler_factor: 0.1
+  scheduler_patience: 10
+  prediction_gamma: 0.8
+  lambda_encoder_pred: 0.5
+  lambda_control: 0.005
+  gramian_horizon_steps: 15
+  data_train: data/pendulum_train.pt
+  data_test: data/pendulum_test.pt
+  data_train_sha256: 564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f
+  data_test_sha256: c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020
+  checkpoint: checkpoints/B01-s43.pt
+effective:
+  model_class: KoopmanLitModule
+  model_config:
+    koopman_mode: controllable
+    lambda_encoder_pred: 0.5
+    lambda_control: 0.005
+    encoder_loss_flag: true
+    control_loss_flag: true
+    use_modulated_u: false
+    latent_dim: 16
+    num_layers: 3
+    hidden_size: 64
+    u_encoder_layers: 2
+    u_encoder_hidden: 64
+  state_dim: 2
+  latent_dim: 16
+  dt: 0.02
+  optimizer: AdamW
+  lr: 0.001
+  weight_decay: 1.0e-05
+  scheduler: ReduceLROnPlateau
+  scheduler_factor: 0.1
+  scheduler_patience: 10
+  scheduler_monitor: train_total_loss
+  prediction_gamma: 0.8
+  gramian_horizon_steps: 15
+  gramian_horizon_seconds: 0.3
+  state_dict:
+    model.encoder.extra_net.linear_0.weight:
+    - 64
+    - 2
+    model.encoder.extra_net.linear_0.bias:
+    - 64
+    model.encoder.extra_net.linear_1.weight:
+    - 64
+    - 64
+    model.encoder.extra_net.linear_1.bias:
+    - 64
+    model.encoder.extra_net.linear_2.weight:
+    - 64
+    - 64
+    model.encoder.extra_net.linear_2.bias:
+    - 64
+    model.encoder.extra_net.output.weight:
+    - 14
+    - 64
+    model.encoder.extra_net.output.bias:
+    - 14
+    model.operator.core.A_free:
+    - 15
+    - 16
+    model.operator.core.B_free:
+    - 14
+    - 1
+    model.operator.core.H_head:
+    - 2
+    - 2
+    model.operator.core.H_tail:
+    - 14
+    - 14
+  parameter_count: 9876
+provenance:
+  git_head: b6abe51a816ab8c89c9782afa7f25733999eeac2
+  git_branch: main
+  working_tree_clean: false
+  source_clean: false
+  tracked_changes:
+  - M ROADMAP.md
+  - ' M TRACKING.md'
+  untracked_files:
+  - checkpoints/B01-s42-locked.pt
+  - checkpoints/B02-s42-locked.pt
+  - configs/research/
+  - data/cartpole_test.pt
+  - data/cartpole_train.pt
+  - docs/superpowers/
+  - outputs/reproduction/B01-s42-locked/
+  - outputs/reproduction/B02-s42-locked/
+  - outputs/reproduction/E01/
+  - outputs/reproduction/checkpoint_audit/
+  - research/__init__.py
+  - research/baseline/__init__.py
+  - research/baseline/common.py
+  - research/baseline/train_koopman.py
+  - research/baseline/verify_checkpoint.py
+  - research/common/RRD_v0.5.md
+  - tests/test_config_contract.py
+  python: 3.10.12
+  torch: 2.14.1+cu130
+  lightning: 2.6.6
+  cuda: '13.0'
+  gpu: NVIDIA GeForce RTX 2050
+dataset:
+  files:
+    train:
+      path: data/pendulum_train.pt
+      sha256: 564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f
+    test:
+      path: data/pendulum_test.pt
+      sha256: c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020
+  train_trajectories_available: 5000
+  train_trajectories_used: 250
+  train_fraction: 0.05
+  selection_seed: 43
+  selected_indices_sha256: c4a2409b35d084c274de1420391bb2c60f73bc1db75c12cc790d40f11b501bf1
+sampler:
+  version: sampled-window-full-range-v1
+  source: my_utils/dataset.py:SampledMultiTrajectoryDataset
+  source_sha256: 1a319b3725ec1fa21baa0327570a32c0db8c8a0bf35376b5fe8b39cac7d42703
+  window_len: 15
+  max_windows_per_traj: 20
+  window_seed: 43
+  window_start_max: 235
+  windows_total: 5000
+  n_trajectories: 250
+training:
+  epochs_completed: 100
+  global_step: 7900
+  final_metrics:
+    train_total_loss: 0.025390200316905975
+    loss/prediction: 0.021141689270734787
+    loss/encoder_true: 9.252384188584983e-05
+    loss/controllability: 0.7082262635231018
+checkpoint:
+  path: checkpoints/B01-s43.pt
+  sha256: cee7525780abe49233f4517a3d50b0d8fbbdbf1e5dbcfbc1e59f1a38953fa5ca
+evaluation:
+  script: experiments/run_eval.py
+  config: configs/research/pendulum_controllable_win15_frac0.05_seed43.yaml
+  split: test
+  trajectories: 1000
+  window_len: 15
+  open_loop: true
+  reencode: false
+  test_mse: 0.105053
+  paper_reference_mse: 0.0318
+  ratio_vs_paper: 3.304

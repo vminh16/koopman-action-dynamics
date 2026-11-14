@@ -1,0 +1,94 @@
+system: cartpole
+status: failed
+splits:
+  train:
+    path: /home/minh/Desktop/Controllable-Koopman/data/cartpole_train.pt
+    sha256: f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b
+    structure:
+      count: 10000
+      nan_count: 0
+      inf_count: 0
+      dtype: torch.float32
+      x0_shape:
+      - 1
+      - 4
+      u_seq_shape:
+      - 250
+      - 1
+      x_seq_shape:
+      - 250
+      - 1
+      - 4
+    actuators:
+      bounds_satisfied: true
+      min_u: -9.999995231628418
+      max_u: 9.99997329711914
+      mean_u: -0.006807620130729676
+      variance_u: 33.32556928092317
+      uniform_expected_mean: 0.0
+      uniform_expected_variance: 33.333333333333336
+    initial_states:
+      bounds_satisfied: true
+      x_min: -3.999784469604492
+      x_max: 3.9999871253967285
+      theta_min: -0.0999925509095192
+      theta_max: 0.09991318732500076
+      x_dot_max: 0.0
+      theta_dot_max: 0.0
+    transitions:
+      consistent: false
+      max_error: 0.0001607612153478044
+      rmse: 1.5186857552955557e-06
+      tol: 0.0001
+      dt: 0.02
+      transitions_checked: 2500000
+  test:
+    path: /home/minh/Desktop/Controllable-Koopman/data/cartpole_test.pt
+    sha256: 9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e
+    structure:
+      count: 1000
+      nan_count: 0
+      inf_count: 0
+      dtype: torch.float32
+      x0_shape:
+      - 1
+      - 4
+      u_seq_shape:
+      - 250
+      - 1
+      x_seq_shape:
+      - 250
+      - 1
+      - 4
+    actuators:
+      bounds_satisfied: true
+      min_u: -9.999938011169434
+      max_u: 9.999897003173828
+      mean_u: 0.0087850517578125
+      variance_u: 33.38731275038488
+      uniform_expected_mean: 0.0
+      uniform_expected_variance: 33.333333333333336
+    initial_states:
+      bounds_satisfied: true
+      x_min: -3.9862465858459473
+      x_max: 3.9703755378723145
+      theta_min: -0.0996977686882019
+      theta_max: 0.09972234815359116
+      x_dot_max: 0.0
+      theta_dot_max: 0.0
+    transitions:
+      consistent: true
+      max_error: 8.444161522547233e-05
+      rmse: 1.4619651714618556e-06
+      tol: 0.0001
+      dt: 0.02
+      transitions_checked: 250000
+errors:
+- 'train: RK4 transition mismatch: max_error=0.000160761215 >= tol=0.0001'
+dynamics:
+  mutation_free: true
+  backward_safe: true
+separation:
+  disjoint: true
+  min_x0_distance: 0.00019525498711533363
+  trajectory_hash_collisions: 0

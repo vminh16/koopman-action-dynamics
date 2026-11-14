@@ -50,3 +50,9 @@ class TestCartPoleConfigContract(unittest.TestCase):
         for key, value in (('latent_dim', 16), ('lambda_control', .01), ('lr', .002)):
             with self.subTest(key=key), self.assertRaises(ValueError):
                 check_effective_hyperparameters(module, {**cfg, key: value})
+
+    def test_consistently_wrong_cartpole_dimension_is_rejected(self):
+        cfg = {**load_config(ROOT / CONFIGS[0]), 'latent_dim': 16}
+        module = build_module(cfg)
+        with self.assertRaisesRegex(ValueError, 'CartPole.*latent_dim=25'):
+            check_effective_hyperparameters(module, cfg)

@@ -43,6 +43,23 @@ original data generation error's cause.
 ## Verification
 
 `PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl .venv/bin/python -m unittest discover tests -v`:
-78 tests passed in 55.129 seconds. This includes the actual complete-data audit
+Final run after the review fix: 79 tests passed in 21.763 seconds. This includes the actual complete-data audit
 failure regression and CLI failure-report/exit-code checks. The implementation
 suite passing does not change the dataset audit's failed verdict.
+
+## Independent code review
+
+### Standards
+
+Zero actionable findings. Research-owned implementation stays in `research/`,
+with upstream modules unchanged; locked standalone YAML files follow the
+existing provenance convention.
+
+### Spec
+
+One runtime contract gap found and fixed: an edited CartPole config specifying
+`latent_dim=16` could previously pass the effective checker if the module was
+also built with 16. The checker now requires `latent_dim=25` for the CartPole
+baseline. The regression test was observed failing before the guard and passing
+afterward (four focused config tests pass). The full suite then passed 79/79.
+No deferred minor findings.

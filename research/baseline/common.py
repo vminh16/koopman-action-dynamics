@@ -209,6 +209,8 @@ def check_effective_hyperparameters(module, cfg: dict) -> dict:
     missing = [key for key in REQUIRED_CONFIG_KEYS if key not in cfg]
     if missing:
         raise ValueError(f"config is missing required keys: {missing}")
+    if cfg.get("system") == "cartpole" and cfg["latent_dim"] != 25:
+        raise ValueError("CartPole baseline requires latent_dim=25")
     eff, mismatches = compare_effective(module, cfg)
     if mismatches:
         raise ValueError(f"config/effective hyperparameter mismatch: {mismatches}")

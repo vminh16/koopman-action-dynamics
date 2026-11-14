@@ -15,6 +15,7 @@ from research.diagnostics.run_p2_diagnostics import (
     run_p2_stress_diagnosis,
     train_official_baseline,
 )
+from research.diagnostics.recompute_p2 import recompute
 
 
 class TestTransitionAlignment(unittest.TestCase):
@@ -180,6 +181,22 @@ class TestP2DiagnosticsIntegration(unittest.TestCase):
                 g = seed_entry["gramian"]
                 if g["rank_deficient"]:
                     self.assertIsNone(g["rho_T"])
+
+        # Full-evidence schema: all experiments declared, artifacts hashed.
+        self.assertEqual(set(data["experiments"]), {"E05", "E06", "E07", "E08", "E09"})
+        self.assertEqual(data["gates"]["p2_verification"]["verdict"], "SMOKE_ONLY")
+        self.assertTrue(data["experiments"]["E06"]["shared_probe_across_a"])
+        self.assertEqual(
+            data["experiments"]["E09"]["excitation_control"]["status"], "not_run_quick"
+        )
+        self.assertTrue(data["artifacts"])
+        for art in data["artifacts"]:
+            self.assertTrue(os.path.exists(art["path"]))
+            self.assertEqual(art["sha256"], _sha256(art["path"]))
+
+        # Recompute from dataset + checkpoint reproduces the recorded metrics.
+        recomputed = recompute(report_path, tolerance=1e-6)
+        self.assertEqual(recomputed["verdict"], "PASS", recomputed["failures"])
 
 
 if __name__ == "__main__":

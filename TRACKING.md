@@ -160,23 +160,27 @@ controls both).
 
 ### 3.3. Phase P2 Controlled Stress Tests Summary
 
-Phase P2 đã được thực hiện lại toàn diện và nghiêm ngặt với baseline chính thức `KoopmanLitModule` (thay thế surrogate baseline cũ), khắc phục triệt để lỗi lệch bước thời gian $(x_t, u_t) \to x_{t+1}$ có bao gồm $x_0$, đồng bộ $dt$ theo benchmark, và ghi nhận provenance đầy đủ. Kết quả P0 hoàn toàn được giữ nguyên không thay đổi.
+Phase P2 đã được thực hiện lại toàn diện và nghiêm ngặt với baseline chính thức `KoopmanLitModule` (thay thế surrogate baseline cũ), khắc phục triệt để lỗi lệch bước thời gian $(x_t, u_t) \to x_{t+1}$ có bao gồm $x_0$, đồng bộ $dt$ theo benchmark, và ghi nhận provenance đầy đủ. Kết quả P0 hoàn toàn được giữ nguyên không thay đổi. Full run hiện dùng 5 seeds, manifest theo run, artifact có hash, và cổng `p2_verification` chỉ PASS sau khi recompute từ checkpoint+dataset khớp báo cáo.
 
-**Kết quả đo đạc chính thức (3 seeds 42, 43, 44; 30 train / 10 eval trajectories; 25 epochs):**
+**Kết quả đo đạc chính thức (5 seeds 42–46; 30 train / 10 eval trajectories; 25 epochs; MPC horizon 12 $\Rightarrow T=0.24$ s cho rotation):**
 - **Rotation family sweep ($a \in [0.0, 2.0]$):**
-  - $a=0.0$: 1-step MSE $(2.83 \pm 0.05) \times 10^{-4}$, normalized $E_{\text{response}} = 1.009 \pm 0.009$, $E_{\text{phys}} = 1.005 \pm 0.004$, $E_{\text{lift}} = 1.324 \pm 0.169$, $d_{\text{orient}} = 0.128 \pm 0.007$, $\rho_T = 0.0238 \pm 0.0012$.
-  - $a=0.5$: 1-step MSE $(2.85 \pm 0.05) \times 10^{-4}$, normalized $E_{\text{response}} = 0.991 \pm 0.003$, $E_{\text{phys}} = 0.994 \pm 0.007$, $E_{\text{lift}} = 1.317 \pm 0.163$, $d_{\text{orient}} = 0.118 \pm 0.008$, $\rho_T = 0.0234 \pm 0.0009$.
-  - $a=1.0$: 1-step MSE $(2.87 \pm 0.04) \times 10^{-4}$, normalized $E_{\text{response}} = 0.977 \pm 0.011$, $E_{\text{phys}} = 0.986 \pm 0.011$, $E_{\text{lift}} = 1.246 \pm 0.107$, $d_{\text{orient}} = 0.099 \pm 0.011$, $\rho_T = 0.0234 \pm 0.0007$.
-  - $a=2.0$: 1-step MSE $(2.88 \pm 0.03) \times 10^{-4}$, normalized $E_{\text{response}} = 0.983 \pm 0.023$, $E_{\text{phys}} = 0.988 \pm 0.018$, $E_{\text{lift}} = 1.242 \pm 0.132$, $d_{\text{orient}} = 0.099 \pm 0.007$, $\rho_T = 0.0238 \pm 0.0002$.
-- **Unicycle:** 1-step MSE $(1.01 \pm 0.02) \times 10^{-4}$, $E_{\text{phys}} = 1.255 \pm 0.026$, $E_{\text{lift}} = 1.261 \pm 0.028$, $d_{\text{orient}} = 0.135 \pm 0.015$, candidate regret $(1.20 \pm 0.24) \times 10^{-1}$.
-- **Planar Quadrotor:** 1-step MSE $(3.85 \pm 0.01) \times 10^{-1}$, $E_{\text{phys}} = 35.23 \pm 0.05$, $E_{\text{lift}} = 35.27 \pm 0.05$, $d_{\text{orient}} = 0.238 \pm 0.053$, candidate regret $0.0000 \pm 0.0000$.
-- **Convex QP MPC ($a=0.0$ vs $a=1.0$ across 3 seeds):** OSQP giải thành công 100% các bước (0 failure, 0 fallback, vi phạm ràng buộc input $\le 7.8 \times 10^{-7}$, p95 latency $\approx 4.7-4.9\text{ ms} < 50\text{ ms}$). Chi phí điều khiển của mô hình học được: $196.2 \pm 8.0$ ($a=0.0$) vs $208.5 \pm 1.6$ ($a=1.0$), tốt hơn zero-control ($\approx 232.1$) nhưng kém hơn LTI-oracle ($104.5$ và $131.0$).
+  - $a=0.0$: 1-step MSE $(2.82 \pm 0.05) \times 10^{-4}$, normalized $E_{\text{response}} = 1.009 \pm 0.008$, $E_{\text{phys}} = 1.005 \pm 0.004$, $E_{\text{lift}} = 1.362 \pm 0.086$, $d_{\text{orient,p95}} = 0.131 \pm 0.006$, $\rho_T = 0.00680 \pm 0.00010$.
+  - $a=0.5$: 1-step MSE $(2.84 \pm 0.05) \times 10^{-4}$, $E_{\text{response}} = 1.021 \pm 0.007$, $E_{\text{phys}} = 0.996 \pm 0.011$, $E_{\text{lift}} = 1.306 \pm 0.081$, $d_{\text{orient,p95}} = 0.131 \pm 0.006$, $\rho_T = 0.00674 \pm 0.00005$.
+  - $a=1.0$: 1-step MSE $(2.84 \pm 0.05) \times 10^{-4}$, $E_{\text{response}} = 1.032 \pm 0.004$, $E_{\text{phys}} = 0.991 \pm 0.022$, $E_{\text{lift}} = 1.251 \pm 0.075$, $d_{\text{orient,p95}} = 0.127 \pm 0.005$, $\rho_T = 0.00675 \pm 0.00008$.
+  - $a=2.0$: 1-step MSE $(2.86 \pm 0.04) \times 10^{-4}$, $E_{\text{response}} = 1.050 \pm 0.003$, $E_{\text{phys}} = 1.007 \pm 0.026$, $E_{\text{lift}} = 1.292 \pm 0.182$, $d_{\text{orient,p95}} = 0.121 \pm 0.005$, $\rho_T = 0.00674 \pm 0.00006$.
+- **Unicycle:** 1-step MSE $(1.002 \pm 0.027) \times 10^{-4}$, $E_{\text{phys}} = 1.280 \pm 0.048$, $E_{\text{lift}} = 1.290 \pm 0.047$, $d_{\text{orient,p95}} = 0.244 \pm 0.012$, candidate regret $0.041 \pm 0.046$.
+- **Planar Quadrotor:** 1-step MSE $0.3821 \pm 0.0032$, $E_{\text{phys}} = 35.07 \pm 0.19$, $E_{\text{lift}} = 35.16 \pm 0.19$, $d_{\text{orient,p95}} = 0.331 \pm 0.111$, candidate regret $113.5 \pm 40.8$.
+- **Convex QP MPC (rotation, 5 seeds):** OSQP thành công 100%, 0 fallback, vi phạm input $=0$, p95 latency $\approx 3.8-3.9$ ms $< 50$ ms. Chi phí: $168.4 \pm 4.5$ ($a=0.0$) vs $267.9 \pm 4.4$ ($a=2.0$), so với zero-control $247.8$ và LTI-oracle $124.2$ / $380.9$. E08 xác nhận ZOH vs Euler khớp nhau ($\text{RMSE } 0.0180$ vs $0.0181$), residual primal/dual được log, và fallback chỉ dùng lệnh chiếu hợp lệ.
+- **E09 excitation control:** giảm excitation làm input covariance suy biến (singular value $=0$, condition $=\infty$) nhưng $E_{\text{response}}$ gần như không đổi ($1.216$ vs $1.235$), tức chưa thấy failure mode do excitation trong ngân sách này.
+- **E05:** Pendulum checkpoint+config+dataset hash load và chạy được; CartPole được ghi nhận `missing_checkpoint` (không có config/checkpoint đã verify), nên E05 là `partial` chứ không bị ẩn.
 - **Phán quyết Gates chính thức:**
-  - **Gate P2: PASS** (Baseline chính thức `KoopmanLitModule`, transition alignment xác thực trên ground-truth RK4, $dt$ nhất quán, provenance đầy đủ trên toàn bộ 4 cấu hình góc quay và 3 seeds).
-  - **Gate H2 (Fixed-B limitation): NOT_CONFIRMED** (Tỷ lệ tăng trưởng đáp ứng $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 0.95 < 1.5$, không đơn điệu. Mặc dù độ bao phủ dữ liệu và hội tụ tối ưu đều đạt, mô hình baseline chính thức chưa thể hiện sự suy giảm đáp ứng theo giả thuyết).
-  - **Gate H2 Readiness: NO-GO** (Chưa đủ bằng chứng xác nhận giới hạn fixed-B để mở track H2; giữ độc lập với H3).
-  - **Gate H3: NO-GO** (Biên điều khiển $\rho_T \approx 0.0235$, trong khi sai lệch hướng $d_{\text{orient\_p95}} \approx 0.125-0.131 > \rho_T$ và khoảng cách nhân tử $d^*_{\text{p95}} \approx 0.125 > \rho_T$; không tồn tại cửa sổ chứng chỉ khả thi với $\sigma(M) \in [0.5, 2.0]$).
-- Báo cáo chẩn đoán chi tiết: [p2_failure_report.yaml](outputs/diagnosis/p2_failure_report.yaml).
+  - **Gate P2: PASS**; **P2 verification: PASS** sau recompute độc lập từ dataset+checkpoint (SHA-256, strict load, tolerance $10^{-6}$).
+  - **Gate H2 (Fixed-B limitation): NOT_CONFIRMED** (tỷ lệ tăng trưởng đáp ứng $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 1.030 < 1.5$; đơn điệu nhưng rất yếu).
+  - **Gate H2 Readiness: NO-GO** (chưa đủ bằng chứng xác nhận giới hạn fixed-B để mở track H2).
+  - **Gate H3: NO-GO** (biên điều khiển $\rho_T \approx 0.0068$, trong khi $d_{\text{orient,p95}} \approx 0.121-0.131 > \rho_T$; không tồn tại cửa sổ chứng chỉ khả thi với $\sigma(M) \in [0.5, 2.0]$).
+- Báo cáo chẩn đoán chi tiết: [p2_failure_report.yaml](outputs/diagnosis/p2_failure_report.yaml); artifact và manifest theo run: `outputs/diagnosis/runs/<run_id>/`.
+- **Sửa lỗi số học upstream:** `training/loss.py` có số hạng condition-number nhân bởi `beta=0`; giá trị loss không đổi nhưng backward đi qua $1/(\lambda_{\min}+10^{-8})$ và sinh NaN gradient sau ~230 bước full-budget (gặp trên quadrotor seed 45). Đã bỏ số hạng chết này; training 25 epochs hoàn tất.
+
 
 ## 4. Commands
 
@@ -216,6 +220,15 @@ Run the config contract self-check:
 
 ```bash
 PYTHONPATH=. python -m tests.test_config_contract
+```
+
+Run the P2 diagnosis (quick = smoke only; full writes a verifiable run):
+
+```bash
+PYTHONPATH=. python -m research.diagnostics.run_p2_diagnostics --quick
+PYTHONPATH=. python -m research.diagnostics.run_p2_diagnostics
+PYTHONPATH=. python -m research.diagnostics.recompute_p2 \
+    --report outputs/diagnosis/p2_failure_report.yaml --tolerance 1e-6
 ```
 
 Legacy entrypoint (`experiments/run_train.py`) is retained only for the old

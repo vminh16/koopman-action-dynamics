@@ -164,6 +164,15 @@ d_{\rm orient}(x)=\|(I-\Pi_{G_z^\star(x)})B\|_2
 
 (with full-rank or pseudoinverse convention stated). Orientation metric is a **necessary diagnostic**, not a sufficient H3 certificate. `d_star` is the *constrained factorization optimization* defined in RRD §6, dependent on pre-declared singular-value bounds on `M`; numerical output is not an exact global feasibility proof. **Do not use `χ=r_A/ρ_T` as a GO/NO-GO rule.**
 
+**P2 verification conventions (2026-11-14):**
+- `d_star` keeps the sign of `M`: for single-input systems it is solved exactly over both sign branches (`t=1/M`), so a negative factor is not silently discarded. Multi-input systems report the proven least-squares lower bound and the feasible SLSQP upper bound separately, plus solver status; neither is a global certificate.
+- `d_orient_max` and `d_orient_p95` are distinct keys. Gate comparisons use the p95 key; the max is reported for tail inspection only. Reporting a max under a p95 key is a protocol bug.
+- `ρ_T` and the factorization bounds use the checkpoint `dt` and the *same* MPC horizon (`T = H_mpc · dt`); the continuous-time Gramian horizon must not be `15·dt` by accident. The upstream loss horizon is recorded separately as an effective hyperparameter.
+- The Gramian is computed exactly with a float64 Van Loan block exponential (`scipy.linalg.expm`); a trapezoidal quadrature is retained only as an integration-sensitivity check, not as the reported value.
+- The upstream `controllability_loss` carried a `beta=0` condition-number term. It contributed zero to the value but its backward pass divided by a numerically zero minimum eigenvalue, producing NaN gradients after ~230 full-budget steps (observed on planar quadrotor seed 45). The zero-weighted term was removed; the returned value is unchanged.
+
+
+
 ### 4.5. Control utility, candidate ranking and solver efficiency
 
 For fixed candidate pool `\mathcal A` and true/evaluated costs from held-out simulator:
@@ -179,6 +188,13 @@ This is *candidate-set regret*, not global regret. Report closed-loop goal succe
 3. **NMPC:** SQP/shooting/direct collocation for nonlinear model; report local convergence, initialization, timing and failures.
 
 Report wall-clock latency (median, P95), solver iterations, success/timeouts, objective/constraint tolerances, physical-action bounds, MPC horizon/`dt`, hardware. Compare under equal action bounds and evaluate plant with same dynamics and seeds. **Do not claim controller-reproduction complete:** upstream `experiments/run_control.py` is empty.
+
+**P2 verification conventions (2026-11-14):**
+- Candidate ranking uses one time-varying pool generated from the held-out simulator, identical for every model at that `(a, seed)`; each MIMO input axis is excited. The learned model encodes that pool once and rolls out the latent LTI solver; the RK4 plant is compared on the same states, action sequence and target. Re-encoding is measured separately and never folded into the free-running score.
+- E08 handles solver failure, stale solutions, residuals and out-of-bounds actions explicitly. When the applied action violates bounds it is projected into `[umin, umax]`; zero is a valid fallback command only if `0 ∈ [umin, umax]`. Raw and applied violations, residuals, solver status, latency and fallback count are logged.
+- The same E08 check compares exact ZOH and Euler discretization of the learned lifted step and records the training-time Euler convention, so a discretization effect cannot be mistaken for a modeling effect.
+- E07 runs a fixed initial-state sweep for Unicycle and Planar Quadrotor through the learned MPC and the target linearization oracle on the same plant/horizon/bounds/cost, and reports regret, tracking error, effort and failures.
+
 
 ### 4.6. Practical identifiability and data coverage (H2)
 
@@ -201,13 +217,13 @@ requires positive definite conditional input covariance and suitable exogeneity/
 | E02 | CartPole smoke generation | `D-CART` 20 samples | NO models | Data integrity, generator hash |
 | E03 | Pendulum faithful reproduction if E00 invalid | D-PEND | **Official Koopman only** | Eval model, logs, checkpoint |
 | E04 | CartPole faithful reproduction | D-CART | **Official Koopman only** | Multi-seed if resources permit, paper table |
-| E05 | Baseline margin & Jacobian diagnostics | D-PEND/D-CART | NO new models | `rho`, `G_z*`, `E_lift`, `d_orient` |
-| E06 | Controlled rotation toy sweep | D-ROT | **Official Koopman only** | COMPLETED; `p2_failure_report.yaml`, `rotation_sweep.png` |
-| E07 | Unicycle & planar quadrotor | D-UNI/D-QUAD | **Official Koopman only** | COMPLETED; unicycle/quadrotor metrics in report |
-| E08 | MPC harness verification | Held-out | NO new models | COMPLETED; OSQP 100% success, learned vs oracle vs zero control |
-| E09 | H2 identifiability study | Stress data | NO new methods first | Data excitation verified (coverage p95 <= 0.58, cond=1.0) |
-| G-H2 | Independent decision | E05–E09 | NO | **NOT_CONFIRMED / Readiness NO-GO** (growth ratio 0.95 < 1.5) |
-| G-H3 | Independent decision | E05–E09 + theory | NO | **NO-GO** ($d_{\text{orient}} > \rho_T$, $d^* > \rho_T$, no certificate window) |
+| E05 | Baseline margin & Jacobian diagnostics | D-PEND/D-CART | NO new models | Pendulum checkpoint/config/data hashes verified; CartPole recorded `missing_checkpoint` (verified systems: Pendulum only) |
+| E06 | Controlled rotation toy sweep | D-ROT | **Official Koopman only** | COMPLETED (5 seeds); `p2_failure_report.yaml`, `rotation_sweep.png`, shared probe across `a` |
+| E07 | Unicycle & planar quadrotor | D-UNI/D-QUAD | **Official Koopman only** | COMPLETED (5 seeds); metrics plus fixed initial-state closed-loop sweep vs target linearization |
+| E08 | MPC harness verification | Held-out | NO new models | COMPLETED; OSQP 100% success, residual/fallback logging, ZOH vs Euler, learned vs oracle vs zero control |
+| E09 | H2 identifiability study | Stress data | NO new methods first | COMPLETED; global/local/MPC coverage, covariance and singular values, reduced-excitation control |
+| G-H2 | Independent decision | E05–E09 | NO | **NOT_CONFIRMED / Readiness NO-GO** (growth ratio 1.030 < 1.5, monotone but weak) |
+| G-H3 | Independent decision | E05–E09 + theory | NO | **NO-GO** ($\rho_T \approx 0.0068$, $d_{\text{orient,p95}} > \rho_T$, no certificate window) |
 | H2-01 | Monolithic input-affine vs factorized | Protocol A | **New methods after G-H2 only** | Matched class/params/data/solver |
 | H2-02 | Controlled-intervention optional | Protocol B | AFTER H2-01 | Information-budget ablation |
 | H3-01 | S1, S2 and certified S3 | Protocol A | **New methods after G-H3 only** | Proof/certificate/compute trade-off |
@@ -241,13 +257,25 @@ Directory convention (actual project tree in `ROADMAP.md`):
 outputs/
   reproduction/{experiment_id}/{seed}/manifest.yaml
   reproduction/{experiment_id}/{seed}/metrics.json
-  diagnosis/{experiment_id}/{seed}/metrics.json
+  diagnosis/p2_failure_report.yaml          # latest report
+  diagnosis/history/                        # prior reports, never overwritten
+  diagnosis/runs/{run_id}/manifest.yaml     # run-local manifest: command, source, env
+  diagnosis/runs/{run_id}/data/             # hashed datasets, never overwritten
+  diagnosis/runs/{run_id}/checkpoints/      # hashed checkpoints, strict-loadable
   diagnosis/{experiment_id}/{seed}/plots/
   h2/{experiment_id}/{seed}/
   h3/{experiment_id}/{seed}/
 ```
 
-Each experiment outputs `status={planned,running,failed,complete_verified}`, immutable config and seed, upstream/local commit IDs, environment versions, data checksum, checkpoint checksum, model class, metrics per trajectory and aggregated, stdout/stderr, failure codes, resource use and notes on deviations. `complete_verified` requires a second pass of metric recomputation from stored checkpoints, not merely finishing epochs.
+Each experiment outputs `status={planned,running,failed,complete_verified}`, immutable config and seed, upstream/local commit IDs, environment versions, data checksum, checkpoint checksum, model class, metrics per trajectory and aggregated, stdout/stderr, failure codes, resource use and notes on deviations. `complete_verified` requires a second pass of metric recomputation from stored checkpoints, not merely finishing epochs:
+
+```bash
+.venv/bin/python -m research.diagnostics.recompute_p2 \
+    --report outputs/diagnosis/p2_failure_report.yaml --tolerance 1e-6
+```
+
+The recompute entrypoint verifies the SHA-256 of every referenced dataset and checkpoint, rebuilds the official `KoopmanLitModule`, loads the state dict with `strict=True`, and recomputes one-step and open-loop MSE. It exits non-zero if any hash, load or metric check fails. `gates.p2_verification` is `SMOKE_ONLY` for `--quick` runs and only becomes `PASS` when the full evidence set and artifact registry are present.
+
 
 **P0 evidence to request during future code verification:** current repository URL/branch/commit or zip, exact Pendulum command, local changed files, `data/` manifest or checksums (not whole huge data initially), YAML config, checkpoint `state_dict` key summary, stdout training+evaluation, effective package versions. Never upload secrets or private tokens.
 
@@ -262,3 +290,5 @@ Each experiment outputs `status={planned,running,failed,complete_verified}`, imm
 
 **Status log — 2026-11-12:** v0.5 updated from H2-only plan. Pendulum self-reported completed, pending forensic verification; baseline-next is CartPole data+training. H2/H3 gates remain independent, with controlled stress tests prior to method design.  
 **Status log — 2026-11-13:** P2 diagnostics completed with official baseline `KoopmanLitModule`. Gate P2 PASS. Gate H2 Fixed-B limitation NOT_CONFIRMED (response error flat across $a$, ratio 0.95 < 1.5, readiness NO-GO). Gate H3 NO-GO (margin $\rho_T \approx 0.0235$ but $d_{\text{orient}} \approx 0.13 > \rho_T$ and $d^* \approx 0.125 > \rho_T$, no certificate window). No H2 or H3 models trained.
+
+**Status log — 2026-11-14:** P2 full verification completed (5 seeds, 30/10 trajectories, 25 epochs): per-run manifest and hashed artifacts, E05 Pendulum verified / CartPole missing, shared E06 probe, E07 fixed-state sweep, E08 fallback/residual + ZOH/Euler, E09 local and MPC-state coverage with reduced excitation. Gate P2 PASS and `p2_verification` PASS via `recompute_p2` (SHA-256 + strict load, tolerance $10^{-6}$). H2 ratio 1.030 < 1.5 (NOT_CONFIRMED, readiness NO-GO); H3 NO-GO at $\rho_T \approx 0.0068$ with $d_{\text{orient,p95}} \approx 0.121-0.131$. Removed a zero-weighted condition-number term in `training/loss.py` that caused NaN gradients on near-singular Gramians (forward value unchanged). No H2 or H3 models trained.

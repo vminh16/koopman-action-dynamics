@@ -3,7 +3,6 @@ import torch.nn.functional as F
 from cvxpy import condition_number
 from sympy.strategies import condition
 from torchdiffeq import odeint
-import math
 
 
 def prediction_loss(x_pred, x_true, reduction='mean', gamma=0.8):
@@ -224,15 +223,10 @@ def controllability_loss(A, B, state_dim, T=0.3, dt=0.02, method="coupled"):
 
     min_eigval = eigvals.min()
     max_eigval = eigvals.max()
-    condition_number = max_eigval/(min_eigval+1e-8)
-    log_cond = torch.log(condition_number)
     print("min, max:", min_eigval, max_eigval)
     alpha = 1.0
-    beta = 0.
     delta = 0.03
-    log_max_cond = math.log(3)
-    # eigvals = torch.linalg.eigvalsh(Wc) # Gramian is symmetric
-    return F.softplus(alpha*(delta-min_eigval)) + beta * F.softplus(alpha * (log_cond - log_max_cond))
+    return F.softplus(alpha*(delta-min_eigval))
     # return -eigvals.min()
 
 # --- Example Usage ---

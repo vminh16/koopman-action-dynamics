@@ -96,6 +96,31 @@ class TestQPMPC(unittest.TestCase):
         E = expm(M * dt)
         self.assertTrue(np.allclose(mpc.Ad, E[:2, :2], atol=1e-12))
         self.assertTrue(np.allclose(mpc.Bd, E[:2, 2:], atol=1e-12))
+        euler = KoopmanConvexMPC(A=A, B=B, C=np.eye(2), dt=dt, discretization="euler")
+        self.assertTrue(np.allclose(euler.Ad, np.eye(2) + dt * A, atol=1e-12))
+        self.assertTrue(np.allclose(euler.Bd, dt * B, atol=1e-12))
+
+    def test_fallback_is_valid_when_zero_is_outside_bounds(self):
+        mpc = double_integrator_mpc(umin=np.array([0.5]), umax=np.array([1.5]))
+        with mock.patch("cvxpy.Problem.solve", side_effect=RuntimeError("boom")):
+            u_opt, status, info = mpc.solve(np.array([1.0, 0.0]), np.zeros(2))
+        self.assertFalse(info["success"])
+        self.assertTrue(info["fallback_used"])
+        self.assertGreaterEqual(u_opt[0], 0.5 - 1e-12)
+        self.assertLessEqual(u_opt[0], 1.5 + 1e-12)
+        self.assertLessEqual(info["max_input_violation"], 1e-12)
+        self.assertEqual(info["fallback_command"], u_opt.tolist())
+
+    def test_residual_above_threshold_triggers_logged_fallback(self):
+        mpc = double_integrator_mpc(residual_tolerance=-1.0)
+        u_opt, status, info = mpc.solve(np.array([1.0, 0.0]), np.zeros(2))
+        if info["primal_residual"] is None:
+            self.skipTest("OSQP did not report a primal residual")
+        self.assertTrue(info["residual_exceeded"])
+        self.assertTrue(info["fallback_used"])
+        self.assertEqual(info["fallback_reason"], "residual_tolerance")
+        self.assertFalse(info["success"])
+        self.assertLessEqual(info["max_input_violation"], 1e-12)
 
     def test_solver_failure_is_reported_not_hidden(self):
         mpc = double_integrator_mpc()

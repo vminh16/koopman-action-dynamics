@@ -36,24 +36,35 @@ class KoopmanConvexMPC:
         umax: np.ndarray = None,
         Qf: np.ndarray = None,
         encoder_fn=None,
+        discretization: str = "zoh",
+        residual_tolerance: float = 1e-3,
     ):
         self.dt = float(dt)
         self.H = int(horizon)
         self.encoder_fn = encoder_fn
+        self.residual_tolerance = float(residual_tolerance)
 
         # Dimensions
         self.dz = A.shape[0]
         self.du = B.shape[1]
         self.dx = C.shape[0]
 
-        # Convert continuous (A, B) to discrete (Ad, Bd) using matrix exponential
-        # (exact zero-order hold for the lifted LTI model).
-        M = np.zeros((self.dz + self.du, self.dz + self.du), dtype=np.float64)
-        M[: self.dz, : self.dz] = A
-        M[: self.dz, self.dz :] = B
-        e_M = expm(M * self.dt)
-        self.Ad = np.ascontiguousarray(e_M[: self.dz, : self.dz])
-        self.Bd = np.ascontiguousarray(e_M[: self.dz, self.dz :])
+        # Convert continuous (A, B) to discrete (Ad, Bd). "zoh" is the exact
+        # matrix-exponential zero-order hold; "euler" reproduces what the
+        # upstream training loss effectively assumes (I + dt*A, dt*B).
+        self.discretization = discretization
+        if discretization == "zoh":
+            M = np.zeros((self.dz + self.du, self.dz + self.du), dtype=np.float64)
+            M[: self.dz, : self.dz] = A
+            M[: self.dz, self.dz :] = B
+            e_M = expm(M * self.dt)
+            self.Ad = np.ascontiguousarray(e_M[: self.dz, : self.dz])
+            self.Bd = np.ascontiguousarray(e_M[: self.dz, self.dz :])
+        elif discretization == "euler":
+            self.Ad = np.ascontiguousarray(np.eye(self.dz) + self.dt * A)
+            self.Bd = np.ascontiguousarray(self.dt * B)
+        else:
+            raise ValueError(f"unknown discretization: {discretization}")
         self.C = np.ascontiguousarray(C, dtype=np.float64)
 
         # Cost weights
@@ -117,6 +128,18 @@ class KoopmanConvexMPC:
             violation = max(violation, float(np.max(u - self.umax)))
         return max(0.0, violation)
 
+    def _project_into_bounds(self, u: np.ndarray) -> np.ndarray:
+        out = np.asarray(u, dtype=np.float64).copy()
+        if self.umin is not None:
+            out = np.maximum(out, self.umin)
+        if self.umax is not None:
+            out = np.minimum(out, self.umax)
+        return out
+
+    def fallback_command(self) -> np.ndarray:
+        """A command that is valid even when 0 lies outside [umin, umax]."""
+        return self._project_into_bounds(np.zeros(self.du))
+
     def solve(self, x_current: np.ndarray, x_target: np.ndarray) -> tuple[np.ndarray, str, dict]:
         x_cur_np = np.asarray(x_current, dtype=np.float64).flatten()
         x_tgt_np = np.asarray(x_target, dtype=np.float64).flatten()
@@ -126,57 +149,75 @@ class KoopmanConvexMPC:
 
         fallback_used = False
         fallback_reason = None
+        stale_discarded = False
         t0 = time.perf_counter()
         exception_text = None
         try:
             self.problem.solve(solver=cp.OSQP, warm_start=True, verbose=False)
         except Exception as exc:  # noqa: BLE001 - solver-specific failures
             exception_text = repr(exc)
+            stale_discarded = self.U.value is not None
             try:
                 self.problem.solve(solver=cp.OSQP, warm_start=False, verbose=False)
             except Exception as exc2:  # noqa: BLE001
                 exception_text = repr(exc2)
+                stale_discarded = stale_discarded or self.U.value is not None
         solve_time = time.perf_counter() - t0
         status = self.problem.status
 
         stats = getattr(self.problem, "solver_stats", None)
         iterations = int(getattr(stats, "num_iters", 0) or 0)
         extra = getattr(stats, "extra_stats", None) or {}
+        primal_residual = _extra_stat(extra, "pri_res")
+        residual_exceeded = (
+            primal_residual is not None and primal_residual > self.residual_tolerance
+        )
 
+        raw_violation = 0.0
         if status in ("optimal", "optimal_inaccurate") and self.U.value is not None:
             u_raw = np.asarray(self.U.value[:, 0], dtype=np.float64).copy()
-            violation = self._input_violation(u_raw)
+            raw_violation = self._input_violation(u_raw)
             # Remove only floating-point noise; do not hide a real bound violation.
             u_opt = u_raw.copy()
-            if violation <= 1e-7:
-                if self.umin is not None:
-                    u_opt = np.maximum(u_opt, self.umin)
-                if self.umax is not None:
-                    u_opt = np.minimum(u_opt, self.umax)
-                violation = self._input_violation(u_opt)
-            success = True
+            if raw_violation <= 1e-7:
+                u_opt = self._project_into_bounds(u_opt)
+            violation = self._input_violation(u_opt)
+            success = not residual_exceeded
             cost = float(self.problem.value)
+            if residual_exceeded:
+                fallback_used = True
+                fallback_reason = "residual_tolerance"
         else:
+            success = False
             fallback_used = True
             fallback_reason = "exception" if exception_text else str(status)
             if exception_text:
                 fallback_reason = "exception"
-            u_opt = np.zeros(self.du)
-            violation = 0.0
+            stale_discarded = True
+            u_opt = self.fallback_command()
+            violation = self._input_violation(u_opt)
             cost = float("nan")
-            success = False
+
+        if not success and not fallback_used:
+            fallback_used = True
+            fallback_reason = "residual_tolerance"
 
         info = {
             "status": status if status is not None else "solver_error",
             "success": success,
             "fallback_used": fallback_used,
             "fallback_reason": fallback_reason,
+            "fallback_command": u_opt.tolist() if fallback_used else None,
+            "stale_solution_discarded": bool(stale_discarded),
             "exception": exception_text,
             "cost": cost,
             "solve_time_s": float(solve_time),
             "iterations": iterations,
-            "primal_residual": _extra_stat(extra, "pri_res"),
+            "primal_residual": primal_residual,
             "dual_residual": _extra_stat(extra, "dua_res"),
+            "residual_tolerance": self.residual_tolerance,
+            "residual_exceeded": bool(residual_exceeded),
+            "raw_input_violation": float(raw_violation),
             "max_input_violation": float(violation),
             "Z": self.Z.value.copy() if self.Z.value is not None else None,
             "U": self.U.value.copy() if self.U.value is not None else None,
@@ -220,7 +261,13 @@ class KoopmanConvexMPC:
                     "iterations": int(info.get("iterations", 0) or 0),
                     "primal_residual": info.get("primal_residual"),
                     "dual_residual": info.get("dual_residual"),
+                    "raw_input_violation": float(info.get("raw_input_violation", 0.0)),
                     "max_input_violation": float(info.get("max_input_violation", 0.0)),
+                    "residual_exceeded": bool(info.get("residual_exceeded", False)),
+                    "stale_solution_discarded": bool(
+                        info.get("stale_solution_discarded", False)
+                    ),
+                    "fallback_command": info.get("fallback_command"),
                 }
             )
             u_history.append(u_t)
@@ -262,10 +309,21 @@ class KoopmanConvexMPC:
                 "num_failures": int(np.sum(~successes)),
                 "success_rate": float(np.mean(successes)),
                 "num_fallbacks": int(sum(s["fallback_used"] for s in solver_info)),
+                "fallback_reasons": [
+                    s.get("fallback_reason") for s in solver_info if s["fallback_used"]
+                ],
+                "num_stale_discarded": int(
+                    sum(s.get("stale_solution_discarded", False) for s in solver_info)
+                ),
                 "latency_median_s": float(np.median(latencies)),
                 "latency_p95_s": float(np.percentile(latencies, 95)),
                 "max_iterations": int(max(s["iterations"] for s in solver_info)),
+                "max_raw_input_violation": float(
+                    max(s.get("raw_input_violation", 0.0) for s in solver_info)
+                ),
                 "max_input_violation": float(violations.max()),
+                "discretization": self.discretization,
+                "residual_tolerance": self.residual_tolerance,
                 "primal_residual_max": float(np.max(pri)) if pri else None,
                 "dual_residual_max": float(np.max(dua)) if dua else None,
                 "statuses": [s["status"] for s in solver_info],
@@ -274,8 +332,13 @@ class KoopmanConvexMPC:
 
 
 def _extra_stat(extra, key):
-    try:
-        value = extra.get(key)
-    except AttributeError:
-        return None
+    """Read OSQP's extra_stats namespace (it has no .get, and residuals live
+    under .info)."""
+    value = getattr(extra, key, None)
+    if value is None:
+        info = getattr(extra, "info", None)
+        aliases = {"pri_res": "prim_res", "dua_res": "dual_res"}
+        value = getattr(info, key, None)
+        if value is None:
+            value = getattr(info, aliases.get(key, key), None)
     return None if value is None else float(value)

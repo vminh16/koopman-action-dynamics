@@ -6,10 +6,12 @@ import torch
 
 from research.benchmarks.rotation_family import RotationFamilyDynamics
 from research.diagnostics.metrics import (
+    build_candidate_pool,
     compute_action_response_error,
     compute_candidate_regret,
     compute_continuous_gramian_and_margin,
     compute_gramian_sensitivity,
+    compute_h3_feasibility,
     compute_input_map_factorization_distance,
     compute_manifold_error,
     compute_vector_field_mismatches,
@@ -197,6 +199,108 @@ class TestFactorisationAndRegret(unittest.TestCase):
         self.assertIsInstance(res, dict)
         self.assertGreaterEqual(res["mean"], 0.0)
         self.assertIn("p95", res)
+
+
+    def test_factorization_distance_allows_negative_scaling(self):
+        # sigma(M)=|M|; M=-1 is feasible and aligns G=-B exactly.
+        B = np.array([[1.0], [0.0]])
+        res = compute_input_map_factorization_distance(
+            -B, B, sigma_min=0.5, sigma_max=2.0
+        )
+        self.assertLess(res["d_star"], 1e-12)
+        self.assertAlmostEqual(res["M"], -1.0, places=9)
+        self.assertTrue(res["feasible"])
+
+    def test_factorization_multi_reports_lower_and_upper_bounds(self):
+        G = np.array([[1.0, 0.0], [0.0, 1.0]])
+        B_feasible = 0.5 * np.eye(2)  # M = 2 I, sigma in [0.5, 2]
+        ok = compute_input_map_factorization_distance(
+            G, B_feasible, sigma_min=0.5, sigma_max=2.0
+        )
+        self.assertAlmostEqual(ok["d_star"], 0.0, places=9)
+        self.assertAlmostEqual(ok["upper_bound"], 0.0, places=9)
+
+        B_bad = np.diag([1.0, 0.1])
+        res = compute_input_map_factorization_distance(
+            G, B_bad, sigma_min=0.5, sigma_max=2.0
+        )
+        self.assertIn("lower_bound", res)
+        self.assertIn("upper_bound", res)
+        self.assertIsInstance(res["feasible"], bool)
+        self.assertGreaterEqual(res["d_star"], res["lower_bound"] - 1e-9)
+
+    def test_candidate_pool_is_valid_and_axis_exciting(self):
+        pool = build_candidate_pool(
+            torch.tensor([-1.0, -0.5]), torch.tensor([1.0, 0.5]),
+            horizon=10, num_sequences=8, seed=0,
+        )
+        self.assertEqual(pool.shape[0], 8)
+        self.assertTrue(bool((pool[..., 0] >= -1.0).all()))
+        self.assertTrue(bool((pool[..., 0] <= 1.0).all()))
+        self.assertTrue(bool((pool[..., 1] >= -0.5).all()))
+        self.assertTrue(bool((pool[..., 1] <= 0.5).all()))
+        # Time variation and independent excitation on both axes.
+        self.assertGreater(float(pool[..., 0].std(dim=1).max()), 0.0)
+        self.assertGreater(float(pool[..., 1].std(dim=1).max()), 0.0)
+        # At least one sequence changes sign on each axis.
+        self.assertTrue(bool((pool[..., 0].max(dim=1).values > 0).any()))
+        self.assertTrue(bool((pool[..., 1].max(dim=1).values > 0).any()))
+
+    def test_candidate_regret_scores_time_varying_pool(self):
+        module, sys = official_rotation_model()
+        x = torch.tensor([[0.2, 0.1], [-0.3, 0.2]])
+        pool = build_candidate_pool(sys.umin, sys.umax, horizon=3, num_sequences=8, seed=1)
+        res = compute_candidate_regret(
+            module, sys, x, candidate_sequences=pool, horizon=3,
+            target=torch.zeros(2),
+        )
+        self.assertEqual(res["num_candidates"], 8)
+        self.assertIn("exact ZOH", res["model_rollout"])
+        self.assertNotIn("reencode", res)
+        res_re = compute_candidate_regret(
+            module, sys, x, candidate_sequences=pool, horizon=3, reencode=True
+        )
+        self.assertIn("reencode", res_re)
+        self.assertGreaterEqual(res_re["reencode"]["mean"], 0.0)
+
+    def test_h3_reports_orientation_max_and_p95_separately(self):
+        module, sys = official_rotation_model()
+        x = torch.randn(6, 2)
+        A, B = module.model.operator.get_AB()
+        res = compute_h3_feasibility(module, sys, x, rho_T=0.05)
+        self.assertIn("d_orient_max", res)
+        self.assertIn("d_orient_p95", res)
+        self.assertGreaterEqual(res["d_orient_max"] + 1e-9, res["d_orient_p95"])
+        self.assertEqual(
+            res["d_orient_p95_below_rho"], bool(res["d_orient_p95"] < 0.05)
+        )
+        self.assertEqual(
+            res["d_orient_max_below_rho"], bool(res["d_orient_max"] < 0.05)
+        )
+        self.assertIn("d_star_lower_bound_p95", res)
+        self.assertIn("factorization_solver_status", res)
+
+
+class TestGramianAnalytic(unittest.TestCase):
+    def test_expm_matches_scalar_analytic_formula(self):
+        for a, b, T in ((0.7, 1.3, 0.4), (-0.3, 2.0, 1.0), (0.0, 0.5, 0.8)):
+            res = compute_continuous_gramian_and_margin(
+                np.array([[a]]), np.array([[b]]), np.array([[1.0]]), T=T, method="expm"
+            )
+            integral = T if abs(a) < 1e-12 else (np.exp(2 * a * T) - 1.0) / (2 * a)
+            self.assertAlmostEqual(res["lambda_min_Wy"], b * b * integral, places=10)
+            self.assertAlmostEqual(res["lambda_max_Qy"], integral, places=10)
+            self.assertAlmostEqual(res["rho_T"], abs(b), places=10)
+
+    def test_quadrature_converges_to_expm(self):
+        A = np.array([[0.2, 1.0], [-1.0, -0.4]])
+        B = np.array([[0.0], [1.0]])
+        exact = compute_continuous_gramian_and_margin(A, B, np.eye(2), T=0.9, method="expm")
+        fine = compute_continuous_gramian_and_margin(
+            A, B, np.eye(2), T=0.9, method="quadrature", num_points=4001
+        )
+        self.assertAlmostEqual(fine["rho_T"], exact["rho_T"], places=5)
+        self.assertAlmostEqual(fine["lambda_min_Wy"], exact["lambda_min_Wy"], places=5)
 
 
 if __name__ == "__main__":

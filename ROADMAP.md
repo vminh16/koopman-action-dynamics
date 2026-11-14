@@ -5,7 +5,7 @@
 **Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
 **Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
 **Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
-**Current state:** P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training.
+**Current state:** P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training.
 
 > **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; do not reproduce external model baselines at this stage.
 
@@ -36,6 +36,7 @@
 | HIGH | `experiments/run_train.py` | `--lr` parsed but not passed to current MLP module; script selects `30%` of window dataset. | Explicit run manifest and effective optimizer LR/data fraction in new runner. |
 | HIGH | `my_utils/dataset.py` | Window starts limited to `0..4` by hardcoded `max_start=5`. | Preserve behavior only for exact-script audit; a corrected sampler lives in research layer and is separately labeled as a protocol variant. |
 | HIGH | `training/loss.py` | Controllability-loss horizon argument overwritten with `15*dt`. | Record effective training horizon; use independent float64 Gramian diagnostics for H3. |
+| HIGH | `training/loss.py` | Zero-weighted condition-number term (`beta=0`) backpropagates through `1/(min_eig+1e-8)`, producing NaN gradients on near-singular Gramians. | Removed the dead term (forward value unchanged); full-budget quadrotor training now completes. |
 | HIGH | `experiments/run_control.py` | Empty. | Build verified MPC evaluation **outside upstream** before any closed-loop claims; paper's table is not reproduced by this file. |
 | MEDIUM | `dynamics/cartpole.py` | In-place angle overwrite on input state in `dynamics()`. | Test for mutation/autograd before dataset generation or derivatives; if fixed, do so in a documented adapter/fork patch, not silently. |
 | MEDIUM | `my_utils/dataset.py` | Simulator data saved to `data/{system}_{split}.pt`; generation CLI does not seed itself. | Seed externally + hash data; retain flat `data/` path for compatibility. |
@@ -183,6 +184,7 @@ koopman-action-dynamics/
 - [x] Measure response error, `CB` vs physical `Gx`, `B` vs lifted `JφGx`, manifold/drift errors, `d_orient`, constrained `d_star`, `ρ_T` vs `T/N`, state coverage, candidate regret.
 - [x] Implement/test baseline convex QP MPC in `research/control/` (upstream `run_control.py` is empty); verify constraints and objective on an analytically simple LTI toy before using learned models.
 - [x] Plot stress-strength vs response error, prediction error and closed-loop cost. Separate **model-class limitation**, **data coverage** and **solver numerical issues**.
+- [x] Add a full-evidence verification gate: per-run manifest, hashed artifacts outside the source tree, recorded command/solver versions/device, checkpoints+datasets for E05, shared E06 probe, and a checkpoint/dataset recompute entrypoint (`research.diagnostics.recompute_p2`). Quick runs stay `SMOKE_ONLY`; only a recomputed full run may set `PASS`.
 
 **Output:** `outputs/diagnosis/` with explicit failure-mode report and positive/negative controls.  
 **Exit:** a testable reason to improve model, or evidence to pivot. Negative Pendulum/CartPole result alone is **not** a veto.
@@ -190,16 +192,16 @@ koopman-action-dynamics/
 ### Gate H2 — Independent architecture/learning hypothesis
 
 **Gate Verdict: NOT_CONFIRMED (Readiness: NO-GO).**
-- Measured response growth ratio $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 0.95 \pm 0.02 < 1.5$ (non-monotone across $a \in \{0.0, 0.5, 1.0, 2.0\}$) under the official baseline `KoopmanLitModule`.
-- Coverage ($\text{state distance p95} \le 0.58 \le 3.0$) and optimization ($\text{one-step MSE} \approx 2.8 \times 10^{-4} \le 0.05$) pass pre-registered gates.
+- Measured response growth ratio $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 1.030 \pm 0.01 < 1.5$ (monotone but weak across $a \in \{0.0, 0.5, 1.0, 2.0\}$, 5 seeds) under the official baseline `KoopmanLitModule`.
+- Coverage ($\text{state distance p95} \le 0.635 \le 3.0$) and optimization ($\text{one-step MSE} \approx 2.8 \times 10^{-4} \le 0.05$) pass pre-registered gates.
 - Previous 4.82x degradation report was an artifact of fitting an unconstrained linear surrogate on misaligned transitions.
 - Track H2 remains paused until/unless a modified excitation protocol or longer training reveals an identifiable failure mode.
 
 ### Gate H3 — Independent control-theory/certificate hypothesis
 
 **Gate Verdict: NO-GO.**
-- Controllability margin $\rho_T \approx 0.0235 > 0$ is well-defined, and QP MPC achieves 100% solver success with P95 latency $< 5$ ms.
-- However, orientation error $d_{\text{orient\_p95}} \approx 0.125-0.131 > \rho_T$ and bounded factorization distance $d^*_{\text{p95}} \approx 0.125 > \rho_T$.
+- Controllability margin $\rho_T \approx 0.0068 > 0$ is well-defined at the MPC horizon ($T=0.24$ s, 5 seeds), and QP MPC achieves 100% solver success with P95 latency $\approx 3.9$ ms.
+- However, orientation error $d_{\text{orient,p95}} \approx 0.121-0.131 > \rho_T$.
 - No certified correction window exists under singular-value bounds $\sigma(M) \in [0.5, 2.0]$.
 - Track H3 remains closed on this baseline architecture.
 
@@ -305,6 +307,7 @@ Branch/commit convention (suggested): `audit/pendulum-run`, `repro/cartpole`, `d
 - 2026-11-12: Select minimal-change overlay for import stability; new code in `research/` and untouched upstream roots.
 - 2026-11-13: P0 Pendulum config and seed variance probe completed. Effective config is verified; seed variance is bimodal.
 - 2026-11-13: P2 re-run with official baseline `KoopmanLitModule` (fixing surrogate substitution, transition off-by-one, benchmark dt, and multi-input operator device/H buffer bugs). Gate P2 PASS. Gate H2 Fixed-B limitation NOT_CONFIRMED (readiness NO-GO); Gate H3 NO-GO. H2/H3 tracks remain closed.
+- 2026-11-14: P2 full verification: 5 seeds, per-run manifest + hashed artifacts, E05 verified Pendulum / CartPole missing, shared E06 probe, E07 fixed-state closed-loop sweep, E08 fallback/residual/ZOH-vs-Euler checks, E09 local/MPC coverage + reduced excitation, recompute entrypoint PASS. `p2_verification` PASS; gate verdicts unchanged. Removed a zero-weighted condition-number term in `training/loss.py` that produced NaN gradients on near-singular Gramians.
 
 ---
 

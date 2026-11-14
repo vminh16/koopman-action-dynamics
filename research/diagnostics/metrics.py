@@ -17,7 +17,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 from scipy.linalg import expm
-from scipy.optimize import minimize, minimize_scalar
+from scipy.optimize import minimize
 
 DEFAULT_RANK_TOL = 1e-10
 EPS = 1e-12
@@ -26,6 +26,31 @@ EPS = 1e-12
 # ---------------------------------------------------------------------------
 # model adapters
 # ---------------------------------------------------------------------------
+def physical_input_map(sys, x_samples: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+    """Return f0(x) [B, n] and Gx(x) [B, n, m].
+
+    Uses the analytic fields when the system exposes them; otherwise falls back
+    to autograd of ``sys.dynamics`` at u=0 (Pendulum/CartPole have no analytic
+    input map). The oracle is for diagnosis only.
+    """
+    if hasattr(sys, "analytic_f0") and hasattr(sys, "analytic_Gx"):
+        return sys.analytic_f0(x_samples), sys.analytic_Gx(x_samples)
+
+    x = x_samples.detach().clone().requires_grad_(True)
+    m = int(getattr(sys, "Ncontrols", None) or len(sys.umin))
+    f0_list, Gx_list = [], []
+    for i in range(x.shape[0]):
+        xi = x[i : i + 1]
+        u0 = torch.zeros(1, m, dtype=x.dtype, device=x.device)
+        f0_list.append(sys.dynamics(0.0, xi, u0).detach().squeeze(0))
+        jac = torch.autograd.functional.jacobian(
+            lambda uu: sys.dynamics(0.0, xi, uu).squeeze(0), u0
+        )
+        # jacobian keeps u0's batch dim: [n, 1, m] -> [n, m]
+        Gx_list.append(jac.reshape(sys.Nstates, m))
+    return torch.stack(f0_list), torch.stack(Gx_list)
+
+
 def extract_latent_model(model) -> dict:
     """Return A, B, encoder and the *instantaneous* latent dynamics.
 
@@ -282,6 +307,7 @@ def compute_vector_field_mismatches(model, sys, x_samples: torch.Tensor) -> dict
     C = torch.eye(n, latent_dim, dtype=A.dtype, device=A.device)
 
     E_phys_list, E_lift_list, E_drift_list, d_orient_list = [], [], [], []
+    f0_samples, Gx_samples = physical_input_map(sys, x_samples.detach())
 
     for i in range(x_samples.shape[0]):
         xi = x_samples[i].clone().detach().requires_grad_(True)
@@ -296,8 +322,8 @@ def compute_vector_field_mismatches(model, sys, x_samples: torch.Tensor) -> dict
             J_phi[j] = grad_xi
 
         with torch.no_grad():
-            Gx_i = sys.analytic_Gx(xi.detach().unsqueeze(0)).squeeze(0)
-            f0_i = sys.analytic_f0(xi.detach().unsqueeze(0)).squeeze(0)
+            Gx_i = Gx_samples[i].detach()
+            f0_i = f0_samples[i].detach()
 
         CB = C @ B
         E_phys_list.append(float(torch.norm(CB - Gx_i, p="fro").item()))
@@ -350,32 +376,64 @@ def compute_manifold_error(model, z_samples: torch.Tensor) -> dict:
 # H3 constrained factorization distance
 # ---------------------------------------------------------------------------
 def _factorization_distance_single(G: np.ndarray, B: np.ndarray, lo: float, hi: float) -> dict:
+    """Exact scalar solve over both forbidden-sign branches.
+
+    M may be negative: the constraint is on sigma(M)=|M|, so the feasible set is
+    [-hi,-lo] U [lo,hi]. With t=1/M the residual is linear in t and t* is exact.
+    """
     g = G[:, 0]
     b = B[:, 0]
-    if np.linalg.norm(g) < EPS:
-        return {"d_star": float(np.linalg.norm(b)), "feasible": True, "approximate": False}
-    obj = lambda s: float(np.linalg.norm(g / s - b))
-    res = minimize_scalar(obj, bounds=(lo, hi), method="bounded")
-    return {"d_star": float(res.fun), "feasible": True, "approximate": False}
+    gg = float(g @ g)
+    if gg < EPS:
+        return {
+            "d_star": float(np.linalg.norm(b)),
+            "feasible": True,
+            "approximate": False,
+            "lower_bound": float(np.linalg.norm(b)),
+            "upper_bound": float(np.linalg.norm(b)),
+            "M": None,
+            "solver_status": "degenerate-G",
+        }
+
+    t_star = float(g @ b) / gg
+    best = None
+    for interval in ((1.0 / hi, 1.0 / lo), (-1.0 / lo, -1.0 / hi)):
+        t = min(max(t_star, interval[0]), interval[1])
+        d = float(np.linalg.norm(g * t - b))
+        if best is None or d < best["d_star"]:
+            best = {
+                "d_star": d,
+                "feasible": True,
+                "approximate": False,
+                "lower_bound": d,
+                "upper_bound": d,
+                "M": float(1.0 / t) if abs(t) > EPS else None,
+                "solver_status": "exact",
+            }
+    return best
 
 
 def _factorization_distance_multi(G: np.ndarray, B: np.ndarray, lo: float, hi: float) -> dict:
     """Approximate min_{M: sigma in [lo,hi]} ||G M^{-1} - B||_2.
 
     Parameterise N = M^{-1} (so spectrum(N) in [1/hi, 1/lo]) and minimise the
-    linear residual ||G N - B||_2 with SLSQP. This is a numerical diagnostic, not
-    a global feasibility certificate.
+    linear residual ||G N - B||_2 with SLSQP. The unconstrained least-squares
+    residual is a proven lower bound on any feasible solution; the SLSQP point,
+    when it satisfies the bounds, is a feasible upper bound. This is a numerical
+    diagnostic, not a global feasibility certificate.
     """
     m = G.shape[1]
-    # Least-squares residual is a lower bound and is feasible when its spectrum
-    # respects the bounds.
     N_ls, *_ = np.linalg.lstsq(G, B, rcond=None)
+    lower_bound = float(np.linalg.norm(G @ N_ls - B, ord=2))
     sv = np.linalg.svd(N_ls, compute_uv=False)
     if sv.min() >= 1.0 / hi - 1e-9 and sv.max() <= 1.0 / lo + 1e-9:
         return {
-            "d_star": float(np.linalg.norm(G @ N_ls - B, ord=2)),
+            "d_star": lower_bound,
             "feasible": True,
             "approximate": False,
+            "lower_bound": lower_bound,
+            "upper_bound": lower_bound,
+            "solver_status": "lstsq-feasible",
         }
 
     def objective(nvec):
@@ -393,7 +451,16 @@ def _factorization_distance_multi(G: np.ndarray, B: np.ndarray, lo: float, hi: f
     res = minimize(objective, x0, method="SLSQP", constraints=cons,
                    options={"maxiter": 200, "ftol": 1e-9})
     feasible = bool(sv_constraint(res.x) >= -1e-8)
-    return {"d_star": float(res.fun), "feasible": feasible, "approximate": True}
+    residual = float(res.fun) if np.isfinite(res.fun) else None
+    return {
+        "d_star": residual if feasible else lower_bound,
+        "feasible": feasible,
+        "approximate": True,
+        "lower_bound": lower_bound,
+        "upper_bound": residual if feasible else None,
+        "solver_status": str(getattr(res, "message", "unknown")),
+        "solver_success": bool(getattr(res, "success", False)),
+    }
 
 
 def compute_input_map_factorization_distance(
@@ -444,6 +511,8 @@ def compute_h3_feasibility(
     C = torch.eye(n, N, dtype=A.dtype, device=A.device)
 
     d_star, d_orient, feasible_flags, approx_flags = [], [], [], []
+    d_star_lower, d_star_upper, solver_status = [], [], []
+    f0_samples, Gx_samples = physical_input_map(sys, x_samples.detach())
     for i in range(x_samples.shape[0]):
         xi = x_samples[i].clone().detach().requires_grad_(True)
         phi_i = spec["encode"](xi.unsqueeze(0)).squeeze(0)
@@ -454,7 +523,7 @@ def compute_h3_feasibility(
             (grad_xi,) = torch.autograd.grad(phi_i, xi, grad_outputs=grad_out, retain_graph=True)
             J_phi[j] = grad_xi
         with torch.no_grad():
-            Gx_i = sys.analytic_Gx(xi.detach().unsqueeze(0)).squeeze(0)
+            Gx_i = Gx_samples[i].detach()
             Gz = J_phi @ Gx_i
             U, S, _ = torch.linalg.svd(Gz, full_matrices=False)
             if S.numel() and float(S[0]) > 0:
@@ -465,28 +534,41 @@ def compute_h3_feasibility(
                 d_orient.append(float(torch.linalg.matrix_norm(B, ord=2)))
         res = compute_input_map_factorization_distance(Gz, B, sigma_min, sigma_max)
         d_star.append(res["d_star"])
+        d_star_lower.append(res.get("lower_bound"))
+        d_star_upper.append(res.get("upper_bound"))
         feasible_flags.append(res["feasible"])
         approx_flags.append(res["approximate"])
+        solver_status.append(res.get("solver_status"))
 
     rank_info = compute_controllability_rank(A.cpu().numpy(), B.cpu().numpy(), C.cpu().numpy())
     d_star_np = np.asarray(d_star)
     d_orient_np = np.asarray(d_orient)
     margin_defined = rho_T is not None
+    d_star_p95 = float(np.quantile(d_star_np, 0.95))
+    d_orient_p95 = float(np.quantile(d_orient_np, 0.95))
+    d_orient_max = float(d_orient_np.max())
+    lower_valid = [v for v in d_star_lower if v is not None]
+    upper_valid = [v for v in d_star_upper if v is not None]
     return {
         "d_star_mean": float(d_star_np.mean()),
-        "d_star_p95": float(np.quantile(d_star_np, 0.95)),
+        "d_star_p95": d_star_p95,
         "d_star_max": float(d_star_np.max()),
+        "d_star_lower_bound_p95": float(np.quantile(lower_valid, 0.95)) if lower_valid else None,
+        "d_star_upper_bound_p95": float(np.quantile(upper_valid, 0.95)) if upper_valid else None,
         "d_orient_mean": float(d_orient_np.mean()),
-        "d_orient_p95": float(np.quantile(d_orient_np, 0.95)),
+        "d_orient_p95": d_orient_p95,
+        "d_orient_max": d_orient_max,
         "sigma_bounds": [float(sigma_min), float(sigma_max)],
         "factorization_feasible_fraction": float(np.mean(feasible_flags)),
+        "factorization_solver_status": sorted({str(s) for s in solver_status if s}),
         "multinput_used_approximation": bool(any(approx_flags)),
         "rank": rank_info,
         "rho_T": rho_T,
         "margin_defined": margin_defined,
         # Necessary orientation condition from RRD §6.6 (not sufficient).
-        "d_orient_p95_below_rho": bool(margin_defined and d_orient_np.max() < rho_T),
-        "d_star_p95_below_rho": bool(margin_defined and float(np.quantile(d_star_np, 0.95)) < rho_T),
+        "d_orient_p95_below_rho": bool(margin_defined and d_orient_p95 < rho_T),
+        "d_orient_max_below_rho": bool(margin_defined and d_orient_max < rho_T),
+        "d_star_p95_below_rho": bool(margin_defined and d_star_p95 < rho_T),
         "note": "d_star is pointwise numerical feasibility, not a global certificate",
     }
 
@@ -494,73 +576,173 @@ def compute_h3_feasibility(
 # ---------------------------------------------------------------------------
 # candidate regret
 # ---------------------------------------------------------------------------
+def build_candidate_pool(
+    umin,
+    umax,
+    horizon: int,
+    num_sequences: int = 8,
+    seed: int = 0,
+) -> torch.Tensor:
+    """Valid, time-varying action sequences that excite each MIMO axis."""
+    lo = torch.as_tensor(umin, dtype=torch.float64).flatten()
+    hi = torch.as_tensor(umax, dtype=torch.float64).flatten()
+    if bool(torch.any(lo > hi)):
+        raise ValueError("umin must be <= umax")
+    mid = 0.5 * (lo + hi)
+    amp = 0.5 * (hi - lo)
+    zero = torch.clamp(torch.zeros_like(mid), min=lo, max=hi)
+    H, m = int(horizon), lo.numel()
+
+    seqs = [zero.expand(H, m).clone(), lo.expand(H, m).clone(), hi.expand(H, m).clone()]
+    for j in range(m):
+        for low_val, high_val in ((lo[j], hi[j]), (hi[j], lo[j])):
+            seq = zero.expand(H, m).clone()
+            seq[:, j] = torch.where(
+                torch.arange(H) % 2 == 0,
+                torch.full((H,), float(low_val), dtype=torch.float64),
+                torch.full((H,), float(high_val), dtype=torch.float64),
+            )
+            seqs.append(seq)
+
+    g = torch.Generator().manual_seed(int(seed))
+    while len(seqs) < max(num_sequences, len(seqs)):
+        freq = 0.25 + 1.75 * torch.rand(m, generator=g, dtype=torch.float64)
+        phase = 2.0 * np.pi * torch.rand(m, generator=g, dtype=torch.float64)
+        t = torch.arange(H, dtype=torch.float64)[:, None]
+        seq = mid + amp * torch.sin(2.0 * np.pi * freq[None, :] * t / H + phase[None, :])
+        seqs.append(torch.clamp(seq, min=lo, max=hi))
+    return torch.stack(seqs)
+
+
 def compute_candidate_regret(
     model,
     sys,
     x_samples: torch.Tensor,
-    candidate_actions: torch.Tensor,
+    candidate_actions: torch.Tensor | None = None,
     horizon: int = 3,
+    target=None,
     control_weight: float = 0.1,
+    candidate_sequences: torch.Tensor | None = None,
+    reencode: bool = False,
 ) -> dict:
-    """Candidate-set regret R_cand (EXPERIMENT §4.5), true plant via RK4."""
+    """Candidate-set regret R_cand (EXPERIMENT §4.5), true plant via RK4.
+
+    The same pool of valid time-varying sequences is scored by the latent model
+    (encoded once, exact ZOH lifted rollout) and by the RK4 plant with the same
+    initial state, sequence, target and cost. ``reencode=True`` adds a separate
+    per-step re-encoding variant instead of overwriting the primary metric.
+    """
     from research.baseline.data_generator import rk4_step
 
     spec = extract_latent_model(model)
     n = spec["state_dim"]
+    m = int(sys.Ncontrols)
     dt = float(getattr(sys, "dt", getattr(model, "dt", 0.02)))
     num_samples = x_samples.shape[0]
-    num_candidates = candidate_actions.shape[0]
-    regrets = []
+    tgt = torch.zeros(n, dtype=x_samples.dtype) if target is None else torch.as_tensor(target)
+
+    if candidate_sequences is None:
+        if candidate_actions is None:
+            raise ValueError("candidate_actions or candidate_sequences is required")
+        actions = torch.as_tensor(candidate_actions)
+        if actions.ndim == 1:
+            actions = actions[:, None]
+        if actions.ndim == 2:
+            candidate_sequences = actions[:, None, :].expand(-1, horizon, -1).clone()
+        else:
+            candidate_sequences = actions
+    seqs = torch.clamp(
+        torch.as_tensor(candidate_sequences, dtype=torch.float64),
+        min=torch.as_tensor(sys.umin, dtype=torch.float64),
+        max=torch.as_tensor(sys.umax, dtype=torch.float64),
+    )
+    if seqs.ndim != 3 or seqs.shape[1] != horizon or seqs.shape[2] != m:
+        raise ValueError(f"candidate_sequences must be [K,{horizon},{m}], got {tuple(seqs.shape)}")
+
+    A = spec["A"].detach().cpu().numpy().astype(np.float64)
+    B = spec["B"].detach().cpu().numpy().astype(np.float64)
+    Mz = np.zeros((A.shape[0] + m, A.shape[0] + m))
+    Mz[: A.shape[0], : A.shape[0]] = A
+    Mz[: A.shape[0], A.shape[0] :] = B
+    E = expm(Mz * dt)
+    Ad, Bd = E[: A.shape[0], : A.shape[0]], E[: A.shape[0], A.shape[0] :]
+
+    regrets, regrets_reencode = [], []
     plant_costs, model_costs = [], []
-
+    best_model_idx, best_true_idx = [], []
     for i in range(num_samples):
-        x0 = x_samples[i].clone()
-        true_costs = []
-        predicted_costs = []
-        for c_idx in range(num_candidates):
-            u_cand = candidate_actions[c_idx]
-
+        x0 = x_samples[i].detach().double()
+        true_costs, predicted_costs, predicted_reencode = [], [], []
+        z0 = spec["encode"](x0.float().unsqueeze(0)).squeeze(0).double().detach().cpu().numpy()
+        for c_idx in range(seqs.shape[0]):
+            u_seq = seqs[c_idx]
             x_true = x0.clone()
             cost_true = 0.0
-            for _ in range(horizon):
+            for t in range(horizon):
                 x_true = rk4_step(
-                    sys.dynamics, 0.0, x_true.unsqueeze(0), u_cand.unsqueeze(0), dt
-                ).squeeze(0)
-                cost_true += float(
-                    torch.norm(x_true).item() ** 2
-                    + control_weight * torch.norm(u_cand).item() ** 2
-                )
+                    sys.dynamics, 0.0, x_true.float().unsqueeze(0),
+                    u_seq[t].float().unsqueeze(0), dt,
+                ).squeeze(0).double()
+                err = x_true - tgt
+                cost_true += float(err @ err + control_weight * u_seq[t] @ u_seq[t])
             true_costs.append(cost_true)
 
-            x_model = x0.clone()
+            z = z0.copy()
             cost_model = 0.0
-            with torch.no_grad():
-                for _ in range(horizon):
-                    z = spec["encode"](x_model.unsqueeze(0))
-                    dz = spec["instant"](z, u_cand.unsqueeze(0))
-                    x_model = x_model + dt * dz[0, :n]
-                    cost_model += float(
-                        torch.norm(x_model).item() ** 2
-                        + control_weight * torch.norm(u_cand).item() ** 2
+            z_re = z0.copy()
+            cost_re = 0.0
+            for t in range(horizon):
+                u = u_seq[t].detach().cpu().numpy()
+                cost_model += float(
+                    (z[:n] - tgt.numpy()) @ (z[:n] - tgt.numpy())
+                    + control_weight * (u @ u)
+                )
+                z = Ad @ z + Bd @ u
+                if reencode:
+                    with torch.no_grad():
+                        z_re = spec["encode"](
+                            torch.from_numpy(z_re[:n]).float().unsqueeze(0)
+                        ).squeeze(0).double().numpy()
+                    cost_re += float(
+                        (z_re[:n] - tgt.numpy()) @ (z_re[:n] - tgt.numpy())
+                        + control_weight * (u @ u)
                     )
+                    z_re = Ad @ z_re + Bd @ u
             predicted_costs.append(cost_model)
+            predicted_reencode.append(cost_re)
 
-        best_model_idx = int(np.argmin(predicted_costs))
-        true_cost_of_best_model = true_costs[best_model_idx]
-        optimal_true_cost = float(np.min(true_costs))
-        regrets.append(max(0.0, true_cost_of_best_model - optimal_true_cost))
-        plant_costs.append(optimal_true_cost)
-        model_costs.append(predicted_costs[best_model_idx])
+        bm = int(np.argmin(predicted_costs))
+        bt = int(np.argmin(true_costs))
+        regrets.append(max(0.0, true_costs[bm] - true_costs[bt]))
+        if reencode:
+            bmr = int(np.argmin(predicted_reencode))
+            regrets_reencode.append(max(0.0, true_costs[bmr] - true_costs[bt]))
+        plant_costs.append(true_costs[bt])
+        model_costs.append(predicted_costs[bm])
+        best_model_idx.append(bm)
+        best_true_idx.append(bt)
 
     reg = np.asarray(regrets)
-    return {
+    out = {
         "mean": float(reg.mean()),
         "p95": float(np.quantile(reg, 0.95)) if reg.size > 1 else float(reg[0]),
         "max": float(reg.max()),
         "horizon": int(horizon),
         "num_samples": int(num_samples),
-        "num_candidates": int(num_candidates),
+        "num_candidates": int(seqs.shape[0]),
         "dt": dt,
         "plant_step": "rk4",
-        "cost": "||x||^2 + %.3f ||u||^2" % control_weight,
+        "model_rollout": "encode-once + exact ZOH lifted rollout",
+        "cost": "||x-target||^2 + %.3f ||u||^2" % control_weight,
+        "target": tgt.tolist(),
+        "pool": "time-varying, axis-wise excitation, clipped to bounds",
+        "model_best_matches_true_fraction": float(np.mean(np.asarray(best_model_idx) == np.asarray(best_true_idx))),
     }
+    if reencode:
+        rr = np.asarray(regrets_reencode)
+        out["reencode"] = {
+            "mean": float(rr.mean()),
+            "p95": float(np.quantile(rr, 0.95)) if rr.size > 1 else float(rr[0]),
+            "max": float(rr.max()),
+        }
+    return out

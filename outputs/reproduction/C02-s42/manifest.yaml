@@ -1,0 +1,148 @@
+experiment_id: C02-s42
+status: complete
+config_path: configs/research/cartpole_controllable_win15_frac0.05_seed42.yml
+config_sha256: 30e1998f8fe33f23d50cbc78ff42dce079c77ec20caf296e594e90cb2877fa72
+config:
+  run_id: C02-s42
+  system: cartpole
+  seed: 42
+  model_class: KoopmanLitModule
+  koopman_mode: controllable
+  control_loss_flag: true
+  encoder_loss_flag: true
+  use_modulated_u: false
+  latent_dim: 25
+  num_layers: 3
+  hidden_size: 64
+  u_encoder_layers: 2
+  u_encoder_hidden: 64
+  window_len: 15
+  max_windows_per_traj: 20
+  window_start_max: 235
+  train_fraction: 0.05
+  num_train_trajectories: 500
+  batch_size: 64
+  epochs: 100
+  deterministic: false
+  optimizer: AdamW
+  lr: 0.001
+  weight_decay: 1.0e-05
+  scheduler: ReduceLROnPlateau
+  scheduler_factor: 0.1
+  scheduler_patience: 10
+  prediction_gamma: 0.8
+  lambda_encoder_pred: 0.5
+  lambda_control: 0.005
+  gramian_horizon_steps: 15
+  data_train: data/cartpole_train.pt
+  data_test: data/cartpole_test.pt
+  data_train_sha256: f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b
+  data_test_sha256: 9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e
+  checkpoint: checkpoints/C02-s42.pt
+effective:
+  model_class: KoopmanLitModule
+  model_config:
+    koopman_mode: controllable
+    lambda_encoder_pred: 0.5
+    lambda_control: 0.005
+    encoder_loss_flag: true
+    control_loss_flag: true
+    use_modulated_u: false
+    latent_dim: 25
+    num_layers: 3
+    hidden_size: 64
+    u_encoder_layers: 2
+    u_encoder_hidden: 64
+  state_dim: 4
+  latent_dim: 25
+  dt: 0.02
+  optimizer: AdamW
+  lr: 0.001
+  weight_decay: 1.0e-05
+  scheduler: ReduceLROnPlateau
+  scheduler_factor: 0.1
+  scheduler_patience: 10
+  scheduler_monitor: train_total_loss
+  prediction_gamma: 0.8
+  gramian_horizon_steps: 15
+  gramian_horizon_seconds: 0.3
+  state_dict:
+    model.encoder.extra_net.linear_0.weight:
+    - 64
+    - 4
+    model.encoder.extra_net.linear_0.bias:
+    - 64
+    model.encoder.extra_net.linear_1.weight:
+    - 64
+    - 64
+    model.encoder.extra_net.linear_1.bias:
+    - 64
+    model.encoder.extra_net.linear_2.weight:
+    - 64
+    - 64
+    model.encoder.extra_net.linear_2.bias:
+    - 64
+    model.encoder.extra_net.output.weight:
+    - 21
+    - 64
+    model.encoder.extra_net.output.bias:
+    - 21
+    model.operator.core.A_free:
+    - 22
+    - 25
+    model.operator.core.B_free:
+    - 21
+    - 1
+    model.operator.core.H_head:
+    - 4
+    - 4
+    model.operator.core.H_tail:
+    - 21
+    - 21
+  parameter_count: 11033
+provenance:
+  git_head: 5701981ce63517637f9e7cdbb1dafc7bf68e9d6f
+  git_branch: repro/cartpole-audit-configs
+  working_tree_clean: true
+  source_clean: true
+  tracked_changes: []
+  untracked_files: []
+  python: 3.10.12
+  torch: 2.14.1+cu130
+  lightning: 2.6.6
+  cuda: '13.0'
+  gpu: NVIDIA GeForce RTX 2050
+dataset:
+  files:
+    train:
+      path: data/cartpole_train.pt
+      sha256: f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b
+    test:
+      path: data/cartpole_test.pt
+      sha256: 9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e
+  train_trajectories_available: 10000
+  train_trajectories_used: 500
+  train_fraction: 0.05
+  selection_seed: 42
+  selected_indices_sha256: 9252f9921612753a172148a3c5c1c8aa392b5da17d5e0360119217af5187f626
+sampler:
+  version: sampled-window-full-range-v1
+  source: my_utils/dataset.py:SampledMultiTrajectoryDataset
+  source_sha256: 1a319b3725ec1fa21baa0327570a32c0db8c8a0bf35376b5fe8b39cac7d42703
+  window_len: 15
+  max_windows_per_traj: 20
+  window_seed: 42
+  window_start_max: 235
+  windows_total: 10000
+  n_trajectories: 500
+training:
+  epochs_completed: 100
+  global_step: 15700
+  final_metrics:
+    train_total_loss: 0.029377887025475502
+    loss/prediction: 0.024974660947918892
+    loss/encoder_true: 0.0002421016979496926
+    loss/controllability: 0.7082597017288208
+checkpoint:
+  path: checkpoints/C02-s42.pt
+  sha256: f5cc29ad3b3f951c0bd58b5dc943a7b22183fa6884d9b16f1f6e12e789edfc02

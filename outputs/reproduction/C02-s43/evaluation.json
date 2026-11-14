@@ -1,0 +1,42 @@
+{
+  "run_id": "C02-s43",
+  "protocol": "All 1000 test trajectories from x0; raw physical-state MSE; predicted-state reencoding; official forward in float32, MSE reduction in float64",
+  "metrics": {
+    "open_loop_H15": {
+      "mse": 0.08918348226256334,
+      "median_trajectory_mse": 0.05742796991696695,
+      "trajectory_mse_std": 0.08669328957668465,
+      "per_state_mse": [
+        0.0017440392086892761,
+        0.10906641305322935,
+        0.003905562949621455,
+        0.24201791383871332
+      ],
+      "trajectories": 1000
+    },
+    "open_loop_H250": {
+      "mse": 43.17358068637909,
+      "median_trajectory_mse": 27.040876682518945,
+      "trajectory_mse_std": 42.23698752313397,
+      "per_state_mse": [
+        2.3416843259595446,
+        0.919183180371475,
+        133.82079452188378,
+        35.6126607173016
+      ],
+      "trajectories": 1000
+    },
+    "reencode_H250_K50": {
+      "mse": 67.95760021911141,
+      "median_trajectory_mse": 48.0994335617751,
+      "trajectory_mse_std": 61.093039330937486,
+      "per_state_mse": [
+        5.72529904461878,
+        2.851627118000687,
+        214.55049547265685,
+        48.70297924116928
+      ],
+      "trajectories": 1000
+    }
+  }
+}

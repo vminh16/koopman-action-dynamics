@@ -5,7 +5,7 @@
 **Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
 **Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
 **Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
-**Current state:** P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training.
+**Current state:** P1 CartPole 5% training/evaluation completed for seeds 42/43/44 (100 epochs each; open-loop H=15 MSE `0.09189450 ± 0.00237392`); reproduction remains NEEDS_INVESTIGATION due to the failed dataset transition audit and unresolved paper-protocol comparison. Structured output rank is 4/4, while the T=0.3 s Gramian is numerically near-singular. See [TRACKING §3.4](TRACKING.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14). P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training.
 
 > **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; do not reproduce external model baselines at this stage.
 
@@ -161,17 +161,21 @@ koopman-action-dynamics/
 **Output:** [manifest](outputs/reproduction/E00/manifest.yaml), checkpoint audit and `MISMATCH` verdict.
 **Exit:** no remaining ambiguity about the local Pendulum run type, config or provenance. The run is not claimed as exact paper reproduction.
 
-### P1 — Dataset and original-model reproduction (CartPole NEXT)
+### P1 — Dataset and original-model reproduction (CartPole 5% COMPLETED; reproduction NEEDS_INVESTIGATION)
 
-- [ ] Freeze author commit and package versions. Audit paper vs README settings (`window_len`, optimizer, sampling, Gramian effective horizon).
-- [ ] Use author's simulator to **generate** CartPole dataset, not assume an external download. First smoke: 10–20 trajectories; then independent train/test with dataset manifest and seeds.
-- [ ] Validate sample shape, no NaNs, physical input range, state mutation in CartPole ODE, `.pt` hashes, train/test separation.
-- [ ] Implement the *correct Koopman* training entrypoint in `research/baseline/train_koopman.py`, instantiate `KoopmanLitModule`, pass effective LR and record all sampling decisions. Reuse official encoder/operator/loss code; label divergence from upstream entrypoint.
+- [ ] Freeze author commit and package versions. Audit paper vs README settings (`window_len`, optimizer, sampling, Gramian effective horizon). Training source commit `5701981ce63517637f9e7cdbb1dafc7bf68e9d6f` and environment versions are recorded in each C02 manifest; full paper-protocol equivalence remains open.
+- [ ] Use author's simulator to **generate** CartPole dataset, not assume an external download. Existing 10,000/1,000 trajectory files are hashed and audited; generation seeds/manifest and the requested prior smoke-generation evidence remain to be established.
+- [ ] Validate sample shape, no NaNs, physical input range, state mutation in CartPole ODE, `.pt` hashes, train/test separation. Those checks pass, but **transition audit FAILS**: train RK4 max error `0.000160761215 > 0.0001`. Preserve this failure; do not certify the whole dataset or silently relax tolerance. [Audit report](outputs/reproduction/cartpole_data_audit.yaml).
+- [x] Implement the *correct Koopman* training entrypoint in `research/baseline/train_koopman.py`, instantiate `KoopmanLitModule`, pass effective LR and record sampling seeds, selected-index hash and sampler provenance. Reuse official encoder/operator/loss code; locked YAML/provenance wrapper is the labeled divergence from upstream entrypoint. C02 manifests verify effective hyperparameters and saved checkpoint hashes.
 - [ ] Evaluate Pendulum (if needed) and CartPole with same protocol as paper; distinguish open-loop/periodic re-encode; repeat runs for robust reported results.
-- [ ] Confirm Gramian matrix/rank using independent numeric test and float64, checking learned `(A,B)` are really structured/controllable.
+  - [x] CartPole 5%: seeds 42/43/44, 100 epochs each; same 1,000 test trajectories, final checkpoints, open-loop H=15/H=250 and predicted-state re-encode H=250/K=50. Mean, sample std and 95% t intervals are recorded in [TRACKING §3.4](TRACKING.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14).
+  - [ ] Establish exact paper comparability and obtain CartPole 1%/10%/30% multi-seed results; three seeds at 5% alone do not close the reproduction gate.
+- [x] Independently measure learned `(A,B)` structure and output controllability in float64 on all three C02 checkpoints: similarity identities and positive-definite `P` pass; first-four-block and scaled-A tests give output rank 4/4. Gramian block-exponential computation matches independent adaptive quadrature. At T=0.3 s, `lambda_min(Wy)=2.50e-12..4.74e-12` and numerical rank is 3/4 at tolerance `1e-10`; `rho_T=null`. This records weak short-horizon conditioning, not a positive usable-margin certificate or a nonlinear-plant guarantee.
 
-**Output:** reproducibility table, source/data/model hashes, saved checkpoints and variance across seeds.  
-**Exit:** author model truly reproduced or precise reason/documentation of remaining mismatch; do not hide failed replication.
+**Recorded CartPole 5% results (mean ± sample std across seeds):** open-loop H=15 `0.09189450 ± 0.00237392`; open-loop H=250 `44.44596358 ± 5.62472149`; predicted-state re-encode H=250/K=50 `65.30979356 ± 3.04836531`. Re-encoding is worse than open-loop H=250 for all three seeds. Metrics are raw physical-state MSE, without angle wrapping/normalization; weighted training loss is a different metric.
+
+**Output:** [summary](outputs/reproduction/cartpole_frac0.05_summary.md), [JSON](outputs/reproduction/cartpole_frac0.05_summary.json), [CSV](outputs/reproduction/cartpole_frac0.05_summary.csv), per-run manifests/evaluation/controllability reports under `outputs/reproduction/C02-s{42,43,44}/`, and saved checkpoints. CartPole E05/P2 inclusion has not been rerun; earlier P2 evidence and gates remain unchanged.
+**Exit:** author model truly reproduced or precise reason/documentation of remaining mismatch; do not hide failed replication. Current status remains **NEEDS_INVESTIGATION**, with transition-audit failure and paper-protocol reconciliation open.
 
 ### P2 — Baseline diagnosis on original + research stress-test systems
 
@@ -223,12 +227,11 @@ P4: independent H2 and H3 reports, statistical significance, failure cases, base
 
 **Order (not a time estimate):**
 
-1. **Verify existing Pendulum:** get local commit and actual script, review checkpoint keys + effective LR; avoid rerunning unless invalid.
-2. **Set up Git boundary:** establish upstream provenance, create `research/` and test scaffolding; do **not** move original folders.
-3. **CartPole smoke dataset:** use generator only after seed/mutation audit; test `n=20`, `T=250` before full dataset.
-4. **CartPole official Koopman reproduction:** use new thin runner, retain paper-vs-repo protocol variants.
-5. **Controlled rotation toy:** write only benchmark/oracle and diagnosis, **not** H2/H3 models.
-6. **MPC harness:** implement baseline QP and unit-test mathematical correctness before reporting closed-loop claims.
+1. **Resolve CartPole dataset audit:** explain/fix the transition mismatch under a separately recorded protocol; retain the existing failed report and dataset hashes. Establish generation seeds/manifest and smoke evidence before certifying new data.
+2. **Reconcile paper vs locked repo protocol:** window sampling, optimizer/scheduler, encoder losses, evaluation horizon/metric and re-encode semantics. Pendulum P0 evidence and CartPole 5% results are already recorded; avoid unnecessary retraining.
+3. **Complete CartPole fraction coverage:** 5% seeds 42/43/44 are done; 1%/10%/30% remain. If the data or protocol changes, use separate run identities and new provenance rather than overwriting C02 evidence.
+4. **Investigate short-horizon conditioning:** output rank 4/4 is established, but Wy(0.3 s) is numerically near-singular. Keep this distinct from the unstable raw 25-power rank computation.
+5. **Refresh P2 E05 only as a separate verified run:** C02 checkpoints now exist; the prior P2 snapshot still records CartPole `missing_checkpoint`. Do not silently change that snapshot or existing H2/H3 gate verdicts.
 
 Safe inspection commands for existing checkout:
 

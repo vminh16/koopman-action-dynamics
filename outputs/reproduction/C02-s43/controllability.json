@@ -1,0 +1,82 @@
+{
+  "run_id": "C02-s43",
+  "gramian": {
+    "rho_T": null,
+    "lambda_min_Wy": 2.502161078272164e-12,
+    "lambda_max_Wy": 0.09947869865110981,
+    "lambda_max_Qy": 16.44954319005801,
+    "cond_Wy": null,
+    "rank_deficient": true,
+    "numerical_rank": 3,
+    "output_dim": 4,
+    "rank_tolerance": 1e-10,
+    "T": 0.3,
+    "method": "expm",
+    "num_points": null,
+    "float_dtype": "float64",
+    "Wy_quadrature": [
+      [
+        1.3157640641803355e-06,
+        1.1747722723397998e-05,
+        3.68951777093909e-05,
+        0.0002024125219833444
+      ],
+      [
+        1.1747722723397998e-05,
+        0.00035038188094447446,
+        0.00043299240930903354,
+        0.005875876827474512
+      ],
+      [
+        3.68951777093909e-05,
+        0.00043299240930903354,
+        0.001078290282095062,
+        0.007392557470940064
+      ],
+      [
+        0.0002024125219833444,
+        0.005875876827474512,
+        0.007392557470940064,
+        0.09857072041216534
+      ]
+    ],
+    "eigenvalues_quadrature": [
+      2.5021610964870945e-12,
+      3.6277688420021286e-09,
+      0.0005220060578899085,
+      0.09947869865110814
+    ],
+    "quadrature_error_estimate": 3.3190672535418902e-15
+  },
+  "rank": {
+    "latent_dim": 25,
+    "full_reachability_rank": 2,
+    "output_reachability_rank": 2,
+    "output_dim": 4,
+    "first_four_blocks": {
+      "latent_dim": 25,
+      "full_reachability_rank": 4,
+      "output_reachability_rank": 4,
+      "output_dim": 4
+    },
+    "first_four_output_singular_values": [
+      144.4996643919561,
+      75.3010353636523,
+      0.02897545994241089,
+      2.2638201994206943e-05
+    ],
+    "scaled_A_norm": 37.94503290211661,
+    "scaled_A": {
+      "latent_dim": 25,
+      "full_reachability_rank": 8,
+      "output_reachability_rank": 4,
+      "output_dim": 4
+    },
+    "interpretation": "First four reachability blocks establish output rank 4 numerically. Raw 25-power rank 2 is ill-conditioned; scaling A also recovers output rank 4. This is distinct from the nearly singular short-horizon Gramian."
+  },
+  "structure": {
+    "A_similarity_ok": true,
+    "B_similarity_ok": true,
+    "P_min_eigenvalue": 0.10000000238503379
+  }
+}

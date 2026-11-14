@@ -1,9 +1,10 @@
 # Experiment Tracking
 
-Tài liệu này ghi lại toàn bộ run phục vụ tái lập Pendulum. Không ghi kết quả
-paper vào cột kết quả của repo.
+Tài liệu này ghi lại các run phục vụ tái lập Pendulum và CartPole. Không ghi kết quả
+paper vào cột kết quả của repo. Kết quả CartPole 5% nằm ở §3.4; kết quả
+Pendulum và chẩn đoán P2 được giữ riêng.
 
-## 1. Reference values from paper
+## 1. Reference values from paper — Pendulum
 
 | Train fraction | Paper prediction MSE |
 |---:|---:|
@@ -72,7 +73,8 @@ Status hợp lệ: `PLANNED`, `RUNNING`, `COMPLETED`, `FAILED`,
 
 The reported test MSE is the open-loop mean over 1,000 test trajectories with
 `window_len=15` and `reencode=False`. Training losses were read from the final
-TensorBoard event for each fraction. Only seed 42 is currently available.
+TensorBoard event for each fraction. This historical summary table reports
+seed 42 only; results for seeds 43/44 at 5% and 10% are recorded in §3.2.
 
 ### Current assessment
 
@@ -181,6 +183,80 @@ Phase P2 đã được thực hiện lại toàn diện và nghiêm ngặt với
 - Báo cáo chẩn đoán chi tiết: [p2_failure_report.yaml](outputs/diagnosis/p2_failure_report.yaml); artifact và manifest theo run: `outputs/diagnosis/runs/<run_id>/`.
 - **Sửa lỗi số học upstream:** `training/loss.py` có số hạng condition-number nhân bởi `beta=0`; giá trị loss không đổi nhưng backward đi qua $1/(\lambda_{\min}+10^{-8})$ và sinh NaN gradient sau ~230 bước full-budget (gặp trên quadrotor seed 45). Đã bỏ số hạng chết này; training 25 epochs hoàn tất.
 
+
+### 3.4. CartPole 5% — completed runs and independent evaluation (2026-11-14)
+
+**Training status: COMPLETED (C02-s42/s43/s44). Reproduction assessment: NEEDS_INVESTIGATION.**
+
+Mỗi run dùng 500/10.000 train trajectories (5%), 20 windows/trajectory,
+10.000 windows dài 15 bước; 100 epochs và 15.700 optimizer steps. Model là
+`KoopmanLitModule`, controllable, `N=25`, encoder 3 layers × hidden 64,
+`use_modulated_u=false`, batch 64, AdamW với LR ban đầu `0.001`,
+`weight_decay=1e-5`, scheduler `ReduceLROnPlateau`, ODE solver Euler, `dt=0.02`.
+Runner `research.baseline.train_koopman` truyền toàn bộ locked YAML và LR vào
+module, dùng encoder/operator/loss của tác giả; wrapper khác entrypoint upstream
+ở config/provenance và ghi quyết định sampling. Đây là protocol repo đã khóa,
+chưa được chứng nhận tương đương hoàn toàn với paper.
+
+| Run ID | Seed | Epochs | Training status | Config | Checkpoint | Final train prediction loss | Test MSE open-loop H=15 |
+|---|---:|---:|---|---|---|---:|---:|
+| C02-s42 | 42 | 100 | COMPLETED | [config](configs/research/cartpole_controllable_win15_frac0.05_seed42.yml) | [checkpoint](checkpoints/C02-s42.pt) | 0.02497466 | 0.09289890 |
+| C02-s43 | 43 | 100 | COMPLETED | [config](configs/research/cartpole_controllable_win15_frac0.05_seed43.yml) | [checkpoint](checkpoints/C02-s43.pt) | 0.02418091 | 0.08918348 |
+| C02-s44 | 44 | 100 | COMPLETED | [config](configs/research/cartpole_controllable_win15_frac0.05_seed44.yml) | [checkpoint](checkpoints/C02-s44.pt) | 0.02600020 | 0.09360111 |
+
+#### Evaluation protocol and seed aggregates
+
+Đánh giá mới được tính từ checkpoint epoch cuối trên cùng toàn bộ 1.000 test
+trajectories, bắt đầu từ `x0`; không chọn checkpoint theo test MSE. Metric là
+MSE không trọng số trên bốn chiều trạng thái vật lý, thời gian và trajectories;
+không wrap góc hoặc normalize state. Model forward float32, giảm tổng sai số
+float64. Training prediction loss có trọng số thời gian nên không đồng nhất
+với test MSE này. Rollout batch đã đối chiếu với một trajectory chạy riêng.
+
+| Protocol | Seed 42 | Seed 43 | Seed 44 | Mean ± sample std | 95% t CI (df=2) |
+|---|---:|---:|---:|---:|---|
+| Open-loop H=15 (0.3 s) | 0.09289890 | 0.08918348 | 0.09360111 | 0.09189450 ± 0.00237392 | [0.08599736, 0.09779163] |
+| Open-loop H=250 (5 s) | 50.59788465 | 43.17358069 | 39.56642541 | 44.44596358 ± 5.62472149 | [30.47338080, 58.41854637] |
+| Re-encode H=250, K=50 | 65.99446461 | 67.95760022 | 61.97731586 | 65.30979356 ± 3.04836531 | [57.73723433, 72.88235280] |
+
+`std` và CI tính trên ba seed, không phải trên test trajectories; ba seed
+cho ước lượng bất định còn hạn chế. Seed thay đổi cả train subset và model init.
+Re-encode dùng trạng thái **dự đoán** trước đó mỗi 50 bước; không reset bằng
+ground truth. Sai số tăng mạnh ở horizon dài và re-encode K=50 kém hơn open-loop
+H=250 ở cả ba seed. Không so các MSE này trực tiếp với reference Pendulum ở §1.
+
+#### Structure and independent float64 Gramian/rank checks
+
+Cả ba checkpoint pass strict load, `A=P Ac P^-1`, `B=P Bc`, và `P` positive
+definite. Kiểm tra độc lập `rank(C[B, AB, A²B, A³B])=4`; chuẩn hóa scale của
+`A` trước khi lập 25 khối cũng cho output rank 4. Rank 2 từ ma trận 25 khối
+chưa chuẩn hóa chịu ảnh hưởng dynamic range nên không dùng kết luận mất
+output controllability.
+
+| Seed | Output rank (first 4 blocks) | Wy(0.3 s) numerical rank, tol=1e-10 | Minimum eigenvalue Wy |
+|---:|---:|---:|---:|
+| 42 | 4/4 | 3/4 | 4.38851276e-12 |
+| 43 | 4/4 | 3/4 | 2.50216108e-12 |
+| 44 | 4/4 | 3/4 | 4.74258936e-12 |
+
+Gramian tính float64 bằng block matrix exponential và đối chiếu adaptive
+quadrature độc lập. Eigenvalue nhỏ nhất dương nhưng rất nhỏ: `Wy` gần suy biến
+về mặt số học tại horizon 0.3 s; `rho_T=null` theo tolerance đã công bố.
+Output rank đủ không đồng nghĩa biên điều khiển tốt trong horizon ngắn, hoặc
+bảo đảm điều khiển hệ phi tuyến thật dưới giới hạn input.
+
+#### Provenance, artifacts and remaining gates
+
+- Training source: `5701981ce63517637f9e7cdbb1dafc7bf68e9d6f`; cả ba manifest ghi source clean.
+- Train SHA-256: `f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b`.
+- Test SHA-256: `9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e`.
+- Đã đối chiếu config/checkpoint/dataset hashes, effective hyperparameters và sampler-source hash với từng manifest.
+- Manifest: [s42](outputs/reproduction/C02-s42/manifest.yaml), [s43](outputs/reproduction/C02-s43/manifest.yaml), [s44](outputs/reproduction/C02-s44/manifest.yaml). Mỗi thư mục còn có `evaluation.json` và `controllability.json`.
+- Summary: [Markdown](outputs/reproduction/cartpole_frac0.05_summary.md), [JSON](outputs/reproduction/cartpole_frac0.05_summary.json), [CSV](outputs/reproduction/cartpole_frac0.05_summary.csv).
+- Seed 42 từng có log chưa hoàn tất ở `version_0` (checkpoint epoch 12); bảng dùng checkpoint cuối `C02-s42.pt` của run hoàn tất, không dùng checkpoint dở dang.
+- **Dataset audit vẫn FAILED:** train RK4 max error `0.000160761215 > 0.0001`; không đổi dữ liệu/hash/tolerance. Shape, finiteness, actuator/initial bounds, mutation/autograd và train/test separation đã pass. [Audit report](outputs/reproduction/cartpole_data_audit.yaml).
+- Chưa có kết quả CartPole 1%, 10%, 30% trong đợt này. Cần xử lý/giải thích audit transition và đối chiếu paper protocol trước khi kết luận reproduction PASS.
+- Các checkpoint CartPole mới chưa được đưa vào E05/recompute P2. Dòng `missing_checkpoint` ở §3.3 mô tả snapshot P2 trước đợt train này; P2 report và gates không tự thay đổi.
 
 ## 4. Commands
 

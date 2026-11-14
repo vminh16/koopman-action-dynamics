@@ -1,0 +1,462 @@
+{
+  "system": "cartpole",
+  "train_fraction": 0.05,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset_audit_status": "failed",
+  "dataset_audit_errors": [
+    "train: RK4 transition mismatch: max_error=0.000160761215 >= tol=0.0001"
+  ],
+  "metric_definition": "Mean raw physical-state squared error across trajectories, timesteps and four state coordinates. No angle wrapping or normalization.",
+  "reencode_definition": "Encode the preceding predicted state every 50 steps; no ground-truth resets.",
+  "uncertainty": "Sample standard deviation and two-sided Student-t 95% interval across 3 training seeds (df=2); seeds vary training subsets and initialization. Interval can extend below zero and is imprecise with n=3.",
+  "aggregate": {
+    "open_loop_H15": {
+      "mean": 0.09189449691770746,
+      "sample_std": 0.0023739159367435793,
+      "seed_count": 3,
+      "ci95_t_df2": [
+        0.08599736281449584,
+        0.09779163102091908
+      ]
+    },
+    "open_loop_H250": {
+      "mean": 44.44596358345033,
+      "sample_std": 5.624721494180292,
+      "seed_count": 3,
+      "ci95_t_df2": [
+        30.473380801138923,
+        58.418546365761735
+      ]
+    },
+    "reencode_H250_K50": {
+      "mean": 65.30979356365587,
+      "sample_std": 3.0483653132960775,
+      "seed_count": 3,
+      "ci95_t_df2": [
+        57.737234329420694,
+        72.88235279789106
+      ]
+    }
+  },
+  "runs": [
+    {
+      "run_id": "C02-s42",
+      "seed": 42,
+      "train_fraction": 0.05,
+      "epochs": 100,
+      "training_steps": 15700,
+      "train_trajectories": 500,
+      "train_windows": 10000,
+      "train_final_metrics": {
+        "train_total_loss": 0.029377887025475502,
+        "loss/prediction": 0.024974660947918892,
+        "loss/encoder_true": 0.0002421016979496926,
+        "loss/controllability": 0.7082597017288208
+      },
+      "evaluation": {
+        "open_loop_H15": {
+          "mse": 0.09289889666999733,
+          "median_trajectory_mse": 0.05972568559251855,
+          "trajectory_mse_std": 0.09128963079380929,
+          "per_state_mse": [
+            0.0017243566371375175,
+            0.10841298444195152,
+            0.004303509452846852,
+            0.25715473614805334
+          ],
+          "trajectories": 1000
+        },
+        "open_loop_H250": {
+          "mse": 50.59788464913763,
+          "median_trajectory_mse": 30.876017569091797,
+          "trajectory_mse_std": 52.8314315490668,
+          "per_state_mse": [
+            2.9699744384231046,
+            1.3876171861953641,
+            156.19457493235464,
+            41.83937203957741
+          ],
+          "trajectories": 1000
+        },
+        "reencode_H250_K50": {
+          "mse": 65.99446461090174,
+          "median_trajectory_mse": 44.535674913840516,
+          "trajectory_mse_std": 60.97875066037416,
+          "per_state_mse": [
+            6.402019401248923,
+            3.22194952136905,
+            207.6016343968279,
+            46.75225512416113
+          ],
+          "trajectories": 1000
+        }
+      },
+      "gramian": {
+        "rho_T": null,
+        "lambda_min_Wy": 4.388512759668914e-12,
+        "lambda_max_Wy": 0.10480602002248128,
+        "lambda_max_Qy": 11.91691308739404,
+        "cond_Wy": null,
+        "rank_deficient": true,
+        "numerical_rank": 3,
+        "output_dim": 4,
+        "rank_tolerance": 1e-10,
+        "T": 0.3,
+        "method": "expm",
+        "num_points": null,
+        "float_dtype": "float64",
+        "Wy_quadrature": [
+          [
+            6.892471431584652e-07,
+            5.8731819728440465e-06,
+            2.2233743466399825e-05,
+            9.926279156386444e-05
+          ],
+          [
+            5.8731819728440465e-06,
+            0.0003906733530330882,
+            0.00043128378931557386,
+            0.006371225495006935
+          ],
+          [
+            2.2233743466399825e-05,
+            0.00043128378931557386,
+            0.0008889239502524464,
+            0.007124884089441289
+          ],
+          [
+            9.926279156386444e-05,
+            0.006371225495006935,
+            0.007124884089441289,
+            0.10392503408192427
+          ]
+        ],
+        "eigenvalues_quadrature": [
+          4.38851276951195e-12,
+          3.2393026721127614e-09,
+          0.0003992973661807354,
+          0.10480602002248106
+        ],
+        "quadrature_error_estimate": 3.495442650691927e-15
+      },
+      "rank": {
+        "latent_dim": 25,
+        "full_reachability_rank": 2,
+        "output_reachability_rank": 2,
+        "output_dim": 4,
+        "first_four_blocks": {
+          "latent_dim": 25,
+          "full_reachability_rank": 4,
+          "output_reachability_rank": 4,
+          "output_dim": 4
+        },
+        "first_four_output_singular_values": [
+          190.45424283734482,
+          35.91859364139068,
+          0.031662279680052335,
+          3.0393086114213283e-05
+        ],
+        "scaled_A_norm": 33.77626671672071,
+        "scaled_A": {
+          "latent_dim": 25,
+          "full_reachability_rank": 8,
+          "output_reachability_rank": 4,
+          "output_dim": 4
+        },
+        "interpretation": "First four reachability blocks establish output rank 4 numerically. Raw 25-power rank 2 is ill-conditioned; scaling A also recovers output rank 4. This is distinct from the nearly singular short-horizon Gramian."
+      },
+      "structure": {
+        "A_similarity_ok": true,
+        "B_similarity_ok": true,
+        "P_min_eigenvalue": 0.1000000000000604
+      },
+      "checkpoint_sha256": "f5cc29ad3b3f951c0bd58b5dc943a7b22183fa6884d9b16f1f6e12e789edfc02",
+      "config_sha256": "30e1998f8fe33f23d50cbc78ff42dce079c77ec20caf296e594e90cb2877fa72",
+      "training_git_head": "5701981ce63517637f9e7cdbb1dafc7bf68e9d6f",
+      "sampling_source_current_hash_matches": true,
+      "evaluation_solver": "euler",
+      "evaluation_batch_single_max_abs_difference": 6.67572021484375e-06
+    },
+    {
+      "run_id": "C02-s43",
+      "seed": 43,
+      "train_fraction": 0.05,
+      "epochs": 100,
+      "training_steps": 15700,
+      "train_trajectories": 500,
+      "train_windows": 10000,
+      "train_final_metrics": {
+        "train_total_loss": 0.0290865246206522,
+        "loss/prediction": 0.024180909618735313,
+        "loss/encoder_true": 0.00037330418126657605,
+        "loss/controllability": 0.7082597017288208
+      },
+      "evaluation": {
+        "open_loop_H15": {
+          "mse": 0.08918348226256334,
+          "median_trajectory_mse": 0.05742796991696695,
+          "trajectory_mse_std": 0.08669328957668465,
+          "per_state_mse": [
+            0.0017440392086892761,
+            0.10906641305322935,
+            0.003905562949621455,
+            0.24201791383871332
+          ],
+          "trajectories": 1000
+        },
+        "open_loop_H250": {
+          "mse": 43.17358068637909,
+          "median_trajectory_mse": 27.040876682518945,
+          "trajectory_mse_std": 42.23698752313397,
+          "per_state_mse": [
+            2.3416843259595446,
+            0.919183180371475,
+            133.82079452188378,
+            35.6126607173016
+          ],
+          "trajectories": 1000
+        },
+        "reencode_H250_K50": {
+          "mse": 67.95760021911141,
+          "median_trajectory_mse": 48.0994335617751,
+          "trajectory_mse_std": 61.093039330937486,
+          "per_state_mse": [
+            5.72529904461878,
+            2.851627118000687,
+            214.55049547265685,
+            48.70297924116928
+          ],
+          "trajectories": 1000
+        }
+      },
+      "gramian": {
+        "rho_T": null,
+        "lambda_min_Wy": 2.502161078272164e-12,
+        "lambda_max_Wy": 0.09947869865110981,
+        "lambda_max_Qy": 16.44954319005801,
+        "cond_Wy": null,
+        "rank_deficient": true,
+        "numerical_rank": 3,
+        "output_dim": 4,
+        "rank_tolerance": 1e-10,
+        "T": 0.3,
+        "method": "expm",
+        "num_points": null,
+        "float_dtype": "float64",
+        "Wy_quadrature": [
+          [
+            1.3157640641803355e-06,
+            1.1747722723397998e-05,
+            3.68951777093909e-05,
+            0.0002024125219833444
+          ],
+          [
+            1.1747722723397998e-05,
+            0.00035038188094447446,
+            0.00043299240930903354,
+            0.005875876827474512
+          ],
+          [
+            3.68951777093909e-05,
+            0.00043299240930903354,
+            0.001078290282095062,
+            0.007392557470940064
+          ],
+          [
+            0.0002024125219833444,
+            0.005875876827474512,
+            0.007392557470940064,
+            0.09857072041216534
+          ]
+        ],
+        "eigenvalues_quadrature": [
+          2.5021610964870945e-12,
+          3.6277688420021286e-09,
+          0.0005220060578899085,
+          0.09947869865110814
+        ],
+        "quadrature_error_estimate": 3.3190672535418902e-15
+      },
+      "rank": {
+        "latent_dim": 25,
+        "full_reachability_rank": 2,
+        "output_reachability_rank": 2,
+        "output_dim": 4,
+        "first_four_blocks": {
+          "latent_dim": 25,
+          "full_reachability_rank": 4,
+          "output_reachability_rank": 4,
+          "output_dim": 4
+        },
+        "first_four_output_singular_values": [
+          144.4996643919561,
+          75.3010353636523,
+          0.02897545994241089,
+          2.2638201994206943e-05
+        ],
+        "scaled_A_norm": 37.94503290211661,
+        "scaled_A": {
+          "latent_dim": 25,
+          "full_reachability_rank": 8,
+          "output_reachability_rank": 4,
+          "output_dim": 4
+        },
+        "interpretation": "First four reachability blocks establish output rank 4 numerically. Raw 25-power rank 2 is ill-conditioned; scaling A also recovers output rank 4. This is distinct from the nearly singular short-horizon Gramian."
+      },
+      "structure": {
+        "A_similarity_ok": true,
+        "B_similarity_ok": true,
+        "P_min_eigenvalue": 0.10000000238503379
+      },
+      "checkpoint_sha256": "1ae89588b678ab17b84a29489eb19fd709f49fcc28b58c0813ff46ff8226a7ac",
+      "config_sha256": "ee3874be134b3afb047e7698e8b144db503494c1e332add038dbcad0c59c66c9",
+      "training_git_head": "5701981ce63517637f9e7cdbb1dafc7bf68e9d6f",
+      "sampling_source_current_hash_matches": true,
+      "evaluation_solver": "euler",
+      "evaluation_batch_single_max_abs_difference": 1.049041748046875e-05
+    },
+    {
+      "run_id": "C02-s44",
+      "seed": 44,
+      "train_fraction": 0.05,
+      "epochs": 100,
+      "training_steps": 15700,
+      "train_trajectories": 500,
+      "train_windows": 10000,
+      "train_final_metrics": {
+        "train_total_loss": 0.03026728518307209,
+        "loss/prediction": 0.02600020356476307,
+        "loss/encoder_true": 0.0001940371294040233,
+        "loss/controllability": 0.7082597017288208
+      },
+      "evaluation": {
+        "open_loop_H15": {
+          "mse": 0.09360111182056169,
+          "median_trajectory_mse": 0.0575269732959754,
+          "trajectory_mse_std": 0.09411898359378346,
+          "per_state_mse": [
+            0.0017343030234797917,
+            0.10831875689172069,
+            0.004185792377416014,
+            0.26016559498963027
+          ],
+          "trajectories": 1000
+        },
+        "open_loop_H250": {
+          "mse": 39.56642541483427,
+          "median_trajectory_mse": 24.76771967523226,
+          "trajectory_mse_std": 37.49484019295141,
+          "per_state_mse": [
+            2.2036626313094865,
+            0.7966159360093211,
+            122.63164230843385,
+            32.63378078358443
+          ],
+          "trajectories": 1000
+        },
+        "reencode_H250_K50": {
+          "mse": 61.97731586095448,
+          "median_trajectory_mse": 43.875959428143524,
+          "trajectory_mse_std": 58.981481114729206,
+          "per_state_mse": [
+            4.815235047935999,
+            2.456005143439863,
+            195.62455210460206,
+            45.01347114783998
+          ],
+          "trajectories": 1000
+        }
+      },
+      "gramian": {
+        "rho_T": null,
+        "lambda_min_Wy": 4.742589358099867e-12,
+        "lambda_max_Wy": 0.05292295606914352,
+        "lambda_max_Qy": 14.356525107815909,
+        "cond_Wy": null,
+        "rank_deficient": true,
+        "numerical_rank": 3,
+        "output_dim": 4,
+        "rank_tolerance": 1e-10,
+        "T": 0.3,
+        "method": "expm",
+        "num_points": null,
+        "float_dtype": "float64",
+        "Wy_quadrature": [
+          [
+            6.989857579504884e-07,
+            1.3419850044813623e-06,
+            1.7046399359527797e-05,
+            2.551182804727645e-05
+          ],
+          [
+            1.3419850044813623e-06,
+            0.00020936716805860568,
+            0.0001645847282514003,
+            0.0033168561560757825
+          ],
+          [
+            1.7046399359527797e-05,
+            0.0001645847282514003,
+            0.00049980660987263,
+            0.002705969836969861
+          ],
+          [
+            2.551182804727645e-05,
+            0.0033168561560757825,
+            0.002705969836969861,
+            0.052573489998671216
+          ]
+        ],
+        "eigenvalues_quadrature": [
+          4.74258932877466e-12,
+          2.662763658603126e-09,
+          0.0003604040257104256,
+          0.052922956069143726
+        ],
+        "quadrature_error_estimate": 1.7658612852249179e-15
+      },
+      "rank": {
+        "latent_dim": 25,
+        "full_reachability_rank": 2,
+        "output_reachability_rank": 2,
+        "output_dim": 4,
+        "first_four_blocks": {
+          "latent_dim": 25,
+          "full_reachability_rank": 4,
+          "output_reachability_rank": 4,
+          "output_dim": 4
+        },
+        "first_four_output_singular_values": [
+          116.00494529784763,
+          110.78935852083151,
+          0.020418073794905903,
+          2.577170733561825e-05
+        ],
+        "scaled_A_norm": 37.701111409440855,
+        "scaled_A": {
+          "latent_dim": 25,
+          "full_reachability_rank": 8,
+          "output_reachability_rank": 4,
+          "output_dim": 4
+        },
+        "interpretation": "First four reachability blocks establish output rank 4 numerically. Raw 25-power rank 2 is ill-conditioned; scaling A also recovers output rank 4. This is distinct from the nearly singular short-horizon Gramian."
+      },
+      "structure": {
+        "A_similarity_ok": true,
+        "B_similarity_ok": true,
+        "P_min_eigenvalue": 0.09999999951243294
+      },
+      "checkpoint_sha256": "6e090db043740a8f049be96622a8c55758648bf26964ae89c76fdb14f6a9de80",
+      "config_sha256": "bc515e9132e473b24e5a8781b0b5122243e3a0cce276513b74cfc1de73bf7f85",
+      "training_git_head": "5701981ce63517637f9e7cdbb1dafc7bf68e9d6f",
+      "sampling_source_current_hash_matches": true,
+      "evaluation_solver": "euler",
+      "evaluation_batch_single_max_abs_difference": 6.198883056640625e-06
+    }
+  ],
+  "rank_interpretation": "Output rank 4/4 from first-four-block test and scaled-A test for all seeds. Raw full 25-power rank is unreliable due to dynamic range. At T=.3, all Wy have positive but tiny minimum eigenvalues (2.5e-12 to 4.74e-12); numerical rank 3 at absolute/scale tolerance 1e-10 is not a proof of exact mathematical uncontrollability."
+}

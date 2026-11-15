@@ -1,0 +1,155 @@
+{
+  "42": {
+    "CB": [
+      -0.0012720187660306692,
+      0.049612030386924744,
+      0.0009933237452059984,
+      0.7915481328964233
+    ],
+    "oracle_G_at_origin": [
+      0.0,
+      0.9756097197532654,
+      0.0,
+      -1.4634145498275757
+    ],
+    "one_step_central_input_slope": [
+      -0.0012720187660306692,
+      0.049612030386924744,
+      0.0009933237452059984,
+      0.7915481328964233
+    ],
+    "sign_conflict": true,
+    "solver": {
+      "euler_mse": 0.0928988966699973,
+      "exact_zoh_mse": 0.09039338275869557,
+      "euler_vs_zoh_prediction_rmse": 0.017218498090351878
+    },
+    "gradient_probe": {
+      "prediction": {
+        "value": 0.020198049023747444,
+        "operator_gradient_l2": 0.02913350984454155
+      },
+      "encoder_true": {
+        "value": 0.0002576489932835102,
+        "operator_gradient_l2": 0.0003100244211964309
+      },
+      "encoder_pred_weighted": {
+        "value": 0.0007716234540566802,
+        "operator_gradient_l2": 0.0018476806581020355
+      },
+      "controllability_weighted": {
+        "value": 0.00354129821062088,
+        "operator_gradient_l2": 7.071003938624587e-12
+      }
+    },
+    "training_euler_gramian_eigenvalues": [
+      -3.953473992623913e-09,
+      4.000133557724439e-11,
+      0.0004654083459172398,
+      0.14679880440235138
+    ],
+    "P_epsilon": 0.1
+  },
+  "43": {
+    "CB": [
+      -0.000750061240978539,
+      0.0494886189699173,
+      0.0019991446752101183,
+      0.810001015663147
+    ],
+    "oracle_G_at_origin": [
+      0.0,
+      0.9756097197532654,
+      0.0,
+      -1.4634145498275757
+    ],
+    "one_step_central_input_slope": [
+      -0.000750061240978539,
+      0.0494886189699173,
+      0.0019991446752101183,
+      0.8100010752677917
+    ],
+    "sign_conflict": true,
+    "solver": {
+      "euler_mse": 0.08918348226256335,
+      "exact_zoh_mse": 0.08741306834609629,
+      "euler_vs_zoh_prediction_rmse": 0.02034006627615029
+    },
+    "gradient_probe": {
+      "prediction": {
+        "value": 0.026353200897574425,
+        "operator_gradient_l2": 0.03670278936624527
+      },
+      "encoder_true": {
+        "value": 0.00025317075778730214,
+        "operator_gradient_l2": 0.0003486147033981979
+      },
+      "encoder_pred_weighted": {
+        "value": 0.0006815007654950023,
+        "operator_gradient_l2": 0.001812020898796618
+      },
+      "controllability_weighted": {
+        "value": 0.00354129821062088,
+        "operator_gradient_l2": 9.068938308653962e-12
+      }
+    },
+    "training_euler_gramian_eigenvalues": [
+      3.915978652457852e-12,
+      4.074410142607121e-09,
+      0.000613913987763226,
+      0.14870259165763855
+    ],
+    "P_epsilon": 0.1
+  },
+  "44": {
+    "CB": [
+      -0.0013433343265205622,
+      0.0501595064997673,
+      0.0001927000703290105,
+      0.7789664268493652
+    ],
+    "oracle_G_at_origin": [
+      0.0,
+      0.9756097197532654,
+      0.0,
+      -1.4634145498275757
+    ],
+    "one_step_central_input_slope": [
+      -0.0013433342101052403,
+      0.050159502774477005,
+      0.00019270008488092571,
+      0.77896648645401
+    ],
+    "sign_conflict": true,
+    "solver": {
+      "euler_mse": 0.09360111182056167,
+      "exact_zoh_mse": 0.09348359723732036,
+      "euler_vs_zoh_prediction_rmse": 0.020760768734119448
+    },
+    "gradient_probe": {
+      "prediction": {
+        "value": 0.031250499188899994,
+        "operator_gradient_l2": 0.06322131305932999
+      },
+      "encoder_true": {
+        "value": 0.00022005884966347367,
+        "operator_gradient_l2": 9.63287238846533e-05
+      },
+      "encoder_pred_weighted": {
+        "value": 0.0005725884111598134,
+        "operator_gradient_l2": 0.001573716290295124
+      },
+      "controllability_weighted": {
+        "value": 0.00354129821062088,
+        "operator_gradient_l2": 2.107012697996624e-12
+      }
+    },
+    "training_euler_gramian_eigenvalues": [
+      2.5302426820417168e-11,
+      1.1276982014862824e-08,
+      0.00047480000648647547,
+      0.08932407945394516
+    ],
+    "P_epsilon": 0.1
+  }
+}

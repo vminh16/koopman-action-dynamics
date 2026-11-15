@@ -2,7 +2,7 @@
 
 Tài liệu này ghi lại các run phục vụ tái lập Pendulum và CartPole. Không ghi kết quả
 paper vào cột kết quả của repo. Kết quả CartPole 5% nằm ở §3.4; kết quả
-Pendulum và chẩn đoán P2 được giữ riêng.
+Pendulum và chẩn đoán P2 được giữ riêng. [Trạng thái P0/P1 hiện tại](docs/superpowers/2026-11-15-p0-p1-status.md): P0 forensic audit đã đóng; đợt 28 đối chứng P1 đã hoàn tất, exact paper reproduction chưa được chứng nhận.
 
 ## 1. Reference values from paper — Pendulum
 
@@ -257,6 +257,48 @@ bảo đảm điều khiển hệ phi tuyến thật dưới giới hạn input.
 - **Dataset audit vẫn FAILED:** train RK4 max error `0.000160761215 > 0.0001`; không đổi dữ liệu/hash/tolerance. Shape, finiteness, actuator/initial bounds, mutation/autograd và train/test separation đã pass. [Audit report](outputs/reproduction/cartpole_data_audit.yaml).
 - Chưa có kết quả CartPole 1%, 10%, 30% trong đợt này. Cần xử lý/giải thích audit transition và đối chiếu paper protocol trước khi kết luận reproduction PASS.
 - Các checkpoint CartPole mới chưa được đưa vào E05/recompute P2. Dòng `missing_checkpoint` ở §3.3 mô tả snapshot P2 trước đợt train này; P2 report và gates không tự thay đổi.
+
+### 3.5. P1 controlled causal audit (2026-11-15)
+
+**28 runs × 100 epochs; 353.800 optimizer updates. Verdict: ROOT_CAUSES_SUPPORTED,
+EXACT_PAPER_REPRODUCTION_NOT_CERTIFIED.** Các checkpoint/dataset C02 cũ được giữ
+nguyên; các run mới có namespace riêng dưới
+`outputs/reproduction/p1_root_cause_2026-11-15/`.
+
+Đối chứng cùng init/subset/windows và thứ tự minibatch; 200 validation trajectories
+nằm ngoài hợp của ba tập train. Bảng sau là test MSE H=15 trên toàn bộ 1.000
+trajectories, mean ± sample std qua seed 42/43/44, checkpoint epoch cuối:
+
+| Dataset | Paired baseline | Variant | Variant MSE |
+|---|---:|---|---:|
+| Pendulum 5% | 0.08619425 ± 0.04338556 | Bỏ cả hai encoder-consistency penalties | 0.01447501 ± 0.01196399 |
+| CartPole 5% | 0.09179632 ± 0.00259836 | Đổi dấu toàn bộ physical transform block; giữ random windows | 0.06004065 ± 0.00180977 |
+
+- Cả ba seed đều cải thiện trong từng cặp. Baseline đối chứng mới dùng CPU và
+  shuffle generator tường minh; không thay thế số liệu lịch sử ở §3.4.
+- Pendulum: bỏ encoder loss cải thiện H=15 nhưng làm H=250 kém đi (mean MSE
+  51.17 → 475.52). Sửa scheduler monitor sang epoch mean cũng cải thiện seed 42;
+  các thay đổi không có tác dụng cộng tuyến tính, nên không áp dụng hàng loạt.
+- CartPole: ràng buộc SPD buộc angular input gain dương, trái với gain âm gần
+  upright. Đối chứng âm physical block vẫn giữ output rank 4/4; sửa dấu một
+  mình chưa đủ đạt reference paper.
+- Đối chứng sampler seed 42, validation MSE: original/random 0.09105911;
+  original/start0 0.09586752; negative/random 0.05909300; negative/start0
+  0.00084898. Start0 thay cả miền trạng thái và số windows duy nhất.
+- Negative/start0 lặp ba seed cho test H=15 **0.00087518 ± 0.00012415**, nhưng
+  đây là **DIAGNOSTIC_ONLY_NOT_FAITHFUL_PAPER_REPRODUCTION** vì khác random-window
+  sampling được paper mô tả. Không lấy số thấp này để đánh dấu P1 PASS.
+- Bỏ riêng softplus Gramian penalty gần như không đổi validation MSE seed 42;
+  khác biệt objective với paper vẫn tồn tại nhưng chưa chứng minh là nguyên
+  nhân chính của prediction gap. Rank/Gramian float64 được kiểm tra độc lập.
+- Chưa có protocol Table 1 đủ tường minh để chứng nhận tái lập chính xác; không
+  sửa verdict dataset audit cũ hoặc các gates P2/H2/H3.
+
+Bằng chứng: [audit note](docs/superpowers/2026-11-15-p1-controlled-reproduction-audit.md),
+[full report](outputs/reproduction/p1_root_cause_2026-11-15/REPORT.md),
+[protocol](outputs/reproduction/p1_root_cause_2026-11-15/PROTOCOL.md),
+[JSON](outputs/reproduction/p1_root_cause_2026-11-15/summary.json),
+[plots](outputs/reproduction/p1_root_cause_2026-11-15/causal_results.png).
 
 ## 4. Commands
 

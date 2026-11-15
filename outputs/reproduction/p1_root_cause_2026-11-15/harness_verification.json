@@ -1,0 +1,12 @@
+{
+  "pendulum": {
+    "forward_max_difference": 0.0,
+    "gradient_max_difference": 1.862645149230957e-09,
+    "oriented_output_rank": 2
+  },
+  "cartpole": {
+    "forward_max_difference": 0.0,
+    "gradient_max_difference": 9.313225746154785e-10,
+    "oriented_output_rank": 4
+  }
+}

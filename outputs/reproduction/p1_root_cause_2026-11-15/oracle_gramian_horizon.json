@@ -1,0 +1,96 @@
+{
+  "cartpole": {
+    "0.3": {
+      "rho_T": 0.00026363125998256576,
+      "lambda_min_Wy": 2.697434389284922e-07,
+      "lambda_max_Wy": 1.3635094152033251,
+      "lambda_max_Qy": 3.8811200763023344,
+      "cond_Wy": 5054838.1106863,
+      "rank_deficient": false,
+      "numerical_rank": 4,
+      "output_dim": 4,
+      "rank_tolerance": 1e-10,
+      "T": 0.3,
+      "method": "expm",
+      "num_points": null,
+      "float_dtype": "float64"
+    },
+    "1.0": {
+      "rho_T": 0.00046900035256475025,
+      "lambda_min_Wy": 0.00034712325083837613,
+      "lambda_max_Wy": 204.97265263878967,
+      "lambda_max_Qy": 1578.110342051719,
+      "cond_Wy": 590489.5513156705,
+      "rank_deficient": false,
+      "numerical_rank": 4,
+      "output_dim": 4,
+      "rank_tolerance": 1e-10,
+      "T": 1.0,
+      "method": "expm",
+      "num_points": null,
+      "float_dtype": "float64"
+    },
+    "3.0": {
+      "rho_T": null,
+      "lambda_min_Wy": 0.006461231017984954,
+      "lambda_max_Wy": 1606801457.8272583,
+      "lambda_max_Qy": 12586491689.364061,
+      "cond_Wy": null,
+      "rank_deficient": true,
+      "numerical_rank": 3,
+      "output_dim": 4,
+      "rank_tolerance": 1e-10,
+      "T": 3.0,
+      "method": "expm",
+      "num_points": null,
+      "float_dtype": "float64"
+    }
+  },
+  "pendulum": {
+    "0.3": {
+      "rho_T": 0.06512037924622324,
+      "lambda_min_Wy": 0.01496173895092616,
+      "lambda_max_Wy": 4.379493732098519,
+      "lambda_max_Qy": 3.5281596657147496,
+      "cond_Wy": 292.7128822701067,
+      "rank_deficient": false,
+      "numerical_rank": 2,
+      "output_dim": 2,
+      "rank_tolerance": 1e-10,
+      "T": 0.3,
+      "method": "expm",
+      "num_points": null,
+      "float_dtype": "float64"
+    },
+    "1.0": {
+      "rho_T": 0.0074471495842960075,
+      "lambda_min_Wy": 0.07026623166451884,
+      "lambda_max_Wy": 720.5471363596192,
+      "lambda_max_Qy": 1266.9705170245666,
+      "cond_Wy": 10254.529370520688,
+      "rank_deficient": false,
+      "numerical_rank": 2,
+      "output_dim": 2,
+      "rank_tolerance": 1e-10,
+      "T": 1.0,
+      "method": "expm",
+      "num_points": null,
+      "float_dtype": "float64"
+    },
+    "3.0": {
+      "rho_T": null,
+      "lambda_min_Wy": 0.0726182758808136,
+      "lambda_max_Wy": 3830252392.3679714,
+      "lambda_max_Qy": 6809337544.431963,
+      "cond_Wy": null,
+      "rank_deficient": true,
+      "numerical_rank": 1,
+      "output_dim": 2,
+      "rank_tolerance": 1e-10,
+      "T": 3.0,
+      "method": "expm",
+      "num_points": null,
+      "float_dtype": "float64"
+    }
+  }
+}

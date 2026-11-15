@@ -1,0 +1,65 @@
+{
+  "42": {
+    "lightning_checkpoint": "outputs/lightning_logs/C02-s42/version_1/checkpoints/epoch=99-step=15700.ckpt",
+    "global_step": 15700,
+    "epoch": 99,
+    "final_lr": 1.0000000000000004e-08,
+    "scheduler_best_monitored_loss": 0.014257927425205708,
+    "scheduler_last_epoch": 99,
+    "scheduler_num_bad_epochs": 0,
+    "default_training_step_logging": {
+      "allowed_on_step": [
+        false,
+        true
+      ],
+      "allowed_on_epoch": [
+        false,
+        true
+      ],
+      "default_on_step": true,
+      "default_on_epoch": false
+    }
+  },
+  "43": {
+    "lightning_checkpoint": "outputs/lightning_logs/C02-s43/version_0/checkpoints/epoch=99-step=15700.ckpt",
+    "global_step": 15700,
+    "epoch": 99,
+    "final_lr": 1.0000000000000004e-08,
+    "scheduler_best_monitored_loss": 0.012509051710367203,
+    "scheduler_last_epoch": 99,
+    "scheduler_num_bad_epochs": 4,
+    "default_training_step_logging": {
+      "allowed_on_step": [
+        false,
+        true
+      ],
+      "allowed_on_epoch": [
+        false,
+        true
+      ],
+      "default_on_step": true,
+      "default_on_epoch": false
+    }
+  },
+  "44": {
+    "lightning_checkpoint": "outputs/lightning_logs/C02-s44/version_0/checkpoints/epoch=99-step=15700.ckpt",
+    "global_step": 15700,
+    "epoch": 99,
+    "final_lr": 1.0000000000000004e-08,
+    "scheduler_best_monitored_loss": 0.014122463762760162,
+    "scheduler_last_epoch": 99,
+    "scheduler_num_bad_epochs": 10,
+    "default_training_step_logging": {
+      "allowed_on_step": [
+        false,
+        true
+      ],
+      "allowed_on_epoch": [
+        false,
+        true
+      ],
+      "default_on_step": true,
+      "default_on_epoch": false
+    }
+  }
+}

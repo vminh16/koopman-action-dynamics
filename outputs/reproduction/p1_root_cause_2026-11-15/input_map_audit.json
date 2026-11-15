@@ -1,0 +1,62 @@
+{
+  "pendulum": {
+    "sampled_training_windows": {
+      "mean_G": [
+        0.0,
+        3.0
+      ],
+      "variance_G_per_state": [
+        0.0,
+        0.0
+      ],
+      "unavoidable_mean_vectorfield_squared_error_for_any_constant_B": 0.0,
+      "description": "Continuous-time vector-field lower bound, not a bound on the reported multi-step state MSE. Assumes independent zero-mean uniform controls, as in the generator."
+    },
+    "first15_validation": {
+      "mean_G": [
+        0.0,
+        3.0
+      ],
+      "variance_G_per_state": [
+        0.0,
+        0.0
+      ],
+      "unavoidable_mean_vectorfield_squared_error_for_any_constant_B": 0.0,
+      "description": "Continuous-time vector-field lower bound, not a bound on the reported multi-step state MSE. Assumes independent zero-mean uniform controls, as in the generator."
+    }
+  },
+  "cartpole": {
+    "sampled_training_windows": {
+      "mean_G": [
+        0.0,
+        0.9443781042169694,
+        0.0,
+        -0.3980467153844804
+      ],
+      "variance_G_per_state": [
+        0.0,
+        0.0005638821370144399,
+        0.0,
+        0.9598739192904482
+      ],
+      "unavoidable_mean_vectorfield_squared_error_for_any_constant_B": 32.01459338091542,
+      "description": "Continuous-time vector-field lower bound, not a bound on the reported multi-step state MSE. Assumes independent zero-mean uniform controls, as in the generator."
+    },
+    "first15_validation": {
+      "mean_G": [
+        0.0,
+        0.9749560514696926,
+        0.0,
+        -1.4556744194641948
+      ],
+      "variance_G_per_state": [
+        0.0,
+        1.1542344168301793e-06,
+        0.0,
+        0.00016550597589766285
+      ],
+      "unavoidable_mean_vectorfield_squared_error_for_any_constant_B": 0.005555340343816434,
+      "description": "Continuous-time vector-field lower bound, not a bound on the reported multi-step state MSE. Assumes independent zero-mean uniform controls, as in the generator."
+    }
+  }
+}

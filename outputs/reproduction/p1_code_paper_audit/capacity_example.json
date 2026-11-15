@@ -1,0 +1,17 @@
+{
+  "explanation": "Diagnostic construction only, not a trained replacement. Block-invertible P allows negative angular input response while preserving output rank.",
+  "P_head_determinant": -1.4634146341463414,
+  "CB": [
+    0.0,
+    0.975609756097561,
+    0.0,
+    -1.4634146341463414
+  ],
+  "target_G": [
+    0.0,
+    0.975609756097561,
+    0.0,
+    -1.4634146341463414
+  ],
+  "output_rank_first_four": 4
+}

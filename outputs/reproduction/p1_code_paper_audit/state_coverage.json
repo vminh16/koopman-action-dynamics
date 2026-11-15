@@ -1,0 +1,10 @@
+{
+  "all_train_predecessors": {
+    "negative_angular_input_fraction": 0.6845052,
+    "mean_angular_input_gain": -0.43673431426848097
+  },
+  "first_15_test_predecessors": {
+    "negative_angular_input_fraction": 1.0,
+    "mean_angular_input_gain": -1.4559500830024645
+  }
+}

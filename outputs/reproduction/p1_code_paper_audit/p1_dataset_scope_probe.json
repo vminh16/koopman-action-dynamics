@@ -1,0 +1,21 @@
+{
+  "total_transitions": 2500000,
+  "transition_counts_above_threshold": {
+    "0.0001": 1,
+    "1e-05": 30515,
+    "1e-06": 989070
+  },
+  "local_state_rmse": 1.5186857552955557e-06,
+  "failing_transitions": [
+    {
+      "trajectory": 3834,
+      "step": 248,
+      "max_error": 0.0001607612153478044
+    }
+  ],
+  "failing_trajectories_in_C02_subsets": {
+    "42": [],
+    "43": [],
+    "44": []
+  }
+}

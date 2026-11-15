@@ -1,0 +1,10 @@
+{
+  "cartpole": {
+    "validation_mse": 7.397659214841179e-06,
+    "description": "Exact ZOH of analytic upright linearization, no fitting. Uses oracle knowledge for evaluation only; not a learned baseline result."
+  },
+  "pendulum": {
+    "validation_mse": 10.27780764773032,
+    "description": "Exact ZOH of analytic upright linearization, no fitting. Uses oracle knowledge for evaluation only; not a learned baseline result."
+  }
+}

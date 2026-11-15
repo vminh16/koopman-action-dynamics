@@ -1,0 +1,16 @@
+{
+  "docs/paper/20675_Learning_Koopman_Represe.pdf": "415cbd8159987257d384a491b99b9f268e489e07535d6d7f6ad9dd577a139065",
+  "models/koopman_operator.py": "fac1b00cd9065e9428d3b5e72af97b29b483e7ae82fc69dd4cfb008abcac397a",
+  "models/model_builder.py": "fe1a4a7b3e5b77ee3ec9e6e933ec61538f8f851d5925f46793d44fa38d39d9ae",
+  "training/train.py": "447ef20e40977673a20636ea85ffebf4754751518002488d4615b77e219220b9",
+  "training/loss.py": "e02b2b29e8b4b95804544371acca024a81e700a2df173a28157d258140a53164",
+  "my_utils/dataset.py": "1a319b3725ec1fa21baa0327570a32c0db8c8a0bf35376b5fe8b39cac7d42703",
+  "my_utils/simulate.py": "cd919f8b03685ff84907acfa820d895b1bcf92e3ff12d15f0011e39262516909",
+  "dynamics/cartpole.py": "ff2322e7df6a345b0dcac419f31c918b6788c0300a27fbfa2623a81e195f9f06",
+  "research/baseline/train_koopman.py": "d6bc8c03170ddd15d18a415ebf76e5d382b7da2f07a887205f0a22817876ea73",
+  "data/cartpole_train.pt": "f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b",
+  "data/cartpole_test.pt": "9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e",
+  "checkpoints/C02-s42.pt": "f5cc29ad3b3f951c0bd58b5dc943a7b22183fa6884d9b16f1f6e12e789edfc02",
+  "checkpoints/C02-s43.pt": "1ae89588b678ab17b84a29489eb19fd709f49fcc28b58c0813ff46ff8226a7ac",
+  "checkpoints/C02-s44.pt": "6e090db043740a8f049be96622a8c55758648bf26964ae89c76fdb14f6a9de80"
+}

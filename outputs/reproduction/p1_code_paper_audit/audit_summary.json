@@ -1,0 +1,33 @@
+{
+  "audit_type": "Read-only code/paper and checkpoint diagnosis; no retraining or production-code changes",
+  "source_commit": "b5c0c0e30cc3be8a45d55fa576e2f82bf09bdce7",
+  "paper_local": "docs/paper/20675_Learning_Koopman_Represe.pdf",
+  "paper_cartpole_table1_5percent_mse": 0.0024,
+  "local_open_loop_H15_mean_mse": 0.09189449691770744,
+  "nominal_ratio_not_protocol_matched": 38.28937371571144,
+  "primary_finding": "SPD P_head and fixed canonical input sign force the wrong local angular input-response sign for the current CartPole state/input convention",
+  "loss_divergence": "Paper reciprocal-minimum-eigenvalue plus condition penalty versus code softplus(.03-lambda_min), with extra encoder losses",
+  "weighted_control_to_prediction_operator_gradient_ratios": {
+    "42": 2.4271033515549483e-10,
+    "43": 2.470912556034354e-10,
+    "44": 3.3327569391342756e-11
+  },
+  "solver_ablation": {
+    "euler_mean_mse": 0.09189449691770744,
+    "exact_zoh_mean_mse": 0.0904300161140374,
+    "relative_reduction": 0.01593654519901766
+  },
+  "failed_transition_explanation": "Stored value replayed bit-for-bit by author float32 dopri5 at original timestamps; independent float64 integrations agree with RK4 audit instead.",
+  "failed_transition_in_any_C02_training_subset": false,
+  "scope": "Findings establish representational and objective/protocol issues; no claim that correcting them reproduces paper numbers without controlled retraining.",
+  "physical_input_sign_coverage": {
+    "all_train_predecessors": {
+      "negative_angular_input_fraction": 0.6845052,
+      "mean_angular_input_gain": -0.43673431426848097
+    },
+    "first_15_test_predecessors": {
+      "negative_angular_input_fraction": 1.0,
+      "mean_angular_input_gain": -1.4559500830024645
+    }
+  }
+}

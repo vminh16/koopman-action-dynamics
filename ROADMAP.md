@@ -158,8 +158,8 @@ koopman-action-dynamics/
 - [x] Re-evaluated open-loop on 1,000 test trajectories; results and source manifest saved.
 - [x] Protocol mismatch classified honestly; exact paper reproduction remains a follow-up, without overwriting existing runs.
 
-**Output:** [manifest](outputs/reproduction/E00/manifest.yaml), checkpoint audit and `MISMATCH` verdict.
-**Exit:** no remaining ambiguity about the local Pendulum run type, config or provenance. The run is not claimed as exact paper reproduction.
+**Output:** historical [E00 manifest](outputs/reproduction/E00/manifest.yaml), [E01 config-drift audit](outputs/reproduction/E01/manifest.yaml), checkpoint verification and local-protocol `MISMATCH` verdict.
+**Exit:** completed for the actual local model, effective training config and checked artifact identities. Unknown legacy generation details remain explicit; P0 does not certify exact paper reproduction. The E01 verdict refers specifically to the recorded 0.01 versus effective 0.005 drift, not to every possible objective/scheduler choice. See [current P0/P1 status](docs/superpowers/2026-11-15-p0-p1-status.md).
 
 ### P1 — Dataset and original-model reproduction (CartPole 5% COMPLETED; reproduction NEEDS_INVESTIGATION)
 
@@ -173,6 +173,20 @@ koopman-action-dynamics/
 - [x] Independently measure learned `(A,B)` structure and output controllability in float64 on all three C02 checkpoints: similarity identities and positive-definite `P` pass; first-four-block and scaled-A tests give output rank 4/4. Gramian block-exponential computation matches independent adaptive quadrature. At T=0.3 s, `lambda_min(Wy)=2.50e-12..4.74e-12` and numerical rank is 3/4 at tolerance `1e-10`; `rho_T=null`. This records weak short-horizon conditioning, not a positive usable-margin certificate or a nonlinear-plant guarantee.
 
 **Recorded CartPole 5% results (mean ± sample std across seeds):** open-loop H=15 `0.09189450 ± 0.00237392`; open-loop H=250 `44.44596358 ± 5.62472149`; predicted-state re-encode H=250/K=50 `65.30979356 ± 3.04836531`. Re-encoding is worse than open-loop H=250 for all three seeds. Metrics are raw physical-state MSE, without angle wrapping/normalization; weighted training loss is a different metric.
+
+**Controlled follow-up (2026-11-15):** 28 runs × 100 epochs on Pendulum/CartPole
+5% support causal effects of encoder objectives/scheduler semantics and the
+CartPole input-sign/window-selection interaction. Paired three-seed test H=15:
+Pendulum baseline `0.08619425 ± 0.04338556` → noenc
+`0.01447501 ± 0.01196399`; CartPole baseline `0.09179632 ± 0.00259836` →
+negative physical block `0.06004065 ± 0.00180977`. The CartPole start0 diagnostic
+reaches `0.00087518 ± 0.00012415` but changes the stated paper sampler, so it is
+not faithful-reproduction evidence. Pendulum noenc worsens long rollouts.
+Exact paper reproduction remains **NOT_CERTIFIED / NEEDS_INVESTIGATION**;
+no H2/H3 gate changes. See [controlled audit](docs/superpowers/2026-11-15-p1-controlled-reproduction-audit.md)
+and [TRACKING §3.5](TRACKING.md#35-p1-controlled-causal-audit-2026-11-15).
+
+**Scope of completion:** the 28-run 5% causal batch is finished; the full paper fraction grid and exact-protocol certification are not. [P0/P1 status](docs/superpowers/2026-11-15-p0-p1-status.md).
 
 **Output:** [summary](outputs/reproduction/cartpole_frac0.05_summary.md), [JSON](outputs/reproduction/cartpole_frac0.05_summary.json), [CSV](outputs/reproduction/cartpole_frac0.05_summary.csv), per-run manifests/evaluation/controllability reports under `outputs/reproduction/C02-s{42,43,44}/`, and saved checkpoints. CartPole E05/P2 inclusion has not been rerun; earlier P2 evidence and gates remain unchanged.
 **Exit:** author model truly reproduced or precise reason/documentation of remaining mismatch; do not hide failed replication. Current status remains **NEEDS_INVESTIGATION**, with transition-audit failure and paper-protocol reconciliation open.
@@ -311,6 +325,8 @@ Branch/commit convention (suggested): `audit/pendulum-run`, `repro/cartpole`, `d
 - 2026-11-13: P0 Pendulum config and seed variance probe completed. Effective config is verified; seed variance is bimodal.
 - 2026-11-13: P2 re-run with official baseline `KoopmanLitModule` (fixing surrogate substitution, transition off-by-one, benchmark dt, and multi-input operator device/H buffer bugs). Gate P2 PASS. Gate H2 Fixed-B limitation NOT_CONFIRMED (readiness NO-GO); Gate H3 NO-GO. H2/H3 tracks remain closed.
 - 2026-11-14: P2 full verification: 5 seeds, per-run manifest + hashed artifacts, E05 verified Pendulum / CartPole missing, shared E06 probe, E07 fixed-state closed-loop sweep, E08 fallback/residual/ZOH-vs-Euler checks, E09 local/MPC coverage + reduced excitation, recompute entrypoint PASS. `p2_verification` PASS; gate verdicts unchanged. Removed a zero-weighted condition-number term in `training/loss.py` that produced NaN gradients on near-singular Gramians.
+
+- 2026-11-15: closed the 28-run P1 causal batch (two environments, 5%, 100 epochs/run); verified 353,800 updates, paired test effects and independent rank/Gramian checks. Preserve P0 forensic completion, exact-reproduction NOT_CERTIFIED, existing dataset-audit failure and unchanged P2/H2/H3 gates. Diagnostic start0 scores do not certify paper sampling.
 
 ---
 

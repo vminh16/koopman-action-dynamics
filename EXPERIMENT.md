@@ -8,7 +8,8 @@
 **Reference:** Miao et al., *Learning Koopman Representations with Controllability Guarantees* (ICLR 2026).  
 **Upstream repository:** `https://github.com/KYMiao/Controllable-Koopman`  
 **Audited upstream `main` commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (static inspection on 2026-11-12).  
-**Evidence status:** P0 Pendulum verified (audit showed config drift does not explain performance; seed variance is bimodal, see `TRACKING.md`). P2 baseline stress diagnosis (E06, E07, E08) completed with official `KoopmanLitModule` baseline, verified transition alignment including $x_0$, and consistent $dt$: Gate P2 PASS; Gate H2 Fixed-B limitation NOT_CONFIRMED, Readiness NO-GO; Gate H3 NO-GO (no certified margin window).
+**Evidence updated:** 2026-11-15.
+**Evidence status:** P0 forensic audit COMPLETE: actual local checkpoints are Koopman; the historical lambda_control reporting drift does not explain their performance. P1 completed 28 controlled 100-epoch runs at 5% on Pendulum/CartPole; exact paper reproduction remains NOT_CERTIFIED (see `TRACKING.md` §3.5). P2 baseline stress diagnosis (E06, E07, E08) completed with official `KoopmanLitModule` baseline, verified transition alignment including $x_0$, and consistent $dt$: Gate P2 PASS; Gate H2 Fixed-B limitation NOT_CONFIRMED, Readiness NO-GO; Gate H3 NO-GO (no certified margin window).
 
 > **Nguyên tắc bất biến:** P0–P2 chỉ huấn luyện và kiểm tra **mô hình ICLR 2026** (trên dữ liệu gốc và stress-test mới), không chạy external model baselines. Simulator oracle cho phản thực và đạo hàm **chỉ dùng diagnosis/evaluation** trong Protocol A. Không phát triển/huấn luyện H2 hoặc H3 trước các gate tương ứng. Không coi learned-surrogate controllability là bảo đảm của plant thật.
 
@@ -51,17 +52,22 @@
 | U13 — High | `experiments/run_train.py` | `torch.save(..., "checkpoints/...")` nhưng script không tạo `checkpoints/` trước; `configs/` chỉ được tạo **sau** bước lưu | Trên checkout sạch, lần train có thể kết thúc bằng lỗi ghi checkpoint; xác minh file có thật và log hoàn chỉnh. |
 | U12 — Method | `training/train.py`, `KoopmanLitModule` | Optimizer AdamW + learned encoder/operator; `training/loss.py` dùng weighted prediction, encoder consistency, Gramian penalty | Audit flags, weights, state dimensions và solver trước khi so paper; **không** giả định README khớp paper. |
 
-**Scope of audit:** code review tĩnh từ upstream commit được ghi ở trên, **chưa chạy runtime trên máy người dùng**. Nếu local fork khác commit, audit theo local diff trước khi kết luận.
+**Scope of §2.1:** bảng này giữ nguyên các phát hiện lịch sử từ static upstream snapshot, không phải kết luận về code local hiện tại. Runtime checkpoint/config audit của local fork đã hoàn tất ở §2.2; không dùng U01/U03 để phân loại nhầm các checkpoint đã verify.
 
 ### 2.2. Pendulum verification checklist (retroactive audit)
 
-- [ ] Ghi `git rev-parse HEAD`, `git status --short`, `git diff --stat` và thông tin environment (`python`, PyTorch, Lightning, torchdiffeq, OS/GPU).
-- [ ] Lưu **lệnh thực tế** đã train/eval, các log tham số (`lr`, epochs, window, seed, loss flags).
-- [ ] Kiểm tra tên lớp model đã khởi tạo **bằng runtime log/source**, không suy luận từ `--koopman_mode`.
-- [ ] Kiểm tra `state_dict`: Koopman có các keys về `model.encoder`/`model.operator`; MLP thường có `model.net`. Khi tên khác, kiểm tra mã nguồn thực tế.
-- [ ] Ghi số trajectories dùng để train, số sampled windows, split theo trajectory, seed của generator và sampler.
-- [ ] Eval lại checkpoint với đúng model class, cùng horizon/metric/split paper, tách open-loop vs re-encode.
-- [ ] Nếu Pendulum là MLP hoặc khác protocol: đổi status thành `completed_unverified` hoặc `not_reproduced`; **không xóa log cũ**, chạy lại structured Koopman từ một runner nghiên cứu tách biệt.
+**P0 forensic status: COMPLETE. Paper-reproduction status: NOT_CERTIFIED (P1).**
+
+- [x] Commit/environment, dataset hashes, effective optimizer/LR/loss flags và sampler provenance được lưu trong [E00](outputs/reproduction/E00/manifest.yaml), [E01](outputs/reproduction/E01/manifest.yaml) và manifests của các locked reruns.
+- [x] Kiểm tra runtime/model class và `state_dict`: checkpoint local dùng `KoopmanLitModule`, có encoder/operator, không phải MLP mặc dù static upstream entrypoint từng có rủi ro U01.
+- [x] Xác nhận drift lịch sử `lambda_control`: YAML ghi 0.01 nhưng module nhận mặc định 0.005; locked reruns tái tạo cùng loss/MSE. Đây là lỗi provenance đã xác nhận, không phải nguyên nhân của riêng chênh lệch đó.
+- [x] Ghi train fractions theo trajectory, số windows, start range [0,235], dt, dimensions, dataset/checkpoint SHA-256 và seeds cho các locked runs.
+- [x] Re-evaluate checkpoint trên 1.000 test trajectories theo protocol local H=15/open-loop; giữ riêng đánh giá rộng hơn và kết quả seed 43/44. Các kết quả là protocol-variant evidence, chưa xác nhận hoàn toàn cùng protocol Table 1.
+- [x] Giữ nguyên log/checkpoint/manifest lịch sử và tách biến thể nghiên cứu; không đổi nhãn checkpoint đã verify thành MLP dựa trên static audit cũ.
+- [ ] Khôi phục đầy đủ seed/command sinh dữ liệu legacy nếu còn thiếu. Hash và replay không chứng minh được mọi chi tiết generation provenance.
+- [ ] Xác nhận exact paper evaluation/objective/optimizer parity — chuyển sang gate P1, không chặn việc đóng P0 forensic audit.
+
+P0 kết luận về **những run cũ thực sự đã làm gì**, không phải tuyên bố mọi cấu hình đều vô can. Các đối chứng P1 ngày 2026-11-15 xác nhận encoder objectives và scheduler có ảnh hưởng nhân quả đến hội tụ trên protocol đã khai báo; chúng bổ sung chẩn đoán mới, không viết lại E00/E01. Seed variance là quan sát trong protocol cũ, không phải lời giải thích đầy đủ cho mọi mismatch.
 
 **Required Pendulum record (YAML/JSON):** `experiment_id`, `kind`, `upstream_commit`, `local_commit`, `entrypoint`, `model_class`, `model_config`, `data_hashes`, `train_seed`, `eval_seed`, `dataset_fraction_definition`, `n_windows`, `dt`, `ode_solver`, `epochs`, `optimizer_lr_effective`, `checkpoint_sha256`, `eval_protocol`, `metric_table`, `status`, `notes`. Chưa có trường nào được điền bằng suy đoán.
 
@@ -75,24 +81,24 @@
 
 | Dataset ID | System | Role | Status | Nguồn/điều kiện |
 |---|---|---|---|---|
-| D-PEND-TRAIN/TEST | Pendulum | Upstream reproduction | Có run được báo cáo; chưa kiểm định data | Dữ liệu địa phương cần fingerprint |
-| D-CART-TRAIN/TEST | CartPole | **Next official reproduction** | Chưa xác nhận tồn tại | Sinh từ `CartPoleDynamics` chính commit khóa |
+| D-PEND-TRAIN/TEST | Pendulum | Original reproduction | 5.000/1.000 trajectories; SHA-256 đã verify | E00/E01 và locked run manifests; generation provenance còn giới hạn |
+| D-CART-TRAIN/TEST | CartPole | Original reproduction | 10.000/1.000 trajectories; audit FAILED tại tolerance đã khóa | Một transition float32 vượt ngưỡng; đã replay/giải thích; không thuộc C02 train subsets |
 | D-ROT-* | 2D input-direction rotation family | Controlled stress strength sweep | Chưa tạo | `research/benchmarks/`, analytic oracle |
 | D-UNI-* | Unicycle | Orientation-dependent input | Chưa tạo | Ràng buộc state/action và miền góc rõ |
 | D-QUAD-* | Planar Quadrotor | Orientation-dependent thrust, multi-input | Chưa tạo | Ghi state variables, thrust bounds, parameter regime |
 | D-ACRO-* | Acrobot | Optional extension | Không ưu tiên | Chỉ nếu stress đơn giản không đủ |
 
-**Reference experiment counts (to VERIFY from paper before full run):** Pendulum thường 5.000 train / 1.000 test; CartPole 10.000 train / 1.000 test; 250 steps/trajectory; paper training windows được ghi là 15 steps, README là 50. Những con số này là **reference candidates** từ RRD/paper discussion, không phải bằng chứng rằng dữ liệu local đã đúng.
+**Paper settings verified (Appendix G.1; Tables 4–5):** Pendulum 5.000 train / 1.000 test; CartPole 10.000 train / 1.000 test; 250 steps/trajectory; dt=0.02, training horizon 15, batch 64, initial LR 0.001, encoder 3 hidden layers × 64/ReLU; N=16/25 tương ứng. README dùng window 50 là ví dụ khác. Exact Table 1 test-window/reduction, scheduler và Gramian settings chưa đủ tường minh; không coi mọi trường config là unknown, cũng không suy chúng từ một số MSE.
 
-**Next dataset workflow:** (i) khóa physics+seed+sampling; (ii) smoke test 10–20 trajectories và shape/dtype/finite checks; (iii) sinh `cartpole_train.pt` và `cartpole_test.pt` độc lập; (iv) hash SHA-256; (v) không overwrite dữ liệu Pendulum. Có thể dùng entrypoint gốc (ví dụ kiểm tra `python -m my_utils.dataset --help`); runner mới chỉ bọc seed/manifest, không thay simulator.
+**For a separately versioned replacement dataset (not performed by the causal audit):** (i) khóa physics+seed+sampling; (ii) smoke test 10–20 trajectories và shape/dtype/finite checks; (iii) sinh `cartpole_train.pt` và `cartpole_test.pt` độc lập; (iv) hash SHA-256; (v) không overwrite dữ liệu Pendulum. Có thể dùng entrypoint gốc (ví dụ kiểm tra `python -m my_utils.dataset --help`); runner mới chỉ bọc seed/manifest, không thay simulator.
 
 **Illustrative upstream generator commands (AFTER audit; without seed lock these are NOT full scientific runs):**
 
 ```bash
-PYTHONPATH=. python -m my_utils.dataset --system cartpole --num 20 --T 250 --split train
+PYTHONPATH=. python -m my_utils.dataset --system cartpole --num 20 --T 250 --split smoke_p1 --seed 42
 # Sau khi có seed+generator manifest:
-# PYTHONPATH=. python -m my_utils.dataset --system cartpole --num 10000 --T 250 --split train
-# PYTHONPATH=. python -m my_utils.dataset --system cartpole --num 1000  --T 250 --split test
+# PYTHONPATH=. python -m my_utils.dataset --system cartpole --num 10000 --T 250 --split train_candidate --seed 42
+# PYTHONPATH=. python -m my_utils.dataset --system cartpole --num 1000 --T 250 --split test_candidate --seed 43
 ```
 
 **Dataset contract:** each trajectory has `x0`, `u_seq`, `x_seq`; inspect shapes (`x0` `[1,n]`, `u_seq` `[T,m]` or equivalent, `x_seq` `[T,1,n]` upstream); ensure `T ≥ window_len`, time alignment `x(t+dt)` vs `u(t)`, bounded inputs, no NaNs, no shared trajectories across splits. Log numerical integrator, `dt`, physical units, state sampling ranges and data generator commit.
@@ -102,6 +108,15 @@ PYTHONPATH=. python -m my_utils.dataset --system cartpole --num 20 --T 250 --spl
 - **A — Observational (PRIMARY):** random admissible actions/trajectories for training; held-out trajectories for metrics. Same-state simulator resets and true `f,G_x` allowed **only** for diagnostics/evaluation. This is the claimable observational-learning setting.
 - **B — Controlled-intervention training (OPTIONAL AFTER H2 GATE):** deliberately repeat states with diverse actions **in training only**, give all compared methods same intervention budget; report as a **different information setting**. Never compare A vs B as an architecture-only gain.
 - **C — Shift/adaptation (FUTURE):** split by physics regimes, enforce no test-regime leakage. Not in P0–P2 or H2/H3 core claims.
+
+### 3.3. P1 execution record and remaining gate (2026-11-15)
+
+- **Completed experimental batch:** 28 observational-training runs × 100 epochs (353.800 updates), 5% Pendulum and CartPole, separate validation and three-seed paired final test comparisons. Đây không phải toàn bộ fraction grid của paper.
+- **Verified:** cached Euler forward/gradients khớp model gốc; geometry gradients qua finite differences; train/validation separation; strict checkpoint load/hashes; output ranks; Gramian float64 đối chiếu block exponential/adaptive quadrature.
+- **Causal findings:** extra encoder losses/scheduler affect Pendulum convergence; SPD orientation excludes the physical CartPole angular input sign; window-selection intervention interacts strongly with that restriction. Bỏ riêng softplus Gramian penalty gần như không đổi prediction score ở đối chứng seed 42.
+- **Trade-offs:** bỏ encoder loss cải thiện H=15 nhưng làm Pendulum H=250 kém đi. CartPole negative-head + start0 đạt MSE thấp nhưng sampler khác paper; chỉ là diagnostic control.
+- **Gate:** `ROOT_CAUSES_SUPPORTED`, **`EXACT_PAPER_REPRODUCTION_NOT_CERTIFIED`**. Không cập nhật H2/H3 readiness hay xóa audit dataset thất bại. Không chọn/tune variant theo test MSE để cố khớp Table 1.
+- [P0/P1 status note](docs/superpowers/2026-11-15-p0-p1-status.md), [controlled audit](docs/superpowers/2026-11-15-p1-controlled-reproduction-audit.md), [protocol](outputs/reproduction/p1_root_cause_2026-11-15/PROTOCOL.md), [full report](outputs/reproduction/p1_root_cause_2026-11-15/REPORT.md).
 
 ---
 

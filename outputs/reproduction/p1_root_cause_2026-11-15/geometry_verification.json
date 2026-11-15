@@ -1,0 +1,12 @@
+{
+  "pendulum": {
+    "initial_dynamics_match_negative_or_positive_SPD": true,
+    "finite_difference_gradient_check": true,
+    "output_rank": 2
+  },
+  "cartpole": {
+    "initial_dynamics_match_negative_or_positive_SPD": true,
+    "finite_difference_gradient_check": true,
+    "output_rank": 4
+  }
+}

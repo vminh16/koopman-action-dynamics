@@ -1,0 +1,11 @@
+{
+  "verdict": "PASS",
+  "source_files_checked": 13,
+  "e05_records_recomputed": 4,
+  "completed_runs": 140,
+  "updates": 65000,
+  "paired_windows_and_shuffle_verified": true,
+  "long_run_prefixes_identical": 40,
+  "historical_report_unchanged": true,
+  "float64_output_rank_2_runs": 140
+}

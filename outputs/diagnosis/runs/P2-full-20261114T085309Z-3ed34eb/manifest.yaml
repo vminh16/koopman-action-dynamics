@@ -1,0 +1,464 @@
+run_id: P2-full-20261114T085309Z-3ed34eb
+generated_at: '2026-11-14T08:53:11.034733+00:00'
+quick_mode: false
+report: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/p2_failure_report.yaml
+artifacts_root: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb
+command: /home/minh/Desktop/Controllable-Koopman/.venv/bin/python /home/minh/Desktop/Controllable-Koopman/research/diagnostics/run_p2_diagnostics.py
+  --output_dir outputs/diagnosis
+git:
+  git_head: 3ed34eb8afdd4e542557b99e3ddacade105b2d75
+  git_branch: repro/cartpole-audit-configs
+  working_tree_clean: false
+  source_clean: false
+  tracked_changes:
+  - M EXPERIMENT.md
+  - ' M ROADMAP.md'
+  - ' M research/control/qp_mpc.py'
+  - ' M research/diagnostics/metrics.py'
+  - ' M research/diagnostics/run_p2_diagnostics.py'
+  - ' M tests/test_metrics.py'
+  - ' M tests/test_p2_diagnostics.py'
+  - ' M tests/test_qp_mpc.py'
+  - ' M training/loss.py'
+  untracked_files:
+  - docs/superpowers/plans/2026-11-14-p1-cartpole-audit-and-configs.md
+  - research/baseline/cartpole_data_audit.py
+  - research/diagnostics/recompute_p2.py
+  - tests/test_cartpole_data_audit.py
+environment:
+  python: 3.10.12
+  torch: 2.14.1+cu130
+  lightning: 2.6.6
+  cuda: '13.0'
+  gpu: NVIDIA GeForce RTX 2050
+source_snapshot:
+  sha256: 7054cf7cd25540f3b5972b203df58ca4f00fea30d65d741ca8fd11bcfd661b96
+  files:
+    research/diagnostics/run_p2_diagnostics.py: 9f12cee6a947310fcc61e57607dedcc873445ed8014b81f9e513c44768aca2aa
+    research/diagnostics/metrics.py: 619f5d64122c4c517522f915a9a3f488c93bdafc81b8984377ddcf3f69cb628c
+    research/control/qp_mpc.py: bdbe746a0ac2c5e1d706b6a9c3df2f50ebfaa97fc398b73a81d78c10f5461c66
+    research/baseline/data_generator.py: ffe9909e74d197b679edba6cd66fb976385f0a2c88135d99b38ba6327ed71689
+    research/baseline/common.py: 5c5362e96f511298c348f32565cc5739a945f5e99c3f4f22c0d930f2de046575
+    training/train.py: 447ef20e40977673a20636ea85ffebf4754751518002488d4615b77e219220b9
+    training/loss.py: e02b2b29e8b4b95804544371acca024a81e700a2df173a28157d258140a53164
+    my_utils/dataset.py: 1a319b3725ec1fa21baa0327570a32c0db8c8a0bf35376b5fe8b39cac7d42703
+  command: /home/minh/Desktop/Controllable-Koopman/.venv/bin/python /home/minh/Desktop/Controllable-Koopman/research/diagnostics/run_p2_diagnostics.py
+    --output_dir outputs/diagnosis
+budget:
+  num_trajectories: 30
+  eval_trajectories: 10
+  T_train: 50
+  T_eval: 60
+  epochs: 25
+  seeds:
+  - 42
+  - 43
+  - 44
+  - 45
+  - 46
+  a_values:
+  - 0.0
+  - 0.5
+  - 1.0
+  - 2.0
+  max_windows_per_traj: 20
+  batch_size: 64
+  latent_sweep: true
+  mpc_steps: 20
+  mpc_horizon: 12
+experiments:
+  E05:
+    status: partial
+    missing_systems:
+    - cartpole
+  E06:
+    status: verified
+    missing_systems: null
+  E07:
+    status: verified
+    missing_systems: null
+  E08:
+    status: verified
+    missing_systems: null
+  E09:
+    status: verified
+    missing_systems: null
+artifacts:
+- kind: checkpoint
+  experiment: E05
+  path: /home/minh/Desktop/Controllable-Koopman/checkpoints/B01-s42-locked.pt
+  sha256: 66a2eeea7633378aadf8714d40478205ef637c473a7baa51785fbf32c9587a31
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.0_N10_T60_s4242.pt
+  sha256: c6484d1c34bb59e81ce201fa631abfb09f9580ad2dc81636f92b8b8dffe469d1
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.0_N30_T50_s42.pt
+  sha256: c23077c3295f41c0d722d4cf6a4fa4adb071ba1dfd7add116f49c2bbc5071a06
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.0_latent6_seed42.pt
+  sha256: 6e439b358f5bad3141261db0fda2ea1a905ba9dcb8ecb55f12419eb25961e263
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.0_N30_T50_s43.pt
+  sha256: 0470877d16c544a0bc87e6956d20de98e4a0f694515fbc3a76f5fa4799809af0
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.0_latent6_seed43.pt
+  sha256: e9276e954177d82c1f01abc68a6c28d8a3a770641795d3b3ef198a94f7f974e3
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.0_N30_T50_s44.pt
+  sha256: f290ad87f0fe735543127919523185daf0f408215ea77d011d8ab195322f296b
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.0_latent6_seed44.pt
+  sha256: f5ea34d743440eb47d2d79f7ce5edada0f8839308f7a44abe1fd01d811ad01c6
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.0_N30_T50_s45.pt
+  sha256: 5d4bf460a649daa9bb453c4fa6c4b8b3ea53b814ac7f128f423dda98bc7ae4db
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.0_latent6_seed45.pt
+  sha256: ddd1bb98eac62a3db7a284ebe389c6dc47e2528a619b35fa27d013a7700db560
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.0_N30_T50_s46.pt
+  sha256: 2cc517dcf9aa34b51b1142c7177683042658ec7a5f5f6c60e576fa8198dc2a2e
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.0_latent6_seed46.pt
+  sha256: a19f21ef406514095b623611dcadd056f241cf3b989a5d243ce22b20b7ff959a
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.5_N10_T60_s4242.pt
+  sha256: e81a28496394dad3043493de35368ecc7c4de44181036b3c256d07047939abfd
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.5_N30_T50_s42.pt
+  sha256: d033f054a455f4e7d7afcf4eff9f7e226969aaf22eaa895b5449496bae52c69e
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.5_latent6_seed42.pt
+  sha256: b8a5db4ca53d021cb5b730f21b4a73dbfddc12723b8b38c514c7c62c994950b4
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.5_N30_T50_s43.pt
+  sha256: ca259457051231607c50208b61a91051ffe3e261db2beb66f7d3636b2a461a0f
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.5_latent6_seed43.pt
+  sha256: c329662b45d41f0d2a31f5363ab800d5100efd7576ca2917ef9df9ce421748c0
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.5_N30_T50_s44.pt
+  sha256: d60920d56f34604c41f662397b989f762b3b17f18eb2aa80aee9b5d88b235a4a
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.5_latent6_seed44.pt
+  sha256: 1c1f7bfb88bb959795d2f339f0420a75915baaa8c6e59a7f947817297b74d921
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.5_N30_T50_s45.pt
+  sha256: 1484dbc682efdb06ea6e7fcc13f4d38f5707e14aecaa47e51096060a4db48392
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.5_latent6_seed45.pt
+  sha256: 96e8a1fa3be7adf8e58361c6341045c02c892f0264021c846d5f9650861e451c
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a0.5_N30_T50_s46.pt
+  sha256: 4a331dc3ed4190739c28e8ed20fc82fd91637eac1fe2b18a63a4ea9829a445b9
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a0.5_latent6_seed46.pt
+  sha256: a76f838628c35085accd8152c1fa223591458743bf2a75a4354ddf1cbfde5d9c
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a1.0_N10_T60_s4242.pt
+  sha256: 787fc45f39e8e7b030b1c781454b07ed42a95616bd00e1bf9f2ce38b63a34d27
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a1.0_N30_T50_s42.pt
+  sha256: dbde9ceb7af50aceb2f3e95157a5ead59920a268413da84277c4016f53d5798c
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a1.0_latent6_seed42.pt
+  sha256: c105d0154d00f0d7dd85f60be5ce2cbf87477e60c861c1b7724cb9ecab3cb8d7
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a1.0_N30_T50_s43.pt
+  sha256: 4db35bd83eb7d0fc5c97b882e893fb0b1123b723197828e450a9368830318619
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a1.0_latent6_seed43.pt
+  sha256: 5978c09d4180e0bce548159a9c1f450fae0c3b474257e2d6e9d0b9257ecef932
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a1.0_N30_T50_s44.pt
+  sha256: dfbaa2a1acf43bff88862fda9d333244673cecca5c4c03c723a45a8355f8ade5
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a1.0_latent6_seed44.pt
+  sha256: b6f098fe6b7a6fe811a3e02fe94ab85aa59c784e9d2588f0952957704a2b7928
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a1.0_N30_T50_s45.pt
+  sha256: 6b5d5c5bdf9f62e63d05ab8b847f3ccc82efa77ca2d69b61dffe0db09891ebce
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a1.0_latent6_seed45.pt
+  sha256: 51f09336bae84ea336360c8e62c80640bbc09a88dee330d47535c1365b7ac233
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a1.0_N30_T50_s46.pt
+  sha256: dccdcb73c6d58f041857589d226c800f19e2ae8bab88aad5c2892adad518e5e2
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a1.0_latent6_seed46.pt
+  sha256: a48b9b645df4e6c86d95516209ce1fb05b07162596fc1d52e9d93af9ec64596f
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a2.0_N10_T60_s4242.pt
+  sha256: 7b0be5da8881667de994769bdb569a80ba735d7ad13d379cdd3cfda4c7c43e62
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a2.0_N30_T50_s42.pt
+  sha256: b8ae828dbbb0e17d762268a70b760d685e95625f131ce5608ba4a2c61570a1d5
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a2.0_latent6_seed42.pt
+  sha256: 482013ae3780bdd9afb6b3248760ca5c9dc97cbadc2183019f61bf32de26d8f0
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a2.0_N30_T50_s43.pt
+  sha256: bd277c9d4442775afedcdf8d1da3207305a1706c54c8071bc834a9511927172a
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a2.0_latent6_seed43.pt
+  sha256: 6efbdcd497c11465a651259272a0e0c03511546240be9944d00341b3d85db8c8
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a2.0_N30_T50_s44.pt
+  sha256: 6397ddc09072b50f25bf64a3209c87c695dec0412189ebfb8aa8804dd16a1e01
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a2.0_latent6_seed44.pt
+  sha256: 80e7a6709ea49ed2d17bef3732572b7b7832b49f68708f1634e3f2d05a64bd88
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a2.0_N30_T50_s45.pt
+  sha256: 7738126427ce7a4ddec636b0b51a207684b593ce6101ca05f993e7ba3d51c172
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a2.0_latent6_seed45.pt
+  sha256: 1fdd80a309be46bfb80151655ef0665a30a5c7f6c263a6e078c208471371861b
+  exists: true
+- kind: dataset
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_rotation_family_a2.0_N30_T50_s46.pt
+  sha256: 0a9dbafe18bc98c5e8eb464ec6685333f3cfcd61f793b1af18cb1da1fd7e92fa
+  exists: true
+- kind: checkpoint
+  experiment: E06
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/rotation_a2.0_latent6_seed46.pt
+  sha256: 48609b52e65f373d6c0df579fb3a7283a3cdd549cf0e8f4147a570d13f9dd2c2
+  exists: true
+- kind: dataset
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_unicycle_N10_T60_s4242.pt
+  sha256: 43c9d5fd2f796a3f8f6b11a0909bc176643b222fa161ba2e7acacc162a178f94
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/unicycle_latent8_seed42.pt
+  sha256: 686af53a04ce809d2bd45fbecf23af39845afbb07224d6a473e200f7e3abf7a2
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/unicycle_latent8_seed43.pt
+  sha256: 3a2130f3497d69e2c0f82033a7c273282a2fdef2e34d72a8f4f8ac5c1884b945
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/unicycle_latent8_seed44.pt
+  sha256: fded6a408370c1c84519496746d0fc70148c1a0be7ce2138db63ae42c048e931
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/unicycle_latent8_seed45.pt
+  sha256: 06cb9155072110c8997a193a56b4de1c527d9daedf9583ee64ae795985da4c80
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/unicycle_latent8_seed46.pt
+  sha256: 5089d69ef79cae88ac97c12594023ff871e5d229fb0a90b0d4ee5d7dd3bfbeca
+  exists: true
+- kind: dataset
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/stress_planar_quadrotor_N10_T60_s4242.pt
+  sha256: f6aead9f67be29f441d9584a54dcc33811cc2e848d07c5427908dec2313d1fa2
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/planar_quadrotor_latent12_seed42.pt
+  sha256: 372d6e63d956fb9799247ea07fd86a36b8952f1dbbf3cfb10641f0900b586b78
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/planar_quadrotor_latent12_seed43.pt
+  sha256: 734c8e452bfcb777e1258195b959f3d331d120cb0f1b4b367e411762114a9121
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/planar_quadrotor_latent12_seed44.pt
+  sha256: 02fba913628f2cfb150d8a94b5c6c0d3e4c98f1f4e258e5ed9a63fa2adf99dc9
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/planar_quadrotor_latent12_seed45.pt
+  sha256: 5256963624e6f8b6f31ed1aefda1c03d2015ce8f33ed19783b729971309e1538
+  exists: true
+- kind: checkpoint
+  experiment: E07
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/planar_quadrotor_latent12_seed46.pt
+  sha256: 62ffd2a5e6e768afaa07007a4a9cb51af5a278b517a56055dc724ec564347e06
+  exists: true
+- kind: dataset
+  experiment: E09
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/data/reduced_excitation_a1.0_seed42.pt
+  sha256: 73b58cad9570637fe56ccc86ec38e9331868041f915436e54cc8ed0882204b16
+  exists: true
+- kind: checkpoint
+  experiment: E09
+  path: /home/minh/Desktop/Controllable-Koopman/outputs/diagnosis/runs/P2-full-20261114T085309Z-3ed34eb/checkpoints/reduced_excitation_a1.0_seed42.pt
+  sha256: 3ff29fcaed54861c8959fce63b7c30e2d1e6b4ee50ae8196d77301651ddc1bff
+  exists: true
+gates:
+  p2:
+    verdict: PASS
+    criteria:
+      official_baseline_used: KoopmanLitModule
+      transition_alignment_verified: true
+      dt_consistent: true
+      provenance_recorded: true
+      rotation_configs_evaluated: 4
+      expected_rotation_configs: 4
+  h2_fixed_b_limitation:
+    verdict: NOT_CONFIRMED
+    criteria:
+      response_ratio_min: 1.0300642627669994
+      response_ratio_threshold: 1.5
+      coverage_ok: true
+      coverage_issues: []
+      optimization_ok: true
+      optimization_issues: []
+      solver_ok: true
+  h2_readiness:
+    verdict: NO-GO
+    criteria:
+      response_growth_ratio_min: 1.0300642627669994
+      response_ratio_threshold: 1.5
+      monotone_response: true
+      coverage_ok: true
+      optimization_ok: true
+      matched_class_comparison_feasible: true
+      note: fixed-B limitation alone does not validate H2; this is a readiness decision
+  h3:
+    verdict: NO-GO
+    criteria:
+      margin_defined: true
+      certificate_window_exists: false
+      mpc_solver_ok: true
+      mpc_latency_ok: true
+      latency_budget_p95_s: 0.05
+      note: H3 requires a usable margin window AND tractable bounded-input MPC; a
+        fixed-B failure does not validate H3
+  p2_verification:
+    verdict: PASS
+    criteria:
+      experiments_declared: true
+      experiment_status:
+        E05: partial
+        E06: verified
+        E07: verified
+        E08: verified
+        E09: verified
+      experiment_seed_coverage: true
+      missing_seed_entries: []
+      alignment_e06_e07: true
+      alignment_issues: []
+      dt_consistency: true
+      dt_issues: []
+      finite_primary_metrics: true
+      nonfinite_entries: []
+      artifact_registry_verified: true
+      artifact_issues: []
+      e05_verified_systems:
+      - pendulum
+      e05_missing_systems:
+      - cartpole
+      e05_has_verified_checkpoint: true
+      e05_hashes_ok: true
+      e08_present: true
+      e09_present: true
+      source_identified: true
+      solver_versions_recorded: true
+    required:
+    - experiments_declared
+    - experiment_seed_coverage
+    - alignment_e06_e07
+    - dt_consistency
+    - finite_primary_metrics
+    - artifact_registry_verified
+    - e05_has_verified_checkpoint
+    - e05_hashes_ok
+    - e08_present
+    - e09_present
+    - source_identified
+    - solver_versions_recorded

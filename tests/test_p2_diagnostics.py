@@ -9,6 +9,7 @@ import yaml
 from research.baseline.data_generator import generate_benchmark_dataset, rk4_step
 from research.benchmarks import load_benchmark
 from research.diagnostics.run_p2_diagnostics import (
+    E05_CONFIGS,
     build_official_module,
     build_training_dataset,
     predict_one_step,
@@ -16,6 +17,15 @@ from research.diagnostics.run_p2_diagnostics import (
     train_official_baseline,
 )
 from research.diagnostics.recompute_p2 import recompute
+
+
+class TestE05Registration(unittest.TestCase):
+    def test_locked_cartpole_config_is_registered(self):
+        self.assertEqual(E05_CONFIGS["cartpole"],
+                         "configs/research/cartpole_controllable_win15_frac0.05_seed42.yml")
+        with open(E05_CONFIGS["cartpole"]) as handle:
+            cfg = yaml.safe_load(handle)
+        self.assertEqual(cfg["checkpoint"], "checkpoints/C02-s42.pt")
 
 
 class TestTransitionAlignment(unittest.TestCase):

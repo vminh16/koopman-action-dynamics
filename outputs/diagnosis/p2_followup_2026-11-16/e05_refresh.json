@@ -1,0 +1,175 @@
+{
+  "historical_report_sha256": "57f671dc2d27a3fd52c8477dc53592ef43bb58b42cda6ddd9ac7e5dd395ff655",
+  "entries": {
+    "pendulum-s42": {
+      "status": "verified",
+      "config": "configs/research/pendulum_controllable_win15_frac0.05_seed42.yaml",
+      "checkpoint": {
+        "kind": "checkpoint",
+        "experiment": "E05",
+        "path": "/home/minh/Desktop/Controllable-Koopman/checkpoints/B01-s42-locked.pt",
+        "sha256": "66a2eeea7633378aadf8714d40478205ef637c473a7baa51785fbf32c9587a31",
+        "exists": true
+      },
+      "dataset_hashes": {
+        "train": {
+          "path": "data/pendulum_train.pt",
+          "sha256": "564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f",
+          "expected_sha256": "564c6da6dfbb61f2aecc09f8b881a65274d14aeb8ba1ae59a29c49ea1602057f",
+          "matches": true
+        },
+        "test": {
+          "path": "data/pendulum_test.pt",
+          "sha256": "c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020",
+          "expected_sha256": "c7c9da6ab89d0549a531ba060109caa09642e187e841535b8dae807d6e0a5020",
+          "matches": true
+        }
+      },
+      "state_samples": 64,
+      "rho_T": 0.002343540329572848,
+      "rank_deficient": false,
+      "gramian": {
+        "rho_T": 0.002343540329572848,
+        "lambda_min_Wy": 6.056645138224556e-05,
+        "cond_Wy": 39689.873796608386,
+        "T": 0.3
+      },
+      "E_lift": 0.8080694181844592,
+      "E_lift_p95": 0.8442331343889237,
+      "E_phys": 0.7430273294448853,
+      "d_orient": 0.3796402206644416,
+      "d_orient_p95": 0.4396679267287254,
+      "d_orient_max": 0.7069951295852661,
+      "G_z_star_convention": "||(I - Pi_col(Gz*)) B||_2, SVD rank tol 1e-12",
+      "config_sha256": "7b05b86258cb72cfc34006ca476847858d3b56a246c33d5543d0040ad0cb2614"
+    },
+    "cartpole-s42": {
+      "status": "verified",
+      "config": "configs/research/cartpole_controllable_win15_frac0.05_seed42.yml",
+      "checkpoint": {
+        "kind": "checkpoint",
+        "experiment": "E05",
+        "path": "/home/minh/Desktop/Controllable-Koopman/checkpoints/C02-s42.pt",
+        "sha256": "f5cc29ad3b3f951c0bd58b5dc943a7b22183fa6884d9b16f1f6e12e789edfc02",
+        "exists": true
+      },
+      "dataset_hashes": {
+        "train": {
+          "path": "data/cartpole_train.pt",
+          "sha256": "f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b",
+          "expected_sha256": "f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b",
+          "matches": true
+        },
+        "test": {
+          "path": "data/cartpole_test.pt",
+          "sha256": "9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e",
+          "expected_sha256": "9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e",
+          "matches": true
+        }
+      },
+      "state_samples": 64,
+      "rho_T": null,
+      "rank_deficient": true,
+      "gramian": {
+        "rho_T": null,
+        "lambda_min_Wy": 4.388512759668914e-12,
+        "cond_Wy": null,
+        "T": 0.3
+      },
+      "E_lift": 1.7318587386980653,
+      "E_lift_p95": 2.477852475643158,
+      "E_phys": 1.6659677233546972,
+      "d_orient": 0.7462562192231417,
+      "d_orient_p95": 0.9091664761304855,
+      "d_orient_max": 0.9125857353210449,
+      "G_z_star_convention": "||(I - Pi_col(Gz*)) B||_2, SVD rank tol 1e-12",
+      "config_sha256": "30e1998f8fe33f23d50cbc78ff42dce079c77ec20caf296e594e90cb2877fa72"
+    },
+    "cartpole-s43": {
+      "status": "verified",
+      "config": "configs/research/cartpole_controllable_win15_frac0.05_seed43.yml",
+      "checkpoint": {
+        "kind": "checkpoint",
+        "experiment": "E05",
+        "path": "/home/minh/Desktop/Controllable-Koopman/checkpoints/C02-s43.pt",
+        "sha256": "1ae89588b678ab17b84a29489eb19fd709f49fcc28b58c0813ff46ff8226a7ac",
+        "exists": true
+      },
+      "dataset_hashes": {
+        "train": {
+          "path": "data/cartpole_train.pt",
+          "sha256": "f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b",
+          "expected_sha256": "f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b",
+          "matches": true
+        },
+        "test": {
+          "path": "data/cartpole_test.pt",
+          "sha256": "9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e",
+          "expected_sha256": "9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e",
+          "matches": true
+        }
+      },
+      "state_samples": 64,
+      "rho_T": null,
+      "rank_deficient": true,
+      "gramian": {
+        "rho_T": null,
+        "lambda_min_Wy": 2.502161078272164e-12,
+        "cond_Wy": null,
+        "T": 0.3
+      },
+      "E_lift": 1.749617800116539,
+      "E_lift_p95": 2.49662367105484,
+      "E_phys": 1.676639474928379,
+      "d_orient": 0.7675865450873971,
+      "d_orient_p95": 0.9347349315881729,
+      "d_orient_max": 0.9378079771995544,
+      "G_z_star_convention": "||(I - Pi_col(Gz*)) B||_2, SVD rank tol 1e-12",
+      "config_sha256": "ee3874be134b3afb047e7698e8b144db503494c1e332add038dbcad0c59c66c9"
+    },
+    "cartpole-s44": {
+      "status": "verified",
+      "config": "configs/research/cartpole_controllable_win15_frac0.05_seed44.yml",
+      "checkpoint": {
+        "kind": "checkpoint",
+        "experiment": "E05",
+        "path": "/home/minh/Desktop/Controllable-Koopman/checkpoints/C02-s44.pt",
+        "sha256": "6e090db043740a8f049be96622a8c55758648bf26964ae89c76fdb14f6a9de80",
+        "exists": true
+      },
+      "dataset_hashes": {
+        "train": {
+          "path": "data/cartpole_train.pt",
+          "sha256": "f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b",
+          "expected_sha256": "f016889ea0090a91c31c545ec37ca25fcaee8d6658d2364bebabb8e0ecea449b",
+          "matches": true
+        },
+        "test": {
+          "path": "data/cartpole_test.pt",
+          "sha256": "9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e",
+          "expected_sha256": "9b8f99b2445f8c6e737f683d544e3efe357a9f21b75e006948541cfdbd5ef35e",
+          "matches": true
+        }
+      },
+      "state_samples": 64,
+      "rho_T": null,
+      "rank_deficient": true,
+      "gramian": {
+        "rho_T": null,
+        "lambda_min_Wy": 4.742589358099867e-12,
+        "cond_Wy": null,
+        "T": 0.3
+      },
+      "E_lift": 1.727468965575099,
+      "E_lift_p95": 2.469342839717865,
+      "E_phys": 1.6584775457158685,
+      "d_orient": 0.7392435455694795,
+      "d_orient_p95": 0.9011363387107849,
+      "d_orient_max": 0.9052016139030457,
+      "G_z_star_convention": "||(I - Pi_col(Gz*)) B||_2, SVD rank tol 1e-12",
+      "config_sha256": "bc515e9132e473b24e5a8781b0b5122243e3a0cce276513b74cfc1de73bf7f85"
+    }
+  },
+  "repeat_verdict": "PASS",
+  "meaning": "checkpoint/config/data identity and repeatability; not paper or dataset-transition certification"
+}

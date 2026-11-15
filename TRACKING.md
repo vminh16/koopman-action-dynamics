@@ -4,6 +4,9 @@ Tài liệu này ghi lại các run phục vụ tái lập Pendulum và CartPole
 paper vào cột kết quả của repo. Kết quả CartPole 5% nằm ở §3.4; kết quả
 Pendulum và chẩn đoán P2 được giữ riêng. [Trạng thái P0/P1 hiện tại](docs/superpowers/2026-11-15-p0-p1-status.md): P0 forensic audit đã đóng; đợt 28 đối chứng P1 đã hoàn tất, exact paper reproduction chưa được chứng nhận.
 
+P2 follow-up 2026-11-16: 140 paired runs và E05 refresh đã hoàn tất; H2/H3 vẫn NO-GO. [Báo cáo mới](outputs/diagnosis/p2_followup_2026-11-16/REPORT.md).
+
+
 ## 1. Reference values from paper — Pendulum
 
 | Train fraction | Paper prediction MSE |
@@ -183,6 +186,45 @@ Phase P2 đã được thực hiện lại toàn diện và nghiêm ngặt với
 - Báo cáo chẩn đoán chi tiết: [p2_failure_report.yaml](outputs/diagnosis/p2_failure_report.yaml); artifact và manifest theo run: `outputs/diagnosis/runs/<run_id>/`.
 - **Sửa lỗi số học upstream:** `training/loss.py` có số hạng condition-number nhân bởi `beta=0`; giá trị loss không đổi nhưng backward đi qua $1/(\lambda_{\min}+10^{-8})$ và sinh NaN gradient sau ~230 bước full-budget (gặp trên quadrotor seed 45). Đã bỏ số hạng chết này; training 25 epochs hoàn tất.
 
+
+### 3.3.1. P2 follow-up — E05 refresh and P1-derived controls (2026-11-16)
+
+**Execution: COMPLETED; evidence verification: PASS; H2/H3 remain NO-GO.**
+
+- E05 now explicitly registers the locked `.yml` CartPole C02 config. Refreshed
+  Pendulum seed 42 and C02 seeds 42/43/44: strict checkpoint loading, dataset hashes,
+  repeat computation and later recomputation all match. The historical snapshot
+  above remains unchanged; its `missing_checkpoint` entry is superseded by this
+  separate E05 refresh. CartPole still has `rho_T=null` at T=.3 s under the numerical
+  rank tolerance, consistent with P1's independently verified algebraic output rank 4.
+- Completed **140 paired rotation runs / 65,000 optimizer updates**:
+  five seeds 42–46, four strengths; five diagnostic arms at 25 epochs and baseline/
+  combined arms at 100 epochs. Reused frozen P2 datasets, windows and shared probe.
+  All 40 longer runs reproduce their first 25 epochs exactly. Explicit shuffle RNG
+  differs from historical Lightning ordering; compare new paired baselines.
+- The constant-map positive control a=0 still has normalized response error
+  **1.014627** for baseline at 100 epochs and **0.954208** for the combined diagnostic
+  variant (five-seed means). Ignoring inputs gives response error 1. Thus small
+  one-step MSE does not demonstrate learned action-response fidelity.
+- Independent decomposition separates the weighted fixed-map floor (0 at a=0,
+  0.845222 at a=2) from learned-map fitting error. The old one-step-MSE threshold
+  .05 admits an exact-drift predictor that ignores inputs (MSE about .000269).
+  Original SPD heads also cannot exactly represent the a=0 map [1,0]^T because
+  their second physical input coefficient is at least .1. That restriction alone
+  only proves a .01 response-error floor, not the observed error near 1.
+- The weak stress ratio therefore does **not isolate** fixed-B limitation from
+  baseline fitting/parameterization. The mathematical floor is verified, while
+  superiority of a new learning mechanism remains untested. Historical gates are
+  preserved; no H2/H3 method was trained. Unicycle/Quadrotor were not retrained in
+  this follow-up, and MPC results are not transferred to diagnostic variants.
+- Checks: 140 checkpoint metric recomputations, source/data/checkpoint hashes,
+  float64 output rank 2 on all rotation checkpoints, Gramian block exponentials
+  versus adaptive quadrature, E05 recomputation and **80 tests passed**.
+
+Evidence: [full report](outputs/diagnosis/p2_followup_2026-11-16/REPORT.md),
+[summary](outputs/diagnosis/p2_followup_2026-11-16/summary.json),
+[verification](outputs/diagnosis/p2_followup_2026-11-16/verification.json),
+[figure](outputs/diagnosis/p2_followup_2026-11-16/results.png).
 
 ### 3.4. CartPole 5% — completed runs and independent evaluation (2026-11-14)
 

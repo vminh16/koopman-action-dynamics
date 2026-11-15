@@ -1,0 +1,7 @@
+{
+  "report": "outputs/diagnosis/p2_failure_report.yaml",
+  "tolerance": 1e-06,
+  "entries": 6,
+  "failures": [],
+  "verdict": "PASS"
+}

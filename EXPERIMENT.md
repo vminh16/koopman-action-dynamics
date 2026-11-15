@@ -307,3 +307,16 @@ The recompute entrypoint verifies the SHA-256 of every referenced dataset and ch
 **Status log — 2026-11-13:** P2 diagnostics completed with official baseline `KoopmanLitModule`. Gate P2 PASS. Gate H2 Fixed-B limitation NOT_CONFIRMED (response error flat across $a$, ratio 0.95 < 1.5, readiness NO-GO). Gate H3 NO-GO (margin $\rho_T \approx 0.0235$ but $d_{\text{orient}} \approx 0.13 > \rho_T$ and $d^* \approx 0.125 > \rho_T$, no certificate window). No H2 or H3 models trained.
 
 **Status log — 2026-11-14:** P2 full verification completed (5 seeds, 30/10 trajectories, 25 epochs): per-run manifest and hashed artifacts, E05 Pendulum verified / CartPole missing, shared E06 probe, E07 fixed-state sweep, E08 fallback/residual + ZOH/Euler, E09 local and MPC-state coverage with reduced excitation. Gate P2 PASS and `p2_verification` PASS via `recompute_p2` (SHA-256 + strict load, tolerance $10^{-6}$). H2 ratio 1.030 < 1.5 (NOT_CONFIRMED, readiness NO-GO); H3 NO-GO at $\rho_T \approx 0.0068$ with $d_{\text{orient,p95}} \approx 0.121-0.131$. Removed a zero-weighted condition-number term in `training/loss.py` that caused NaN gradients on near-singular Gramians (forward value unchanged). No H2 or H3 models trained.
+
+**Status log — 2026-11-16:** Sequential P2 follow-up completed: separate E05 refresh
+(Pendulum s42 and CartPole C02 s42–44), 140 paired rotation diagnostic runs across
+five seeds (five arms at 25 epochs, baseline/combined at 100), 65,000 updates.
+Diagnostic deviations—explicit shuffle RNG, removal of both encoder consistency
+terms, epoch-mean scheduler and general invertible head—are labeled and never
+promoted to faithful paper reproduction. Independent weighted response-error
+decomposition reveals substantial easy-system input-map fitting error; one-step
+MSE <= .05 alone is not a sufficient optimization control. Existing registered
+thresholds and historical gates are unchanged; a response-based criterion would
+require a separately declared protocol. H2/H3 remain NO-GO. All 140 checkpoint
+recomputations, source/pairing checks and 80 tests pass. See
+[report](outputs/diagnosis/p2_followup_2026-11-16/REPORT.md).

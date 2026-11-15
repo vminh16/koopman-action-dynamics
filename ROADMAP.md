@@ -5,9 +5,9 @@
 **Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
 **Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
 **Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
-**Current state:** P1 CartPole 5% training/evaluation completed for seeds 42/43/44 (100 epochs each; open-loop H=15 MSE `0.09189450 ± 0.00237392`); reproduction remains NEEDS_INVESTIGATION due to the failed dataset transition audit and unresolved paper-protocol comparison. Structured output rank is 4/4, while the T=0.3 s Gramian is numerically near-singular. See [TRACKING §3.4](TRACKING.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14). P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training.
+**Current state:** P1 CartPole 5% training/evaluation completed for seeds 42/43/44 (100 epochs each; open-loop H=15 MSE `0.09189450 ± 0.00237392`); reproduction remains NEEDS_INVESTIGATION due to the failed dataset transition audit and unresolved paper-protocol comparison. Structured output rank is 4/4, while the T=0.3 s Gramian is numerically near-singular. See [TRACKING §3.4](TRACKING.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14). P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training. The 2026-11-16 follow-up completed E05 refresh and 140 paired rotation runs; baseline input-map fitting remains unresolved (see P2 follow-up below).
 
-> **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; do not reproduce external model baselines at this stage.
+> **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; explicitly labeled diagnostic ablations of its losses/parameterization are allowed to isolate failure causes. Do not reproduce external model baselines or train H2/H3 methods at this stage.
 
 ---
 
@@ -207,13 +207,30 @@ and [TRACKING §3.5](TRACKING.md#35-p1-controlled-causal-audit-2026-11-15).
 **Output:** `outputs/diagnosis/` with explicit failure-mode report and positive/negative controls.  
 **Exit:** a testable reason to improve model, or evidence to pivot. Negative Pendulum/CartPole result alone is **not** a veto.
 
+### P2 follow-up — 2026-11-16
+
+**COMPLETED:** refreshed E05 on Pendulum and all three C02 checkpoints; fixed
+explicit CartPole registration; completed 140 paired rotation diagnostic runs
+(25/100 epochs, five seeds, 65,000 updates). Checkpoint recomputation,
+source hashes, pairing/prefix checks, independent float64 rank/Gramian checks and
+80 tests pass. [Report](outputs/diagnosis/p2_followup_2026-11-16/REPORT.md).
+
+**Interpretation:** the easy constant-map positive control still has response
+error near the ignore-input reference. The old one-step-MSE optimization gate
+cannot establish input-map fitting. Verified weighted fixed-B floors and SPD-head
+restrictions clarify the confounding; they do not establish H2 learning superiority.
+Historical P2 PASS and H2/H3 verdicts remain unchanged. Next prerequisite is a
+well-fitted constant-map control and a separately preregistered response-based
+optimization check, before renewed stress/excitation experiments. Unicycle,
+Quadrotor and variant MPC were not rerun in this follow-up.
+
 ### Gate H2 — Independent architecture/learning hypothesis
 
 **Gate Verdict: NOT_CONFIRMED (Readiness: NO-GO).**
 - Measured response growth ratio $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 1.030 \pm 0.01 < 1.5$ (monotone but weak across $a \in \{0.0, 0.5, 1.0, 2.0\}$, 5 seeds) under the official baseline `KoopmanLitModule`.
 - Coverage ($\text{state distance p95} \le 0.635 \le 3.0$) and optimization ($\text{one-step MSE} \approx 2.8 \times 10^{-4} \le 0.05$) pass pre-registered gates.
 - Previous 4.82x degradation report was an artifact of fitting an unconstrained linear surrogate on misaligned transitions.
-- Track H2 remains paused until/unless a modified excitation protocol or longer training reveals an identifiable failure mode.
+- Follow-up: 100-epoch paired runs still do not fit the easy constant-map action response well. The verified fixed-B floor does not by itself establish H2 superiority. Establish a response-fidelity positive control before a new preregistered stress/excitation protocol; track H2 remains paused.
 
 ### Gate H3 — Independent control-theory/certificate hypothesis
 
@@ -245,7 +262,8 @@ P4: independent H2 and H3 reports, statistical significance, failure cases, base
 2. **Reconcile paper vs locked repo protocol:** window sampling, optimizer/scheduler, encoder losses, evaluation horizon/metric and re-encode semantics. Pendulum P0 evidence and CartPole 5% results are already recorded; avoid unnecessary retraining.
 3. **Complete CartPole fraction coverage:** 5% seeds 42/43/44 are done; 1%/10%/30% remain. If the data or protocol changes, use separate run identities and new provenance rather than overwriting C02 evidence.
 4. **Investigate short-horizon conditioning:** output rank 4/4 is established, but Wy(0.3 s) is numerically near-singular. Keep this distinct from the unstable raw 25-power rank computation.
-5. **Refresh P2 E05 only as a separate verified run:** C02 checkpoints now exist; the prior P2 snapshot still records CartPole `missing_checkpoint`. Do not silently change that snapshot or existing H2/H3 gate verdicts.
+5. **DONE — separate P2 E05 refresh:** Pendulum and C02 seeds 42/43/44 verified in the 2026-11-16 follow-up. Historical `missing_checkpoint` snapshot and H2/H3 gates are preserved.
+6. **P2 prerequisite:** establish action-response fidelity on the constant-map positive control, then preregister a stronger response-based optimization check and stress/excitation experiment; no H2/H3 training yet.
 
 Safe inspection commands for existing checkout:
 
@@ -336,3 +354,5 @@ Branch/commit convention (suggested): `audit/pendulum-run`, `repro/cartpole`, `d
 - [EXPERIMENT v0.5](EXPERIMENT.md) — exact metrics, experiment registry, data protocols.
 - [Original ICLR 2026 paper](https://proceedings.iclr.cc/paper_files/paper/2026/file/e3781fb5d2c17ea7283cc2a543793bdb-Paper-Conference.pdf).
 - [Author code at audited commit](https://github.com/KYMiao/Controllable-Koopman/tree/ec131bb549c8f7b01519a99acca237b9fdc9c826).
+
+- 2026-11-16: P2 follow-up completed E05 refresh and 140 paired rotation runs (65,000 updates); full checkpoint/source/pairing verification and 80 tests PASS. Mathematical input-map decomposition shows weak easy-system fitting masks interpretation of the stress ratio. H2/H3 remain NO-GO; historical report unchanged.

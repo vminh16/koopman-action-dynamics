@@ -1,0 +1,40 @@
+{
+  "sha256": "7e5c16406d3f81501521606e1b376faa6f5b1ddad0fbb7eb66711c253a9a2366",
+  "files": {
+    "research/diagnostics/run_p2_diagnostics.py": "18500c7f1ae9cba74857a13bed924d9eadd8d1d5b124fb3e27bb1cba6def8f22",
+    "research/diagnostics/metrics.py": "619f5d64122c4c517522f915a9a3f488c93bdafc81b8984377ddcf3f69cb628c",
+    "research/control/qp_mpc.py": "bdbe746a0ac2c5e1d706b6a9c3df2f50ebfaa97fc398b73a81d78c10f5461c66",
+    "research/baseline/data_generator.py": "ffe9909e74d197b679edba6cd66fb976385f0a2c88135d99b38ba6327ed71689",
+    "research/baseline/common.py": "66b6b4f3e1669e97c23efb13da7e5cf66791fa53d0458f75b7a004c65f92d70d",
+    "training/train.py": "447ef20e40977673a20636ea85ffebf4754751518002488d4615b77e219220b9",
+    "training/loss.py": "e02b2b29e8b4b95804544371acca024a81e700a2df173a28157d258140a53164",
+    "my_utils/dataset.py": "1a319b3725ec1fa21baa0327570a32c0db8c8a0bf35376b5fe8b39cac7d42703"
+  },
+  "command": "/home/minh/Desktop/Controllable-Koopman/.venv/bin/python -",
+  "additional_files": {
+    "models/koopman_operator.py": "fac1b00cd9065e9428d3b5e72af97b29b483e7ae82fc69dd4cfb008abcac397a",
+    "models/model_builder.py": "fe1a4a7b3e5b77ee3ec9e6e933ec61538f8f851d5925f46793d44fa38d39d9ae",
+    "research/diagnostics/p2_followup.py": "1442e20bddef8064dc89b903d55ecc846d85494f66d2d2dad1b4cdc0bb64c3ac",
+    "models/encoder.py": "228990c53a7827691145514423ec45a045dc1c403c7f2b3d5d40508c679f301a",
+    "research/benchmarks/rotation_family.py": "e929672ca4ff6fb7ba8e14e8210b8bae0282fac7c4190bcab4f1cd08696e0bb6"
+  },
+  "runtime": {
+    "python": "3.10.12",
+    "torch": "2.14.1+cu130",
+    "device": "cpu",
+    "torch_threads": 1,
+    "precision": "float32 training; float64 Gramian and MSE reductions",
+    "packages": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "torchdiffeq": "0.2.5",
+      "pytorch-lightning": "2.6.6"
+    }
+  },
+  "execution_commands": [
+    "MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python -m research.diagnostics.p2_followup --stage verify",
+    "MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python -m research.diagnostics.p2_followup --stage e05",
+    "MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python -m research.diagnostics.p2_followup --stage train",
+    "MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python -m research.diagnostics.p2_followup --stage recompute"
+  ]
+}

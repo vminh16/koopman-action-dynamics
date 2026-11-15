@@ -820,6 +820,7 @@ def _lifted_step_consistency(module, sys_inst, x_history, u_history, dt: float) 
 # E05: checkpoint margin/Jacobian diagnostics on verified checkpoints
 # ---------------------------------------------------------------------------
 E05_CONFIGS = {
+    "cartpole": "configs/research/cartpole_controllable_win15_frac0.05_seed42.yml",
     "pendulum": "configs/research/pendulum_controllable_win15_frac0.05_seed42.yaml",
 }
 
@@ -897,19 +898,6 @@ def run_e05_diagnostics() -> dict:
     for system, cfg_path in E05_CONFIGS.items():
         cfg = yaml.safe_load((ROOT / cfg_path).read_text())
         systems[system] = evaluate_e05_system(system, cfg_path, cfg.get("checkpoint"))
-    # CartPole is only registered if a config + checkpoint actually exist.
-    cart_cfg = _find_assets("*cartpole*.yaml")
-    cart_ckpt = sorted(p.name for p in (ROOT / "checkpoints").glob("*cartpole*.pt"))
-    if cart_cfg and cart_ckpt:
-        cfg = yaml.safe_load((ROOT / cart_cfg[0]).read_text())
-        systems["cartpole"] = evaluate_e05_system(
-            "cartpole", cart_cfg[0], cfg.get("checkpoint", f"checkpoints/{cart_ckpt[0]}")
-        )
-    else:
-        systems["cartpole"] = _e05_missing(
-            "no verified CartPole config/checkpoint in configs/ or checkpoints/"
-        )
-
     verified = [k for k, v in systems.items() if v.get("status") == "verified"]
     status = "verified" if len(verified) == len(systems) else (
         "partial" if verified else "missing_checkpoint"

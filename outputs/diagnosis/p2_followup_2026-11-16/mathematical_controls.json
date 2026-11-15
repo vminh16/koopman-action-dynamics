@@ -1,0 +1,63 @@
+{
+  "rotation_controls": {
+    "a_0.0": {
+      "weighted_best_constant_map": [
+        1.0,
+        0.0
+      ],
+      "fixed_B_normalized_floor": 0.0,
+      "ignore_input_normalized_response": 1.0,
+      "exact_drift_ignore_input_one_step_mse": 0.0002686622801448248
+    },
+    "a_0.5": {
+      "weighted_best_constant_map": [
+        0.939870427413913,
+        -0.04630027259336197
+      ],
+      "fixed_B_normalized_floor": 0.114499861211226,
+      "ignore_input_normalized_response": 1.0,
+      "exact_drift_ignore_input_one_step_mse": 0.000268542947643237
+    },
+    "a_1.0": {
+      "weighted_best_constant_map": [
+        0.7785063451897447,
+        -0.08777088208599493
+      ],
+      "fixed_B_normalized_floor": 0.38622414668396393,
+      "ignore_input_normalized_response": 1.0,
+      "exact_drift_ignore_input_one_step_mse": 0.00026829027714516676
+    },
+    "a_2.0": {
+      "weighted_best_constant_map": [
+        0.363538627652926,
+        -0.15039127208313885
+      ],
+      "fixed_B_normalized_floor": 0.8452221405879636,
+      "ignore_input_normalized_response": 1.0,
+      "exact_drift_ignore_input_one_step_mse": 0.0002680098273216024
+    }
+  },
+  "decomposition": "E_response = weighted Var(G) + ||CB - weighted mean(G)||^2, since ||G(x)||=1",
+  "max_float32_metric_decomposition_error": 1.9712225274304274e-07,
+  "checked_runs": 140,
+  "original_SPD_constraint": "B_physical[1] = sum(H_head[1,:]^2)+eps >= .1; cannot equal true [1,0] at a=0",
+  "original_a0_response_lower_bound": 0.01,
+  "general_head_oracle": {
+    "P_head": [
+      [
+        0.2,
+        1.0
+      ],
+      [
+        -1.0,
+        0.0
+      ]
+    ],
+    "determinant": 1.0,
+    "AB_reconstruction_max_error": 0.0,
+    "real_exponential_realization": true,
+    "heldout_one_step_exact_ZOH_mse": 3.647678405588041e-16,
+    "meaning": "analytic feasibility control only; not a trained result"
+  },
+  "scope": "Physical continuous-time action response on a frozen probe; not a bound on rollout MSE or proof of H2 superiority"
+}

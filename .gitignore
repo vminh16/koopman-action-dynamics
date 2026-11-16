@@ -8,16 +8,21 @@ __pycache__/
 *.py[cod]
 
 lightning_logs/
-outputs/*
+# Generated artifacts stay local; curate checkpoints explicitly with git add -f.
+outputs/**
+!outputs/**/
 !outputs/.gitkeep
-!outputs/reproduction/
-!outputs/reproduction/E00/
-!outputs/reproduction/E00/manifest.yaml
-!outputs/diagnosis/
-outputs/diagnosis/*
+!outputs/**/*.md
+!outputs/**/summary.json
+!outputs/**/verification.json
+!outputs/**/source_snapshot.json
+!outputs/**/selected_config.json
+!outputs/**/stage_gates.json
+!outputs/reproduction/*_summary.json
+!outputs/reproduction/cartpole_data_audit.yaml
 !outputs/diagnosis/p2_failure_report.yaml
-!outputs/diagnosis/rotation_sweep.png
-data/cartpole*.pt
+checkpoints/*.pt
+data/*.pt
 
 *.egg-info/
 .pytest_cache/

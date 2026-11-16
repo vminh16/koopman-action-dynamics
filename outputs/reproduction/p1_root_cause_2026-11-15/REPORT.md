@@ -165,10 +165,10 @@ The official public README/operator/evaluator were fetched read-only and snapsho
 
 ```bash
 # Numerical/gradient checks
-PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python outputs/reproduction/p1_root_cause_2026-11-15/experiment.py --verify
-PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python outputs/reproduction/p1_root_cause_2026-11-15/verify_geometry.py
+PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python research/diagnostics/p1_audit/experiment.py --verify
+PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python research/diagnostics/p1_audit/verify_geometry.py
 # Example paired run (completed runs are skipped)
-PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python outputs/reproduction/p1_root_cause_2026-11-15/experiment.py --system pendulum --arm noenc --seed 42
+PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python research/diagnostics/p1_audit/experiment.py --system pendulum --arm noenc --seed 42
 # Rebuild the verified report after all runs and final evaluations exist
-PYTHONPATH=. .venv/bin/python outputs/reproduction/p1_root_cause_2026-11-15/summarize.py
+PYTHONPATH=. .venv/bin/python research/diagnostics/p1_audit/summarize.py
 ```

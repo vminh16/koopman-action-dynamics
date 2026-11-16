@@ -355,6 +355,183 @@ Bằng chứng: [audit note](docs/superpowers/2026-11-15-p1-controlled-reproduct
 
 ## 4. Commands
 
+### 4.0. Artifact policy and replay after cleanup (2026-11-16)
+
+Code lives in `research/`; generated results stay ignored under `outputs/`.
+Cleanup removes Git tracking, **not local files**. Keep original Pendulum/CartPole
+inputs and root checkpoints; legacy input-generation provenance is incomplete, so
+never replace them with freshly generated data and claim identical reproduction.
+CartPole inputs must be supplied separately with the hashes in locked configs.
+No Git history was rewritten; old commits still contain archived artifacts.
+Cleanup verification: 407 generated files (14.86 MiB) removed from Git tracking;
+tracked contents drop from 46.23 to about 31.4 MiB. All 322 previously tracked `.pt`
+files remain byte-identical locally. 80 tests pass. A temporary index-only checkout
+(with original CartPole inputs supplied separately) restored all 36 historical P2
+dataset hashes and recomputed P2, regenerated P1 evaluation from 28 retained
+checkpoints, and rebuilt/verified all 22 config-check runs. The 140-run follow-up
+training was not repeated during cleanup; its replay code is unchanged.
+
+| Evidence retained in Git | Rebuilt/ignored artifacts | Replay below |
+|---|---|---|
+| P0/C02 checkpoints, configs, audit reports | TensorBoard, plots, new fraction runs | Existing locked train/eval commands in §4 |
+| P1: all 28 final checkpoints, manifests/results, protocol, concise summary | Progress duplicates, per-trajectory evaluations, large summaries/plots | P1 |
+| Historical P2: report, checkpoints, E09 control data | Deterministic E06/E07 datasets and plots | Restore P2 inputs, then historical recompute |
+| P2 follow-up: summary/provenance; a=0 baseline/combined e100 seeds42–46 | Remaining 130 runs and figure | P2 follow-up |
+| Config check: protocol/selection/gates; 5 confirmations, seed45 original controls, .001 long-budget candidates and tiny overfit | Other tuning/comparison runs, synthetic inputs | Config check |
+
+Checkpoint-bearing retained run records are kept with **every referenced checkpoint**.
+`recompute` alone needs all inputs/runs; replay missing artifacts before verifying.
+Old reports/source hashes describe their capture time. P1 active scripts moved from
+`outputs/reproduction/.../*.py` to `research/diagnostics/p1_audit/`; captured protocols
+remain unchanged. Curate future essential checkpoints explicitly, not whole folders.
+
+Common environment (repository root; installed dependencies from `requirements.txt`):
+
+```bash
+export PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1
+```
+
+**Restore historical P2 synthetic inputs.** Regenerate in a temporary directory,
+verify every SHA against the frozen report, and copy only missing files. Existing
+inputs are verified, never overwritten. This also supplies the follow-up's inputs.
+
+```bash
+.venv/bin/python - <<'PY'
+from pathlib import Path
+import shutil, tempfile, yaml
+from research.baseline.common import ROOT, sha256_file
+from research.baseline.data_generator import generate_benchmark_dataset
+report = yaml.safe_load((ROOT/'outputs/diagnosis/p2_failure_report.yaml').read_text())
+checked = 0
+with tempfile.TemporaryDirectory() as temporary:
+    for group in ('rotation_sweep', 'benchmark_evaluations'):
+        for name, entry in report[group].items():
+            system = 'rotation_family' if group == 'rotation_sweep' else name
+            kwargs = {'a': entry['a']} if system == 'rotation_family' else {}
+            datasets = [entry['datasets']['eval'], *entry['datasets']['train'].values()]
+            for item in datasets:
+                source, digest, _ = generate_benchmark_dataset(
+                    system, item['num_trajectories'], item['T'], item['dt'],
+                    item['seed'], save_dir=temporary, sys_kwargs=kwargs)
+                assert digest == item['sha256'], item['path']
+                target = ROOT/item['path']
+                if target.exists():
+                    assert sha256_file(target) == digest, target
+                else:
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(source, target)
+                checked += 1
+# Derive a local-path report for clones at a different filesystem location.
+# The frozen report, scientific values and artifact hashes remain unchanged.
+for group in ('rotation_sweep', 'benchmark_evaluations'):
+    for entry in report[group].values():
+        for seed, recorded in entry['seeds'].items():
+            checkpoint = recorded['training']['checkpoint']
+            run = Path(entry['datasets']['train'][seed]['path']).parent.parent
+            checkpoint['path'] = str(ROOT/run/'checkpoints'/Path(checkpoint['path']).name)
+(ROOT/'outputs/diagnosis/p2_replay.yaml').write_text(yaml.safe_dump(report))
+print(f'{checked} historical dataset hashes verified; local replay report written')
+PY
+.venv/bin/python -m research.diagnostics.recompute_p2 \
+  --report outputs/diagnosis/p2_replay.yaml
+```
+
+**P1 causal audit.** All 28 checkpoints are retained. Rebuild derived evaluation
+and reports without retraining:
+
+```bash
+.venv/bin/python research/diagnostics/p1_audit/experiment.py --verify
+.venv/bin/python research/diagnostics/p1_audit/verify_geometry.py
+for system in pendulum cartpole; do
+  .venv/bin/python research/diagnostics/p1_audit/evaluate_final.py --system "$system"
+done
+.venv/bin/python research/diagnostics/p1_audit/evaluate_start0.py
+.venv/bin/python research/diagnostics/p1_audit/summarize.py
+.venv/bin/python research/diagnostics/p1_audit/plot_results.py
+```
+
+To retrain missing P1 checkpoints, use the **same** output paths and 100 epochs;
+completed run records skip training. Restore both checkpoint and metadata together,
+or use a separate output/archive for a fresh repetition.
+
+```bash
+p1=research/diagnostics/p1_audit
+for seed in 42 43 44; do
+  for system in pendulum cartpole; do
+    .venv/bin/python "$p1/experiment.py" --system "$system" --arm baseline --seed "$seed"
+  done
+  .venv/bin/python "$p1/experiment.py" --system pendulum --arm noenc --seed "$seed"
+  .venv/bin/python "$p1/geometry_experiment.py" --system cartpole --arm negative_head --seed "$seed"
+  .venv/bin/python "$p1/sampling_experiment.py" --arm negative_head_start0 --seed "$seed"
+done
+for arm in constant epochmean noenc_epochmean; do
+  .venv/bin/python "$p1/experiment.py" --system pendulum --arm "$arm" --seed 42
+done
+.venv/bin/python "$p1/geometry_experiment.py" --system pendulum --arm general_head --seed 42
+for arm in signed noenc epochmean; do
+  .venv/bin/python "$p1/experiment.py" --system cartpole --arm "$arm" --seed 42
+done
+for arm in general_head general_head_epochmean general_head_noenc; do
+  .venv/bin/python "$p1/geometry_experiment.py" --system cartpole --arm "$arm" --seed 42
+done
+for system in pendulum cartpole; do
+  .venv/bin/python "$p1/gramian_experiment.py" --system "$system" --seed 42
+done
+.venv/bin/python "$p1/sampling_experiment.py" --arm baseline_start0 --seed 42
+```
+
+Static numerical probes: `.venv/bin/python research/diagnostics/p1_audit/static/<probe>.py`;
+`sign_repro.py` intentionally fails on the original wrong-sign parameterization.
+`p1_tb_probe.py` requires original ignored Lightning logs; its retained JSON is
+forensic evidence, not a promise to recreate unknown historical training.
+
+**P2 follow-up, 140-run protocol.** Restore historical inputs above first; 10 retained
+run/checkpoint pairs skip training, missing 130 runs are reconstructed locally.
+
+```bash
+.venv/bin/python -m research.diagnostics.p2_followup --stage verify
+.venv/bin/python -m research.diagnostics.p2_followup --stage e05
+.venv/bin/python -m research.diagnostics.p2_followup --stage train
+.venv/bin/python -m research.diagnostics.p2_followup --stage recompute
+.venv/bin/python -m research.diagnostics.p2_followup_math
+.venv/bin/python -m research.diagnostics.recompute_p2 \
+  --report outputs/diagnosis/p2_replay.yaml \
+  --output outputs/diagnosis/p2_followup_2026-11-16/historical_recompute.json
+.venv/bin/python -m research.diagnostics.verify_p2_followup
+.venv/bin/python -m research.diagnostics.summarize_p2_followup
+```
+
+**Config check, 22-run conditional protocol.** Restore inputs for retained runs
+first (the training runner skips completed results). The same split seeds, configs,
+selection rule and 5/5 gate apply; a blocked stress stage remains a valid outcome.
+
+```bash
+.venv/bin/python - <<'PY'
+from research.diagnostics.p2_config_check import generate
+for seed in range(42, 47):
+    for compatible in (True, False):
+        for split in ('train', 'validation', 'test'):
+            generate(seed, split, compatible)
+generate(42, 'train', solver='euler', count=2, T=30)
+PY
+.venv/bin/python -m research.diagnostics.p2_config_check --stage all
+.venv/bin/python -m research.diagnostics.p2_config_check --stage recompute
+.venv/bin/python -m research.diagnostics.report_p2_config_check
+```
+
+Full historical P2 retraining is optional, rather than a prerequisite for reuse of
+retained checkpoints. Use a separate output directory to preserve the frozen report:
+
+```bash
+.venv/bin/python -m research.diagnostics.run_p2_diagnostics \
+  --output_dir outputs/diagnosis/new_p2_run
+```
+
+Training reproducibility depends on the recorded package versions/device; a fresh
+run is a new provenance record, not a promise of bitwise-identical checkpoints.
+Dataset restoration above requires exact hashes and stops on version/solver drift.
+
+
 Run from the repository root with the project environment activated:
 
 ```bash

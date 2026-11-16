@@ -132,13 +132,13 @@ From repository root:
 ```bash
 # Intentionally exits 1 on the currently diagnosed sign conflict.
 PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl .venv/bin/python \
-  outputs/reproduction/p1_code_paper_audit/sign_repro.py
+  research/diagnostics/p1_audit/static/sign_repro.py
 
 # Diagnostic measurements; these do not train or overwrite checkpoints.
 PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python \
-  outputs/reproduction/p1_code_paper_audit/p1_checkpoint_probe.py
+  research/diagnostics/p1_audit/static/p1_checkpoint_probe.py
 PYTHONPATH=. OMP_NUM_THREADS=1 .venv/bin/python \
-  outputs/reproduction/p1_code_paper_audit/p1_transition_probe.py
+  research/diagnostics/p1_audit/static/p1_transition_probe.py
 PYTHONPATH=. OMP_NUM_THREADS=1 .venv/bin/python \
-  outputs/reproduction/p1_code_paper_audit/p1_dataset_scope_probe.py
+  research/diagnostics/p1_audit/static/p1_dataset_scope_probe.py
 ```

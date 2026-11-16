@@ -1,0 +1,290 @@
+{
+  "selected_config_sha256": "1148685b3f3967d14267546c52148743ac6a568b01ac8319c1131b3fcf961145",
+  "results": {
+    "confirm-compatible-s42": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/compatible-a0.0-rk4-test-s42-N16-T50.pt",
+        "sha256": "3d9c75c99e9561fcbb6d97e77fbb3b79dfe11d1bfa13d62400bfd351c17b934c"
+      },
+      "metrics": {
+        "response": 0.0005662766442222633,
+        "H15_mse": 0.00015127127909657964,
+        "ignore_input_H15_mse": 0.00180967686229696,
+        "H15_ratio_to_ignore_input": 0.08359021560599292,
+        "CB": [
+          0.005094975233078003,
+          0.9767552614212036
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.0005662766442222633,
+        "passed": true
+      }
+    },
+    "confirm-compatible-s43": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/compatible-a0.0-rk4-test-s43-N16-T50.pt",
+        "sha256": "c6e685d63f4d7faea5e06c624c7617f3ef7a2f8310f46e2a8065675cc2d8cfc8"
+      },
+      "metrics": {
+        "response": 0.00019342327886651134,
+        "H15_mse": 3.6039473908625747e-05,
+        "ignore_input_H15_mse": 0.0022927249112142975,
+        "H15_ratio_to_ignore_input": 0.015719057150008518,
+        "CB": [
+          0.005158513784408569,
+          1.0129156112670898
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.00019342327886651134,
+        "passed": true
+      }
+    },
+    "confirm-compatible-s44": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/compatible-a0.0-rk4-test-s44-N16-T50.pt",
+        "sha256": "510e024b8537ef346a69bda8c7c99a04c3eae0e60866ffea61af2cbb1b205397"
+      },
+      "metrics": {
+        "response": 0.0009790108940643805,
+        "H15_mse": 5.1792604187274763e-05,
+        "ignore_input_H15_mse": 0.0021872225954860927,
+        "H15_ratio_to_ignore_input": 0.023679621952590643,
+        "CB": [
+          0.004929155111312866,
+          0.9691015481948853
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.0009790108940643805,
+        "passed": true
+      }
+    },
+    "confirm-compatible-s45": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/compatible-a0.0-rk4-test-s45-N16-T50.pt",
+        "sha256": "060dac072c21de80bef480dfd4cace4af49956b07e022dbe97e08c5f3ac20a95"
+      },
+      "metrics": {
+        "response": 0.6016902509313392,
+        "H15_mse": 0.0018576905441461272,
+        "ignore_input_H15_mse": 0.002072516160495509,
+        "H15_ratio_to_ignore_input": 0.8963455048292506,
+        "CB": [
+          -0.0005548372864723206,
+          0.22431324422359467
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.6016902509313391,
+        "passed": false
+      }
+    },
+    "confirm-compatible-s46": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/compatible-a0.0-rk4-test-s46-N16-T50.pt",
+        "sha256": "6a1e5cfcd1b6ce3b6ea8721ab7e9b48a3d1a6a568daa147f22353380ee8b1447"
+      },
+      "metrics": {
+        "response": 0.01757045519605427,
+        "H15_mse": 0.0001384985093315508,
+        "ignore_input_H15_mse": 0.002526475488999311,
+        "H15_ratio_to_ignore_input": 0.054818861269225076,
+        "CB": [
+          0.0046964287757873535,
+          0.8675296306610107
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.01757045519605427,
+        "passed": true
+      }
+    },
+    "original-a0-SPD-s42": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s42-N16-T50.pt",
+        "sha256": "19c9c60ed5f8eab77937d4717b6299a2db5623e781c2a86fa1078a316d1b29ca"
+      },
+      "metrics": {
+        "response": 0.9965592522102612,
+        "H15_mse": 0.0032697239108601893,
+        "ignore_input_H15_mse": 0.0018909086252666039,
+        "H15_ratio_to_ignore_input": 1.7291813402137202,
+        "CB": [
+          0.007300963159650564,
+          0.1053939014673233
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.9965592522102613,
+        "passed": false
+      }
+    },
+    "original-a0-SPD-s43": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s43-N16-T50.pt",
+        "sha256": "efd4f4c4e2a7a6fa5a34aeb349017eb45b579622d45525b4cc782173509dc734"
+      },
+      "metrics": {
+        "response": 1.0190280505123432,
+        "H15_mse": 0.0028326463622740427,
+        "ignore_input_H15_mse": 0.002382227132903877,
+        "H15_ratio_to_ignore_input": 1.1890748464530818,
+        "CB": [
+          -0.0035096467472612858,
+          0.10952825844287872
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 1.0190280505123432,
+        "passed": false
+      }
+    },
+    "original-a0-SPD-s44": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s44-N16-T50.pt",
+        "sha256": "9bf750142205f2a0e020b9d166e065a379c78acfcf9277ae09fc7be518993491"
+      },
+      "metrics": {
+        "response": 1.0278688196526136,
+        "H15_mse": 0.0028250305764507045,
+        "ignore_input_H15_mse": 0.0022824723537556465,
+        "H15_ratio_to_ignore_input": 1.2377063721285897,
+        "CB": [
+          -0.008394678123295307,
+          0.10492374747991562
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 1.0278688196526133,
+        "passed": false
+      }
+    },
+    "original-a0-SPD-s45": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s45-N16-T50.pt",
+        "sha256": "babf715cac70eba4917cd63d0eee5687212b08de7aedd39198aa8a6d9e58932e"
+      },
+      "metrics": {
+        "response": 1.0089410445020692,
+        "H15_mse": 0.002654364467904426,
+        "ignore_input_H15_mse": 0.002155124987456676,
+        "H15_ratio_to_ignore_input": 1.2316522166247614,
+        "CB": [
+          0.002262849360704422,
+          0.11602423340082169
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 1.0089410445020688,
+        "passed": false
+      }
+    },
+    "original-a0-SPD-s46": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s46-N16-T50.pt",
+        "sha256": "31ea48390bde38d70f68482382f6c39750517db34e4b748b672cc7d27e5d36a4"
+      },
+      "metrics": {
+        "response": 1.0019190649942362,
+        "H15_mse": 0.0031080985040476752,
+        "ignore_input_H15_mse": 0.0026302921411456587,
+        "H15_ratio_to_ignore_input": 1.1816552448405604,
+        "CB": [
+          0.0055069709196686745,
+          0.11358996480703354
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 1.0019190649942358,
+        "passed": false
+      }
+    },
+    "original-a0-general-s42": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s42-N16-T50.pt",
+        "sha256": "19c9c60ed5f8eab77937d4717b6299a2db5623e781c2a86fa1078a316d1b29ca"
+      },
+      "metrics": {
+        "response": 0.9284241757306014,
+        "H15_mse": 0.002433244058298847,
+        "ignore_input_H15_mse": 0.0018909086252666039,
+        "H15_ratio_to_ignore_input": 1.2868120784819932,
+        "CB": [
+          0.044113676995038986,
+          0.12126629054546356
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.9284241757306014,
+        "passed": false
+      }
+    },
+    "original-a0-general-s43": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s43-N16-T50.pt",
+        "sha256": "efd4f4c4e2a7a6fa5a34aeb349017eb45b579622d45525b4cc782173509dc734"
+      },
+      "metrics": {
+        "response": 0.8600816050862776,
+        "H15_mse": 0.0022933348793166526,
+        "ignore_input_H15_mse": 0.002382227132903877,
+        "H15_ratio_to_ignore_input": 0.9626852316643432,
+        "CB": [
+          0.07722189277410507,
+          0.09253199398517609
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.8600816050862778,
+        "passed": false
+      }
+    },
+    "original-a0-general-s44": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s44-N16-T50.pt",
+        "sha256": "9bf750142205f2a0e020b9d166e065a379c78acfcf9277ae09fc7be518993491"
+      },
+      "metrics": {
+        "response": 0.7652604922017779,
+        "H15_mse": 0.0031466225908714477,
+        "ignore_input_H15_mse": 0.0022824723537556465,
+        "H15_ratio_to_ignore_input": 1.3786027180981637,
+        "CB": [
+          0.12668319046497345,
+          0.050776395946741104
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.765260492201778,
+        "passed": false
+      }
+    },
+    "original-a0-general-s45": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s45-N16-T50.pt",
+        "sha256": "babf715cac70eba4917cd63d0eee5687212b08de7aedd39198aa8a6d9e58932e"
+      },
+      "metrics": {
+        "response": 0.9746467843583899,
+        "H15_mse": 0.0024049212599975773,
+        "ignore_input_H15_mse": 0.002155124987456676,
+        "H15_ratio_to_ignore_input": 1.1159080211100392,
+        "CB": [
+          0.019377054646611214,
+          0.114128977060318
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.9746467843583899,
+        "passed": false
+      }
+    },
+    "original-a0-general-s46": {
+      "data": {
+        "path": "outputs/diagnosis/p2_config_check_2026-11-16/data/original-a0.0-rk4-test-s46-N16-T50.pt",
+        "sha256": "31ea48390bde38d70f68482382f6c39750517db34e4b748b672cc7d27e5d36a4"
+      },
+      "metrics": {
+        "response": 0.7891096123749003,
+        "H15_mse": 0.0025609382088299794,
+        "ignore_input_H15_mse": 0.0026302921411456587,
+        "H15_ratio_to_ignore_input": 0.9736326124270472,
+        "CB": [
+          0.11540769040584564,
+          0.08127766102552414
+        ],
+        "fixed_map_floor": 0.0,
+        "excess_fitting_error": 0.7891096123749002,
+        "passed": false
+      }
+    }
+  }
+}

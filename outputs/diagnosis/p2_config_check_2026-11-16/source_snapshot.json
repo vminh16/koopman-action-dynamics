@@ -1,0 +1,46 @@
+{
+  "files": {
+    "research/diagnostics/p2_config_check.py": "d3a755c67423e029e22389b1260dc884ca21e242756de0ba56f53e8ccea5813c",
+    "research/diagnostics/p2_followup.py": "1442e20bddef8064dc89b903d55ecc846d85494f66d2d2dad1b4cdc0bb64c3ac",
+    "research/diagnostics/run_p2_diagnostics.py": "18500c7f1ae9cba74857a13bed924d9eadd8d1d5b124fb3e27bb1cba6def8f22",
+    "research/baseline/common.py": "66b6b4f3e1669e97c23efb13da7e5cf66791fa53d0458f75b7a004c65f92d70d",
+    "models/encoder.py": "228990c53a7827691145514423ec45a045dc1c403c7f2b3d5d40508c679f301a",
+    "models/model_builder.py": "fe1a4a7b3e5b77ee3ec9e6e933ec61538f8f851d5925f46793d44fa38d39d9ae",
+    "models/koopman_operator.py": "fac1b00cd9065e9428d3b5e72af97b29b483e7ae82fc69dd4cfb008abcac397a",
+    "my_utils/dataset.py": "1a319b3725ec1fa21baa0327570a32c0db8c8a0bf35376b5fe8b39cac7d42703",
+    "training/train.py": "447ef20e40977673a20636ea85ffebf4754751518002488d4615b77e219220b9",
+    "training/loss.py": "e02b2b29e8b4b95804544371acca024a81e700a2df173a28157d258140a53164"
+  },
+  "protocol_sha256": "728981dfb2df92ad5bb327ed66f6264120822026ac6da41edb42960911079402",
+  "git": {
+    "git_head": "a27eb91506b8a3333d6964ff4a76611698a83b45",
+    "git_branch": "main",
+    "working_tree_clean": false,
+    "source_clean": true,
+    "tracked_changes": [],
+    "untracked_files": [
+      "checkpoints/C01-s42.pt",
+      "checkpoints/C03-s42.pt",
+      "checkpoints/C03-s43.pt",
+      "checkpoints/C03-s44.pt",
+      "checkpoints/C04-s42.pt",
+      "checkpoints/C04-s43.pt",
+      "checkpoints/C04-s44.pt",
+      "docs/superpowers/2026-11-16-p2-config-check.md",
+      "outputs/reproduction/C01-s42/",
+      "outputs/reproduction/C01-s43/",
+      "outputs/reproduction/C03-s42/",
+      "outputs/reproduction/C03-s43/",
+      "outputs/reproduction/C03-s44/",
+      "outputs/reproduction/C04-s42/",
+      "outputs/reproduction/C04-s43/",
+      "outputs/reproduction/C04-s44/",
+      "research/diagnostics/p2_config_check.py"
+    ]
+  },
+  "runtime": {
+    "torch": "2.14.1+cu130",
+    "device": "cpu",
+    "threads": 1
+  }
+}

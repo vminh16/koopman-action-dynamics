@@ -1,0 +1,17 @@
+{
+  "python": "3.10.12",
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "torch": "2.14.1",
+    "torchdiffeq": "0.2.5",
+    "pytorch-lightning": "2.6.6"
+  },
+  "device": "cpu",
+  "threads": 1,
+  "training_dtype": "float32",
+  "analytic_reference_and_gradcheck_dtype": "float64",
+  "extra_sources": {
+    "research/benchmarks/rotation_family.py": "e929672ca4ff6fb7ba8e14e8210b8bae0282fac7c4190bcab4f1cd08696e0bb6"
+  }
+}

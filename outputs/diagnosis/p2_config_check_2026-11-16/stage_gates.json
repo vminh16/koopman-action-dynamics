@@ -1,0 +1,25 @@
+{
+  "compatible_all_five_pass": false,
+  "confirmation": [
+    "confirm-compatible-s42",
+    "confirm-compatible-s43",
+    "confirm-compatible-s44",
+    "confirm-compatible-s45",
+    "confirm-compatible-s46"
+  ],
+  "original_comparison": [
+    "original-a0-SPD-s42",
+    "original-a0-general-s42",
+    "original-a0-SPD-s43",
+    "original-a0-general-s43",
+    "original-a0-SPD-s44",
+    "original-a0-general-s44",
+    "original-a0-SPD-s45",
+    "original-a0-general-s45",
+    "original-a0-SPD-s46",
+    "original-a0-general-s46"
+  ],
+  "original_general_all_five_pass": false,
+  "stress_runs": [],
+  "status": "STRESS_BLOCKED_PREREQUISITE_NOT_MET"
+}

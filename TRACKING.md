@@ -226,6 +226,17 @@ Evidence: [full report](outputs/diagnosis/p2_followup_2026-11-16/REPORT.md),
 [verification](outputs/diagnosis/p2_followup_2026-11-16/verification.json),
 [figure](outputs/diagnosis/p2_followup_2026-11-16/results.png).
 
+### 3.3.2. P2 config check — compatible positive control (2026-11-16)
+
+Protocol mới đã chạy 22 runs / 18.100 updates; known-answer và finite-difference
+checks PASS; 32 checkpoint evaluations và 15 test evaluations recompute khớp.
+Baseline/loss gốc học được compatible control, nhưng config được chọn bằng
+validation seed42 (LR=.01, constant,100 epochs) chỉ đạt 4/5 seeds. Cả SPD/general
+trên hệ tọa độ gốc chưa đạt với ngân sách đã khóa. Stress không chạy vì
+prerequisite 5/5 chưa đạt; không đổi H2/H3 gates. Không kết luận các config khác
+đều thất bại: LR=.001/1000 đạt trên seed tune nhưng chưa được xác nhận đa seed.
+[Protocol và báo cáo ngắn](docs/superpowers/2026-11-16-p2-config-check.md).
+
 ### 3.4. CartPole 5% — completed runs and independent evaluation (2026-11-14)
 
 **Training status: COMPLETED (C02-s42/s43/s44). Reproduction assessment: NEEDS_INVESTIGATION.**

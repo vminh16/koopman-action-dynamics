@@ -1,0 +1,14 @@
+{
+  "verdict": "PASS",
+  "expected_run_inventory_verified": true,
+  "selection_rederived": true,
+  "conditional_gates_rederived": true,
+  "paired_original_windows_verified": true,
+  "general_initial_AB_match_all_seeds": true,
+  "general_head_float64_gradcheck": true,
+  "runs": 22,
+  "updates": 18100,
+  "failed_training_runs": [],
+  "stress_omitted_by_protocol": true,
+  "note": "PASS verifies execution and recomputation; it does not mean the selected configuration met the scientific five-seed gate."
+}

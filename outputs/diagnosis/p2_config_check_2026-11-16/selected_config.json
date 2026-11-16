@@ -1,0 +1,32 @@
+{
+  "status": "SELECTED",
+  "name": "tune-lr0.01-constant-noenc0",
+  "cfg": {
+    "lr": 0.01,
+    "scheduler": "constant",
+    "epochs": 100,
+    "noenc": false
+  },
+  "selection_metric": {
+    "response": 0.0005662766442222633,
+    "H15_mse": 1.067587696308367e-05,
+    "ignore_input_H15_mse": 0.00091961432136177,
+    "H15_ratio_to_ignore_input": 0.011609080801693879,
+    "CB": [
+      0.005094975233078003,
+      0.9767552614212036
+    ],
+    "fixed_map_floor": 0.0,
+    "excess_fitting_error": 0.0005662766442222633,
+    "passed": true
+  },
+  "tuning_runs": [
+    "tune-lr0.0001-constant-noenc0",
+    "tune-lr0.0001-epochmean-noenc0",
+    "tune-lr0.001-constant-noenc0",
+    "tune-lr0.001-epochmean-noenc0",
+    "tune-lr0.01-constant-noenc0",
+    "tune-lr0.01-epochmean-noenc0"
+  ],
+  "rule": "first passing checkpoint per run; minimum updates, then validation response, then name; test never consulted"
+}

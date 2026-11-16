@@ -1,0 +1,38 @@
+{
+  "42": {
+    "forward_error": 0.0,
+    "gradient_error": 3.725290298461914e-09
+  },
+  "43": {
+    "forward_error": 0.0,
+    "gradient_error": 3.725290298461914e-09
+  },
+  "known_answer": {
+    "response": 0.0,
+    "H15_mse": 2.4364769461252914e-15,
+    "ignore_input_H15_mse": 0.0025776549070840463,
+    "H15_ratio_to_ignore_input": 9.452300769312594e-13,
+    "CB": [
+      0.0,
+      1.0
+    ],
+    "fixed_map_floor": 0.0,
+    "excess_fitting_error": 0.0,
+    "passed": true
+  },
+  "float64_operator_loss_gradcheck": true,
+  "coordinate_equivalence_max_error": 1.1920928955078125e-07,
+  "known_answer_RK4_evaluation": {
+    "response": 0.0,
+    "H15_mse": 2.77599110546115e-06,
+    "ignore_input_H15_mse": 0.00180967686229696,
+    "H15_ratio_to_ignore_input": 0.0015339706017668154,
+    "CB": [
+      0.0,
+      1.0
+    ],
+    "fixed_map_floor": 0.0,
+    "excess_fitting_error": 0.0,
+    "passed": true
+  }
+}

@@ -356,3 +356,10 @@ Branch/commit convention (suggested): `audit/pendulum-run`, `repro/cartpole`, `d
 - [Author code at audited commit](https://github.com/KYMiao/Controllable-Koopman/tree/ec131bb549c8f7b01519a99acca237b9fdc9c826).
 
 - 2026-11-16: P2 follow-up completed E05 refresh and 140 paired rotation runs (65,000 updates); full checkpoint/source/pairing verification and 80 tests PASS. Mathematical input-map decomposition shows weak easy-system fitting masks interpretation of the stress ratio. H2/H3 remain NO-GO; historical report unchanged.
+
+- 2026-11-16: compatible-control config check executed 22 runs (18,100 updates):
+  original baseline/loss can learn the compatible system, but the selected
+  LR=.01/100-epoch configuration passes only 4/5 validation seeds. Original-coordinate
+  SPD/general controls fail the locked-budget gate; nonlinear stress remains
+  blocked by protocol. No H2/H3 gate change. See
+  [short report](docs/superpowers/2026-11-16-p2-config-check.md).

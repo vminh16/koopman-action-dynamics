@@ -779,3 +779,46 @@ raw runs and synthetic data remain ignored.
 
 Robust-flow review: Standards and Spec found no blocking issues; the pre-run
 development3/3 prerequisite is explicit in the frozen protocol.
+
+### Drift/coverage + equal-budget tuning — preregistered (2026-11-16)
+
+[Protocol](docs/superpowers/2026-11-16-p2-drift-coverage-tuning.md). A: compatible,
+seeds72–76, train8 vs32; both640 presented windows, batch64,300epochs=3000updates
+and192000presentations. N8 repeats160 unique windows4×; N32 has640unique windows.
+First8 observations/windows paired. LR=.001 constant, original losses. B: original
+SPD/general, each LR{.001,.01} ×dev42–44 ×3000updates with32train; choose separately
+by failures/worst H15ratio/worst response/LR, then confirm82–86. Test read after
+selection is frozen; no nonlinear or H2/H3 training. Total32runs/96000updates.
+Validation8/test16; seed offsets10000/20000/30000, window seed=seed, shuffle700000+seed.
+Source/data hashes are recorded in `outputs/diagnosis/p2_drift_coverage_2026-11-16/`
+`source_snapshot.json` and `summary.json` before/after execution. Keep raw results,
+data and intermediate weights ignored; curate20 final data/confirmation controls.
+
+```bash
+export PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1
+sha256sum research/diagnostics/p2_drift_coverage.py research/diagnostics/p2_config_check.py
+.venv/bin/python -m research.diagnostics.p2_drift_coverage --stage all
+.venv/bin/python -m research.diagnostics.p2_drift_coverage --stage verify-saved
+```
+
+`all` restores ignored inputs and reconstructs missing raw runs. `verify-saved`
+regenerates train/val/test and checks20 curated finals, source/protocol hashes and
+selection metadata; full development checkpoint reproduction needs `all`.
+
+Drift/coverage result:32 finite runs /96,000updates /6,144,000presentations;
+64validation checkpoint reloads,20curated finals verified on train/val/test,84testsPASS.
+At equal budgets, N8 vsN32 compatible test joint pass1/5 vs5/5; H15 mean MSE
+.000509121→.00000973021 (52.3×), drift .0171776→.000234165 (73.4×).
+Per-head tuning original system selectsLR=.01 for both: general dev3/3 and new
+confirmation/test5/5; SPD dev0/3 and confirmation/test0/5. Freeze N32 compatible
+LR=.001 and original-general LR=.01 as positive controls for subsequent stress;
+retain upstream-SPD as a labeled weaker diagnostic, not the sole comparator.
+[Report](docs/superpowers/2026-11-16-p2-drift-coverage-tuning.md). No nonlinear/H2/H3
+training or historical gate changes in this round. Next: controlled nonlinear
+stress with these baselines, then matched-class architecture comparisons.
+
+Drift/coverage review (Standards/Spec): no blocking findings; historical runners
+and model/loss code unchanged. Curate only20 final controls plus compact metadata.
+
+Fresh-export check PASS: `verify-saved` restored35 initially absent synthetic
+datasets and verified20 curated final checkpoints without raw run records.

@@ -1,0 +1,4693 @@
+{
+  "selected": {
+    "SPD": {
+      "lr": 0.01,
+      "dev_pass_count": 0,
+      "qualified": false,
+      "rule": "fewest dev failures, worst H15/ignore-input ratio, worst response, lower LR"
+    },
+    "general": {
+      "lr": 0.01,
+      "dev_pass_count": 3,
+      "qualified": true,
+      "rule": "fewest dev failures, worst H15/ignore-input ratio, worst response, lower LR"
+    }
+  },
+  "rows": [
+    {
+      "name": "coverage-n8-s72",
+      "seed": 72,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 8,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N8-T50.pt",
+        "sha256": "5b6b1515b59b40a5b8dd9e2a8e22862bbbe42e5a93c801d2c75a40b6dd09907d"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s72-N8-T50.pt",
+        "sha256": "4e32f3c9ac3f49cfac9f2c818d6afcbc2758fb5df5f8a8781c4e007a50196105"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 160,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s72-N8-T50.pt",
+            "sha256": "4e32f3c9ac3f49cfac9f2c818d6afcbc2758fb5df5f8a8781c4e007a50196105"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N8-T50.pt",
+            "sha256": "5b6b1515b59b40a5b8dd9e2a8e22862bbbe42e5a93c801d2c75a40b6dd09907d"
+          },
+          "metrics": {
+            "response": 0.4838413604444591,
+            "H15_mse": 0.0012459585494086485,
+            "ignore_input_H15_mse": 0.0015776075320816805,
+            "H15_ratio_to_ignore_input": 0.7897772570625247,
+            "CB": [
+              0.0006027519702911377,
+              0.30441319942474365
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.48384136044445913,
+            "passed": false
+          },
+          "drift_mse": 0.0075318903660262304,
+          "input_mse": 0.3199418690278165,
+          "cross_term": -0.0019876402255322467,
+          "vector_field_mse": 0.3254861191683105,
+          "nearest_train_distance_p95": 0.8735783426744278,
+          "zero_input_mse": {
+            "15": 0.00026367913987608696,
+            "50": 0.001642855635393857
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s72-N8-T50.pt",
+            "sha256": "4e32f3c9ac3f49cfac9f2c818d6afcbc2758fb5df5f8a8781c4e007a50196105"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N8-T50.pt",
+            "sha256": "5b6b1515b59b40a5b8dd9e2a8e22862bbbe42e5a93c801d2c75a40b6dd09907d"
+          },
+          "metrics": {
+            "response": 0.0003800751492315513,
+            "H15_mse": 5.39306786208778e-05,
+            "ignore_input_H15_mse": 0.0015776075320816805,
+            "H15_ratio_to_ignore_input": 0.034185104675378504,
+            "CB": [
+              0.005600064992904663,
+              1.0186738967895508
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0003800751492315513,
+            "passed": true
+          },
+          "drift_mse": 0.0018915478312132434,
+          "input_mse": 0.0002513260823846572,
+          "cross_term": -6.154381316578761e-05,
+          "vector_field_mse": 0.0020813301004321133,
+          "nearest_train_distance_p95": 0.8735783426744278,
+          "zero_input_mse": {
+            "15": 5.509612436264944e-05,
+            "50": 0.0008157230811962734
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n8-s72/epoch300.pt",
+        "sha256": "569f509ccc088c2bcdec6917f78bf419959d327631195037c57522ca7492e0fb"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N8-T50.pt",
+          "sha256": "5b6b1515b59b40a5b8dd9e2a8e22862bbbe42e5a93c801d2c75a40b6dd09907d"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N8-T50.pt",
+          "sha256": "5b6b1515b59b40a5b8dd9e2a8e22862bbbe42e5a93c801d2c75a40b6dd09907d"
+        },
+        "metrics": {
+          "response": 0.0003800751492315513,
+          "H15_mse": 8.845460491081816e-06,
+          "ignore_input_H15_mse": 0.0020561303255034664,
+          "H15_ratio_to_ignore_input": 0.004301994081486983,
+          "CB": [
+            0.005600064992904663,
+            1.0186738967895508
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003800751492315513,
+          "passed": true
+        },
+        "drift_mse": 0.00011772427558405598,
+        "input_mse": 0.00023142103071749332,
+        "cross_term": -2.2434616115153144e-05,
+        "vector_field_mse": 0.0003267106901863961,
+        "nearest_train_distance_p95": 2.9802322387695312e-08,
+        "zero_input_mse": {
+          "15": 5.378186146136472e-06,
+          "50": 7.086706114816967e-05
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s72-N16-T50.pt",
+          "sha256": "4e420d0612f159fe97a626fa119d168cd2676424524ae4f670be54f350f5c6a4"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N8-T50.pt",
+          "sha256": "5b6b1515b59b40a5b8dd9e2a8e22862bbbe42e5a93c801d2c75a40b6dd09907d"
+        },
+        "metrics": {
+          "response": 0.0003800751492315513,
+          "H15_mse": 0.000632571426778849,
+          "ignore_input_H15_mse": 0.0018331915001375,
+          "H15_ratio_to_ignore_input": 0.34506565556920943,
+          "CB": [
+            0.005600064992904663,
+            1.0186738967895508
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003800751492315513,
+          "passed": false
+        },
+        "drift_mse": 0.020221266501806348,
+        "input_mse": 0.000244986026517908,
+        "cross_term": 0.0001449131602183608,
+        "vector_field_mse": 0.020611165688542616,
+        "nearest_train_distance_p95": 1.0184320075212254,
+        "zero_input_mse": {
+          "15": 0.00061574487197786,
+          "50": 0.006492473077986643
+        }
+      }
+    },
+    {
+      "name": "coverage-n32-s72",
+      "seed": 72,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N32-T50.pt",
+        "sha256": "73b50a7a0bb8bef78bf6557ae5ec1faf3c8d25cd3a3e7d73cc4301a304e70d05"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s72-N8-T50.pt",
+        "sha256": "4e32f3c9ac3f49cfac9f2c818d6afcbc2758fb5df5f8a8781c4e007a50196105"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s72-N8-T50.pt",
+            "sha256": "4e32f3c9ac3f49cfac9f2c818d6afcbc2758fb5df5f8a8781c4e007a50196105"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N32-T50.pt",
+            "sha256": "73b50a7a0bb8bef78bf6557ae5ec1faf3c8d25cd3a3e7d73cc4301a304e70d05"
+          },
+          "metrics": {
+            "response": 0.5650665743827128,
+            "H15_mse": 0.0013735319117702404,
+            "ignore_input_H15_mse": 0.0015776075320816805,
+            "H15_ratio_to_ignore_input": 0.8706423390092726,
+            "CB": [
+              0.000761866569519043,
+              0.2482912838459015
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.5650665743827128,
+            "passed": false
+          },
+          "drift_mse": 0.0032695107357029784,
+          "input_mse": 0.3736523387894694,
+          "cross_term": 0.003160033181709675,
+          "vector_field_mse": 0.3800818827068821,
+          "nearest_train_distance_p95": 0.15744467488246955,
+          "zero_input_mse": {
+            "15": 0.00013662577579651123,
+            "50": 0.0009469374470744948
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s72-N8-T50.pt",
+            "sha256": "4e32f3c9ac3f49cfac9f2c818d6afcbc2758fb5df5f8a8781c4e007a50196105"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N32-T50.pt",
+            "sha256": "73b50a7a0bb8bef78bf6557ae5ec1faf3c8d25cd3a3e7d73cc4301a304e70d05"
+          },
+          "metrics": {
+            "response": 0.00025553278121392964,
+            "H15_mse": 5.200450426904347e-06,
+            "ignore_input_H15_mse": 0.0015776075320816805,
+            "H15_ratio_to_ignore_input": 0.0032964158202530023,
+            "CB": [
+              0.005421340465545654,
+              1.015038013458252
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00025553278121392964,
+            "passed": true
+          },
+          "drift_mse": 0.0001286317766654862,
+          "input_mse": 0.00016897198607485647,
+          "cross_term": 2.696200411869816e-06,
+          "vector_field_mse": 0.0003002999631522125,
+          "nearest_train_distance_p95": 0.15744467488246955,
+          "zero_input_mse": {
+            "15": 3.847077200406727e-06,
+            "50": 3.546953501639555e-05
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n32-s72/epoch300.pt",
+        "sha256": "61df9753eccb5d83029a43301d62cbaa66497500aa5c337cbf4e3aabfe72d08f"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N32-T50.pt",
+          "sha256": "73b50a7a0bb8bef78bf6557ae5ec1faf3c8d25cd3a3e7d73cc4301a304e70d05"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N32-T50.pt",
+          "sha256": "73b50a7a0bb8bef78bf6557ae5ec1faf3c8d25cd3a3e7d73cc4301a304e70d05"
+        },
+        "metrics": {
+          "response": 0.00025553278121392964,
+          "H15_mse": 1.6006353335227258e-06,
+          "ignore_input_H15_mse": 0.0024873740511701854,
+          "H15_ratio_to_ignore_input": 0.0006435040732091366,
+          "CB": [
+            0.005421340465545654,
+            1.015038013458252
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00025553278121392964,
+          "passed": true
+        },
+        "drift_mse": 8.529711996819272e-05,
+        "input_mse": 0.0001698464305367023,
+        "cross_term": -1.5865528601509174e-06,
+        "vector_field_mse": 0.0002535569976447441,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 1.0076671264448461e-06,
+          "50": 8.461890106966125e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s72-N16-T50.pt",
+          "sha256": "4e420d0612f159fe97a626fa119d168cd2676424524ae4f670be54f350f5c6a4"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s72-N32-T50.pt",
+          "sha256": "73b50a7a0bb8bef78bf6557ae5ec1faf3c8d25cd3a3e7d73cc4301a304e70d05"
+        },
+        "metrics": {
+          "response": 0.00025553278121392964,
+          "H15_mse": 2.0722425053079886e-06,
+          "ignore_input_H15_mse": 0.0018331915001375,
+          "H15_ratio_to_ignore_input": 0.0011304015456937032,
+          "CB": [
+            0.005421340465545654,
+            1.015038013458252
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00025553278121392964,
+          "passed": true
+        },
+        "drift_mse": 0.00011813181104060648,
+        "input_mse": 0.00016470942875702687,
+        "cross_term": -1.635080511064947e-05,
+        "vector_field_mse": 0.0002664904346869839,
+        "nearest_train_distance_p95": 0.26646088417425656,
+        "zero_input_mse": {
+          "15": 2.109254866556503e-06,
+          "50": 1.7907615955584216e-05
+        }
+      }
+    },
+    {
+      "name": "coverage-n8-s73",
+      "seed": 73,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 8,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N8-T50.pt",
+        "sha256": "19198f542ada11219c6bb2268256985544480c4750d452dffcaf022a200231fa"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s73-N8-T50.pt",
+        "sha256": "5aee4e2e91af9001bc68f993065af32a5ce66eb381dbcce6267f1e9c364c3dda"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 160,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s73-N8-T50.pt",
+            "sha256": "5aee4e2e91af9001bc68f993065af32a5ce66eb381dbcce6267f1e9c364c3dda"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N8-T50.pt",
+            "sha256": "19198f542ada11219c6bb2268256985544480c4750d452dffcaf022a200231fa"
+          },
+          "metrics": {
+            "response": 0.7448149056255192,
+            "H15_mse": 0.0010691544530510419,
+            "ignore_input_H15_mse": 0.0018949664220271616,
+            "H15_ratio_to_ignore_input": 0.5642075978883583,
+            "CB": [
+              0.0009138286113739014,
+              0.13697388768196106
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7448149056255193,
+            "passed": false
+          },
+          "drift_mse": 0.01370774451813309,
+          "input_mse": 0.4885953994548703,
+          "cross_term": -0.016655836806255982,
+          "vector_field_mse": 0.4856473071667473,
+          "nearest_train_distance_p95": 0.7005448633874833,
+          "zero_input_mse": {
+            "15": 0.0008802848625877872,
+            "50": 0.01599363057866759
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s73-N8-T50.pt",
+            "sha256": "5aee4e2e91af9001bc68f993065af32a5ce66eb381dbcce6267f1e9c364c3dda"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N8-T50.pt",
+            "sha256": "19198f542ada11219c6bb2268256985544480c4750d452dffcaf022a200231fa"
+          },
+          "metrics": {
+            "response": 0.0003552813526859211,
+            "H15_mse": 0.0002479368040687865,
+            "ignore_input_H15_mse": 0.0018949664220271616,
+            "H15_ratio_to_ignore_input": 0.13083968200531668,
+            "CB": [
+              0.005316555500030518,
+              1.0180835723876953
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0003552813526859211,
+            "passed": true
+          },
+          "drift_mse": 0.010976192721342324,
+          "input_mse": 0.00023306305113303125,
+          "cross_term": -7.992405799650384e-06,
+          "vector_field_mse": 0.011201263366675707,
+          "nearest_train_distance_p95": 0.7005448633874833,
+          "zero_input_mse": {
+            "15": 0.00023648520387100673,
+            "50": 0.0020501789132837864
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n8-s73/epoch300.pt",
+        "sha256": "930a186e61fe9efc8e9ea1ac104ad5e6633085cb43037739e174d5514e4ee97a"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N8-T50.pt",
+          "sha256": "19198f542ada11219c6bb2268256985544480c4750d452dffcaf022a200231fa"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N8-T50.pt",
+          "sha256": "19198f542ada11219c6bb2268256985544480c4750d452dffcaf022a200231fa"
+        },
+        "metrics": {
+          "response": 0.0003552813526859211,
+          "H15_mse": 7.699979134445776e-06,
+          "ignore_input_H15_mse": 0.0009814454334444145,
+          "H15_ratio_to_ignore_input": 0.007845549912461714,
+          "CB": [
+            0.005316555500030518,
+            1.0180835723876953
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003552813526859211,
+          "passed": true
+        },
+        "drift_mse": 0.00012909815114915907,
+        "input_mse": 0.0002422707083766393,
+        "cross_term": -4.934495901931649e-06,
+        "vector_field_mse": 0.00036643436362386676,
+        "nearest_train_distance_p95": 2.1509869162059032e-08,
+        "zero_input_mse": {
+          "15": 8.30941573772568e-06,
+          "50": 7.253668127166713e-05
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s73-N16-T50.pt",
+          "sha256": "311bcf6bf64b3f4cfd4e968fbb22a182c172d4a63033c662a0c3d00565e83695"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N8-T50.pt",
+          "sha256": "19198f542ada11219c6bb2268256985544480c4750d452dffcaf022a200231fa"
+        },
+        "metrics": {
+          "response": 0.0003552813526859211,
+          "H15_mse": 0.00017562447949373498,
+          "ignore_input_H15_mse": 0.0026647390350024737,
+          "H15_ratio_to_ignore_input": 0.06590682133853755,
+          "CB": [
+            0.005316555500030518,
+            1.0180835723876953
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003552813526859211,
+          "passed": true
+        },
+        "drift_mse": 0.008644881319291243,
+        "input_mse": 0.00024945673696247374,
+        "cross_term": -0.00016307751670232315,
+        "vector_field_mse": 0.008731260539551393,
+        "nearest_train_distance_p95": 1.1898256837415688,
+        "zero_input_mse": {
+          "15": 0.00018016671655872302,
+          "50": 0.0015183916902245514
+        }
+      }
+    },
+    {
+      "name": "coverage-n32-s73",
+      "seed": 73,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N32-T50.pt",
+        "sha256": "ea9a6857139de470c772d1cca40823a56d206b8a84905744b5f686b9d03da536"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s73-N8-T50.pt",
+        "sha256": "5aee4e2e91af9001bc68f993065af32a5ce66eb381dbcce6267f1e9c364c3dda"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s73-N8-T50.pt",
+            "sha256": "5aee4e2e91af9001bc68f993065af32a5ce66eb381dbcce6267f1e9c364c3dda"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N32-T50.pt",
+            "sha256": "ea9a6857139de470c772d1cca40823a56d206b8a84905744b5f686b9d03da536"
+          },
+          "metrics": {
+            "response": 0.2512314983725794,
+            "H15_mse": 0.0007874549727482509,
+            "ignore_input_H15_mse": 0.0018949664220271616,
+            "H15_ratio_to_ignore_input": 0.4155508844878962,
+            "CB": [
+              0.0005852580070495605,
+              0.4987703561782837
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.2512314983725794,
+            "passed": false
+          },
+          "drift_mse": 0.0052115363458170305,
+          "input_mse": 0.1648067907554914,
+          "cross_term": 0.00244210046817795,
+          "vector_field_mse": 0.17246042756948637,
+          "nearest_train_distance_p95": 0.42726802285510823,
+          "zero_input_mse": {
+            "15": 0.00016786373175644095,
+            "50": 0.001496429083495151
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s73-N8-T50.pt",
+            "sha256": "5aee4e2e91af9001bc68f993065af32a5ce66eb381dbcce6267f1e9c364c3dda"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N32-T50.pt",
+            "sha256": "ea9a6857139de470c772d1cca40823a56d206b8a84905744b5f686b9d03da536"
+          },
+          "metrics": {
+            "response": 0.0002840600877682675,
+            "H15_mse": 2.9866774233597913e-05,
+            "ignore_input_H15_mse": 0.0018949664220271616,
+            "H15_ratio_to_ignore_input": 0.015761110005130117,
+            "CB": [
+              0.005547225475311279,
+              1.015915036201477
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0002840600877682675,
+            "passed": true
+          },
+          "drift_mse": 0.00046917061754043587,
+          "input_mse": 0.0001863422052969812,
+          "cross_term": -4.500352316310463e-05,
+          "vector_field_mse": 0.0006105092996743123,
+          "nearest_train_distance_p95": 0.42726802285510823,
+          "zero_input_mse": {
+            "15": 3.0903993601685316e-05,
+            "50": 0.00030240314476873717
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n32-s73/epoch300.pt",
+        "sha256": "feb54c168f3b6cf8f1497e9b609d3c80bdf3eb15ef9f488d97b9832f3d18d242"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N32-T50.pt",
+          "sha256": "ea9a6857139de470c772d1cca40823a56d206b8a84905744b5f686b9d03da536"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N32-T50.pt",
+          "sha256": "ea9a6857139de470c772d1cca40823a56d206b8a84905744b5f686b9d03da536"
+        },
+        "metrics": {
+          "response": 0.0002840600877682675,
+          "H15_mse": 1.012986995323863e-06,
+          "ignore_input_H15_mse": 0.0021576590453024165,
+          "H15_ratio_to_ignore_input": 0.00046948427627122307,
+          "CB": [
+            0.005547225475311279,
+            1.015915036201477
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0002840600877682675,
+          "passed": true
+        },
+        "drift_mse": 7.024300264238582e-05,
+        "input_mse": 0.00018667491731359974,
+        "cross_term": -2.9104486763591607e-06,
+        "vector_field_mse": 0.0002540074712796264,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 4.6205739547264933e-07,
+          "50": 4.824530995860544e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s73-N16-T50.pt",
+          "sha256": "311bcf6bf64b3f4cfd4e968fbb22a182c172d4a63033c662a0c3d00565e83695"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s73-N32-T50.pt",
+          "sha256": "ea9a6857139de470c772d1cca40823a56d206b8a84905744b5f686b9d03da536"
+        },
+        "metrics": {
+          "response": 0.0002840600877682675,
+          "H15_mse": 2.9948580927387407e-05,
+          "ignore_input_H15_mse": 0.0026647390350024737,
+          "H15_ratio_to_ignore_input": 0.011238841978145002,
+          "CB": [
+            0.005547225475311279,
+            1.015915036201477
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0002840600877682675,
+          "passed": true
+        },
+        "drift_mse": 0.0003985126215017491,
+        "input_mse": 0.0001994495406534573,
+        "cross_term": -1.032538825418329e-05,
+        "vector_field_mse": 0.0005876367739010232,
+        "nearest_train_distance_p95": 0.7371006898998096,
+        "zero_input_mse": {
+          "15": 2.9841567865198408e-05,
+          "50": 0.00028717638147518346
+        }
+      }
+    },
+    {
+      "name": "coverage-n8-s74",
+      "seed": 74,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 8,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N8-T50.pt",
+        "sha256": "7e34bbadc650cecd12bc5018511dcc23a8144e4b6e8decad8a19230f97add48d"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s74-N8-T50.pt",
+        "sha256": "4b10081b2e38815dc8824dbbed93bdd371192a2a19782f13f26082245b87c3dd"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 160,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s74-N8-T50.pt",
+            "sha256": "4b10081b2e38815dc8824dbbed93bdd371192a2a19782f13f26082245b87c3dd"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N8-T50.pt",
+            "sha256": "7e34bbadc650cecd12bc5018511dcc23a8144e4b6e8decad8a19230f97add48d"
+          },
+          "metrics": {
+            "response": 0.5110013297955157,
+            "H15_mse": 0.0016656349617422813,
+            "ignore_input_H15_mse": 0.0027362749389732133,
+            "H15_ratio_to_ignore_input": 0.6087235379816439,
+            "CB": [
+              -0.004148736596107483,
+              0.28516846895217896
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.5110013297955158,
+            "passed": false
+          },
+          "drift_mse": 0.038829138274107784,
+          "input_mse": 0.324677361466022,
+          "cross_term": -0.009946251764482198,
+          "vector_field_mse": 0.35356024797564756,
+          "nearest_train_distance_p95": 1.2642582121987986,
+          "zero_input_mse": {
+            "15": 0.001623324784116313,
+            "50": 0.010111809688113428
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s74-N8-T50.pt",
+            "sha256": "4b10081b2e38815dc8824dbbed93bdd371192a2a19782f13f26082245b87c3dd"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N8-T50.pt",
+            "sha256": "7e34bbadc650cecd12bc5018511dcc23a8144e4b6e8decad8a19230f97add48d"
+          },
+          "metrics": {
+            "response": 0.0003503289025452716,
+            "H15_mse": 0.00035962742651858554,
+            "ignore_input_H15_mse": 0.0027362749389732133,
+            "H15_ratio_to_ignore_input": 0.13142956557338337,
+            "CB": [
+              0.007993638515472412,
+              1.016924262046814
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0003503289025452716,
+            "passed": true
+          },
+          "drift_mse": 0.013309288286029081,
+          "input_mse": 0.00022259015210234794,
+          "cross_term": 0.00017056998474043413,
+          "vector_field_mse": 0.013702448422871862,
+          "nearest_train_distance_p95": 1.2642582121987986,
+          "zero_input_mse": {
+            "15": 0.00035743039141475683,
+            "50": 0.0032716706724962093
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n8-s74/epoch300.pt",
+        "sha256": "9fb82568c31be80d7f0b67a300bdd3473c727f1c4f069ef669e3d2eb38b78641"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N8-T50.pt",
+          "sha256": "7e34bbadc650cecd12bc5018511dcc23a8144e4b6e8decad8a19230f97add48d"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N8-T50.pt",
+          "sha256": "7e34bbadc650cecd12bc5018511dcc23a8144e4b6e8decad8a19230f97add48d"
+        },
+        "metrics": {
+          "response": 0.0003503289025452716,
+          "H15_mse": 3.2313536890138445e-06,
+          "ignore_input_H15_mse": 0.0022419651496543543,
+          "H15_ratio_to_ignore_input": 0.0014413041565396435,
+          "CB": [
+            0.007993638515472412,
+            1.016924262046814
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003503289025452716,
+          "passed": true
+        },
+        "drift_mse": 0.00015383792339696337,
+        "input_mse": 0.00022283015926770043,
+        "cross_term": 7.844291955035551e-06,
+        "vector_field_mse": 0.00038451237461969935,
+        "nearest_train_distance_p95": 1.4901161193847656e-08,
+        "zero_input_mse": {
+          "15": 2.355542176033527e-06,
+          "50": 1.9801384126039545e-05
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s74-N16-T50.pt",
+          "sha256": "f2277ec5b8b4d1487c0b788ca1190df3ed98dfbe5d64ec11ee8a60a4d50b4c86"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N8-T50.pt",
+          "sha256": "7e34bbadc650cecd12bc5018511dcc23a8144e4b6e8decad8a19230f97add48d"
+        },
+        "metrics": {
+          "response": 0.0003503289025452716,
+          "H15_mse": 0.0006741151198688882,
+          "ignore_input_H15_mse": 0.0012567298273726346,
+          "H15_ratio_to_ignore_input": 0.5364041699226778,
+          "CB": [
+            0.007993638515472412,
+            1.016924262046814
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003503289025452716,
+          "passed": false
+        },
+        "drift_mse": 0.011857794639204262,
+        "input_mse": 0.00023813473110593342,
+        "cross_term": 7.183456551176856e-05,
+        "vector_field_mse": 0.012167763935821965,
+        "nearest_train_distance_p95": 1.2113567401936594,
+        "zero_input_mse": {
+          "15": 0.0006725914981957207,
+          "50": 0.005605245962563725
+        }
+      }
+    },
+    {
+      "name": "coverage-n32-s74",
+      "seed": 74,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N32-T50.pt",
+        "sha256": "07cf056cb228b4a0ab6dd3cb0b20180f76cad0220564a6af96c7b5d56559b862"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s74-N8-T50.pt",
+        "sha256": "4b10081b2e38815dc8824dbbed93bdd371192a2a19782f13f26082245b87c3dd"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s74-N8-T50.pt",
+            "sha256": "4b10081b2e38815dc8824dbbed93bdd371192a2a19782f13f26082245b87c3dd"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N32-T50.pt",
+            "sha256": "07cf056cb228b4a0ab6dd3cb0b20180f76cad0220564a6af96c7b5d56559b862"
+          },
+          "metrics": {
+            "response": 0.29246050467855794,
+            "H15_mse": 0.0006779271968322353,
+            "ignore_input_H15_mse": 0.0027362749389732133,
+            "H15_ratio_to_ignore_input": 0.24775551139851004,
+            "CB": [
+              0.0016211718320846558,
+              0.4592062532901764
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.292460504678558,
+            "passed": false
+          },
+          "drift_mse": 0.0016981141591188647,
+          "input_mse": 0.1858220310895337,
+          "cross_term": -0.0015871976092569611,
+          "vector_field_mse": 0.18593294763939558,
+          "nearest_train_distance_p95": 0.2840532649307347,
+          "zero_input_mse": {
+            "15": 7.517873096599218e-05,
+            "50": 0.0005701568516525449
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s74-N8-T50.pt",
+            "sha256": "4b10081b2e38815dc8824dbbed93bdd371192a2a19782f13f26082245b87c3dd"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N32-T50.pt",
+            "sha256": "07cf056cb228b4a0ab6dd3cb0b20180f76cad0220564a6af96c7b5d56559b862"
+          },
+          "metrics": {
+            "response": 0.00039378940596535017,
+            "H15_mse": 9.182104682708536e-06,
+            "ignore_input_H15_mse": 0.0027362749389732133,
+            "H15_ratio_to_ignore_input": 0.003355695201504173,
+            "CB": [
+              0.005165517330169678,
+              1.0191600322723389
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00039378940596535017,
+            "passed": true
+          },
+          "drift_mse": 0.0001333159930298613,
+          "input_mse": 0.0002502038602390033,
+          "cross_term": -7.824493790035775e-06,
+          "vector_field_mse": 0.00037569535947882876,
+          "nearest_train_distance_p95": 0.2840532649307347,
+          "zero_input_mse": {
+            "15": 1.0414079832128108e-05,
+            "50": 8.871542437770204e-05
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n32-s74/epoch300.pt",
+        "sha256": "12983336a46372ab1a706150261479a03be54ef4dbe0843b4e9bef490c4cfbc0"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N32-T50.pt",
+          "sha256": "07cf056cb228b4a0ab6dd3cb0b20180f76cad0220564a6af96c7b5d56559b862"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N32-T50.pt",
+          "sha256": "07cf056cb228b4a0ab6dd3cb0b20180f76cad0220564a6af96c7b5d56559b862"
+        },
+        "metrics": {
+          "response": 0.00039378940596535017,
+          "H15_mse": 1.358911702887246e-06,
+          "ignore_input_H15_mse": 0.001875988839811928,
+          "H15_ratio_to_ignore_input": 0.0007243708885941346,
+          "CB": [
+            0.005165517330169678,
+            1.0191600322723389
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00039378940596535017,
+          "passed": true
+        },
+        "drift_mse": 6.448044806946988e-05,
+        "input_mse": 0.00026129185917478587,
+        "cross_term": -1.0193823385143833e-05,
+        "vector_field_mse": 0.0003155784838591119,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 1.0547916731344826e-06,
+          "50": 8.529675053083442e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s74-N16-T50.pt",
+          "sha256": "f2277ec5b8b4d1487c0b788ca1190df3ed98dfbe5d64ec11ee8a60a4d50b4c86"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s74-N32-T50.pt",
+          "sha256": "07cf056cb228b4a0ab6dd3cb0b20180f76cad0220564a6af96c7b5d56559b862"
+        },
+        "metrics": {
+          "response": 0.00039378940596535017,
+          "H15_mse": 2.5939321948642764e-06,
+          "ignore_input_H15_mse": 0.0012567298273726346,
+          "H15_ratio_to_ignore_input": 0.002064033285727964,
+          "CB": [
+            0.005165517330169678,
+            1.0191600322723389
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00039378940596535017,
+          "passed": true
+        },
+        "drift_mse": 0.00010998063321569527,
+        "input_mse": 0.00026767684202078004,
+        "cross_term": 1.259805328736284e-05,
+        "vector_field_mse": 0.00039025552852383814,
+        "nearest_train_distance_p95": 0.2480245839370218,
+        "zero_input_mse": {
+          "15": 2.136870502921069e-06,
+          "50": 1.7947965481209374e-05
+        }
+      }
+    },
+    {
+      "name": "coverage-n8-s75",
+      "seed": 75,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 8,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N8-T50.pt",
+        "sha256": "3f5f7a2d6c87e1c33800b4fd84608ff96285a9c446b7509e5abe10a5d1cdeacd"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s75-N8-T50.pt",
+        "sha256": "dc21842573ff4d54ccbb6d95a6b569f9d1786f187e982c37d3b35ee2aeb28084"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 160,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s75-N8-T50.pt",
+            "sha256": "dc21842573ff4d54ccbb6d95a6b569f9d1786f187e982c37d3b35ee2aeb28084"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N8-T50.pt",
+            "sha256": "3f5f7a2d6c87e1c33800b4fd84608ff96285a9c446b7509e5abe10a5d1cdeacd"
+          },
+          "metrics": {
+            "response": 0.7257256284061578,
+            "H15_mse": 0.001686648244055148,
+            "ignore_input_H15_mse": 0.0017067781063729091,
+            "H15_ratio_to_ignore_input": 0.9882059289121424,
+            "CB": [
+              0.0011802129447460175,
+              0.14810550212860107
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7257256284061578,
+            "passed": false
+          },
+          "drift_mse": 0.006496061918156965,
+          "input_mse": 0.4724515216194402,
+          "cross_term": 0.003549236667904504,
+          "vector_field_mse": 0.4824968202055016,
+          "nearest_train_distance_p95": 1.9048386223180107,
+          "zero_input_mse": {
+            "15": 0.00035822078739805574,
+            "50": 0.00501934328235698
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s75-N8-T50.pt",
+            "sha256": "dc21842573ff4d54ccbb6d95a6b569f9d1786f187e982c37d3b35ee2aeb28084"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N8-T50.pt",
+            "sha256": "3f5f7a2d6c87e1c33800b4fd84608ff96285a9c446b7509e5abe10a5d1cdeacd"
+          },
+          "metrics": {
+            "response": 0.00016633888227435278,
+            "H15_mse": 0.0006659066566655559,
+            "ignore_input_H15_mse": 0.0017067781063729091,
+            "H15_ratio_to_ignore_input": 0.39015420585671834,
+            "CB": [
+              0.004785686731338501,
+              1.0119764804840088
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00016633888227435278,
+            "passed": false
+          },
+          "drift_mse": 0.005989983488455966,
+          "input_mse": 0.0001082875606964414,
+          "cross_term": 1.5322623310506674e-06,
+          "vector_field_mse": 0.006099803311483458,
+          "nearest_train_distance_p95": 1.9048386223180107,
+          "zero_input_mse": {
+            "15": 0.0006672315681818155,
+            "50": 0.006186923367941756
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n8-s75/epoch300.pt",
+        "sha256": "fc1f8767a042329949b5266b2c1f6f0b89386ae0229b424510350699c6aa30e1"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N8-T50.pt",
+          "sha256": "3f5f7a2d6c87e1c33800b4fd84608ff96285a9c446b7509e5abe10a5d1cdeacd"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N8-T50.pt",
+          "sha256": "3f5f7a2d6c87e1c33800b4fd84608ff96285a9c446b7509e5abe10a5d1cdeacd"
+        },
+        "metrics": {
+          "response": 0.00016633888227435278,
+          "H15_mse": 8.179887693606319e-07,
+          "ignore_input_H15_mse": 0.002452295187215505,
+          "H15_ratio_to_ignore_input": 0.0003335604839193235,
+          "CB": [
+            0.004785686731338501,
+            1.0119764804840088
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00016633888227435278,
+          "passed": true
+        },
+        "drift_mse": 8.924780471153335e-05,
+        "input_mse": 0.00010980328725319002,
+        "cross_term": 7.243544127109332e-06,
+        "vector_field_mse": 0.00020629463609183273,
+        "nearest_train_distance_p95": 2.9802322387695312e-08,
+        "zero_input_mse": {
+          "15": 4.685577590498412e-07,
+          "50": 1.3373783510796028e-05
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s75-N16-T50.pt",
+          "sha256": "90a9490d984cf74463d0d17c5ae7a9c5a92d2446165689c41d4fa3d6fa7c4491"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N8-T50.pt",
+          "sha256": "3f5f7a2d6c87e1c33800b4fd84608ff96285a9c446b7509e5abe10a5d1cdeacd"
+        },
+        "metrics": {
+          "response": 0.00016633888227435278,
+          "H15_mse": 0.0003566987433508761,
+          "ignore_input_H15_mse": 0.0012208676876809136,
+          "H15_ratio_to_ignore_input": 0.292168223428404,
+          "CB": [
+            0.004785686731338501,
+            1.0119764804840088
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00016633888227435278,
+          "passed": false
+        },
+        "drift_mse": 0.013416328277051802,
+        "input_mse": 0.00011056585516036708,
+        "cross_term": -4.423069860022564e-06,
+        "vector_field_mse": 0.013522471062352145,
+        "nearest_train_distance_p95": 1.7663472819598713,
+        "zero_input_mse": {
+          "15": 0.000358793697513219,
+          "50": 0.003370461013676647
+        }
+      }
+    },
+    {
+      "name": "coverage-n32-s75",
+      "seed": 75,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N32-T50.pt",
+        "sha256": "2337fbabd17cc8832f1e59f489fdc40e42ade5536c983b763e8890c1be8f353b"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s75-N8-T50.pt",
+        "sha256": "dc21842573ff4d54ccbb6d95a6b569f9d1786f187e982c37d3b35ee2aeb28084"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s75-N8-T50.pt",
+            "sha256": "dc21842573ff4d54ccbb6d95a6b569f9d1786f187e982c37d3b35ee2aeb28084"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N32-T50.pt",
+            "sha256": "2337fbabd17cc8832f1e59f489fdc40e42ade5536c983b763e8890c1be8f353b"
+          },
+          "metrics": {
+            "response": 0.37313762474524464,
+            "H15_mse": 0.0007724914425119258,
+            "ignore_input_H15_mse": 0.0017067781063729091,
+            "H15_ratio_to_ignore_input": 0.45260215116864544,
+            "CB": [
+              0.0014418959617614746,
+              0.38915178179740906
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.3731376247452447,
+            "passed": false
+          },
+          "drift_mse": 0.002785659618226861,
+          "input_mse": 0.24291472105170414,
+          "cross_term": -0.0025204895693745105,
+          "vector_field_mse": 0.2431798911005565,
+          "nearest_train_distance_p95": 0.4784865370475737,
+          "zero_input_mse": {
+            "15": 6.651778156048612e-05,
+            "50": 0.000662797493620765
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s75-N8-T50.pt",
+            "sha256": "dc21842573ff4d54ccbb6d95a6b569f9d1786f187e982c37d3b35ee2aeb28084"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N32-T50.pt",
+            "sha256": "2337fbabd17cc8832f1e59f489fdc40e42ade5536c983b763e8890c1be8f353b"
+          },
+          "metrics": {
+            "response": 0.0002945038865087568,
+            "H15_mse": 4.062101048954295e-06,
+            "ignore_input_H15_mse": 0.0017067781063729091,
+            "H15_ratio_to_ignore_input": 0.0023799819283988276,
+            "CB": [
+              0.0054301917552948,
+              1.0162793397903442
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0002945038865087568,
+            "passed": true
+          },
+          "drift_mse": 9.10012899689715e-05,
+          "input_mse": 0.0001917237091509065,
+          "cross_term": 9.024547271253326e-06,
+          "vector_field_mse": 0.00029174954639113134,
+          "nearest_train_distance_p95": 0.4784865370475737,
+          "zero_input_mse": {
+            "15": 3.4430992023936547e-06,
+            "50": 3.19012395347781e-05
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n32-s75/epoch300.pt",
+        "sha256": "0c04425d748f98a25116b37194d1c65532bee92dbb43916af8a29cc0d17678e8"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N32-T50.pt",
+          "sha256": "2337fbabd17cc8832f1e59f489fdc40e42ade5536c983b763e8890c1be8f353b"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N32-T50.pt",
+          "sha256": "2337fbabd17cc8832f1e59f489fdc40e42ade5536c983b763e8890c1be8f353b"
+        },
+        "metrics": {
+          "response": 0.0002945038865087568,
+          "H15_mse": 1.1465827156081278e-06,
+          "ignore_input_H15_mse": 0.002116393024230293,
+          "H15_ratio_to_ignore_input": 0.0005417626605649611,
+          "CB": [
+            0.0054301917552948,
+            1.0162793397903442
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0002945038865087568,
+          "passed": true
+        },
+        "drift_mse": 6.59216461509174e-05,
+        "input_mse": 0.00020168522727236494,
+        "cross_term": 4.7840855867660546e-06,
+        "vector_field_mse": 0.0002723909590100484,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 5.276707235175453e-07,
+          "50": 4.928082327139021e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s75-N16-T50.pt",
+          "sha256": "90a9490d984cf74463d0d17c5ae7a9c5a92d2446165689c41d4fa3d6fa7c4491"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s75-N32-T50.pt",
+          "sha256": "2337fbabd17cc8832f1e59f489fdc40e42ade5536c983b763e8890c1be8f353b"
+        },
+        "metrics": {
+          "response": 0.0002945038865087568,
+          "H15_mse": 5.320271434882092e-06,
+          "ignore_input_H15_mse": 0.0012208676876809136,
+          "H15_ratio_to_ignore_input": 0.004357778888380737,
+          "CB": [
+            0.0054301917552948,
+            1.0162793397903442
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0002945038865087568,
+          "passed": true
+        },
+        "drift_mse": 0.00021586248378794817,
+        "input_mse": 0.00019575744176389133,
+        "cross_term": -7.354644018815759e-06,
+        "vector_field_mse": 0.00040426528153302373,
+        "nearest_train_distance_p95": 0.4027422010156054,
+        "zero_input_mse": {
+          "15": 5.1066946357337184e-06,
+          "50": 4.574806553042571e-05
+        }
+      }
+    },
+    {
+      "name": "coverage-n8-s76",
+      "seed": 76,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 8,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N8-T50.pt",
+        "sha256": "b5d210fac76fe13cff5a05e1cfacb19ad2fd4befd2516b9c3a660e9f0b0a0921"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s76-N8-T50.pt",
+        "sha256": "9635245922003875e52ef02141ff4264db79d5e55ba854a72237b664d0481824"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 160,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s76-N8-T50.pt",
+            "sha256": "9635245922003875e52ef02141ff4264db79d5e55ba854a72237b664d0481824"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N8-T50.pt",
+            "sha256": "b5d210fac76fe13cff5a05e1cfacb19ad2fd4befd2516b9c3a660e9f0b0a0921"
+          },
+          "metrics": {
+            "response": 0.6128608308169475,
+            "H15_mse": 0.0014168429493791345,
+            "ignore_input_H15_mse": 0.0019721231120235832,
+            "H15_ratio_to_ignore_input": 0.7184353455121373,
+            "CB": [
+              0.0007117427885532379,
+              0.21714603900909424
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.6128608308169476,
+            "passed": false
+          },
+          "drift_mse": 0.020710484394260476,
+          "input_mse": 0.4040458718533141,
+          "cross_term": 0.008366982270622374,
+          "vector_field_mse": 0.4331233385181969,
+          "nearest_train_distance_p95": 1.042270635997685,
+          "zero_input_mse": {
+            "15": 0.0008654495000980091,
+            "50": 0.007154841205844194
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s76-N8-T50.pt",
+            "sha256": "9635245922003875e52ef02141ff4264db79d5e55ba854a72237b664d0481824"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N8-T50.pt",
+            "sha256": "b5d210fac76fe13cff5a05e1cfacb19ad2fd4befd2516b9c3a660e9f0b0a0921"
+          },
+          "metrics": {
+            "response": 0.0003004118476903628,
+            "H15_mse": 0.0013745549186811527,
+            "ignore_input_H15_mse": 0.0019721231120235832,
+            "H15_ratio_to_ignore_input": 0.696992449558958,
+            "CB": [
+              0.005515366792678833,
+              1.016431450843811
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0003004118476903628,
+            "passed": false
+          },
+          "drift_mse": 0.02440987107114646,
+          "input_mse": 0.00019805502458578896,
+          "cross_term": -0.00010908736738972415,
+          "vector_field_mse": 0.024498838728342517,
+          "nearest_train_distance_p95": 1.042270635997685,
+          "zero_input_mse": {
+            "15": 0.0013552457107076426,
+            "50": 0.010011527542462421
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n8-s76/epoch300.pt",
+        "sha256": "221b6ebc4b629ddced2f3c9f034febef9d4272f8a12b42c4d6d0b863703344c0"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N8-T50.pt",
+          "sha256": "b5d210fac76fe13cff5a05e1cfacb19ad2fd4befd2516b9c3a660e9f0b0a0921"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N8-T50.pt",
+          "sha256": "b5d210fac76fe13cff5a05e1cfacb19ad2fd4befd2516b9c3a660e9f0b0a0921"
+        },
+        "metrics": {
+          "response": 0.0003004118476903628,
+          "H15_mse": 1.8904796837617444e-06,
+          "ignore_input_H15_mse": 0.0013423216992036113,
+          "H15_ratio_to_ignore_input": 0.0014083655839604997,
+          "CB": [
+            0.005515366792678833,
+            1.016431450843811
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003004118476903628,
+          "passed": true
+        },
+        "drift_mse": 0.00014078252558489857,
+        "input_mse": 0.0001980730545701148,
+        "cross_term": -3.5169261907362924e-06,
+        "vector_field_mse": 0.00033533865396427707,
+        "nearest_train_distance_p95": 1.0754934581029516e-08,
+        "zero_input_mse": {
+          "15": 2.3273989032895212e-06,
+          "50": 1.1234384056528218e-05
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s76-N16-T50.pt",
+          "sha256": "495a8a01a1dce97d4e5bdcce5e8f006173659d2ada67e95dc4cae52cde661fd2"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N8-T50.pt",
+          "sha256": "b5d210fac76fe13cff5a05e1cfacb19ad2fd4befd2516b9c3a660e9f0b0a0921"
+        },
+        "metrics": {
+          "response": 0.0003004118476903628,
+          "H15_mse": 0.0007065954327323865,
+          "ignore_input_H15_mse": 0.0015098144255426642,
+          "H15_ratio_to_ignore_input": 0.46800151116480343,
+          "CB": [
+            0.005515366792678833,
+            1.016431450843811
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003004118476903628,
+          "passed": false
+        },
+        "drift_mse": 0.03174784964359395,
+        "input_mse": 0.00020266643816792566,
+        "cross_term": 5.868542265977871e-06,
+        "vector_field_mse": 0.031956384624027855,
+        "nearest_train_distance_p95": 1.4480099811393794,
+        "zero_input_mse": {
+          "15": 0.0007037044707437445,
+          "50": 0.00601397087939516
+        }
+      }
+    },
+    {
+      "name": "coverage-n32-s76",
+      "seed": 76,
+      "general": false,
+      "compatible": true,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N32-T50.pt",
+        "sha256": "afa025dad59d16b1a703a36b8a6e7b926e6ea7fe774188d4bd2ab167fabd6bb4"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s76-N8-T50.pt",
+        "sha256": "9635245922003875e52ef02141ff4264db79d5e55ba854a72237b664d0481824"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s76-N8-T50.pt",
+            "sha256": "9635245922003875e52ef02141ff4264db79d5e55ba854a72237b664d0481824"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N32-T50.pt",
+            "sha256": "afa025dad59d16b1a703a36b8a6e7b926e6ea7fe774188d4bd2ab167fabd6bb4"
+          },
+          "metrics": {
+            "response": 0.5788622885291678,
+            "H15_mse": 0.001206030224884076,
+            "ignore_input_H15_mse": 0.0019721231120235832,
+            "H15_ratio_to_ignore_input": 0.6115390147456747,
+            "CB": [
+              0.0007526129484176636,
+              0.2391703724861145
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.5788622885291679,
+            "passed": false
+          },
+          "drift_mse": 0.0014512969350796573,
+          "input_mse": 0.3816313692947213,
+          "cross_term": 0.0007532877023372381,
+          "vector_field_mse": 0.38383595393213826,
+          "nearest_train_distance_p95": 0.3705583247682539,
+          "zero_input_mse": {
+            "15": 8.559043872845713e-05,
+            "50": 0.0007739970349460075
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-validation-s76-N8-T50.pt",
+            "sha256": "9635245922003875e52ef02141ff4264db79d5e55ba854a72237b664d0481824"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N32-T50.pt",
+            "sha256": "afa025dad59d16b1a703a36b8a6e7b926e6ea7fe774188d4bd2ab167fabd6bb4"
+          },
+          "metrics": {
+            "response": 0.0002637803863905219,
+            "H15_mse": 1.1581916629679225e-05,
+            "ignore_input_H15_mse": 0.0019721231120235832,
+            "H15_ratio_to_ignore_input": 0.005872816234983977,
+            "CB": [
+              0.0053969621658325195,
+              1.0153183937072754
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0002637803863905219,
+            "passed": true
+          },
+          "drift_mse": 0.0001285876113196722,
+          "input_mse": 0.0001739046955487291,
+          "cross_term": 1.3403895263608796e-05,
+          "vector_field_mse": 0.0003158962021320101,
+          "nearest_train_distance_p95": 0.3705583247682539,
+          "zero_input_mse": {
+            "15": 9.84476986052544e-06,
+            "50": 8.593471963454824e-05
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/coverage-n32-s76/epoch300.pt",
+        "sha256": "ba6074928e60add24a5de8e94e31d38fa21084476ab55def4d543e37f66f7040"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N32-T50.pt",
+          "sha256": "afa025dad59d16b1a703a36b8a6e7b926e6ea7fe774188d4bd2ab167fabd6bb4"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N32-T50.pt",
+          "sha256": "afa025dad59d16b1a703a36b8a6e7b926e6ea7fe774188d4bd2ab167fabd6bb4"
+        },
+        "metrics": {
+          "response": 0.0002637803863905219,
+          "H15_mse": 8.148792361719246e-07,
+          "ignore_input_H15_mse": 0.0015495145494172145,
+          "H15_ratio_to_ignore_input": 0.0005258932460352873,
+          "CB": [
+            0.0053969621658325195,
+            1.0153183937072754
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0002637803863905219,
+          "passed": true
+        },
+        "drift_mse": 8.240489833551769e-05,
+        "input_mse": 0.0001716343267936176,
+        "cross_term": -2.172426267369153e-06,
+        "vector_field_mse": 0.00025186679886176613,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 5.218637324547306e-07,
+          "50": 3.992212438096086e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-test-s76-N16-T50.pt",
+          "sha256": "495a8a01a1dce97d4e5bdcce5e8f006173659d2ada67e95dc4cae52cde661fd2"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/compatible-a0.0-rk4-train-s76-N32-T50.pt",
+          "sha256": "afa025dad59d16b1a703a36b8a6e7b926e6ea7fe774188d4bd2ab167fabd6bb4"
+        },
+        "metrics": {
+          "response": 0.0002637803863905219,
+          "H15_mse": 8.716006056119603e-06,
+          "ignore_input_H15_mse": 0.0015098144255426642,
+          "H15_ratio_to_ignore_input": 0.00577289891304811,
+          "CB": [
+            0.0053969621658325195,
+            1.0153183937072754
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0002637803863905219,
+          "passed": true
+        },
+        "drift_mse": 0.00032833929615970925,
+        "input_mse": 0.00017795380501579736,
+        "cross_term": 1.4572805171256175e-05,
+        "vector_field_mse": 0.0005208659063467629,
+        "nearest_train_distance_p95": 0.5046020494242828,
+        "zero_input_mse": {
+          "15": 7.504145266467787e-06,
+          "50": 6.640677757795796e-05
+        }
+      }
+    },
+    {
+      "name": "dev-SPD-lr0.001-s42",
+      "seed": 42,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+        "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+        "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+            "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+          },
+          "metrics": {
+            "response": 1.0045185397403564,
+            "H15_mse": 0.0009252181007639641,
+            "ignore_input_H15_mse": 0.0009496850394901088,
+            "H15_ratio_to_ignore_input": 0.9742367861883123,
+            "CB": [
+              0.005685747601091862,
+              0.1259273886680603
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0045185397403564,
+            "passed": false
+          },
+          "drift_mse": 0.002573255395378231,
+          "input_mse": 0.7020313887306859,
+          "cross_term": -0.0036879671911202966,
+          "vector_field_mse": 0.7009166769349439,
+          "nearest_train_distance_p95": 0.24582653477121266,
+          "zero_input_mse": {
+            "15": 5.977693265598366e-05,
+            "50": 0.0005285532693479099
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+            "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+          },
+          "metrics": {
+            "response": 1.0088381102197608,
+            "H15_mse": 0.0009218520216977444,
+            "ignore_input_H15_mse": 0.0009496850394901088,
+            "H15_ratio_to_ignore_input": 0.9706923699595099,
+            "CB": [
+              0.006672754883766174,
+              0.1487921178340912
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0088381102197606,
+            "passed": false
+          },
+          "drift_mse": 0.0019063727105049417,
+          "input_mse": 0.705050222074628,
+          "cross_term": -0.0029406625099219663,
+          "vector_field_mse": 0.7040159322752111,
+          "nearest_train_distance_p95": 0.24582653477121266,
+          "zero_input_mse": {
+            "15": 6.0252274097672055e-05,
+            "50": 0.0004434138270349462
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+          "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+          "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+        },
+        "metrics": {
+          "response": 1.0088381102197608,
+          "H15_mse": 0.0023576436865285896,
+          "ignore_input_H15_mse": 0.0024848821489587983,
+          "H15_ratio_to_ignore_input": 0.948794971027691,
+          "CB": [
+            0.006672754883766174,
+            0.1487921178340912
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0088381102197606,
+          "passed": false
+        },
+        "drift_mse": 0.0035602438123484028,
+        "input_mse": 0.6769437846156993,
+        "cross_term": -0.004381132309562659,
+        "vector_field_mse": 0.676122896118485,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 0.00011219961964342545,
+          "50": 0.0009649455317673355
+        }
+      }
+    },
+    {
+      "name": "dev-SPD-lr0.001-s43",
+      "seed": 43,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+        "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+        "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+            "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+          },
+          "metrics": {
+            "response": 1.023686929945628,
+            "H15_mse": 0.0033277865399288084,
+            "ignore_input_H15_mse": 0.0031570304150411437,
+            "H15_ratio_to_ignore_input": 1.0540875767538145,
+            "CB": [
+              0.0012385398149490356,
+              0.16174818575382233
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0236869299456282,
+            "passed": false
+          },
+          "drift_mse": 0.011551807898346778,
+          "input_mse": 0.6780118262245206,
+          "cross_term": -0.005848347562351066,
+          "vector_field_mse": 0.6837152865605164,
+          "nearest_train_distance_p95": 0.49268315170868915,
+          "zero_input_mse": {
+            "15": 0.00018766409137159102,
+            "50": 0.0018769012313390888
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+            "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+          },
+          "metrics": {
+            "response": 1.0260862934771011,
+            "H15_mse": 0.003121861398928191,
+            "ignore_input_H15_mse": 0.0031570304150411437,
+            "H15_ratio_to_ignore_input": 0.9888600958846022,
+            "CB": [
+              0.00023390352725982666,
+              0.16295412182807922
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.026086293477101,
+            "passed": false
+          },
+          "drift_mse": 0.008283362869605586,
+          "input_mse": 0.6796009808792906,
+          "cross_term": -0.004468917287546663,
+          "vector_field_mse": 0.6834154264613496,
+          "nearest_train_distance_p95": 0.49268315170868915,
+          "zero_input_mse": {
+            "15": 8.172069309628482e-05,
+            "50": 0.0008596587392150242
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+          "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+          "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+        },
+        "metrics": {
+          "response": 1.0260862934771011,
+          "H15_mse": 0.0018444403201293743,
+          "ignore_input_H15_mse": 0.0017542598004060752,
+          "H15_ratio_to_ignore_input": 1.0514065930841168,
+          "CB": [
+            0.00023390352725982666,
+            0.16295412182807922
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.026086293477101,
+          "passed": false
+        },
+        "drift_mse": 0.002587102763407569,
+        "input_mse": 0.6786736791339034,
+        "cross_term": -0.0028066488972487403,
+        "vector_field_mse": 0.6784541330000623,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 8.386539332274195e-05,
+          "50": 0.0007538564861893604
+        }
+      }
+    },
+    {
+      "name": "dev-SPD-lr0.001-s44",
+      "seed": 44,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+        "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+        "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+            "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+          },
+          "metrics": {
+            "response": 1.023783402913754,
+            "H15_mse": 0.001336398800695438,
+            "ignore_input_H15_mse": 0.0012724819649867986,
+            "H15_ratio_to_ignore_input": 1.0502300523444374,
+            "CB": [
+              0.0022422224283218384,
+              0.168115496635437
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.023783402913754,
+            "passed": false
+          },
+          "drift_mse": 0.0011764996953350596,
+          "input_mse": 0.7167177768781231,
+          "cross_term": 0.0012216606993041982,
+          "vector_field_mse": 0.7191159372727622,
+          "nearest_train_distance_p95": 0.32655862097229077,
+          "zero_input_mse": {
+            "15": 2.5689977148673703e-05,
+            "50": 0.00024103843706688635
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+            "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+          },
+          "metrics": {
+            "response": 1.0255680203602324,
+            "H15_mse": 0.0013326375749237525,
+            "ignore_input_H15_mse": 0.0012724819649867986,
+            "H15_ratio_to_ignore_input": 1.0472742338140548,
+            "CB": [
+              0.0017278790473937988,
+              0.1703549027442932
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0255680203602324,
+            "passed": false
+          },
+          "drift_mse": 0.0009587528162443512,
+          "input_mse": 0.7179671300569085,
+          "cross_term": 0.0002749034141874687,
+          "vector_field_mse": 0.7192007862873399,
+          "nearest_train_distance_p95": 0.32655862097229077,
+          "zero_input_mse": {
+            "15": 2.4082762629707338e-05,
+            "50": 0.00017512639360737014
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+          "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+          "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+        },
+        "metrics": {
+          "response": 1.0255680203602324,
+          "H15_mse": 0.002671170509406995,
+          "ignore_input_H15_mse": 0.0026588217564064683,
+          "H15_ratio_to_ignore_input": 1.0046444455972923,
+          "CB": [
+            0.0017278790473937988,
+            0.1703549027442932
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0255680203602324,
+          "passed": false
+        },
+        "drift_mse": 0.001128212433283022,
+        "input_mse": 0.6829909948672688,
+        "cross_term": -0.0005442646533282988,
+        "vector_field_mse": 0.6835749426472236,
+        "nearest_train_distance_p95": 1.4901161193847656e-08,
+        "zero_input_mse": {
+          "15": 3.420390542265764e-05,
+          "50": 0.0002674577485803619
+        }
+      }
+    },
+    {
+      "name": "dev-SPD-lr0.01-s42",
+      "seed": 42,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+        "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+        "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+            "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+          },
+          "metrics": {
+            "response": 1.00325839090913,
+            "H15_mse": 0.0009073198491198612,
+            "ignore_input_H15_mse": 0.0009496850394901088,
+            "H15_ratio_to_ignore_input": 0.9553902729761925,
+            "CB": [
+              0.004110878799110651,
+              0.1070665642619133
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0032583909091302,
+            "passed": false
+          },
+          "drift_mse": 0.0011329444120454113,
+          "input_mse": 0.7011507041051719,
+          "cross_term": -0.0027685196154362403,
+          "vector_field_mse": 0.6995151289017811,
+          "nearest_train_distance_p95": 0.24582653477121266,
+          "zero_input_mse": {
+            "15": 3.583778152712567e-05,
+            "50": 0.0002560967097167106
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+            "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+          },
+          "metrics": {
+            "response": 1.002195557182936,
+            "H15_mse": 0.0008987890288348207,
+            "ignore_input_H15_mse": 0.0009496850394901088,
+            "H15_ratio_to_ignore_input": 0.9464074840195288,
+            "CB": [
+              0.004696089308708906,
+              0.10754386335611343
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.002195557182936,
+            "passed": false
+          },
+          "drift_mse": 0.0011508545913706946,
+          "input_mse": 0.7004079177779203,
+          "cross_term": -0.003041863079855915,
+          "vector_field_mse": 0.6985169092894351,
+          "nearest_train_distance_p95": 0.24582653477121266,
+          "zero_input_mse": {
+            "15": 4.308562775620283e-05,
+            "50": 0.00027949184767691644
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+          "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+          "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+        },
+        "metrics": {
+          "response": 1.0021955571829364,
+          "H15_mse": 0.0023450344468575377,
+          "ignore_input_H15_mse": 0.0024848821489587983,
+          "H15_ratio_to_ignore_input": 0.943720589662629,
+          "CB": [
+            0.004696089308708906,
+            0.10754386335611343
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.002195557182936,
+          "passed": false
+        },
+        "drift_mse": 0.0030230342238723538,
+        "input_mse": 0.6724865432142227,
+        "cross_term": -0.003974764785340393,
+        "vector_field_mse": 0.6715348126527548,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 9.20003542055653e-05,
+          "50": 0.0007750753268987907
+        }
+      }
+    },
+    {
+      "name": "dev-SPD-lr0.01-s43",
+      "seed": 43,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+        "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+        "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+            "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+          },
+          "metrics": {
+            "response": 1.0105845405969465,
+            "H15_mse": 0.0031137884836324597,
+            "ignore_input_H15_mse": 0.0031570304150411437,
+            "H15_ratio_to_ignore_input": 0.9863029728181696,
+            "CB": [
+              0.0006542417104355991,
+              0.10905317962169647
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0105845405969465,
+            "passed": false
+          },
+          "drift_mse": 0.002071559224903398,
+          "input_mse": 0.6693338069294258,
+          "cross_term": -0.004906143983976808,
+          "vector_field_mse": 0.6664992221703524,
+          "nearest_train_distance_p95": 0.49268315170868915,
+          "zero_input_mse": {
+            "15": 5.51714001864531e-05,
+            "50": 0.0004949172522077653
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+            "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+          },
+          "metrics": {
+            "response": 1.011704891042342,
+            "H15_mse": 0.003025302604227503,
+            "ignore_input_H15_mse": 0.0031570304150411437,
+            "H15_ratio_to_ignore_input": 0.9582747729682789,
+            "CB": [
+              -4.296594124753028e-05,
+              0.10779126733541489
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.011704891042342,
+            "passed": false
+          },
+          "drift_mse": 0.0015804461025013855,
+          "input_mse": 0.6700758412655823,
+          "cross_term": -0.004430674678413399,
+          "vector_field_mse": 0.6672256126896703,
+          "nearest_train_distance_p95": 0.49268315170868915,
+          "zero_input_mse": {
+            "15": 4.2832435689925814e-05,
+            "50": 0.00043414311204742956
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+          "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+          "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+        },
+        "metrics": {
+          "response": 1.011704891042342,
+          "H15_mse": 0.0018145958715937984,
+          "ignore_input_H15_mse": 0.0017542598004060752,
+          "H15_ratio_to_ignore_input": 1.0343940339816011,
+          "CB": [
+            -4.296594124753028e-05,
+            0.10779126733541489
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.011704891042342,
+          "passed": false
+        },
+        "drift_mse": 0.0014826085316470008,
+        "input_mse": 0.6691615363798779,
+        "cross_term": -0.0020811493290561396,
+        "vector_field_mse": 0.6685629955824689,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 5.1394695160152535e-05,
+          "50": 0.0004519154103136663
+        }
+      }
+    },
+    {
+      "name": "dev-SPD-lr0.01-s44",
+      "seed": 44,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+        "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+        "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+            "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+          },
+          "metrics": {
+            "response": 1.0085425886954784,
+            "H15_mse": 0.0012806826460566455,
+            "ignore_input_H15_mse": 0.0012724819649867986,
+            "H15_ratio_to_ignore_input": 1.0064446344195785,
+            "CB": [
+              0.0007494026212953031,
+              0.10020395368337631
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0085425886954784,
+            "passed": false
+          },
+          "drift_mse": 0.00028754574051697646,
+          "input_mse": 0.7060481738612677,
+          "cross_term": 0.0004009987239749866,
+          "vector_field_mse": 0.7067367183257596,
+          "nearest_train_distance_p95": 0.32655862097229077,
+          "zero_input_mse": {
+            "15": 7.79007848563014e-06,
+            "50": 5.996938089536888e-05
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+            "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+          },
+          "metrics": {
+            "response": 1.0090733903184204,
+            "H15_mse": 0.0012803369839609886,
+            "ignore_input_H15_mse": 0.0012724819649867986,
+            "H15_ratio_to_ignore_input": 1.0061729904158379,
+            "CB": [
+              0.0004694900126196444,
+              0.10006073117256165
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0090733903184204,
+            "passed": false
+          },
+          "drift_mse": 0.00026620555211428055,
+          "input_mse": 0.7064197709765125,
+          "cross_term": -0.00016954092572061305,
+          "vector_field_mse": 0.7065164356029061,
+          "nearest_train_distance_p95": 0.32655862097229077,
+          "zero_input_mse": {
+            "15": 9.403433894475731e-06,
+            "50": 6.859541919049887e-05
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+          "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+          "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+        },
+        "metrics": {
+          "response": 1.0090733903184204,
+          "H15_mse": 0.002659949083887856,
+          "ignore_input_H15_mse": 0.0026588217564064683,
+          "H15_ratio_to_ignore_input": 1.0004239951319307,
+          "CB": [
+            0.0004694900126196444,
+            0.10006073117256165
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0090733903184204,
+          "passed": false
+        },
+        "drift_mse": 0.0005617583267350805,
+        "input_mse": 0.6720061712782222,
+        "cross_term": -0.0004399947498543641,
+        "vector_field_mse": 0.672127934855103,
+        "nearest_train_distance_p95": 1.4901161193847656e-08,
+        "zero_input_mse": {
+          "15": 1.7253604403234495e-05,
+          "50": 0.0001495198818925624
+        }
+      }
+    },
+    {
+      "name": "dev-general-lr0.001-s42",
+      "seed": 42,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+        "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+        "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+            "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+          },
+          "metrics": {
+            "response": 0.9628587506013345,
+            "H15_mse": 0.0008804291463060987,
+            "ignore_input_H15_mse": 0.0009496850394901088,
+            "H15_ratio_to_ignore_input": 0.9270748824039663,
+            "CB": [
+              0.026755692437291145,
+              0.12511701881885529
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.9628587506013344,
+            "passed": false
+          },
+          "drift_mse": 0.002561048624766621,
+          "input_mse": 0.6729164660423953,
+          "cross_term": -0.0039255520262397705,
+          "vector_field_mse": 0.6715519626409221,
+          "nearest_train_distance_p95": 0.24582653477121266,
+          "zero_input_mse": {
+            "15": 6.214813706831675e-05,
+            "50": 0.0005465800234365912
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+            "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+          },
+          "metrics": {
+            "response": 0.7513360692973111,
+            "H15_mse": 0.0007681740727230213,
+            "ignore_input_H15_mse": 0.0009496850394901088,
+            "H15_ratio_to_ignore_input": 0.8088724585315762,
+            "CB": [
+              0.1411227285861969,
+              0.11690124869346619
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7513360692973112,
+            "passed": false
+          },
+          "drift_mse": 0.002049766754379328,
+          "input_mse": 0.5250888692095045,
+          "cross_term": -0.0006425253292075167,
+          "vector_field_mse": 0.5264961106346762,
+          "nearest_train_distance_p95": 0.24582653477121266,
+          "zero_input_mse": {
+            "15": 6.186759801130506e-05,
+            "50": 0.0004630269903146944
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+          "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+          "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+        },
+        "metrics": {
+          "response": 0.7513360692973111,
+          "H15_mse": 0.001728682800619173,
+          "ignore_input_H15_mse": 0.0024848821489587983,
+          "H15_ratio_to_ignore_input": 0.6956799948615334,
+          "CB": [
+            0.1411227285861969,
+            0.11690124869346619
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.7513360692973112,
+          "passed": false
+        },
+        "drift_mse": 0.003548334044373934,
+        "input_mse": 0.5041564916273944,
+        "cross_term": -0.005913018339489162,
+        "vector_field_mse": 0.5017918073322791,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 0.00010446897635960078,
+          "50": 0.0008864194244424364
+        }
+      }
+    },
+    {
+      "name": "dev-general-lr0.001-s43",
+      "seed": 43,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+        "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+        "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+            "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+          },
+          "metrics": {
+            "response": 0.9367490806051394,
+            "H15_mse": 0.0030326002476496377,
+            "ignore_input_H15_mse": 0.0031570304150411437,
+            "H15_ratio_to_ignore_input": 0.9605863260617702,
+            "CB": [
+              0.03991618752479553,
+              0.1224261149764061
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.9367490806051397,
+            "passed": false
+          },
+          "drift_mse": 0.012278330001110227,
+          "input_mse": 0.6204308527109607,
+          "cross_term": -0.004947906049867014,
+          "vector_field_mse": 0.6277612766622037,
+          "nearest_train_distance_p95": 0.49268315170868915,
+          "zero_input_mse": {
+            "15": 0.00020718883899979517,
+            "50": 0.0022728053612807247
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+            "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+          },
+          "metrics": {
+            "response": 0.6765260592201707,
+            "H15_mse": 0.0021899888143036075,
+            "ignore_input_H15_mse": 0.0031570304150411437,
+            "H15_ratio_to_ignore_input": 0.6936863211294297,
+            "CB": [
+              0.18326422572135925,
+              0.09730742126703262
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.6765260592201705,
+            "passed": false
+          },
+          "drift_mse": 0.0049713545110213605,
+          "input_mse": 0.44807905179048135,
+          "cross_term": -0.0025379694160042104,
+          "vector_field_mse": 0.4505124368854985,
+          "nearest_train_distance_p95": 0.49268315170868915,
+          "zero_input_mse": {
+            "15": 9.624655312061494e-05,
+            "50": 0.0009591949957271157
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+          "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+          "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+        },
+        "metrics": {
+          "response": 0.6765260592201707,
+          "H15_mse": 0.001189306295234433,
+          "ignore_input_H15_mse": 0.0017542598004060752,
+          "H15_ratio_to_ignore_input": 0.6779533424633757,
+          "CB": [
+            0.18326422572135925,
+            0.09730742126703262
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.6765260592201705,
+          "passed": false
+        },
+        "drift_mse": 0.0030698006453608985,
+        "input_mse": 0.44746765701842095,
+        "cross_term": -0.00538711851525124,
+        "vector_field_mse": 0.4451503391485306,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 0.00010013267626576964,
+          "50": 0.0008613888405132864
+        }
+      }
+    },
+    {
+      "name": "dev-general-lr0.001-s44",
+      "seed": 44,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+        "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+        "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+            "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+          },
+          "metrics": {
+            "response": 0.929670519026729,
+            "H15_mse": 0.0012137874912247154,
+            "ignore_input_H15_mse": 0.0012724819649867986,
+            "H15_ratio_to_ignore_input": 0.953874023069009,
+            "CB": [
+              0.043839264661073685,
+              0.12420614808797836
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.9296705190267291,
+            "passed": false
+          },
+          "drift_mse": 0.001041923051438578,
+          "input_mse": 0.6508323789285924,
+          "cross_term": 0.0012057482273598267,
+          "vector_field_mse": 0.6530800502073908,
+          "nearest_train_distance_p95": 0.32655862097229077,
+          "zero_input_mse": {
+            "15": 3.254537700253933e-05,
+            "50": 0.0002486667477797161
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+            "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+          },
+          "metrics": {
+            "response": 0.6377747631506875,
+            "H15_mse": 0.0010891707491894745,
+            "ignore_input_H15_mse": 0.0012724819649867986,
+            "H15_ratio_to_ignore_input": 0.8559419930173817,
+            "CB": [
+              0.20664086937904358,
+              0.09141144901514053
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.6377747631506874,
+            "passed": false
+          },
+          "drift_mse": 0.004229040040594418,
+          "input_mse": 0.4464855643228665,
+          "cross_term": -0.0007550690121626337,
+          "vector_field_mse": 0.44995953535129835,
+          "nearest_train_distance_p95": 0.32655862097229077,
+          "zero_input_mse": {
+            "15": 0.00012513070795118006,
+            "50": 0.001124765883788185
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+          "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+          "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+        },
+        "metrics": {
+          "response": 0.6377747631506877,
+          "H15_mse": 0.0015343601288386514,
+          "ignore_input_H15_mse": 0.0026588217564064683,
+          "H15_ratio_to_ignore_input": 0.5770827341628257,
+          "CB": [
+            0.20664086937904358,
+            0.09141144901514053
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.6377747631506874,
+          "passed": false
+        },
+        "drift_mse": 0.004020027472979546,
+        "input_mse": 0.4247347921715825,
+        "cross_term": -0.008116485682954205,
+        "vector_field_mse": 0.4206383339616079,
+        "nearest_train_distance_p95": 1.4901161193847656e-08,
+        "zero_input_mse": {
+          "15": 0.0001242113843582763,
+          "50": 0.0010327331133537588
+        }
+      }
+    },
+    {
+      "name": "dev-general-lr0.01-s42",
+      "seed": 42,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+        "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+        "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+            "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+          },
+          "metrics": {
+            "response": 0.00040942085205339455,
+            "H15_mse": 1.443596032631167e-06,
+            "ignore_input_H15_mse": 0.0009496850394901088,
+            "H15_ratio_to_ignore_input": 0.0015200787341098285,
+            "CB": [
+              1.0188944339752197,
+              -0.007240249775350094
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0004094208520533946,
+            "passed": true
+          },
+          "drift_mse": 5.896612444325818e-05,
+          "input_mse": 0.0002861333842744585,
+          "cross_term": 1.5702047466767875e-05,
+          "vector_field_mse": 0.00036080155618448454,
+          "nearest_train_distance_p95": 0.24582653477121266,
+          "zero_input_mse": {
+            "15": 1.2322199441806052e-06,
+            "50": 8.199622213918164e-06
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "120c2fd2370f3c85f6be50dbbbe87569bb536d67d9f38c8aef62bd72ac66ccf5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+            "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+          },
+          "metrics": {
+            "response": 0.00044137469471259514,
+            "H15_mse": 5.202877472618161e-07,
+            "ignore_input_H15_mse": 0.0009496850394901088,
+            "H15_ratio_to_ignore_input": 0.0005478529466370887,
+            "CB": [
+              1.0196738243103027,
+              -0.007369893603026867
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0004413746947125952,
+            "passed": true
+          },
+          "drift_mse": 4.579683351491301e-05,
+          "input_mse": 0.000308465078165463,
+          "cross_term": -6.732293780006991e-07,
+          "vector_field_mse": 0.00035358868230237525,
+          "nearest_train_distance_p95": 0.24582653477121266,
+          "zero_input_mse": {
+            "15": 2.5103905127839834e-07,
+            "50": 1.6700095938410007e-06
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+          "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s42-N32-T50.pt",
+          "sha256": "15a928ff795c5247ddb30b5a8ee07a57ca95abcf8c099dd01244540d4517bc8b"
+        },
+        "metrics": {
+          "response": 0.00044137469471259514,
+          "H15_mse": 9.070083491700493e-07,
+          "ignore_input_H15_mse": 0.0024848821489587983,
+          "H15_ratio_to_ignore_input": 0.0003650106100806829,
+          "CB": [
+            1.0196738243103027,
+            -0.007369893603026867
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0004413746947125952,
+          "passed": true
+        },
+        "drift_mse": 6.196935597370051e-05,
+        "input_mse": 0.0002961682882967783,
+        "cross_term": -5.021698674192782e-06,
+        "vector_field_mse": 0.00035311594559628604,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 5.327456776292545e-07,
+          "50": 3.790648779754477e-06
+        }
+      }
+    },
+    {
+      "name": "dev-general-lr0.01-s43",
+      "seed": 43,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+        "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+        "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+            "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+          },
+          "metrics": {
+            "response": 0.00044758495872073567,
+            "H15_mse": 9.358906704220214e-07,
+            "ignore_input_H15_mse": 0.0031570304150411437,
+            "H15_ratio_to_ignore_input": 0.00029644651694298756,
+            "CB": [
+              1.0202418565750122,
+              -0.006152414251118898
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00044758495872073583,
+            "passed": true
+          },
+          "drift_mse": 0.0001412823613101612,
+          "input_mse": 0.0002964459996270452,
+          "cross_term": 7.252810104644298e-06,
+          "vector_field_mse": 0.00044498117104185066,
+          "nearest_train_distance_p95": 0.49268315170868915,
+          "zero_input_mse": {
+            "15": 9.947076206139675e-07,
+            "50": 7.603940794655151e-06
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "6c51223e317a5f41b4a767c82830b411de3f2c20f57354badd6a1184c6feeb9b"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+            "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+          },
+          "metrics": {
+            "response": 0.0004598844646395185,
+            "H15_mse": 6.589929997663286e-06,
+            "ignore_input_H15_mse": 0.0031570304150411437,
+            "H15_ratio_to_ignore_input": 0.002087382486486879,
+            "CB": [
+              1.020605444908142,
+              -0.005941389128565788
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0004598844646395185,
+            "passed": true
+          },
+          "drift_mse": 0.00022886199192793027,
+          "input_mse": 0.000304592250424734,
+          "cross_term": 3.8304590438378987e-05,
+          "vector_field_mse": 0.0005717588327910433,
+          "nearest_train_distance_p95": 0.49268315170868915,
+          "zero_input_mse": {
+            "15": 5.121358714795726e-06,
+            "50": 3.999275355703775e-05
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+          "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s43-N32-T50.pt",
+          "sha256": "49c284f66a817c8b49762771f19dca95d593f7b02253afacc5fe0b0350cbeab3"
+        },
+        "metrics": {
+          "response": 0.0004598844646395185,
+          "H15_mse": 4.007871359183723e-06,
+          "ignore_input_H15_mse": 0.0017542598004060752,
+          "H15_ratio_to_ignore_input": 0.002284650972595954,
+          "CB": [
+            1.020605444908142,
+            -0.005941389128565788
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0004598844646395185,
+          "passed": true
+        },
+        "drift_mse": 0.00016425338583138485,
+        "input_mse": 0.0003041766404809625,
+        "cross_term": -1.6409651653618638e-05,
+        "vector_field_mse": 0.00045202037465872876,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 3.953823901328034e-06,
+          "50": 2.9622816895492916e-05
+        }
+      }
+    },
+    {
+      "name": "dev-general-lr0.01-s44",
+      "seed": 44,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+        "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+        "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+            "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+          },
+          "metrics": {
+            "response": 0.000352764942168491,
+            "H15_mse": 3.673753641420581e-06,
+            "ignore_input_H15_mse": 0.0012724819649867986,
+            "H15_ratio_to_ignore_input": 0.0028870771786998917,
+            "CB": [
+              1.0175331830978394,
+              -0.006734421476721764
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.000352764942168491,
+            "passed": true
+          },
+          "drift_mse": 0.00014329355648397184,
+          "input_mse": 0.0002469593708903286,
+          "cross_term": 7.947072158127255e-06,
+          "vector_field_mse": 0.00039819999953242765,
+          "nearest_train_distance_p95": 0.32655862097229077,
+          "zero_input_mse": {
+            "15": 3.2089684903467363e-06,
+            "50": 2.1938928934324156e-05
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6d634c48b031c53a9fda2eda4e2ef4d9c1e4e25bf5010891807c98e4e418d4a7"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+            "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+          },
+          "metrics": {
+            "response": 0.0004486655026626104,
+            "H15_mse": 5.927792015631619e-06,
+            "ignore_input_H15_mse": 0.0012724819649867986,
+            "H15_ratio_to_ignore_input": 0.004658448747203357,
+            "CB": [
+              1.019992709159851,
+              -0.006996933836489916
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00044866550266261054,
+            "passed": true
+          },
+          "drift_mse": 0.00016683962258861782,
+          "input_mse": 0.00031409626363843415,
+          "cross_term": 2.0672667280147486e-05,
+          "vector_field_mse": 0.0005016085535071995,
+          "nearest_train_distance_p95": 0.32655862097229077,
+          "zero_input_mse": {
+            "15": 5.584485431667738e-06,
+            "50": 3.90324446063189e-05
+          }
+        }
+      },
+      "archived_checkpoint": null,
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+          "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s44-N32-T50.pt",
+          "sha256": "7ec53ea704d805eabbe42b336889ea3985bb507a502600d03c5f8871811c624f"
+        },
+        "metrics": {
+          "response": 0.0004486655026626104,
+          "H15_mse": 4.561338547068226e-06,
+          "ignore_input_H15_mse": 0.0026588217564064683,
+          "H15_ratio_to_ignore_input": 0.001715548827625476,
+          "CB": [
+            1.019992709159851,
+            -0.006996933836489916
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00044866550266261054,
+          "passed": true
+        },
+        "drift_mse": 0.00020563615443006073,
+        "input_mse": 0.00029879490384121375,
+        "cross_term": -2.261130981690566e-05,
+        "vector_field_mse": 0.00048181974845436877,
+        "nearest_train_distance_p95": 1.4901161193847656e-08,
+        "zero_input_mse": {
+          "15": 4.8592967695247935e-06,
+          "50": 3.419280371816144e-05
+        }
+      }
+    },
+    {
+      "name": "confirm-SPD-s82",
+      "seed": 82,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+        "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s82-N8-T50.pt",
+        "sha256": "586e8766e154ee26449ec7dbeee8f7c8ad82e949143da1150b12c7027ca230f5"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s82-N8-T50.pt",
+            "sha256": "586e8766e154ee26449ec7dbeee8f7c8ad82e949143da1150b12c7027ca230f5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+            "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+          },
+          "metrics": {
+            "response": 1.007630334149124,
+            "H15_mse": 0.0013270951636514881,
+            "ignore_input_H15_mse": 0.0013795747664101055,
+            "H15_ratio_to_ignore_input": 0.9619595805632352,
+            "CB": [
+              0.0012393179349601269,
+              0.10053573548793793
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0076303341491242,
+            "passed": false
+          },
+          "drift_mse": 0.0004783865326063489,
+          "input_mse": 0.7127092562670302,
+          "cross_term": -0.0007617728356433561,
+          "vector_field_mse": 0.7124258699639932,
+          "nearest_train_distance_p95": 0.35103327137253487,
+          "zero_input_mse": {
+            "15": 1.2283170318063175e-05,
+            "50": 8.671820488097597e-05
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s82-N8-T50.pt",
+            "sha256": "586e8766e154ee26449ec7dbeee8f7c8ad82e949143da1150b12c7027ca230f5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+            "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+          },
+          "metrics": {
+            "response": 1.0070784773853096,
+            "H15_mse": 0.0013449851465321008,
+            "ignore_input_H15_mse": 0.0013795747664101055,
+            "H15_ratio_to_ignore_input": 0.974927332160465,
+            "CB": [
+              0.0015609419206157327,
+              0.10098477452993393
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0070784773853096,
+            "passed": false
+          },
+          "drift_mse": 0.00032966026817508876,
+          "input_mse": 0.7123189212300879,
+          "cross_term": -0.00037663606159967644,
+          "vector_field_mse": 0.7122719454366633,
+          "nearest_train_distance_p95": 0.35103327137253487,
+          "zero_input_mse": {
+            "15": 5.611954915730145e-06,
+            "50": 4.7283491576090436e-05
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-SPD-s82/epoch300.pt",
+        "sha256": "69385c0dc199030d34ff620bcd61fc3c5cead6ed60fc795d94d33b721b83ff60"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+          "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+          "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+        },
+        "metrics": {
+          "response": 1.0070784773853096,
+          "H15_mse": 0.00179073878433031,
+          "ignore_input_H15_mse": 0.0017353101062108976,
+          "H15_ratio_to_ignore_input": 1.031941655800324,
+          "CB": [
+            0.0015609419206157327,
+            0.10098477452993393
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0070784773853096,
+          "passed": false
+        },
+        "drift_mse": 0.0006067897795270103,
+        "input_mse": 0.6636144650129435,
+        "cross_term": -0.00020530568817754194,
+        "vector_field_mse": 0.664015949104293,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 1.2538420676669834e-05,
+          "50": 0.00010500644143887008
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s82-N16-T50.pt",
+          "sha256": "9c8f63ac76d0c4575dc0887c137325c19db61e0bc6591f33e19d5f0538ea6e2a"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+          "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+        },
+        "metrics": {
+          "response": 1.0070784773853096,
+          "H15_mse": 0.002058529770843643,
+          "ignore_input_H15_mse": 0.0020602060805389455,
+          "H15_ratio_to_ignore_input": 0.9991863388273935,
+          "CB": [
+            0.0015609419206157327,
+            0.10098477452993393
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0070784773853096,
+          "passed": false
+        },
+        "drift_mse": 0.0007631887430709894,
+        "input_mse": 0.6780599298314223,
+        "cross_term": 0.00033791144047033814,
+        "vector_field_mse": 0.6791610300149636,
+        "nearest_train_distance_p95": 0.3284401019785788,
+        "zero_input_mse": {
+          "15": 1.5983261256752583e-05,
+          "50": 0.00012613723188221955
+        }
+      }
+    },
+    {
+      "name": "confirm-SPD-s83",
+      "seed": 83,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+        "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s83-N8-T50.pt",
+        "sha256": "d71ca927c6e1d0640d61445d51dbba45750af228a8ae7dc9a32d61b7ebfa4aed"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s83-N8-T50.pt",
+            "sha256": "d71ca927c6e1d0640d61445d51dbba45750af228a8ae7dc9a32d61b7ebfa4aed"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+            "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+          },
+          "metrics": {
+            "response": 1.0097804052532309,
+            "H15_mse": 0.0029417914503000724,
+            "ignore_input_H15_mse": 0.0029408525639996585,
+            "H15_ratio_to_ignore_input": 1.0003192565012973,
+            "CB": [
+              0.00011004721454810351,
+              0.10000243782997131
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0097804052532307,
+            "passed": false
+          },
+          "drift_mse": 0.0014691034512719636,
+          "input_mse": 0.7203984722351501,
+          "cross_term": 0.006022740142234017,
+          "vector_field_mse": 0.727890315828656,
+          "nearest_train_distance_p95": 0.238554043770021,
+          "zero_input_mse": {
+            "15": 3.459520985993538e-05,
+            "50": 0.0003577326577025704
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s83-N8-T50.pt",
+            "sha256": "d71ca927c6e1d0640d61445d51dbba45750af228a8ae7dc9a32d61b7ebfa4aed"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+            "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+          },
+          "metrics": {
+            "response": 1.01051070569465,
+            "H15_mse": 0.002919182020007959,
+            "ignore_input_H15_mse": 0.0029408525639996585,
+            "H15_ratio_to_ignore_input": 0.9926312035302352,
+            "CB": [
+              -0.00025382876629009843,
+              0.10001491755247116
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0105107056946503,
+            "passed": false
+          },
+          "drift_mse": 0.0008069636651725295,
+          "input_mse": 0.7209194838526607,
+          "cross_term": 0.0046304275963594994,
+          "vector_field_mse": 0.7263568751141927,
+          "nearest_train_distance_p95": 0.238554043770021,
+          "zero_input_mse": {
+            "15": 2.56897471258843e-05,
+            "50": 0.00026663762854531423
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-SPD-s83/epoch300.pt",
+        "sha256": "b343221a3aef021a1746bc4b12a2d6db1fb9ee47c5e692ad8eb5cd40862c54b1"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+          "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+          "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+        },
+        "metrics": {
+          "response": 1.0105107056946496,
+          "H15_mse": 0.0017688357799346582,
+          "ignore_input_H15_mse": 0.0017526581748621717,
+          "H15_ratio_to_ignore_input": 1.0092303252879067,
+          "CB": [
+            -0.00025382876629009843,
+            0.10001491755247116
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0105107056946503,
+          "passed": false
+        },
+        "drift_mse": 0.000848121204728597,
+        "input_mse": 0.6689857633440737,
+        "cross_term": -0.0013162934275884578,
+        "vector_field_mse": 0.6685175911212139,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 2.6440574027442398e-05,
+          "50": 0.0002804012418503641
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s83-N16-T50.pt",
+          "sha256": "9246a60c7743a8e9637cd1b4404d7fee2ed62ce5932c60de5c11ee8983e1e044"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+          "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+        },
+        "metrics": {
+          "response": 1.0105107056946498,
+          "H15_mse": 0.0024649226296281335,
+          "ignore_input_H15_mse": 0.0021583032827184193,
+          "H15_ratio_to_ignore_input": 1.1420649958533733,
+          "CB": [
+            -0.00025382876629009843,
+            0.10001491755247116
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0105107056946503,
+          "passed": false
+        },
+        "drift_mse": 0.0008741584830142985,
+        "input_mse": 0.68056106096147,
+        "cross_term": 0.0017723739363719076,
+        "vector_field_mse": 0.6832075933808561,
+        "nearest_train_distance_p95": 0.2975481163181092,
+        "zero_input_mse": {
+          "15": 3.2763634907279594e-05,
+          "50": 0.0003186517189184747
+        }
+      }
+    },
+    {
+      "name": "confirm-SPD-s84",
+      "seed": 84,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+        "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s84-N8-T50.pt",
+        "sha256": "feaccb7208a240405fffcc61c41a58d19465585f2d812bc436f7552c6a31e2b6"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s84-N8-T50.pt",
+            "sha256": "feaccb7208a240405fffcc61c41a58d19465585f2d812bc436f7552c6a31e2b6"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+            "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+          },
+          "metrics": {
+            "response": 1.0040651149243982,
+            "H15_mse": 0.0019103596809989395,
+            "ignore_input_H15_mse": 0.0018634722645299458,
+            "H15_ratio_to_ignore_input": 1.0251613170539036,
+            "CB": [
+              0.0032493500038981438,
+              0.10272904485464096
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0040651149243984,
+            "passed": false
+          },
+          "drift_mse": 0.001636595053850621,
+          "input_mse": 0.6643833171327692,
+          "cross_term": -0.0028886652689327787,
+          "vector_field_mse": 0.6631312469176871,
+          "nearest_train_distance_p95": 0.6170939421281882,
+          "zero_input_mse": {
+            "15": 5.1090819301977106e-05,
+            "50": 0.00041098805631144025
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s84-N8-T50.pt",
+            "sha256": "feaccb7208a240405fffcc61c41a58d19465585f2d812bc436f7552c6a31e2b6"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+            "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+          },
+          "metrics": {
+            "response": 1.0037538514739304,
+            "H15_mse": 0.001917723062902296,
+            "ignore_input_H15_mse": 0.0018634722645299458,
+            "H15_ratio_to_ignore_input": 1.0291127479624897,
+            "CB": [
+              0.0034169224090874195,
+              0.10283978283405304
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0037538514739301,
+            "passed": false
+          },
+          "drift_mse": 0.0016457558322688765,
+          "input_mse": 0.6641773561441334,
+          "cross_term": -0.002806274493116847,
+          "vector_field_mse": 0.6630168374832857,
+          "nearest_train_distance_p95": 0.6170939421281882,
+          "zero_input_mse": {
+            "15": 4.268557145825604e-05,
+            "50": 0.00036030614613386273
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-SPD-s84/epoch300.pt",
+        "sha256": "fb88998f1749be118c6f7a7d009b0a37fea4cab5ffbaa8244ccda16abcd35c34"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+          "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+          "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+        },
+        "metrics": {
+          "response": 1.0037538514739308,
+          "H15_mse": 0.0020790025825990466,
+          "ignore_input_H15_mse": 0.002119600903972208,
+          "H15_ratio_to_ignore_input": 0.980846242659607,
+          "CB": [
+            0.0034169224090874195,
+            0.10283978283405304
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0037538514739301,
+          "passed": false
+        },
+        "drift_mse": 0.0020359431009417863,
+        "input_mse": 0.6692936612447121,
+        "cross_term": -0.002341119760765213,
+        "vector_field_mse": 0.6689884845848887,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 5.309885313330297e-05,
+          "50": 0.00045549013472115054
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s84-N16-T50.pt",
+          "sha256": "ce61fe737994b3a97e6c0861647192803a3b55419d46a328cd52b4ff701248ca"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+          "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+        },
+        "metrics": {
+          "response": 1.0037538514739306,
+          "H15_mse": 0.0012115323023937522,
+          "ignore_input_H15_mse": 0.0012131540775758252,
+          "H15_ratio_to_ignore_input": 0.9986631746024266,
+          "CB": [
+            0.0034169224090874195,
+            0.10283978283405304
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0037538514739301,
+          "passed": false
+        },
+        "drift_mse": 0.0017725267662347432,
+        "input_mse": 0.7497979412326036,
+        "cross_term": 0.0018404616235274769,
+        "vector_field_mse": 0.7534109296223659,
+        "nearest_train_distance_p95": 0.5203470368856858,
+        "zero_input_mse": {
+          "15": 4.317037126609988e-05,
+          "50": 0.00035398652682692793
+        }
+      }
+    },
+    {
+      "name": "confirm-SPD-s85",
+      "seed": 85,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+        "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s85-N8-T50.pt",
+        "sha256": "2f58d24a747fdbbe9bcd582d045b73e2ee30257f348a7b057470886645296a53"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s85-N8-T50.pt",
+            "sha256": "2f58d24a747fdbbe9bcd582d045b73e2ee30257f348a7b057470886645296a53"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+            "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+          },
+          "metrics": {
+            "response": 1.0120370375801782,
+            "H15_mse": 0.0033540519849172344,
+            "ignore_input_H15_mse": 0.003306673263343166,
+            "H15_ratio_to_ignore_input": 1.0143282138272611,
+            "CB": [
+              -0.0006205238169059157,
+              0.10390190035104752
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0120370375801782,
+            "passed": false
+          },
+          "drift_mse": 0.0007047746670751043,
+          "input_mse": 0.655061399242421,
+          "cross_term": -6.723307740909179e-05,
+          "vector_field_mse": 0.6556989408320871,
+          "nearest_train_distance_p95": 0.21644841832301953,
+          "zero_input_mse": {
+            "15": 2.575256916160232e-05,
+            "50": 0.00021656758177246007
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s85-N8-T50.pt",
+            "sha256": "2f58d24a747fdbbe9bcd582d045b73e2ee30257f348a7b057470886645296a53"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+            "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+          },
+          "metrics": {
+            "response": 1.0118855383568168,
+            "H15_mse": 0.003354532326627653,
+            "ignore_input_H15_mse": 0.003306673263343166,
+            "H15_ratio_to_ignore_input": 1.0144734781676312,
+            "CB": [
+              -0.0005851078894920647,
+              0.1035131886601448
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.011885538356817,
+            "passed": false
+          },
+          "drift_mse": 0.0005654838574063072,
+          "input_mse": 0.6549633383122836,
+          "cross_term": -1.108314527217151e-05,
+          "vector_field_mse": 0.6555177390244176,
+          "nearest_train_distance_p95": 0.21644841832301953,
+          "zero_input_mse": {
+            "15": 2.082014675401462e-05,
+            "50": 0.000171729082076868
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-SPD-s85/epoch300.pt",
+        "sha256": "f09df9851f292f5fa3192656b9a2a91d665d08a81f77ee24f0ec480982ed623a"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+          "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+          "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+        },
+        "metrics": {
+          "response": 1.0118855383568168,
+          "H15_mse": 0.002502193040631495,
+          "ignore_input_H15_mse": 0.002446220631732595,
+          "H15_ratio_to_ignore_input": 1.0228811776717197,
+          "CB": [
+            -0.0005851078894920647,
+            0.1035131886601448
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.011885538356817,
+          "passed": false
+        },
+        "drift_mse": 0.0006282948869637214,
+        "input_mse": 0.6854211210066028,
+        "cross_term": -0.001142035389672533,
+        "vector_field_mse": 0.684907380503894,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 2.2735901989133908e-05,
+          "50": 0.00018664472094314866
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s85-N16-T50.pt",
+          "sha256": "da46a04f2b95b37ec2952484599aed7457632ae60d19db103a0e4aa046fe2f10"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+          "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+        },
+        "metrics": {
+          "response": 1.0118855383568168,
+          "H15_mse": 0.0019943653116212706,
+          "ignore_input_H15_mse": 0.0019491271466432838,
+          "H15_ratio_to_ignore_input": 1.0232094479089753,
+          "CB": [
+            -0.0005851078894920647,
+            0.1035131886601448
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.011885538356817,
+          "passed": false
+        },
+        "drift_mse": 0.0004943299852591294,
+        "input_mse": 0.6614672406940456,
+        "cross_term": 0.0002341596778337797,
+        "vector_field_mse": 0.6621957303571385,
+        "nearest_train_distance_p95": 0.4175880619604293,
+        "zero_input_mse": {
+          "15": 1.7886200266386327e-05,
+          "50": 0.00016636605683781425
+        }
+      }
+    },
+    {
+      "name": "confirm-SPD-s86",
+      "seed": 86,
+      "general": false,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+        "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s86-N8-T50.pt",
+        "sha256": "6b4743768776f504ff2d623313faefd1aeb998269a727106922591863caf5a6c"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s86-N8-T50.pt",
+            "sha256": "6b4743768776f504ff2d623313faefd1aeb998269a727106922591863caf5a6c"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+            "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+          },
+          "metrics": {
+            "response": 1.0071035925332767,
+            "H15_mse": 0.0032472246183015093,
+            "ignore_input_H15_mse": 0.0033048507660352836,
+            "H15_ratio_to_ignore_input": 0.9825631619055204,
+            "CB": [
+              0.001592968124896288,
+              0.10142480581998825
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0071035925332767,
+            "passed": false
+          },
+          "drift_mse": 0.0006702061051615025,
+          "input_mse": 0.6481746542090093,
+          "cross_term": -0.001295685621695064,
+          "vector_field_mse": 0.6475491746924757,
+          "nearest_train_distance_p95": 0.31658310812591994,
+          "zero_input_mse": {
+            "15": 1.82893590129771e-05,
+            "50": 0.00015304548850487344
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s86-N8-T50.pt",
+            "sha256": "6b4743768776f504ff2d623313faefd1aeb998269a727106922591863caf5a6c"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+            "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+          },
+          "metrics": {
+            "response": 1.0073267330316715,
+            "H15_mse": 0.0032576774334663818,
+            "ignore_input_H15_mse": 0.0033048507660352836,
+            "H15_ratio_to_ignore_input": 0.9857260324569832,
+            "CB": [
+              0.0014872110914438963,
+              0.10148371011018753
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0073267330316713,
+            "passed": false
+          },
+          "drift_mse": 0.0003979105242281754,
+          "input_mse": 0.6483182680501863,
+          "cross_term": -0.0011109822277734517,
+          "vector_field_mse": 0.647605196346641,
+          "nearest_train_distance_p95": 0.31658310812591994,
+          "zero_input_mse": {
+            "15": 1.0032254349884844e-05,
+            "50": 7.555964061896009e-05
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-SPD-s86/epoch300.pt",
+        "sha256": "ff3cbb729f98e7d544f8f55f583fd2665d7893a9e07cd672b1247c1588c767df"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+          "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+          "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+        },
+        "metrics": {
+          "response": 1.0073267330316715,
+          "H15_mse": 0.0016311347187427715,
+          "ignore_input_H15_mse": 0.0016183283776267333,
+          "H15_ratio_to_ignore_input": 1.0079133143143784,
+          "CB": [
+            0.0014872110914438963,
+            0.10148371011018753
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0073267330316713,
+          "passed": false
+        },
+        "drift_mse": 0.0003080726086446706,
+        "input_mse": 0.6946856167266983,
+        "cross_term": -8.627272740329275e-05,
+        "vector_field_mse": 0.6949074166079395,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 8.66777570535532e-06,
+          "50": 6.362395006822849e-05
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s86-N16-T50.pt",
+          "sha256": "b727e2232e57612df3c2e18bc114667ce938cb27751d31e03a39c6cb3ead5b19"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+          "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+        },
+        "metrics": {
+          "response": 1.0073267330316715,
+          "H15_mse": 0.0018371254914414372,
+          "ignore_input_H15_mse": 0.0018130412431103156,
+          "H15_ratio_to_ignore_input": 1.013283894353007,
+          "CB": [
+            0.0014872110914438963,
+            0.10148371011018753
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0073267330316713,
+          "passed": false
+        },
+        "drift_mse": 0.0002895446838841381,
+        "input_mse": 0.668783438408024,
+        "cross_term": -4.611019518463336e-05,
+        "vector_field_mse": 0.6690268728967235,
+        "nearest_train_distance_p95": 0.2747461009744657,
+        "zero_input_mse": {
+          "15": 8.908742471801458e-06,
+          "50": 6.694054921027488e-05
+        }
+      }
+    },
+    {
+      "name": "confirm-general-s82",
+      "seed": 82,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+        "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s82-N8-T50.pt",
+        "sha256": "586e8766e154ee26449ec7dbeee8f7c8ad82e949143da1150b12c7027ca230f5"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s82-N8-T50.pt",
+            "sha256": "586e8766e154ee26449ec7dbeee8f7c8ad82e949143da1150b12c7027ca230f5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+            "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+          },
+          "metrics": {
+            "response": 0.00041722268794354504,
+            "H15_mse": 3.348740762351806e-06,
+            "ignore_input_H15_mse": 0.0013795747664101055,
+            "H15_ratio_to_ignore_input": 0.0024273717118397393,
+            "CB": [
+              1.0192416906356812,
+              -0.006854197941720486
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0004172226879435451,
+            "passed": true
+          },
+          "drift_mse": 0.00020856641067413997,
+          "input_mse": 0.00029510670882399977,
+          "cross_term": -7.110347892027594e-06,
+          "vector_field_mse": 0.0004965627716061122,
+          "nearest_train_distance_p95": 0.35103327137253487,
+          "zero_input_mse": {
+            "15": 3.5440051985012892e-06,
+            "50": 1.7056533429642584e-05
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s82-N8-T50.pt",
+            "sha256": "586e8766e154ee26449ec7dbeee8f7c8ad82e949143da1150b12c7027ca230f5"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+            "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+          },
+          "metrics": {
+            "response": 0.000486926749799747,
+            "H15_mse": 4.2542190659342804e-07,
+            "ignore_input_H15_mse": 0.0013795747664101055,
+            "H15_ratio_to_ignore_input": 0.0003083717656712801,
+            "CB": [
+              1.0211193561553955,
+              -0.006395275238901377
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0004869267497997472,
+            "passed": true
+          },
+          "drift_mse": 6.28185043980875e-05,
+          "input_mse": 0.00034440924408984724,
+          "cross_term": -2.160704401165992e-06,
+          "vector_field_mse": 0.0004050670440867688,
+          "nearest_train_distance_p95": 0.35103327137253487,
+          "zero_input_mse": {
+            "15": 2.890078548130731e-07,
+            "50": 1.941581879233593e-06
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-general-s82/epoch300.pt",
+        "sha256": "5ae06a03ae131e51988d706317d2b347d99cb686fe9a53da010c5b2ed451febc"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+          "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+          "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+        },
+        "metrics": {
+          "response": 0.000486926749799747,
+          "H15_mse": 8.933907568390476e-07,
+          "ignore_input_H15_mse": 0.0017353101062108976,
+          "H15_ratio_to_ignore_input": 0.0005148306078789534,
+          "CB": [
+            1.0211193561553955,
+            -0.006395275238901377
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0004869267497997472,
+          "passed": true
+        },
+        "drift_mse": 9.822321477420657e-05,
+        "input_mse": 0.00032086043126231965,
+        "cross_term": -1.7758632435956153e-05,
+        "vector_field_mse": 0.0004013250136005699,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 7.959406532985575e-07,
+          "50": 5.1717492707743425e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s82-N16-T50.pt",
+          "sha256": "9c8f63ac76d0c4575dc0887c137325c19db61e0bc6591f33e19d5f0538ea6e2a"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s82-N32-T50.pt",
+          "sha256": "166d1b42da4a589c802b9667e945b0b81ecfd9d14fc7bee71846a6b8c9f864b3"
+        },
+        "metrics": {
+          "response": 0.000486926749799747,
+          "H15_mse": 1.748456019410477e-06,
+          "ignore_input_H15_mse": 0.0020602060805389455,
+          "H15_ratio_to_ignore_input": 0.0008486801567700862,
+          "CB": [
+            1.0211193561553955,
+            -0.006395275238901377
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0004869267497997472,
+          "passed": true
+        },
+        "drift_mse": 9.807878540008959e-05,
+        "input_mse": 0.0003278448752667934,
+        "cross_term": -5.590453365155568e-06,
+        "vector_field_mse": 0.0004203332073017274,
+        "nearest_train_distance_p95": 0.3284401019785788,
+        "zero_input_mse": {
+          "15": 1.1205169302108251e-06,
+          "50": 6.91946076010359e-06
+        }
+      }
+    },
+    {
+      "name": "confirm-general-s83",
+      "seed": 83,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+        "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s83-N8-T50.pt",
+        "sha256": "d71ca927c6e1d0640d61445d51dbba45750af228a8ae7dc9a32d61b7ebfa4aed"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s83-N8-T50.pt",
+            "sha256": "d71ca927c6e1d0640d61445d51dbba45750af228a8ae7dc9a32d61b7ebfa4aed"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+            "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+          },
+          "metrics": {
+            "response": 0.00010118023566258252,
+            "H15_mse": 3.2592653625561354e-06,
+            "ignore_input_H15_mse": 0.0029408525639996585,
+            "H15_ratio_to_ignore_input": 0.0011082722753443391,
+            "CB": [
+              1.00661301612854,
+              -0.007579462602734566
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00010118023566258252,
+            "passed": true
+          },
+          "drift_mse": 0.0003124258372626042,
+          "input_mse": 7.218409746566401e-05,
+          "cross_term": -7.145211354466521e-07,
+          "vector_field_mse": 0.00038389541359282154,
+          "nearest_train_distance_p95": 0.238554043770021,
+          "zero_input_mse": {
+            "15": 3.4207947157368496e-06,
+            "50": 1.5573396738942807e-05
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s83-N8-T50.pt",
+            "sha256": "d71ca927c6e1d0640d61445d51dbba45750af228a8ae7dc9a32d61b7ebfa4aed"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+            "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+          },
+          "metrics": {
+            "response": 0.00041331379506261146,
+            "H15_mse": 1.3712167420483942e-06,
+            "ignore_input_H15_mse": 0.0029408525639996585,
+            "H15_ratio_to_ignore_input": 0.000466265041244874,
+            "CB": [
+              1.0192155838012695,
+              -0.006638910621404648
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00041331379506261146,
+            "passed": true
+          },
+          "drift_mse": 9.388287181947727e-05,
+          "input_mse": 0.0002948667105915449,
+          "cross_term": -7.635766212439972e-06,
+          "vector_field_mse": 0.00038111381619858206,
+          "nearest_train_distance_p95": 0.238554043770021,
+          "zero_input_mse": {
+            "15": 8.161507879612929e-07,
+            "50": 4.631047535653193e-06
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-general-s83/epoch300.pt",
+        "sha256": "4ee24af462f7f9b78a4bf96b0d15c835d86092371801fba035b200ee7dd38ffb"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+          "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+          "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+        },
+        "metrics": {
+          "response": 0.00041331379506261146,
+          "H15_mse": 1.0534180504060117e-06,
+          "ignore_input_H15_mse": 0.0017526581748621717,
+          "H15_ratio_to_ignore_input": 0.0006010402173765868,
+          "CB": [
+            1.0192155838012695,
+            -0.006638910621404648
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00041331379506261146,
+          "passed": true
+        },
+        "drift_mse": 8.659807776810043e-05,
+        "input_mse": 0.0002736250522952386,
+        "cross_term": -1.1977307995760939e-05,
+        "vector_field_mse": 0.00034824582206757814,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 8.762733485009889e-07,
+          "50": 5.389944218530324e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s83-N16-T50.pt",
+          "sha256": "9246a60c7743a8e9637cd1b4404d7fee2ed62ce5932c60de5c11ee8983e1e044"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s83-N32-T50.pt",
+          "sha256": "473e141b8323f32489473ec2b2ed9a8c7e97b37d7c8f7823476f816b88917f1d"
+        },
+        "metrics": {
+          "response": 0.00041331379506261146,
+          "H15_mse": 2.243941770816775e-06,
+          "ignore_input_H15_mse": 0.0021583032827184193,
+          "H15_ratio_to_ignore_input": 0.001039678616431743,
+          "CB": [
+            1.0192155838012695,
+            -0.006638910621404648
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00041331379506261146,
+          "passed": true
+        },
+        "drift_mse": 0.00010231506594478567,
+        "input_mse": 0.00027835951988698616,
+        "cross_term": 6.887356372966616e-06,
+        "vector_field_mse": 0.00038756194220473846,
+        "nearest_train_distance_p95": 0.2975481163181092,
+        "zero_input_mse": {
+          "15": 1.461316639130058e-06,
+          "50": 8.276953228669287e-06
+        }
+      }
+    },
+    {
+      "name": "confirm-general-s84",
+      "seed": 84,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+        "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s84-N8-T50.pt",
+        "sha256": "feaccb7208a240405fffcc61c41a58d19465585f2d812bc436f7552c6a31e2b6"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s84-N8-T50.pt",
+            "sha256": "feaccb7208a240405fffcc61c41a58d19465585f2d812bc436f7552c6a31e2b6"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+            "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+          },
+          "metrics": {
+            "response": 0.00033674522938826663,
+            "H15_mse": 1.872837711837282e-05,
+            "ignore_input_H15_mse": 0.0018634722645299458,
+            "H15_ratio_to_ignore_input": 0.010050258045078543,
+            "CB": [
+              1.0166479349136353,
+              -0.007719552610069513
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0003367452293882667,
+            "passed": true
+          },
+          "drift_mse": 0.0005750355504559883,
+          "input_mse": 0.00022282211502434046,
+          "cross_term": 3.903555212706639e-05,
+          "vector_field_mse": 0.0008368932176073952,
+          "nearest_train_distance_p95": 0.6170939421281882,
+          "zero_input_mse": {
+            "15": 1.7126018337706352e-05,
+            "50": 0.00012031324943524535
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s84-N8-T50.pt",
+            "sha256": "feaccb7208a240405fffcc61c41a58d19465585f2d812bc436f7552c6a31e2b6"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+            "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+          },
+          "metrics": {
+            "response": 0.0005403071011586,
+            "H15_mse": 6.6465710150563315e-06,
+            "ignore_input_H15_mse": 0.0018634722645299458,
+            "H15_ratio_to_ignore_input": 0.0035667668049424416,
+            "CB": [
+              1.0220539569854736,
+              -0.007343710400164127
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0005403071011586,
+            "passed": true
+          },
+          "drift_mse": 0.0001962504481051715,
+          "input_mse": 0.00035751767370701873,
+          "cross_term": 2.3346053995431573e-05,
+          "vector_field_mse": 0.0005771141758076219,
+          "nearest_train_distance_p95": 0.6170939421281882,
+          "zero_input_mse": {
+            "15": 5.0971615984826655e-06,
+            "50": 3.75771608472251e-05
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-general-s84/epoch300.pt",
+        "sha256": "43478650a39a3af88123badbe5c71025fffd7bc928b29750d92bb2a0bc2fb398"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+          "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+          "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+        },
+        "metrics": {
+          "response": 0.0005403071011586,
+          "H15_mse": 1.318118091276565e-06,
+          "ignore_input_H15_mse": 0.002119600903972208,
+          "H15_ratio_to_ignore_input": 0.0006218708856022681,
+          "CB": [
+            1.0220539569854736,
+            -0.007343710400164127
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0005403071011586,
+          "passed": true
+        },
+        "drift_mse": 8.023226939533896e-05,
+        "input_mse": 0.0003602717114359672,
+        "cross_term": 4.231437929948516e-06,
+        "vector_field_mse": 0.0004447354187612547,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 6.702684378391254e-07,
+          "50": 6.248082770495829e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s84-N16-T50.pt",
+          "sha256": "ce61fe737994b3a97e6c0861647192803a3b55419d46a328cd52b4ff701248ca"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s84-N32-T50.pt",
+          "sha256": "d600d2d39901f760cb3dc5079a0ce706ba27b235598be953de2884a6f4b5ca61"
+        },
+        "metrics": {
+          "response": 0.0005403071011586,
+          "H15_mse": 3.6452198201510024e-06,
+          "ignore_input_H15_mse": 0.0012131540775758252,
+          "H15_ratio_to_ignore_input": 0.0030047459655207455,
+          "CB": [
+            1.0220539569854736,
+            -0.007343710400164127
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0005403071011586,
+          "passed": true
+        },
+        "drift_mse": 0.00011190138684552194,
+        "input_mse": 0.00040360607482321217,
+        "cross_term": -2.3202633239181482e-06,
+        "vector_field_mse": 0.000513187198344816,
+        "nearest_train_distance_p95": 0.5203470368856858,
+        "zero_input_mse": {
+          "15": 3.1227264068033668e-06,
+          "50": 2.363367020280124e-05
+        }
+      }
+    },
+    {
+      "name": "confirm-general-s85",
+      "seed": 85,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+        "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s85-N8-T50.pt",
+        "sha256": "2f58d24a747fdbbe9bcd582d045b73e2ee30257f348a7b057470886645296a53"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s85-N8-T50.pt",
+            "sha256": "2f58d24a747fdbbe9bcd582d045b73e2ee30257f348a7b057470886645296a53"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+            "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+          },
+          "metrics": {
+            "response": 0.0003807440310161175,
+            "H15_mse": 3.5845152998278585e-06,
+            "ignore_input_H15_mse": 0.003306673263343166,
+            "H15_ratio_to_ignore_input": 0.001084024641794752,
+            "CB": [
+              1.0185450315475464,
+              -0.006068429443985224
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00038074403101611754,
+            "passed": true
+          },
+          "drift_mse": 7.333581817776473e-05,
+          "input_mse": 0.000246444258904762,
+          "cross_term": 8.166902838643618e-06,
+          "vector_field_mse": 0.0003279469799211703,
+          "nearest_train_distance_p95": 0.21644841832301953,
+          "zero_input_mse": {
+            "15": 2.1954104757513493e-06,
+            "50": 1.27169198035022e-05
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s85-N8-T50.pt",
+            "sha256": "2f58d24a747fdbbe9bcd582d045b73e2ee30257f348a7b057470886645296a53"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+            "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+          },
+          "metrics": {
+            "response": 0.00034667849743411165,
+            "H15_mse": 1.5157950701544908e-06,
+            "ignore_input_H15_mse": 0.003306673263343166,
+            "H15_ratio_to_ignore_input": 0.00045840485268325764,
+            "CB": [
+              1.0175837278366089,
+              -0.006122990511357784
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0003466784974341117,
+            "passed": true
+          },
+          "drift_mse": 5.701613575595262e-05,
+          "input_mse": 0.00022439465472473655,
+          "cross_term": 6.3877674608371245e-06,
+          "vector_field_mse": 0.0002877985579415263,
+          "nearest_train_distance_p95": 0.21644841832301953,
+          "zero_input_mse": {
+            "15": 4.35029557657708e-07,
+            "50": 2.9388938862386007e-06
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-general-s85/epoch300.pt",
+        "sha256": "8d08cb1b78a10f5b9bc303bfe6f96e9080ba95f6ca245e888c29ca42157032fc"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+          "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+          "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+        },
+        "metrics": {
+          "response": 0.00034667849743411165,
+          "H15_mse": 1.0041749851685605e-06,
+          "ignore_input_H15_mse": 0.002446220631732595,
+          "H15_ratio_to_ignore_input": 0.0004105005787876661,
+          "CB": [
+            1.0175837278366089,
+            -0.006122990511357784
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003466784974341117,
+          "passed": true
+        },
+        "drift_mse": 8.891655989757363e-05,
+        "input_mse": 0.0002348296870869818,
+        "cross_term": -1.16145700315596e-05,
+        "vector_field_mse": 0.0003121316769529958,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 5.435083439036012e-07,
+          "50": 3.935379949540479e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s85-N16-T50.pt",
+          "sha256": "da46a04f2b95b37ec2952484599aed7457632ae60d19db103a0e4aa046fe2f10"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s85-N32-T50.pt",
+          "sha256": "42330a28114524d23334b2c956f664cb5aa4db1bb8c86eb4619f51d6b08c21fc"
+        },
+        "metrics": {
+          "response": 0.00034667849743411165,
+          "H15_mse": 1.2981705907077944e-06,
+          "ignore_input_H15_mse": 0.0019491271466432838,
+          "H15_ratio_to_ignore_input": 0.0006660266329692533,
+          "CB": [
+            1.0175837278366089,
+            -0.006122990511357784
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003466784974341117,
+          "passed": true
+        },
+        "drift_mse": 0.00010160194603970876,
+        "input_mse": 0.0002266229335366157,
+        "cross_term": -5.089122538030463e-06,
+        "vector_field_mse": 0.0003231357570382941,
+        "nearest_train_distance_p95": 0.4175880619604293,
+        "zero_input_mse": {
+          "15": 7.43909005164144e-07,
+          "50": 5.891400058431677e-06
+        }
+      }
+    },
+    {
+      "name": "confirm-general-s86",
+      "seed": 86,
+      "general": true,
+      "compatible": false,
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 300,
+        "noenc": false
+      },
+      "status": "complete",
+      "ntrain": 32,
+      "train": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+        "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s86-N8-T50.pt",
+        "sha256": "6b4743768776f504ff2d623313faefd1aeb998269a727106922591863caf5a6c"
+      },
+      "updates": 3000,
+      "presentations": 192000,
+      "unique_windows": 640,
+      "validation_checkpoints": {
+        "100": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s86-N8-T50.pt",
+            "sha256": "6b4743768776f504ff2d623313faefd1aeb998269a727106922591863caf5a6c"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+            "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+          },
+          "metrics": {
+            "response": 0.00029935629245964827,
+            "H15_mse": 1.735488675005033e-06,
+            "ignore_input_H15_mse": 0.0033048507660352836,
+            "H15_ratio_to_ignore_input": 0.0005251337497115003,
+            "CB": [
+              1.0158617496490479,
+              -0.006910947151482105
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00029935629245964827,
+            "passed": true
+          },
+          "drift_mse": 8.090666136370648e-05,
+          "input_mse": 0.00019266653677825328,
+          "cross_term": 7.673578869179124e-06,
+          "vector_field_mse": 0.0002812467770111389,
+          "nearest_train_distance_p95": 0.31658310812591994,
+          "zero_input_mse": {
+            "15": 1.4690962945489575e-06,
+            "50": 1.0259610972679018e-05
+          }
+        },
+        "300": {
+          "data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-validation-s86-N8-T50.pt",
+            "sha256": "6b4743768776f504ff2d623313faefd1aeb998269a727106922591863caf5a6c"
+          },
+          "train_data": {
+            "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+            "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+          },
+          "metrics": {
+            "response": 0.00040510947234775717,
+            "H15_mse": 1.891600552259089e-06,
+            "ignore_input_H15_mse": 0.0033048507660352836,
+            "H15_ratio_to_ignore_input": 0.0005723709438560754,
+            "CB": [
+              1.0188207626342773,
+              -0.007133608218282461
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00040510947234775733,
+            "passed": true
+          },
+          "drift_mse": 9.669846141790645e-05,
+          "input_mse": 0.0002607295754901456,
+          "cross_term": 6.398898603079053e-06,
+          "vector_field_mse": 0.00036382693551113116,
+          "nearest_train_distance_p95": 0.31658310812591994,
+          "zero_input_mse": {
+            "15": 1.4749900570602934e-06,
+            "50": 1.153122730214439e-05
+          }
+        }
+      },
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/runs/confirm-general-s86/epoch300.pt",
+        "sha256": "63480c250636a339393b71316fdcb6b671c9a5eea79f11f669de335d50b97b4e"
+      },
+      "train_diagnostics": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+          "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+          "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+        },
+        "metrics": {
+          "response": 0.00040510947234775717,
+          "H15_mse": 9.215908251253067e-07,
+          "ignore_input_H15_mse": 0.0016183283776267333,
+          "H15_ratio_to_ignore_input": 0.0005694708427944722,
+          "CB": [
+            1.0188207626342773,
+            -0.007133608218282461
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00040510947234775733,
+          "passed": true
+        },
+        "drift_mse": 8.66865509559798e-05,
+        "input_mse": 0.00027937680437880414,
+        "cross_term": -6.380167329334675e-06,
+        "vector_field_mse": 0.0003596831880054493,
+        "nearest_train_distance_p95": 2.1073424255447014e-08,
+        "zero_input_mse": {
+          "15": 7.430624950619247e-07,
+          "50": 5.675511255281713e-06
+        }
+      },
+      "test": {
+        "data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-test-s86-N16-T50.pt",
+          "sha256": "b727e2232e57612df3c2e18bc114667ce938cb27751d31e03a39c6cb3ead5b19"
+        },
+        "train_data": {
+          "path": "outputs/diagnosis/p2_drift_coverage_2026-11-16/data/original-a0.0-rk4-train-s86-N32-T50.pt",
+          "sha256": "abe9b87a94afbeaeb872488986964f84970bf2cb596305dc718c42a7abf7414c"
+        },
+        "metrics": {
+          "response": 0.00040510947234775717,
+          "H15_mse": 8.312505780790202e-07,
+          "ignore_input_H15_mse": 0.0018130412431103156,
+          "H15_ratio_to_ignore_input": 0.000458484097500722,
+          "CB": [
+            1.0188207626342773,
+            -0.007133608218282461
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00040510947234775733,
+          "passed": true
+        },
+        "drift_mse": 6.666210958989797e-05,
+        "input_mse": 0.0002689599084032997,
+        "cross_term": 6.8405448310831275e-06,
+        "vector_field_mse": 0.00034246256282428086,
+        "nearest_train_distance_p95": 0.2747461009744657,
+        "zero_input_mse": {
+          "15": 4.0532629819680774e-07,
+          "50": 3.1897472615702014e-06
+        }
+      }
+    }
+  ],
+  "run_count": 32,
+  "updates": 96000,
+  "presentations": 6144000,
+  "local_checkpoint_evaluations": 64,
+  "failed_runs": [],
+  "test_used_for_selection": false,
+  "historical_gates_changed": false
+}

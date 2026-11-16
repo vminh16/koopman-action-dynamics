@@ -1,0 +1,12 @@
+{
+  "command": "MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1 .venv/bin/python -m unittest discover -s tests",
+  "tests": 84,
+  "verdict": "PASS",
+  "fresh_export": {
+    "command": "python -m research.diagnostics.p2_drift_coverage --stage verify-saved",
+    "input_datasets_before": 0,
+    "regenerated_datasets": 35,
+    "archived_checkpoints": 20,
+    "verdict": "PASS"
+  }
+}

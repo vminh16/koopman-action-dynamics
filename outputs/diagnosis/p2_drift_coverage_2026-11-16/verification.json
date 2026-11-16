@@ -1,0 +1,6 @@
+{
+  "archived_checkpoint_verdict": "PASS",
+  "archived_checkpoints": 20,
+  "selection_metadata_checked": true,
+  "scope": "curated final checkpoints + regenerated train/validation/test diagnostics; dev checkpoints require full local replay"
+}

@@ -320,3 +320,12 @@ thresholds and historical gates are unchanged; a response-based criterion would
 require a separately declared protocol. H2/H3 remain NO-GO. All 140 checkpoint
 recomputations, source/pairing checks and 80 tests pass. See
 [report](outputs/diagnosis/p2_followup_2026-11-16/REPORT.md).
+
+**Status log — 2026-11-16 (drift/coverage + equal tuning):** 32 controlled runs,
+96,000updates,192,000presentations/run. At paired data/budget, N32 compatible
+passes5/5 test vsN8 1/5, with lower drift/zero-input error. Original-general with
+independently tunedLR=.01 passes5new validation/test seeds; upstream-SPD0/5.
+Strong corrected fixed-B baseline is now available for a separately declared
+nonlinear stress protocol. Keep original SPD and general-head labels distinct;
+no exact paper reproduction, H2 superiority or H3 certificate is inferred.
+[Protocol/results](docs/superpowers/2026-11-16-p2-drift-coverage-tuning.md).

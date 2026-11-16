@@ -5,7 +5,7 @@
 **Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
 **Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
 **Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
-**Current state:** P1 CartPole 5% training/evaluation completed for seeds 42/43/44 (100 epochs each; open-loop H=15 MSE `0.09189450 ± 0.00237392`); reproduction remains NEEDS_INVESTIGATION due to the failed dataset transition audit and unresolved paper-protocol comparison. Structured output rank is 4/4, while the T=0.3 s Gramian is numerically near-singular. See [TRACKING §3.4](TRACKING.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14). P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training. The 2026-11-16 follow-up completed E05 refresh and 140 paired rotation runs; baseline input-map fitting remains unresolved (see P2 follow-up below).
+**Current state:** P1 CartPole 5% training/evaluation completed for seeds 42/43/44 (100 epochs each; open-loop H=15 MSE `0.09189450 ± 0.00237392`); reproduction remains NEEDS_INVESTIGATION due to the failed dataset transition audit and unresolved paper-protocol comparison. Structured output rank is 4/4, while the T=0.3 s Gramian is numerically near-singular. See [TRACKING §3.4](TRACKING.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14). P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training. The 2026-11-16 drift/coverage and equal-budget tuning follow-up now establishes reliable synthetic positive controls (N32 compatible LR=.001; original-general LR=.01, five new validation/test seeds). Next is preregistered nonlinear stress; historical gates remain unchanged.
 
 > **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; explicitly labeled diagnostic ablations of its losses/parameterization are allowed to isolate failure causes. Do not reproduce external model baselines or train H2/H3 methods at this stage.
 
@@ -230,7 +230,7 @@ Quadrotor and variant MPC were not rerun in this follow-up.
 - Measured response growth ratio $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 1.030 \pm 0.01 < 1.5$ (monotone but weak across $a \in \{0.0, 0.5, 1.0, 2.0\}$, 5 seeds) under the official baseline `KoopmanLitModule`.
 - Coverage ($\text{state distance p95} \le 0.635 \le 3.0$) and optimization ($\text{one-step MSE} \approx 2.8 \times 10^{-4} \le 0.05$) pass pre-registered gates.
 - Previous 4.82x degradation report was an artifact of fitting an unconstrained linear surrogate on misaligned transitions.
-- Follow-up: 100-epoch paired runs still do not fit the easy constant-map action response well. The verified fixed-B floor does not by itself establish H2 superiority. Establish a response-fidelity positive control before a new preregistered stress/excitation protocol; track H2 remains paused.
+- Latest drift/coverage + equal-budget tuning establishes reliable synthetic positive controls on five new validation/test seeds (N32 compatible and original-general). Next preregister nonlinear stress using these strong baselines; the fixed-B floor alone still does not establish H2 learning superiority. Historical gate results remain archived and H2 training awaits the new stress/matched-class protocol.
 
 ### Gate H3 — Independent control-theory/certificate hypothesis
 
@@ -263,7 +263,7 @@ P4: independent H2 and H3 reports, statistical significance, failure cases, base
 3. **Complete CartPole fraction coverage:** 5% seeds 42/43/44 are done; 1%/10%/30% remain. If the data or protocol changes, use separate run identities and new provenance rather than overwriting C02 evidence.
 4. **Investigate short-horizon conditioning:** output rank 4/4 is established, but Wy(0.3 s) is numerically near-singular. Keep this distinct from the unstable raw 25-power rank computation.
 5. **DONE — separate P2 E05 refresh:** Pendulum and C02 seeds 42/43/44 verified in the 2026-11-16 follow-up. Historical `missing_checkpoint` snapshot and H2/H3 gates are preserved.
-6. **P2 next:** robust-flow input-map control now passes five new seeds, but joint test fidelity is 4/5 and original-coordinate controls remain weak. Preregister drift/coverage controls and equal-budget per-parameterization tuning before architecture comparisons; see [report](docs/superpowers/2026-11-16-p2-robust-flow.md). H2/H3 training remains closed.
+6. **DONE — drift/coverage and equal-budget tuning:** N32 compatible (LR=.001) and original-general (LR=.01) now pass five new validation/test seeds. Next preregister controlled nonlinear stress with these frozen strong baselines, keeping upstream-SPD as a labeled diagnostic; see [report](docs/superpowers/2026-11-16-p2-drift-coverage-tuning.md). No automatic H2/H3 training gate change.
 
 Safe inspection commands for existing checkout:
 
@@ -371,3 +371,11 @@ Branch/commit convention (suggested): `audit/pendulum-run`, `repro/cartpole`, `d
   next are drift/coverage controls and equal-budget per-parameterization tuning,
   not forcing paper MSE or immediately training a new architecture. Historical
   H2/H3 verdicts unchanged. [Report](docs/superpowers/2026-11-16-p2-robust-flow.md).
+
+- 2026-11-16: drift/coverage and equal-budget per-head tuning COMPLETE (32runs,
+  96,000updates, equal192,000presentations/run,84testsPASS). Compatible N32 beats
+  N8 on test at fixed budget (joint5/5 vs1/5; H15 52.3×lower). Original-general
+  LR=.01 passes5new val/test seeds; upstream-SPD0/5. Freeze these calibrated
+  positive controls for nonlinear stress, then matched-class architecture design.
+  Do not use upstream-SPD alone as a strong comparator on the original system.
+  [Report](docs/superpowers/2026-11-16-p2-drift-coverage-tuning.md).

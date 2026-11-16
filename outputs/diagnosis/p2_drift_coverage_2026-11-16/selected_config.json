@@ -1,0 +1,14 @@
+{
+  "SPD": {
+    "lr": 0.01,
+    "dev_pass_count": 0,
+    "qualified": false,
+    "rule": "fewest dev failures, worst H15/ignore-input ratio, worst response, lower LR"
+  },
+  "general": {
+    "lr": 0.01,
+    "dev_pass_count": 3,
+    "qualified": true,
+    "rule": "fewest dev failures, worst H15/ignore-input ratio, worst response, lower LR"
+  }
+}

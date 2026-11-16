@@ -1,0 +1,2757 @@
+{
+  "selected": {
+    "cfg": {
+      "lr": 0.001,
+      "scheduler": "constant",
+      "epochs": 1000,
+      "noenc": false
+    },
+    "development_pass_count": 3,
+    "development_qualified": true,
+    "rule": "fewest failed dev seeds, worst response, mean H15/ignore-input ratio, lower LR"
+  },
+  "gates": {
+    "compatible_all_five_pass": true,
+    "original_general_all_five_pass": false,
+    "stress_open": false
+  },
+  "runs": [
+    {
+      "name": "dev-lr0.001-s42",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 42,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s42-N8-T50.pt",
+        "sha256": "0b85502c5951d939e69ac84858a3a87fc589e35e25f248a04e9607657c242b3e"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s42-N8-T50.pt",
+        "sha256": "dcf47c97a33a6bdf471becf1fe274f80ae6b558bc37dbf5850d17544cb466629"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": null,
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.7712782648866465,
+            "H15_mse": 0.0020841777583750875,
+            "ignore_input_H15_mse": 0.00091961432136177,
+            "H15_ratio_to_ignore_input": 2.2663607013958043,
+            "CB": [
+              -0.004772511310875416,
+              0.12178847193717957
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7712782648866465,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "dcf47c97a33a6bdf471becf1fe274f80ae6b558bc37dbf5850d17544cb466629"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.07869545144750578,
+            "H15_mse": 7.528803271526935e-05,
+            "ignore_input_H15_mse": 0.00091961432136177,
+            "H15_ratio_to_ignore_input": 0.08186913901447557,
+            "CB": [
+              0.0032542049884796143,
+              0.7194917798042297
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.07869545144750578,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "dcf47c97a33a6bdf471becf1fe274f80ae6b558bc37dbf5850d17544cb466629"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.0003675379279037827,
+            "H15_mse": 0.00012289542109475461,
+            "ignore_input_H15_mse": 0.00091961432136177,
+            "H15_ratio_to_ignore_input": 0.13363800262785205,
+            "CB": [
+              0.0052141547203063965,
+              1.0184485912322998
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0003675379279037827,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "dcf47c97a33a6bdf471becf1fe274f80ae6b558bc37dbf5850d17544cb466629"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.0003675379279037827,
+          "H15_mse": 0.00012289542109475461,
+          "ignore_input_H15_mse": 0.00091961432136177,
+          "H15_ratio_to_ignore_input": 0.13363800262785205,
+          "CB": [
+            0.0052141547203063965,
+            1.0184485912322998
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0003675379279037827,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/dev-lr0.001-s42/epoch1000.pt",
+        "sha256": "47884c9071919b792e3709ed9fbb2fd54e02f967e4d70e104ce76ebe1dc1a4c7"
+      }
+    },
+    {
+      "name": "dev-lr0.001-s43",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 43,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s43-N8-T50.pt",
+        "sha256": "c356b9f47ae2b5bdea91230417c6119d09ccef53b7494764437e9ee3af4063d9"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s43-N8-T50.pt",
+        "sha256": "158738d2d70d75bb491e4f8af0c125f1c69b58cda63926f81cf464a257deac26"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": null,
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.7565011663626814,
+            "H15_mse": 0.0016767075221603691,
+            "ignore_input_H15_mse": 0.0030103424771782184,
+            "H15_ratio_to_ignore_input": 0.5569823150926175,
+            "CB": [
+              -0.000725623220205307,
+              0.13022954761981964
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7565011663626813,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "158738d2d70d75bb491e4f8af0c125f1c69b58cda63926f81cf464a257deac26"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.0035010811769924377,
+            "H15_mse": 0.00020640493031744912,
+            "ignore_input_H15_mse": 0.0030103424771782184,
+            "H15_ratio_to_ignore_input": 0.06856526520893573,
+            "CB": [
+              0.004276171326637268,
+              0.9409847855567932
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0035010811769924377,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "158738d2d70d75bb491e4f8af0c125f1c69b58cda63926f81cf464a257deac26"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.0004267174072092317,
+            "H15_mse": 0.00018335686926190334,
+            "ignore_input_H15_mse": 0.0030103424771782184,
+            "H15_ratio_to_ignore_input": 0.06090897319888173,
+            "CB": [
+              0.005096465349197388,
+              1.0200185775756836
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0004267174072092317,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "158738d2d70d75bb491e4f8af0c125f1c69b58cda63926f81cf464a257deac26"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.0004267174072092317,
+          "H15_mse": 0.00018335686926190334,
+          "ignore_input_H15_mse": 0.0030103424771782184,
+          "H15_ratio_to_ignore_input": 0.06090897319888173,
+          "CB": [
+            0.005096465349197388,
+            1.0200185775756836
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0004267174072092317,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/dev-lr0.001-s43/epoch1000.pt",
+        "sha256": "8c5c49e4626f2567369776c38f8c083ff816f43eada2adc01b3158d5c744ece2"
+      }
+    },
+    {
+      "name": "dev-lr0.001-s44",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 44,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s44-N8-T50.pt",
+        "sha256": "60e5a9b7acc59cba167929088293cd8576496bc8203874ce8e3aee1c86d89580"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s44-N8-T50.pt",
+        "sha256": "6195f3ed37818678504aa191ad4a6ae605099cc60037fca9d356a609af470974"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": null,
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.7519296204680491,
+            "H15_mse": 0.002635373872257063,
+            "ignore_input_H15_mse": 0.0012337312488842924,
+            "H15_ratio_to_ignore_input": 2.1361004470303615,
+            "CB": [
+              0.0025099674239754677,
+              0.13286487758159637
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7519296204680492,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6195f3ed37818678504aa191ad4a6ae605099cc60037fca9d356a609af470974"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.07326080475709151,
+            "H15_mse": 0.00019694046719720347,
+            "ignore_input_H15_mse": 0.0012337312488842924,
+            "H15_ratio_to_ignore_input": 0.15962995780102338,
+            "CB": [
+              0.006391614675521851,
+              0.7294081449508667
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.07326080475709151,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6195f3ed37818678504aa191ad4a6ae605099cc60037fca9d356a609af470974"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.0002451805685348418,
+            "H15_mse": 2.8444877498103867e-05,
+            "ignore_input_H15_mse": 0.0012337312488842924,
+            "H15_ratio_to_ignore_input": 0.023055975540724607,
+            "CB": [
+              0.005168825387954712,
+              1.0147805213928223
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0002451805685348418,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6195f3ed37818678504aa191ad4a6ae605099cc60037fca9d356a609af470974"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.0002451805685348418,
+          "H15_mse": 2.8444877498103867e-05,
+          "ignore_input_H15_mse": 0.0012337312488842924,
+          "H15_ratio_to_ignore_input": 0.023055975540724607,
+          "CB": [
+            0.005168825387954712,
+            1.0147805213928223
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0002451805685348418,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/dev-lr0.001-s44/epoch1000.pt",
+        "sha256": "a8a7186007818037e41c164f6125d34cd6c3e58808fe838dab7dfba54c2c3ea5"
+      }
+    },
+    {
+      "name": "dev-lr0.01-s42",
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 42,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s42-N8-T50.pt",
+        "sha256": "0b85502c5951d939e69ac84858a3a87fc589e35e25f248a04e9607657c242b3e"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s42-N8-T50.pt",
+        "sha256": "dcf47c97a33a6bdf471becf1fe274f80ae6b558bc37dbf5850d17544cb466629"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": null,
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.0005662766442222633,
+            "H15_mse": 1.067587696308367e-05,
+            "ignore_input_H15_mse": 0.00091961432136177,
+            "H15_ratio_to_ignore_input": 0.011609080801693879,
+            "CB": [
+              0.005094975233078003,
+              0.9767552614212036
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0005662766442222633,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "dcf47c97a33a6bdf471becf1fe274f80ae6b558bc37dbf5850d17544cb466629"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.0004340503624291614,
+            "H15_mse": 7.148169965380073e-06,
+            "ignore_input_H15_mse": 0.00091961432136177,
+            "H15_ratio_to_ignore_input": 0.007773008531223201,
+            "CB": [
+              0.005139946937561035,
+              1.020189881324768
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0004340503624291614,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "dcf47c97a33a6bdf471becf1fe274f80ae6b558bc37dbf5850d17544cb466629"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.00036605724247351645,
+            "H15_mse": 6.053979237008687e-06,
+            "ignore_input_H15_mse": 0.00091961432136177,
+            "H15_ratio_to_ignore_input": 0.006583171984581451,
+            "CB": [
+              0.004491448402404785,
+              1.018597960472107
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00036605724247351645,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s42-N8-T50.pt",
+            "sha256": "dcf47c97a33a6bdf471becf1fe274f80ae6b558bc37dbf5850d17544cb466629"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.00036605724247351645,
+          "H15_mse": 6.053979237008687e-06,
+          "ignore_input_H15_mse": 0.00091961432136177,
+          "H15_ratio_to_ignore_input": 0.006583171984581451,
+          "CB": [
+            0.004491448402404785,
+            1.018597960472107
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00036605724247351645,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/dev-lr0.01-s42/epoch1000.pt",
+        "sha256": "05d279e9f661af6fb4ff136ebf17255732cc2522e61f95279b8bf56d90b289f5"
+      }
+    },
+    {
+      "name": "dev-lr0.01-s43",
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 43,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s43-N8-T50.pt",
+        "sha256": "c356b9f47ae2b5bdea91230417c6119d09ccef53b7494764437e9ee3af4063d9"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s43-N8-T50.pt",
+        "sha256": "158738d2d70d75bb491e4f8af0c125f1c69b58cda63926f81cf464a257deac26"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": null,
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.00019342327886651134,
+            "H15_mse": 3.215459419068057e-05,
+            "ignore_input_H15_mse": 0.0030103424771782184,
+            "H15_ratio_to_ignore_input": 0.010681374107580303,
+            "CB": [
+              0.005158513784408569,
+              1.0129156112670898
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00019342327886651134,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "158738d2d70d75bb491e4f8af0c125f1c69b58cda63926f81cf464a257deac26"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.00015966115940457826,
+            "H15_mse": 1.797955921770069e-05,
+            "ignore_input_H15_mse": 0.0030103424771782184,
+            "H15_ratio_to_ignore_input": 0.005972595926877413,
+            "CB": [
+              0.004661619663238525,
+              1.0117443799972534
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00015966115940457826,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "158738d2d70d75bb491e4f8af0c125f1c69b58cda63926f81cf464a257deac26"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.0004644199145937833,
+            "H15_mse": 1.2688788464743966e-05,
+            "ignore_input_H15_mse": 0.0030103424771782184,
+            "H15_ratio_to_ignore_input": 0.004215064751249818,
+            "CB": [
+              0.00565144419670105,
+              1.0207961797714233
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0004644199145937833,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s43-N8-T50.pt",
+            "sha256": "158738d2d70d75bb491e4f8af0c125f1c69b58cda63926f81cf464a257deac26"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.0004644199145937833,
+          "H15_mse": 1.2688788464743966e-05,
+          "ignore_input_H15_mse": 0.0030103424771782184,
+          "H15_ratio_to_ignore_input": 0.004215064751249818,
+          "CB": [
+            0.00565144419670105,
+            1.0207961797714233
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0004644199145937833,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/dev-lr0.01-s43/epoch1000.pt",
+        "sha256": "b941592ae5698d7389f6f87ee9ab2b4aa8a53333e58cb3fc43af4dee32e193c5"
+      }
+    },
+    {
+      "name": "dev-lr0.01-s44",
+      "cfg": {
+        "lr": 0.01,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 44,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s44-N8-T50.pt",
+        "sha256": "60e5a9b7acc59cba167929088293cd8576496bc8203874ce8e3aee1c86d89580"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s44-N8-T50.pt",
+        "sha256": "6195f3ed37818678504aa191ad4a6ae605099cc60037fca9d356a609af470974"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": null,
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.0009790108940643805,
+            "H15_mse": 2.9763510937779857e-05,
+            "ignore_input_H15_mse": 0.0012337312488842924,
+            "H15_ratio_to_ignore_input": 0.024124792952027498,
+            "CB": [
+              0.004929155111312866,
+              0.9691015481948853
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0009790108940643805,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6195f3ed37818678504aa191ad4a6ae605099cc60037fca9d356a609af470974"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.00046072569974242583,
+            "H15_mse": 1.827917845406328e-05,
+            "ignore_input_H15_mse": 0.0012337312488842924,
+            "H15_ratio_to_ignore_input": 0.014816175297978226,
+            "CB": [
+              0.007194101810455322,
+              1.0202230215072632
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00046072569974242583,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6195f3ed37818678504aa191ad4a6ae605099cc60037fca9d356a609af470974"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.0005435267095208474,
+            "H15_mse": 5.075276448943534e-06,
+            "ignore_input_H15_mse": 0.0012337312488842924,
+            "H15_ratio_to_ignore_input": 0.004113761772293025,
+            "CB": [
+              0.0048029422760009766,
+              1.0228135585784912
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0005435267095208474,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s44-N8-T50.pt",
+            "sha256": "6195f3ed37818678504aa191ad4a6ae605099cc60037fca9d356a609af470974"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.0005435267095208474,
+          "H15_mse": 5.075276448943534e-06,
+          "ignore_input_H15_mse": 0.0012337312488842924,
+          "H15_ratio_to_ignore_input": 0.004113761772293025,
+          "CB": [
+            0.0048029422760009766,
+            1.0228135585784912
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0005435267095208474,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/dev-lr0.01-s44/epoch1000.pt",
+        "sha256": "779deeb32ee0b0c8910e9d705b53725b73a48f8dda1976c097418b94f20fc0aa"
+      }
+    },
+    {
+      "name": "confirm-compatible-s52",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 52,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s52-N8-T50.pt",
+        "sha256": "07c96e5f6e524994f6a5c97acd3d399c8c4b246aef5c1df1a88219a9aee09aef"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s52-N8-T50.pt",
+        "sha256": "92b10c82ebd9409bd709942d5e8cb2413774412661c9e6cc90ba2b4b0f8e6723"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s52/epoch1000.pt",
+        "sha256": "13cfd1069e6bf3d4e4bd2d0dfcb62d4cddf41cdbeb2417ac7212acab816c4a63"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.7871353776634055,
+            "H15_mse": 0.0019128337856967959,
+            "ignore_input_H15_mse": 0.001239572485143612,
+            "H15_ratio_to_ignore_input": 1.5431399201113944,
+            "CB": [
+              0.0042449175380170345,
+              0.11280365288257599
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7871353776634052,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "92b10c82ebd9409bd709942d5e8cb2413774412661c9e6cc90ba2b4b0f8e6723"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.002613053255643649,
+            "H15_mse": 0.00024565138215704087,
+            "ignore_input_H15_mse": 0.001239572485143612,
+            "H15_ratio_to_ignore_input": 0.19817427790725822,
+            "CB": [
+              0.006498456001281738,
+              0.9492967128753662
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.002613053255643649,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "92b10c82ebd9409bd709942d5e8cb2413774412661c9e6cc90ba2b4b0f8e6723"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.00047454339808794543,
+            "H15_mse": 0.00012200137469183755,
+            "ignore_input_H15_mse": 0.001239572485143612,
+            "H15_ratio_to_ignore_input": 0.09842213840177563,
+            "CB": [
+              0.0031856894493103027,
+              1.0215498208999634
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00047454339808794543,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "92b10c82ebd9409bd709942d5e8cb2413774412661c9e6cc90ba2b4b0f8e6723"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.00047454339808794543,
+          "H15_mse": 0.00012200137469183755,
+          "ignore_input_H15_mse": 0.001239572485143612,
+          "H15_ratio_to_ignore_input": 0.09842213840177563,
+          "CB": [
+            0.0031856894493103027,
+            1.0215498208999634
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00047454339808794543,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s52/epoch1000.pt",
+        "sha256": "13cfd1069e6bf3d4e4bd2d0dfcb62d4cddf41cdbeb2417ac7212acab816c4a63"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.00047454339808794543,
+          "H15_mse": 0.00017776147576343895,
+          "ignore_input_H15_mse": 0.0024662959938357787,
+          "H15_ratio_to_ignore_input": 0.07207629425167668,
+          "CB": [
+            0.0031856894493103027,
+            1.0215498208999634
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00047454339808794543,
+          "passed": true
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s52-N16-T50.pt",
+          "sha256": "b3bf985ed03f3353fabe370755f2173548f236d0d149dc6491b89a51ab5733a2"
+        }
+      }
+    },
+    {
+      "name": "confirm-original-SPD-s52",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 52,
+      "compatible": false,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s52-N8-T50.pt",
+        "sha256": "518109cdcbc0519e5f3970a94c887568a4759059b9512b2a655ada746da5159c"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s52-N8-T50.pt",
+        "sha256": "3e90fab90cf777f4fe351baabf3f4a5997e4870ef5936716ce1975aded784e16"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s52/epoch1000.pt",
+        "sha256": "caef218458094aa3f3e9460e5556cd6f67f2998511b8263a437c2246f7dfc7c4"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 1.0532151366250948,
+            "H15_mse": 0.003259293766315456,
+            "ignore_input_H15_mse": 0.0012783802434330918,
+            "H15_ratio_to_ignore_input": 2.549549543696497,
+            "CB": [
+              -0.016795001924037933,
+              0.13907933235168457
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0532151366250946,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "3e90fab90cf777f4fe351baabf3f4a5997e4870ef5936716ce1975aded784e16"
+          },
+          "shared_probe": {
+            "response": 1.0532151366250946,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0532151366250946,
+            "normalized_nearest_train_distance_p95": 0.5937609582896023,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 1.0236002927349213,
+            "H15_mse": 0.0019212217973840955,
+            "ignore_input_H15_mse": 0.0012783802434330918,
+            "H15_ratio_to_ignore_input": 1.502856295889439,
+            "CB": [
+              -0.005464770365506411,
+              0.11243170499801636
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0236002927349215,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "3e90fab90cf777f4fe351baabf3f4a5997e4870ef5936716ce1975aded784e16"
+          },
+          "shared_probe": {
+            "response": 1.0236002927349215,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0236002927349215,
+            "normalized_nearest_train_distance_p95": 0.5937609582896023,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 1.0214574970678043,
+            "H15_mse": 0.0019243078447698783,
+            "ignore_input_H15_mse": 0.0012783802434330918,
+            "H15_ratio_to_ignore_input": 1.5052703252063306,
+            "CB": [
+              -0.004759290721267462,
+              0.10916164517402649
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0214574970678045,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "3e90fab90cf777f4fe351baabf3f4a5997e4870ef5936716ce1975aded784e16"
+          },
+          "shared_probe": {
+            "response": 1.0214574970678045,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0214574970678045,
+            "normalized_nearest_train_distance_p95": 0.5937609582896023,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 1.0214574970678043,
+          "H15_mse": 0.0019243078447698783,
+          "ignore_input_H15_mse": 0.0012783802434330918,
+          "H15_ratio_to_ignore_input": 1.5052703252063306,
+          "CB": [
+            -0.004759290721267462,
+            0.10916164517402649
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0214574970678045,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s52/epoch1000.pt",
+        "sha256": "caef218458094aa3f3e9460e5556cd6f67f2998511b8263a437c2246f7dfc7c4"
+      },
+      "test": {
+        "metrics": {
+          "response": 1.021457497067804,
+          "H15_mse": 0.004357629266617219,
+          "ignore_input_H15_mse": 0.0025727981108004594,
+          "H15_ratio_to_ignore_input": 1.6937315245701325,
+          "CB": [
+            -0.004759290721267462,
+            0.10916164517402649
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0214574970678045,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s52-N16-T50.pt",
+          "sha256": "0c953a43f486bcbf930fa7fb3887b311e0558f2bfec3008da6ebe6cd76e77422"
+        },
+        "shared_probe": {
+          "response": 1.0214574970678045,
+          "floor": 0.0,
+          "excess_fitting_error": 1.0214574970678045,
+          "normalized_nearest_train_distance_p95": 0.5937609582896023,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-original-general-s52",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 52,
+      "compatible": false,
+      "general": true,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s52-N8-T50.pt",
+        "sha256": "518109cdcbc0519e5f3970a94c887568a4759059b9512b2a655ada746da5159c"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s52-N8-T50.pt",
+        "sha256": "3e90fab90cf777f4fe351baabf3f4a5997e4870ef5936716ce1975aded784e16"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s52/epoch1000.pt",
+        "sha256": "c59c1f52b96d4dcf081626dc6a1a9db9bcc4a757e707c6a9b80b2ac1cb85a566"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 1.0371780939347566,
+            "H15_mse": 0.0028458500367427295,
+            "ignore_input_H15_mse": 0.0012783802434330918,
+            "H15_ratio_to_ignore_input": 2.226137372946406,
+            "CB": [
+              -0.011986201629042625,
+              0.11428920179605484
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0371780939347566,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "3e90fab90cf777f4fe351baabf3f4a5997e4870ef5936716ce1975aded784e16"
+          },
+          "shared_probe": {
+            "response": 1.0371780939347566,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0371780939347566,
+            "normalized_nearest_train_distance_p95": 0.5937609582896023,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 1.0033038460885424,
+            "H15_mse": 0.0019721490695080867,
+            "ignore_input_H15_mse": 0.0012783802434330918,
+            "H15_ratio_to_ignore_input": 1.5426936387970749,
+            "CB": [
+              0.0048547000624239445,
+              0.1139722689986229
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0033038460885426,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "3e90fab90cf777f4fe351baabf3f4a5997e4870ef5936716ce1975aded784e16"
+          },
+          "shared_probe": {
+            "response": 1.0033038460885426,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0033038460885426,
+            "normalized_nearest_train_distance_p95": 0.5937609582896023,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.8904031581375486,
+            "H15_mse": 0.001874267164301675,
+            "ignore_input_H15_mse": 0.0012783802434330918,
+            "H15_ratio_to_ignore_input": 1.4661265096434282,
+            "CB": [
+              0.06260918080806732,
+              0.10817398130893707
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.8904031581375489,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s52-N8-T50.pt",
+            "sha256": "3e90fab90cf777f4fe351baabf3f4a5997e4870ef5936716ce1975aded784e16"
+          },
+          "shared_probe": {
+            "response": 0.8904031581375489,
+            "floor": 0.0,
+            "excess_fitting_error": 0.8904031581375489,
+            "normalized_nearest_train_distance_p95": 0.5937609582896023,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.8904031581375486,
+          "H15_mse": 0.001874267164301675,
+          "ignore_input_H15_mse": 0.0012783802434330918,
+          "H15_ratio_to_ignore_input": 1.4661265096434282,
+          "CB": [
+            0.06260918080806732,
+            0.10817398130893707
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.8904031581375489,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s52/epoch1000.pt",
+        "sha256": "c59c1f52b96d4dcf081626dc6a1a9db9bcc4a757e707c6a9b80b2ac1cb85a566"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.8904031581375486,
+          "H15_mse": 0.003086121513486112,
+          "ignore_input_H15_mse": 0.0025727981108004594,
+          "H15_ratio_to_ignore_input": 1.1995195038937374,
+          "CB": [
+            0.06260918080806732,
+            0.10817398130893707
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.8904031581375489,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s52-N16-T50.pt",
+          "sha256": "0c953a43f486bcbf930fa7fb3887b311e0558f2bfec3008da6ebe6cd76e77422"
+        },
+        "shared_probe": {
+          "response": 0.8904031581375489,
+          "floor": 0.0,
+          "excess_fitting_error": 0.8904031581375489,
+          "normalized_nearest_train_distance_p95": 0.5937609582896023,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-compatible-s53",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 53,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s53-N8-T50.pt",
+        "sha256": "2710c3d9f53d3b472b2e96abb5ea04f5c08189bce0f6f7a13e515e78e00a09d3"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s53-N8-T50.pt",
+        "sha256": "00ed09689d7a8b73a3552815c6be5b7cb840a4e408348de44fa719437ab4aa0b"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s53/epoch1000.pt",
+        "sha256": "65695cd23a09cc579ec9cb77aa0ace965905eb245ef9ce1d4258064dce145a6d"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.7729828125649874,
+            "H15_mse": 0.00636685065599053,
+            "ignore_input_H15_mse": 0.0036481718383763093,
+            "H15_ratio_to_ignore_input": 1.745216765563385,
+            "CB": [
+              -0.002994231879711151,
+              0.12081068754196167
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7729828125649876,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "00ed09689d7a8b73a3552815c6be5b7cb840a4e408348de44fa719437ab4aa0b"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.25530602350421905,
+            "H15_mse": 0.002545359260669733,
+            "ignore_input_H15_mse": 0.0036481718383763093,
+            "H15_ratio_to_ignore_input": 0.697708159986947,
+            "CB": [
+              0.0021027326583862305,
+              0.4947262108325958
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.25530602350421905,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "00ed09689d7a8b73a3552815c6be5b7cb840a4e408348de44fa719437ab4aa0b"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.0007315025590921564,
+            "H15_mse": 0.00017356121563737777,
+            "ignore_input_H15_mse": 0.0036481718383763093,
+            "H15_ratio_to_ignore_input": 0.047574846615400825,
+            "CB": [
+              0.00563386082649231,
+              1.0264530181884766
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0007315025590921564,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "00ed09689d7a8b73a3552815c6be5b7cb840a4e408348de44fa719437ab4aa0b"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.0007315025590921564,
+          "H15_mse": 0.00017356121563737777,
+          "ignore_input_H15_mse": 0.0036481718383763093,
+          "H15_ratio_to_ignore_input": 0.047574846615400825,
+          "CB": [
+            0.00563386082649231,
+            1.0264530181884766
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0007315025590921564,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s53/epoch1000.pt",
+        "sha256": "65695cd23a09cc579ec9cb77aa0ace965905eb245ef9ce1d4258064dce145a6d"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.0007315025590921564,
+          "H15_mse": 0.00015951192265902127,
+          "ignore_input_H15_mse": 0.0025443937662266453,
+          "H15_ratio_to_ignore_input": 0.06269152392067782,
+          "CB": [
+            0.00563386082649231,
+            1.0264530181884766
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0007315025590921564,
+          "passed": true
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s53-N16-T50.pt",
+          "sha256": "33ef2f3362a89511860be6e460634da144b44fd2d87d61a2a195d9f042dda35f"
+        }
+      }
+    },
+    {
+      "name": "confirm-original-SPD-s53",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 53,
+      "compatible": false,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s53-N8-T50.pt",
+        "sha256": "fd96ef37afc97fd1df718cfce250cfae9bd4dc90aad9f1999e2eb42c5c2d6037"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s53-N8-T50.pt",
+        "sha256": "a479f37b12e8bd9aee9ec222b83029c4b45b97d41c67bcc828ab227144fbfd09"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s53/epoch1000.pt",
+        "sha256": "7142f13b8569fe041613fc5f280701a55477834c037ebf45430bbac4115acfaa"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 1.000949748560067,
+            "H15_mse": 0.00557649236689672,
+            "ignore_input_H15_mse": 0.0038135824251364545,
+            "H15_ratio_to_ignore_input": 1.46227136199821,
+            "CB": [
+              0.0048759086057543755,
+              0.10333339869976044
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0009497485600667,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "a479f37b12e8bd9aee9ec222b83029c4b45b97d41c67bcc828ab227144fbfd09"
+          },
+          "shared_probe": {
+            "response": 1.0009497485600667,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0009497485600667,
+            "normalized_nearest_train_distance_p95": 1.0542244394465683,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 1.0208834670526705,
+            "H15_mse": 0.004862829518216499,
+            "ignore_input_H15_mse": 0.0038135824251364545,
+            "H15_ratio_to_ignore_input": 1.2751342376040296,
+            "CB": [
+              0.0010595619678497314,
+              0.15166234970092773
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0208834670526707,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "a479f37b12e8bd9aee9ec222b83029c4b45b97d41c67bcc828ab227144fbfd09"
+          },
+          "shared_probe": {
+            "response": 1.0208834670526707,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0208834670526707,
+            "normalized_nearest_train_distance_p95": 1.0542244394465683,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 1.022019327834853,
+            "H15_mse": 0.00483350462563465,
+            "ignore_input_H15_mse": 0.0038135824251364545,
+            "H15_ratio_to_ignore_input": 1.2674446456894664,
+            "CB": [
+              0.0018642749637365341,
+              0.16045062243938446
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0220193278348533,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "a479f37b12e8bd9aee9ec222b83029c4b45b97d41c67bcc828ab227144fbfd09"
+          },
+          "shared_probe": {
+            "response": 1.0220193278348533,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0220193278348533,
+            "normalized_nearest_train_distance_p95": 1.0542244394465683,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 1.022019327834853,
+          "H15_mse": 0.00483350462563465,
+          "ignore_input_H15_mse": 0.0038135824251364545,
+          "H15_ratio_to_ignore_input": 1.2674446456894664,
+          "CB": [
+            0.0018642749637365341,
+            0.16045062243938446
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0220193278348533,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s53/epoch1000.pt",
+        "sha256": "7142f13b8569fe041613fc5f280701a55477834c037ebf45430bbac4115acfaa"
+      },
+      "test": {
+        "metrics": {
+          "response": 1.0220193278348533,
+          "H15_mse": 0.004408049187901158,
+          "ignore_input_H15_mse": 0.0026541274596751595,
+          "H15_ratio_to_ignore_input": 1.6608279952164249,
+          "CB": [
+            0.0018642749637365341,
+            0.16045062243938446
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0220193278348533,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s53-N16-T50.pt",
+          "sha256": "7537c58dc3906ed46de20368f28eb674805fc7f75cb9dd59de4319f532aa467d"
+        },
+        "shared_probe": {
+          "response": 1.0220193278348533,
+          "floor": 0.0,
+          "excess_fitting_error": 1.0220193278348533,
+          "normalized_nearest_train_distance_p95": 1.0542244394465683,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-original-general-s53",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 53,
+      "compatible": false,
+      "general": true,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s53-N8-T50.pt",
+        "sha256": "fd96ef37afc97fd1df718cfce250cfae9bd4dc90aad9f1999e2eb42c5c2d6037"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s53-N8-T50.pt",
+        "sha256": "a479f37b12e8bd9aee9ec222b83029c4b45b97d41c67bcc828ab227144fbfd09"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s53/epoch1000.pt",
+        "sha256": "be359fdfaaa36523b61a4e180bdb4bc28341d56bd0ab1dab7e95c5afc68943b2"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 1.0258744576953667,
+            "H15_mse": 0.005592482240306294,
+            "ignore_input_H15_mse": 0.0038135824251364545,
+            "H15_ratio_to_ignore_input": 1.4664642367356695,
+            "CB": [
+              -0.007261894177645445,
+              0.1062917411327362
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.025874457695367,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "a479f37b12e8bd9aee9ec222b83029c4b45b97d41c67bcc828ab227144fbfd09"
+          },
+          "shared_probe": {
+            "response": 1.025874457695367,
+            "floor": 0.0,
+            "excess_fitting_error": 1.025874457695367,
+            "normalized_nearest_train_distance_p95": 1.0542244394465683,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 1.0172043546941267,
+            "H15_mse": 0.004847123404262842,
+            "ignore_input_H15_mse": 0.0038135824251364545,
+            "H15_ratio_to_ignore_input": 1.271015770450905,
+            "CB": [
+              -0.0013112457236275077,
+              0.12074826657772064
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.017204354694127,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "a479f37b12e8bd9aee9ec222b83029c4b45b97d41c67bcc828ab227144fbfd09"
+          },
+          "shared_probe": {
+            "response": 1.017204354694127,
+            "floor": 0.0,
+            "excess_fitting_error": 1.017204354694127,
+            "normalized_nearest_train_distance_p95": 1.0542244394465683,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.9404089206775919,
+            "H15_mse": 0.0045875522623831455,
+            "ignore_input_H15_mse": 0.0038135824251364545,
+            "H15_ratio_to_ignore_input": 1.2029508611496702,
+            "CB": [
+              0.038396649062633514,
+              0.1254109889268875
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.9404089206775919,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s53-N8-T50.pt",
+            "sha256": "a479f37b12e8bd9aee9ec222b83029c4b45b97d41c67bcc828ab227144fbfd09"
+          },
+          "shared_probe": {
+            "response": 0.9404089206775919,
+            "floor": 0.0,
+            "excess_fitting_error": 0.9404089206775919,
+            "normalized_nearest_train_distance_p95": 1.0542244394465683,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.9404089206775919,
+          "H15_mse": 0.0045875522623831455,
+          "ignore_input_H15_mse": 0.0038135824251364545,
+          "H15_ratio_to_ignore_input": 1.2029508611496702,
+          "CB": [
+            0.038396649062633514,
+            0.1254109889268875
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.9404089206775919,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s53/epoch1000.pt",
+        "sha256": "be359fdfaaa36523b61a4e180bdb4bc28341d56bd0ab1dab7e95c5afc68943b2"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.9404089206775921,
+          "H15_mse": 0.0038046593698188064,
+          "ignore_input_H15_mse": 0.0026541274596751595,
+          "H15_ratio_to_ignore_input": 1.4334878138386244,
+          "CB": [
+            0.038396649062633514,
+            0.1254109889268875
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.9404089206775919,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s53-N16-T50.pt",
+          "sha256": "7537c58dc3906ed46de20368f28eb674805fc7f75cb9dd59de4319f532aa467d"
+        },
+        "shared_probe": {
+          "response": 0.9404089206775919,
+          "floor": 0.0,
+          "excess_fitting_error": 0.9404089206775919,
+          "normalized_nearest_train_distance_p95": 1.0542244394465683,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-compatible-s54",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 54,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s54-N8-T50.pt",
+        "sha256": "229be96f6c50e1c6bbfdcb18be9fffe584ee1962b6a5aa63a939e0e302f768c7"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s54-N8-T50.pt",
+        "sha256": "50b9f8aa0ae4b4e857271fda769611c91e12b10b83e1571ffcd474d5f415f76e"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s54/epoch1000.pt",
+        "sha256": "aa6060e12141c300a8686b538e6a32ec3456db9361761a3c4fc841b30fb433df"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.7875408995954646,
+            "H15_mse": 0.003417772549146112,
+            "ignore_input_H15_mse": 0.0013163371767278941,
+            "H15_ratio_to_ignore_input": 2.596426363678259,
+            "CB": [
+              -0.0004451966378837824,
+              0.11256510019302368
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7875408995954645,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "50b9f8aa0ae4b4e857271fda769611c91e12b10b83e1571ffcd474d5f415f76e"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.04657705265230394,
+            "H15_mse": 0.0004407989884234137,
+            "ignore_input_H15_mse": 0.0013163371767278941,
+            "H15_ratio_to_ignore_input": 0.3348678410186186,
+            "CB": [
+              0.0037110745906829834,
+              0.7842147350311279
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.04657705265230394,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "50b9f8aa0ae4b4e857271fda769611c91e12b10b83e1571ffcd474d5f415f76e"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.00014910952710156522,
+            "H15_mse": 0.00010497692957992186,
+            "ignore_input_H15_mse": 0.0013163371767278941,
+            "H15_ratio_to_ignore_input": 0.07974927050291926,
+            "CB": [
+              0.005545109510421753,
+              1.010879397392273
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00014910952710156522,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "50b9f8aa0ae4b4e857271fda769611c91e12b10b83e1571ffcd474d5f415f76e"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.00014910952710156522,
+          "H15_mse": 0.00010497692957992186,
+          "ignore_input_H15_mse": 0.0013163371767278941,
+          "H15_ratio_to_ignore_input": 0.07974927050291926,
+          "CB": [
+            0.005545109510421753,
+            1.010879397392273
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00014910952710156522,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s54/epoch1000.pt",
+        "sha256": "aa6060e12141c300a8686b538e6a32ec3456db9361761a3c4fc841b30fb433df"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.00014910952710156522,
+          "H15_mse": 0.00010045965674228974,
+          "ignore_input_H15_mse": 0.002521799063753197,
+          "H15_ratio_to_ignore_input": 0.03983650330680014,
+          "CB": [
+            0.005545109510421753,
+            1.010879397392273
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00014910952710156522,
+          "passed": true
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s54-N16-T50.pt",
+          "sha256": "d53dcc68f43363a2f17348a80088a94a1a53f79251f9509a99d83d364cc728e9"
+        }
+      }
+    },
+    {
+      "name": "confirm-original-SPD-s54",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 54,
+      "compatible": false,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s54-N8-T50.pt",
+        "sha256": "adabc5af31e185ba9da08f037377f744cc8d810a48c19a6457870817da53e0d4"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s54-N8-T50.pt",
+        "sha256": "61e339ec1e64ff542865100c69681290b574095b7cc5f2c3cc8ca67381f0418c"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s54/epoch1000.pt",
+        "sha256": "c5a76324d0c15d4b462aaa6261de7b2fa44aa69028977a75e2586383dfc3efa6"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 1.0015183521993811,
+            "H15_mse": 0.004018427704911177,
+            "ignore_input_H15_mse": 0.0013719932768944299,
+            "H15_ratio_to_ignore_input": 2.9288975190950453,
+            "CB": [
+              0.004997095093131065,
+              0.10718008875846863
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.001518352199381,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "61e339ec1e64ff542865100c69681290b574095b7cc5f2c3cc8ca67381f0418c"
+          },
+          "shared_probe": {
+            "response": 1.001518352199381,
+            "floor": 0.0,
+            "excess_fitting_error": 1.001518352199381,
+            "normalized_nearest_train_distance_p95": 0.7284675337133308,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 1.0092331994939807,
+            "H15_mse": 0.002232670200273184,
+            "ignore_input_H15_mse": 0.0013719932768944299,
+            "H15_ratio_to_ignore_input": 1.6273186158221824,
+            "CB": [
+              0.004100451711565256,
+              0.13197457790374756
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0092331994939807,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "61e339ec1e64ff542865100c69681290b574095b7cc5f2c3cc8ca67381f0418c"
+          },
+          "shared_probe": {
+            "response": 1.0092331994939807,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0092331994939807,
+            "normalized_nearest_train_distance_p95": 0.7284675337133308,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 1.0093170029563954,
+            "H15_mse": 0.002359805571760402,
+            "ignore_input_H15_mse": 0.0013719932768944299,
+            "H15_ratio_to_ignore_input": 1.7199833348323186,
+            "CB": [
+              0.004185023717582226,
+              0.132926806807518
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0093170029563954,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "61e339ec1e64ff542865100c69681290b574095b7cc5f2c3cc8ca67381f0418c"
+          },
+          "shared_probe": {
+            "response": 1.0093170029563954,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0093170029563954,
+            "normalized_nearest_train_distance_p95": 0.7284675337133308,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 1.0093170029563954,
+          "H15_mse": 0.002359805571760402,
+          "ignore_input_H15_mse": 0.0013719932768944299,
+          "H15_ratio_to_ignore_input": 1.7199833348323186,
+          "CB": [
+            0.004185023717582226,
+            0.132926806807518
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0093170029563954,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s54/epoch1000.pt",
+        "sha256": "c5a76324d0c15d4b462aaa6261de7b2fa44aa69028977a75e2586383dfc3efa6"
+      },
+      "test": {
+        "metrics": {
+          "response": 1.0093170029563954,
+          "H15_mse": 0.0030728078450645547,
+          "ignore_input_H15_mse": 0.002633291693441631,
+          "H15_ratio_to_ignore_input": 1.1669075069494066,
+          "CB": [
+            0.004185023717582226,
+            0.132926806807518
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0093170029563954,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s54-N16-T50.pt",
+          "sha256": "331be0844cebcf85c9c20c76612b150ea872f0b033d2bc6dd35fa8cb099c4210"
+        },
+        "shared_probe": {
+          "response": 1.0093170029563954,
+          "floor": 0.0,
+          "excess_fitting_error": 1.0093170029563954,
+          "normalized_nearest_train_distance_p95": 0.7284675337133308,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-original-general-s54",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 54,
+      "compatible": false,
+      "general": true,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s54-N8-T50.pt",
+        "sha256": "adabc5af31e185ba9da08f037377f744cc8d810a48c19a6457870817da53e0d4"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s54-N8-T50.pt",
+        "sha256": "61e339ec1e64ff542865100c69681290b574095b7cc5f2c3cc8ca67381f0418c"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s54/epoch1000.pt",
+        "sha256": "0c1095bb124a56a7ff12408bc17abb0e97d3cb3e091b88d730ad601ab1ae8c27"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.9860837239481383,
+            "H15_mse": 0.004181182410547853,
+            "ignore_input_H15_mse": 0.0013719932768944299,
+            "H15_ratio_to_ignore_input": 3.0475239791350526,
+            "CB": [
+              0.012630620039999485,
+              0.10576120018959045
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.9860837239481385,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "61e339ec1e64ff542865100c69681290b574095b7cc5f2c3cc8ca67381f0418c"
+          },
+          "shared_probe": {
+            "response": 0.9860837239481385,
+            "floor": 0.0,
+            "excess_fitting_error": 0.9860837239481385,
+            "normalized_nearest_train_distance_p95": 0.7284675337133308,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.9165769657675575,
+            "H15_mse": 0.0027064995346910464,
+            "ignore_input_H15_mse": 0.0013719932768944299,
+            "H15_ratio_to_ignore_input": 1.9726769658939824,
+            "CB": [
+              0.04914742708206177,
+              0.11160802096128464
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.9165769657675575,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "61e339ec1e64ff542865100c69681290b574095b7cc5f2c3cc8ca67381f0418c"
+          },
+          "shared_probe": {
+            "response": 0.9165769657675575,
+            "floor": 0.0,
+            "excess_fitting_error": 0.9165769657675575,
+            "normalized_nearest_train_distance_p95": 0.7284675337133308,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.7576687953796811,
+            "H15_mse": 0.0019486657144413223,
+            "ignore_input_H15_mse": 0.0013719932768944299,
+            "H15_ratio_to_ignore_input": 1.4203172473645185,
+            "CB": [
+              0.13578695058822632,
+              0.10394518077373505
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7576687953796812,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s54-N8-T50.pt",
+            "sha256": "61e339ec1e64ff542865100c69681290b574095b7cc5f2c3cc8ca67381f0418c"
+          },
+          "shared_probe": {
+            "response": 0.7576687953796812,
+            "floor": 0.0,
+            "excess_fitting_error": 0.7576687953796812,
+            "normalized_nearest_train_distance_p95": 0.7284675337133308,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.7576687953796811,
+          "H15_mse": 0.0019486657144413223,
+          "ignore_input_H15_mse": 0.0013719932768944299,
+          "H15_ratio_to_ignore_input": 1.4203172473645185,
+          "CB": [
+            0.13578695058822632,
+            0.10394518077373505
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.7576687953796812,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s54/epoch1000.pt",
+        "sha256": "0c1095bb124a56a7ff12408bc17abb0e97d3cb3e091b88d730ad601ab1ae8c27"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.7576687953796812,
+          "H15_mse": 0.0029334155408668253,
+          "ignore_input_H15_mse": 0.002633291693441631,
+          "H15_ratio_to_ignore_input": 1.1139728835102738,
+          "CB": [
+            0.13578695058822632,
+            0.10394518077373505
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.7576687953796812,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s54-N16-T50.pt",
+          "sha256": "331be0844cebcf85c9c20c76612b150ea872f0b033d2bc6dd35fa8cb099c4210"
+        },
+        "shared_probe": {
+          "response": 0.7576687953796812,
+          "floor": 0.0,
+          "excess_fitting_error": 0.7576687953796812,
+          "normalized_nearest_train_distance_p95": 0.7284675337133308,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-compatible-s55",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 55,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s55-N8-T50.pt",
+        "sha256": "9626302d10311018c0d2dbaf3e523a90ba8c1a2202827ec0a9046c3789658ff5"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s55-N8-T50.pt",
+        "sha256": "7ad0911c6fd180b0710a7ffe6f3a39b332182fcda9363da4ce84b1aaf3a0e5e0"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s55/epoch1000.pt",
+        "sha256": "fce4220dd817aa557a53cd0feb17aa2828fb3b97e7f1c1f3a8fc5c080aed9aa5"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.7841498605821414,
+            "H15_mse": 0.0016669312899317051,
+            "ignore_input_H15_mse": 0.001337237907209172,
+            "H15_ratio_to_ignore_input": 1.246548038269874,
+            "CB": [
+              -0.005328856408596039,
+              0.11449366807937622
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7841498605821413,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "7ad0911c6fd180b0710a7ffe6f3a39b332182fcda9363da4ce84b1aaf3a0e5e0"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.23453411446553765,
+            "H15_mse": 0.0010650325567584176,
+            "ignore_input_H15_mse": 0.001337237907209172,
+            "H15_ratio_to_ignore_input": 0.7964420923283206,
+            "CB": [
+              0.0014285296201705933,
+              0.5157148838043213
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.23453411446553774,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "7ad0911c6fd180b0710a7ffe6f3a39b332182fcda9363da4ce84b1aaf3a0e5e0"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.00040088060964027505,
+            "H15_mse": 0.00015409117137312045,
+            "ignore_input_H15_mse": 0.001337237907209172,
+            "H15_ratio_to_ignore_input": 0.11523093276252552,
+            "CB": [
+              0.005748659372329712,
+              1.0191789865493774
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.00040088060964027505,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "7ad0911c6fd180b0710a7ffe6f3a39b332182fcda9363da4ce84b1aaf3a0e5e0"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.00040088060964027505,
+          "H15_mse": 0.00015409117137312045,
+          "ignore_input_H15_mse": 0.001337237907209172,
+          "H15_ratio_to_ignore_input": 0.11523093276252552,
+          "CB": [
+            0.005748659372329712,
+            1.0191789865493774
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00040088060964027505,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s55/epoch1000.pt",
+        "sha256": "fce4220dd817aa557a53cd0feb17aa2828fb3b97e7f1c1f3a8fc5c080aed9aa5"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.00040088060964027505,
+          "H15_mse": 2.8172062231823316e-05,
+          "ignore_input_H15_mse": 0.002481025817646272,
+          "H15_ratio_to_ignore_input": 0.011355005672028804,
+          "CB": [
+            0.005748659372329712,
+            1.0191789865493774
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.00040088060964027505,
+          "passed": true
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s55-N16-T50.pt",
+          "sha256": "ded1abfcceb52513ff5e2775560952fa24365a751a4d360b1759f77b48bcf408"
+        }
+      }
+    },
+    {
+      "name": "confirm-original-SPD-s55",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 55,
+      "compatible": false,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s55-N8-T50.pt",
+        "sha256": "a34bb4c09147bd75801ebe8b4c6d530d2086ade4d51b567973d9b163a3ac8fc8"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s55-N8-T50.pt",
+        "sha256": "247abcb88d764184be09458d91812286a757346480d89fe60553e4b4c9b9710b"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s55/epoch1000.pt",
+        "sha256": "263f7548f3660172c650b9f14903e9a39ab9d106497416ae32ddb6483918ac52"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 1.01452647804733,
+            "H15_mse": 0.004579851985077978,
+            "ignore_input_H15_mse": 0.0013828615857515727,
+            "H15_ratio_to_ignore_input": 3.3118657950057018,
+            "CB": [
+              -0.001994531834498048,
+              0.10263253003358841
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0145264780473302,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "247abcb88d764184be09458d91812286a757346480d89fe60553e4b4c9b9710b"
+          },
+          "shared_probe": {
+            "response": 1.0145264780473302,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0145264780473302,
+            "normalized_nearest_train_distance_p95": 0.8714373902016705,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 1.0171269530105966,
+            "H15_mse": 0.002716576607241068,
+            "ignore_input_H15_mse": 0.0013828615857515727,
+            "H15_ratio_to_ignore_input": 1.9644602433327651,
+            "CB": [
+              -0.003419840009883046,
+              0.10136852413415909
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0171269530105969,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "247abcb88d764184be09458d91812286a757346480d89fe60553e4b4c9b9710b"
+          },
+          "shared_probe": {
+            "response": 1.0171269530105969,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0171269530105969,
+            "normalized_nearest_train_distance_p95": 0.8714373902016705,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 1.017418813418707,
+            "H15_mse": 0.0022967160022246895,
+            "ignore_input_H15_mse": 0.0013828615857515727,
+            "H15_ratio_to_ignore_input": 1.6608430126985163,
+            "CB": [
+              -0.0034320158883929253,
+              0.10267912596464157
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0174188134187068,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "247abcb88d764184be09458d91812286a757346480d89fe60553e4b4c9b9710b"
+          },
+          "shared_probe": {
+            "response": 1.0174188134187068,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0174188134187068,
+            "normalized_nearest_train_distance_p95": 0.8714373902016705,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 1.017418813418707,
+          "H15_mse": 0.0022967160022246895,
+          "ignore_input_H15_mse": 0.0013828615857515727,
+          "H15_ratio_to_ignore_input": 1.6608430126985163,
+          "CB": [
+            -0.0034320158883929253,
+            0.10267912596464157
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0174188134187068,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s55/epoch1000.pt",
+        "sha256": "263f7548f3660172c650b9f14903e9a39ab9d106497416ae32ddb6483918ac52"
+      },
+      "test": {
+        "metrics": {
+          "response": 1.0174188134187072,
+          "H15_mse": 0.0029671198587690796,
+          "ignore_input_H15_mse": 0.0025696764504496003,
+          "H15_ratio_to_ignore_input": 1.1546667123208998,
+          "CB": [
+            -0.0034320158883929253,
+            0.10267912596464157
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.0174188134187068,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s55-N16-T50.pt",
+          "sha256": "89e05cacf86c047abdc37cd31c9ef5f9fccfb3e106cecfc585fe73c2467e0fc4"
+        },
+        "shared_probe": {
+          "response": 1.0174188134187068,
+          "floor": 0.0,
+          "excess_fitting_error": 1.0174188134187068,
+          "normalized_nearest_train_distance_p95": 0.8714373902016705,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-original-general-s55",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 55,
+      "compatible": false,
+      "general": true,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s55-N8-T50.pt",
+        "sha256": "a34bb4c09147bd75801ebe8b4c6d530d2086ade4d51b567973d9b163a3ac8fc8"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s55-N8-T50.pt",
+        "sha256": "247abcb88d764184be09458d91812286a757346480d89fe60553e4b4c9b9710b"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s55/epoch1000.pt",
+        "sha256": "9f2844a0f13e252948ecfbc54dd13b20b56f2ec33c6a51cde40aa65b814341d6"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 1.0376065691156584,
+            "H15_mse": 0.005046604597633796,
+            "ignore_input_H15_mse": 0.0013828615857515727,
+            "H15_ratio_to_ignore_input": 3.6493924262788835,
+            "CB": [
+              -0.013149645179510117,
+              0.10551950335502625
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0376065691156586,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "247abcb88d764184be09458d91812286a757346480d89fe60553e4b4c9b9710b"
+          },
+          "shared_probe": {
+            "response": 1.0376065691156586,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0376065691156586,
+            "normalized_nearest_train_distance_p95": 0.8714373902016705,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 1.0147825528421477,
+            "H15_mse": 0.0034290495781990004,
+            "ignore_input_H15_mse": 0.0013828615857515727,
+            "H15_ratio_to_ignore_input": 2.479676645537408,
+            "CB": [
+              -0.0015144851058721542,
+              0.10840336233377457
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.0147825528421477,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "247abcb88d764184be09458d91812286a757346480d89fe60553e4b4c9b9710b"
+          },
+          "shared_probe": {
+            "response": 1.0147825528421477,
+            "floor": 0.0,
+            "excess_fitting_error": 1.0147825528421477,
+            "normalized_nearest_train_distance_p95": 0.8714373902016705,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.9512072558716126,
+            "H15_mse": 0.0026919257334822367,
+            "ignore_input_H15_mse": 0.0013828615857515727,
+            "H15_ratio_to_ignore_input": 1.9466342555312213,
+            "CB": [
+              0.030836284160614014,
+              0.10921972244977951
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.9512072558716129,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s55-N8-T50.pt",
+            "sha256": "247abcb88d764184be09458d91812286a757346480d89fe60553e4b4c9b9710b"
+          },
+          "shared_probe": {
+            "response": 0.9512072558716129,
+            "floor": 0.0,
+            "excess_fitting_error": 0.9512072558716129,
+            "normalized_nearest_train_distance_p95": 0.8714373902016705,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.9512072558716126,
+          "H15_mse": 0.0026919257334822367,
+          "ignore_input_H15_mse": 0.0013828615857515727,
+          "H15_ratio_to_ignore_input": 1.9466342555312213,
+          "CB": [
+            0.030836284160614014,
+            0.10921972244977951
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.9512072558716129,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s55/epoch1000.pt",
+        "sha256": "9f2844a0f13e252948ecfbc54dd13b20b56f2ec33c6a51cde40aa65b814341d6"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.9512072558716125,
+          "H15_mse": 0.0030001801773471616,
+          "ignore_input_H15_mse": 0.0025696764504496003,
+          "H15_ratio_to_ignore_input": 1.1675322692170989,
+          "CB": [
+            0.030836284160614014,
+            0.10921972244977951
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.9512072558716129,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s55-N16-T50.pt",
+          "sha256": "89e05cacf86c047abdc37cd31c9ef5f9fccfb3e106cecfc585fe73c2467e0fc4"
+        },
+        "shared_probe": {
+          "response": 0.9512072558716129,
+          "floor": 0.0,
+          "excess_fitting_error": 0.9512072558716129,
+          "normalized_nearest_train_distance_p95": 0.8714373902016705,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-compatible-s56",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 56,
+      "compatible": true,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-train-s56-N8-T50.pt",
+        "sha256": "0a12b0756376a330cdf777f976283a043ee0eccdc6cad5c699152b1f2cb00915"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s56-N8-T50.pt",
+        "sha256": "d1650f3f9a7d4120ffe7dc69e7f0741ea87bbff10f0b06bb721d82cf70e9f143"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s56/epoch1000.pt",
+        "sha256": "0b1213eb853d33705a0f009b70980537c778eda32fcf05ed6433a9609dd2b2e6"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.7929133785298313,
+            "H15_mse": 0.003899420091259121,
+            "ignore_input_H15_mse": 0.002263605535883119,
+            "H15_ratio_to_ignore_input": 1.722658842030888,
+            "CB": [
+              0.0005934480577707291,
+              0.10954336076974869
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.7929133785298311,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "d1650f3f9a7d4120ffe7dc69e7f0741ea87bbff10f0b06bb721d82cf70e9f143"
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.003768939731316756,
+            "H15_mse": 7.203658398184355e-05,
+            "ignore_input_H15_mse": 0.002263605535883119,
+            "H15_ratio_to_ignore_input": 0.03182382391273811,
+            "CB": [
+              0.00491759181022644,
+              0.9388055801391602
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.003768939731316756,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "d1650f3f9a7d4120ffe7dc69e7f0741ea87bbff10f0b06bb721d82cf70e9f143"
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.0005447328972758569,
+            "H15_mse": 0.0001512308606461973,
+            "ignore_input_H15_mse": 0.002263605535883119,
+            "H15_ratio_to_ignore_input": 0.06680972380074887,
+            "CB": [
+              0.00483211874961853,
+              1.0228338241577148
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.0005447328972758569,
+            "passed": true
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "d1650f3f9a7d4120ffe7dc69e7f0741ea87bbff10f0b06bb721d82cf70e9f143"
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.0005447328972758569,
+          "H15_mse": 0.0001512308606461973,
+          "ignore_input_H15_mse": 0.002263605535883119,
+          "H15_ratio_to_ignore_input": 0.06680972380074887,
+          "CB": [
+            0.00483211874961853,
+            1.0228338241577148
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0005447328972758569,
+          "passed": true
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-compatible-s56/epoch1000.pt",
+        "sha256": "0b1213eb853d33705a0f009b70980537c778eda32fcf05ed6433a9609dd2b2e6"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.0005447328972758569,
+          "H15_mse": 0.0007805764695138793,
+          "ignore_input_H15_mse": 0.002748223467352301,
+          "H15_ratio_to_ignore_input": 0.2840294753271661,
+          "CB": [
+            0.00483211874961853,
+            1.0228338241577148
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.0005447328972758569,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s56-N16-T50.pt",
+          "sha256": "5ee56caad960f725279d9e457079e202d5fc0545d040d4c24e705ebfbcd38301"
+        }
+      }
+    },
+    {
+      "name": "confirm-original-SPD-s56",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 56,
+      "compatible": false,
+      "general": false,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s56-N8-T50.pt",
+        "sha256": "1e128da9a562936dcf3185de93a89baaeda9d90a7aeec02b54f9784cfc72c8b4"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s56-N8-T50.pt",
+        "sha256": "c93a0da87953ce2f21838cf2228ec99bdd94db999d218704a7cfbc55976b4d63"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s56/epoch1000.pt",
+        "sha256": "f94530cdc7024ded39a4cf71dbba75a769873c7e6d288b5f34dd8b54256d8d20"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 1.006106881177294,
+            "H15_mse": 0.003656200057948617,
+            "ignore_input_H15_mse": 0.002375707853690361,
+            "H15_ratio_to_ignore_input": 1.5389939685846363,
+            "CB": [
+              0.0030271937139332294,
+              0.11023658514022827
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.006106881177294,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "c93a0da87953ce2f21838cf2228ec99bdd94db999d218704a7cfbc55976b4d63"
+          },
+          "shared_probe": {
+            "response": 1.006106881177294,
+            "floor": 0.0,
+            "excess_fitting_error": 1.006106881177294,
+            "normalized_nearest_train_distance_p95": 1.17868329565551,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 1.0092685425793888,
+            "H15_mse": 0.004062302067989147,
+            "ignore_input_H15_mse": 0.002375707853690361,
+            "H15_ratio_to_ignore_input": 1.7099333412056013,
+            "CB": [
+              0.0018626940436661243,
+              0.11397570371627808
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.009268542579389,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "c93a0da87953ce2f21838cf2228ec99bdd94db999d218704a7cfbc55976b4d63"
+          },
+          "shared_probe": {
+            "response": 1.009268542579389,
+            "floor": 0.0,
+            "excess_fitting_error": 1.009268542579389,
+            "normalized_nearest_train_distance_p95": 1.17868329565551,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 1.0105223003997772,
+            "H15_mse": 0.003600351586911385,
+            "ignore_input_H15_mse": 0.002375707853690361,
+            "H15_ratio_to_ignore_input": 1.5154858293365892,
+            "CB": [
+              0.0016746753826737404,
+              0.11776606738567352
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 1.010522300399777,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "c93a0da87953ce2f21838cf2228ec99bdd94db999d218704a7cfbc55976b4d63"
+          },
+          "shared_probe": {
+            "response": 1.010522300399777,
+            "floor": 0.0,
+            "excess_fitting_error": 1.010522300399777,
+            "normalized_nearest_train_distance_p95": 1.17868329565551,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 1.0105223003997772,
+          "H15_mse": 0.003600351586911385,
+          "ignore_input_H15_mse": 0.002375707853690361,
+          "H15_ratio_to_ignore_input": 1.5154858293365892,
+          "CB": [
+            0.0016746753826737404,
+            0.11776606738567352
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.010522300399777,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-SPD-s56/epoch1000.pt",
+        "sha256": "f94530cdc7024ded39a4cf71dbba75a769873c7e6d288b5f34dd8b54256d8d20"
+      },
+      "test": {
+        "metrics": {
+          "response": 1.0105223003997774,
+          "H15_mse": 0.0054301513517429345,
+          "ignore_input_H15_mse": 0.0028715861155199254,
+          "H15_ratio_to_ignore_input": 1.8909937342275243,
+          "CB": [
+            0.0016746753826737404,
+            0.11776606738567352
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 1.010522300399777,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s56-N16-T50.pt",
+          "sha256": "e96ac221328390d856331aba81fc5d4b39278a650ad86c53d3791806940a88da"
+        },
+        "shared_probe": {
+          "response": 1.010522300399777,
+          "floor": 0.0,
+          "excess_fitting_error": 1.010522300399777,
+          "normalized_nearest_train_distance_p95": 1.17868329565551,
+          "coverage_below_3": true
+        }
+      }
+    },
+    {
+      "name": "confirm-original-general-s56",
+      "cfg": {
+        "lr": 0.001,
+        "scheduler": "constant",
+        "epochs": 1000,
+        "noenc": false
+      },
+      "seed": 56,
+      "compatible": false,
+      "general": true,
+      "a": 0.0,
+      "status": "complete",
+      "train": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-train-s56-N8-T50.pt",
+        "sha256": "1e128da9a562936dcf3185de93a89baaeda9d90a7aeec02b54f9784cfc72c8b4"
+      },
+      "validation": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s56-N8-T50.pt",
+        "sha256": "c93a0da87953ce2f21838cf2228ec99bdd94db999d218704a7cfbc55976b4d63"
+      },
+      "epochs_completed": 1000,
+      "updates": 3000,
+      "archived_checkpoint": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s56/epoch1000.pt",
+        "sha256": "f468b3b13169962878e307b618437caef9450af0bb4366265d1b77fabbe0d7a7"
+      },
+      "validation_checkpoints": {
+        "100": {
+          "metrics": {
+            "response": 0.9678308265781104,
+            "H15_mse": 0.004050408660264823,
+            "ignore_input_H15_mse": 0.002375707853690361,
+            "H15_ratio_to_ignore_input": 1.7049270826684462,
+            "CB": [
+              0.02211717888712883,
+              0.1075918897986412
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.9678308265781106,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "c93a0da87953ce2f21838cf2228ec99bdd94db999d218704a7cfbc55976b4d63"
+          },
+          "shared_probe": {
+            "response": 0.9678308265781106,
+            "floor": 0.0,
+            "excess_fitting_error": 0.9678308265781106,
+            "normalized_nearest_train_distance_p95": 1.17868329565551,
+            "coverage_below_3": true
+          }
+        },
+        "500": {
+          "metrics": {
+            "response": 0.8794506973205399,
+            "H15_mse": 0.003419581846492106,
+            "ignore_input_H15_mse": 0.002375707853690361,
+            "H15_ratio_to_ignore_input": 1.439394932832427,
+            "CB": [
+              0.06783901154994965,
+              0.10259916633367538
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.87945069732054,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "c93a0da87953ce2f21838cf2228ec99bdd94db999d218704a7cfbc55976b4d63"
+          },
+          "shared_probe": {
+            "response": 0.87945069732054,
+            "floor": 0.0,
+            "excess_fitting_error": 0.87945069732054,
+            "normalized_nearest_train_distance_p95": 1.17868329565551,
+            "coverage_below_3": true
+          }
+        },
+        "1000": {
+          "metrics": {
+            "response": 0.6591203477156273,
+            "H15_mse": 0.001989552175375944,
+            "ignore_input_H15_mse": 0.002375707853690361,
+            "H15_ratio_to_ignore_input": 0.8374565804820769,
+            "CB": [
+              0.1895848959684372,
+              0.04845314100384712
+            ],
+            "fixed_map_floor": 0.0,
+            "excess_fitting_error": 0.6591203477156274,
+            "passed": false
+          },
+          "data": {
+            "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-validation-s56-N8-T50.pt",
+            "sha256": "c93a0da87953ce2f21838cf2228ec99bdd94db999d218704a7cfbc55976b4d63"
+          },
+          "shared_probe": {
+            "response": 0.6591203477156274,
+            "floor": 0.0,
+            "excess_fitting_error": 0.6591203477156274,
+            "normalized_nearest_train_distance_p95": 1.17868329565551,
+            "coverage_below_3": true
+          }
+        }
+      },
+      "final_checkpoint": {
+        "metrics": {
+          "response": 0.6591203477156273,
+          "H15_mse": 0.001989552175375944,
+          "ignore_input_H15_mse": 0.002375707853690361,
+          "H15_ratio_to_ignore_input": 0.8374565804820769,
+          "CB": [
+            0.1895848959684372,
+            0.04845314100384712
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.6591203477156274,
+          "passed": false
+        },
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/runs/confirm-original-general-s56/epoch1000.pt",
+        "sha256": "f468b3b13169962878e307b618437caef9450af0bb4366265d1b77fabbe0d7a7"
+      },
+      "test": {
+        "metrics": {
+          "response": 0.6591203477156273,
+          "H15_mse": 0.0026783362115133237,
+          "ignore_input_H15_mse": 0.0028715861155199254,
+          "H15_ratio_to_ignore_input": 0.9327027307444645,
+          "CB": [
+            0.1895848959684372,
+            0.04845314100384712
+          ],
+          "fixed_map_floor": 0.0,
+          "excess_fitting_error": 0.6591203477156274,
+          "passed": false
+        },
+        "data": {
+          "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/original-a0.0-rk4-test-s56-N16-T50.pt",
+          "sha256": "e96ac221328390d856331aba81fc5d4b39278a650ad86c53d3791806940a88da"
+        },
+        "shared_probe": {
+          "response": 0.6591203477156274,
+          "floor": 0.0,
+          "excess_fitting_error": 0.6591203477156274,
+          "normalized_nearest_train_distance_p95": 1.17868329565551,
+          "coverage_below_3": true
+        }
+      }
+    }
+  ],
+  "run_count": 21,
+  "updates": 63000,
+  "local_checkpoint_evaluations": 63,
+  "failed_runs": [],
+  "historical_gates_changed": false,
+  "test_used_for_selection": false
+}

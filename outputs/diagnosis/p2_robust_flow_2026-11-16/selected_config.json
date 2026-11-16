@@ -1,0 +1,11 @@
+{
+  "cfg": {
+    "lr": 0.001,
+    "scheduler": "constant",
+    "epochs": 1000,
+    "noenc": false
+  },
+  "development_pass_count": 3,
+  "development_qualified": true,
+  "rule": "fewest failed dev seeds, worst response, mean H15/ignore-input ratio, lower LR"
+}

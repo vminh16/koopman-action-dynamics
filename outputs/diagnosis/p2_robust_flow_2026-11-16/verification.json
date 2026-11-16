@@ -1,0 +1,6 @@
+{
+  "archived_checkpoint_verdict": "PASS",
+  "archived_checkpoints": 15,
+  "selection_and_gate_metadata_checked": true,
+  "scope": "source hashes, curated final checkpoints, regenerated validation/test data and metrics; full local checkpoint count is in summary.json"
+}

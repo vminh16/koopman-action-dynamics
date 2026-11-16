@@ -1,0 +1,60 @@
+{
+  "scope": "POSTHOC_DIAGNOSTIC_ONLY_NO_RESELECTION",
+  "runs": {
+    "52": {
+      "test_data": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s52-N16-T50.pt",
+        "sha256": "b3bf985ed03f3353fabe370755f2173548f236d0d149dc6491b89a51ab5733a2"
+      },
+      "drift_mse": 0.004987971854180005,
+      "input_mse": 0.0003034911614518361,
+      "cross_term": 5.016563438487572e-05,
+      "total_vector_field_mse": 0.005341628650016718,
+      "nearest_train_distance_p95": 1.280403180985311
+    },
+    "53": {
+      "test_data": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s53-N16-T50.pt",
+        "sha256": "33ef2f3362a89511860be6e460634da144b44fd2d87d61a2a195d9f042dda35f"
+      },
+      "drift_mse": 0.007923533432620242,
+      "input_mse": 0.0004883226578796183,
+      "cross_term": -9.408392556503839e-05,
+      "total_vector_field_mse": 0.008317772164934822,
+      "nearest_train_distance_p95": 1.0848540491917844
+    },
+    "54": {
+      "test_data": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s54-N16-T50.pt",
+        "sha256": "d53dcc68f43363a2f17348a80088a94a1a53f79251f9509a99d83d364cc728e9"
+      },
+      "drift_mse": 0.008546006178945346,
+      "input_mse": 9.707807696631887e-05,
+      "cross_term": 4.444263274864383e-05,
+      "total_vector_field_mse": 0.008687526888660311,
+      "nearest_train_distance_p95": 0.7977938036160046
+    },
+    "55": {
+      "test_data": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s55-N16-T50.pt",
+        "sha256": "ded1abfcceb52513ff5e2775560952fa24365a751a4d360b1759f77b48bcf408"
+      },
+      "drift_mse": 0.003959581084423384,
+      "input_mse": 0.0002618015065051706,
+      "cross_term": -4.8588501237331585e-05,
+      "total_vector_field_mse": 0.004172794089691223,
+      "nearest_train_distance_p95": 0.7924836302421993
+    },
+    "56": {
+      "test_data": {
+        "path": "outputs/diagnosis/p2_robust_flow_2026-11-16/data/compatible-a0.0-rk4-test-s56-N16-T50.pt",
+        "sha256": "5ee56caad960f725279d9e457079e202d5fc0545d040d4c24e705ebfbcd38301"
+      },
+      "drift_mse": 0.014301664971401219,
+      "input_mse": 0.00036036336157357316,
+      "cross_term": 0.00016869349096290638,
+      "total_vector_field_mse": 0.014830721823937697,
+      "nearest_train_distance_p95": 1.5188657411616642
+    }
+  }
+}

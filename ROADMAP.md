@@ -263,7 +263,7 @@ P4: independent H2 and H3 reports, statistical significance, failure cases, base
 3. **Complete CartPole fraction coverage:** 5% seeds 42/43/44 are done; 1%/10%/30% remain. If the data or protocol changes, use separate run identities and new provenance rather than overwriting C02 evidence.
 4. **Investigate short-horizon conditioning:** output rank 4/4 is established, but Wy(0.3 s) is numerically near-singular. Keep this distinct from the unstable raw 25-power rank computation.
 5. **DONE — separate P2 E05 refresh:** Pendulum and C02 seeds 42/43/44 verified in the 2026-11-16 follow-up. Historical `missing_checkpoint` snapshot and H2/H3 gates are preserved.
-6. **P2 prerequisite:** establish action-response fidelity on the constant-map positive control, then preregister a stronger response-based optimization check and stress/excitation experiment; no H2/H3 training yet.
+6. **P2 next:** robust-flow input-map control now passes five new seeds, but joint test fidelity is 4/5 and original-coordinate controls remain weak. Preregister drift/coverage controls and equal-budget per-parameterization tuning before architecture comparisons; see [report](docs/superpowers/2026-11-16-p2-robust-flow.md). H2/H3 training remains closed.
 
 Safe inspection commands for existing checkout:
 
@@ -363,3 +363,11 @@ Branch/commit convention (suggested): `audit/pendulum-run`, `repro/cartpole`, `d
   SPD/general controls fail the locked-budget gate; nonlinear stress remains
   blocked by protocol. No H2/H3 gate change. See
   [short report](docs/superpowers/2026-11-16-p2-config-check.md).
+
+- 2026-11-16: multi-seed robust-flow completed21 runs/63,000updates. LR=.001 fixed1000
+  selected on3dev seeds; compatible new52–56 validation5/5, test input-map5/5 but
+  joint fidelity4/5. Original-coordinate SPD/general each0/5, so stress stays closed.
+  Posthoc drift/input decomposition locates a state-fidelity/generalization issue;
+  next are drift/coverage controls and equal-budget per-parameterization tuning,
+  not forcing paper MSE or immediately training a new architecture. Historical
+  H2/H3 verdicts unchanged. [Report](docs/superpowers/2026-11-16-p2-robust-flow.md).

@@ -699,3 +699,83 @@ MSE(5%) > MSE(10%) > MSE(30%)
 If the absolute values differ, record the difference and investigate the
 optimizer, loss coefficients, ODE solver, sampling protocol and checkpoint
 selection before claiming reproduction.
+
+### P2 robust-flow protocol — locked before execution (2026-11-16)
+
+Goal: reliable baseline/experimental comparisons, not matching paper scores.
+[Protocol](docs/superpowers/2026-11-16-p2-robust-flow.md). Dev seeds42–44;
+LR .001/.01, fixed1000 epochs, original losses, 8/8/16 train/val/test trajectories.
+Select on multi-seed validation, then freeze for NEW confirmation seeds52–56
+(compatible, original SPD/general). Nonlinear general sweep .5/1/2 opens only
+when dev and both prerequisite confirmation groups pass. No test-based selection.
+Source/data hashes: `outputs/diagnosis/p2_robust_flow_2026-11-16/source_snapshot.json`
+and compact `summary.json`; RNG offsets10000/20000/30000+seed, windows seed=seed,
+shuffle700000+seed. Raw runs/datasets stay ignored; curate only final confirmation
+checkpoints and concise evidence. No H2/H3 model training or historical gate edits.
+
+```bash
+export PYTHONPATH=. MPLCONFIGDIR=/tmp/cartpole-mpl OMP_NUM_THREADS=1
+sha256sum research/diagnostics/p2_robust_flow.py research/diagnostics/p2_config_check.py
+.venv/bin/python -m research.diagnostics.p2_robust_flow --stage all
+.venv/bin/python -m research.diagnostics.p2_robust_flow --stage verify-saved
+```
+
+`all` reuses completed local raw runs; on a fresh checkout it rebuilds ignored
+inputs and raw runs. `verify-saved` regenerates inputs and verifies only curated
+final checkpoints, with the source and frozen protocol hashes checked first.
+
+Post-test diagnostic for this protocol (no reselection or gate changes): decompose
+physical vector-field error on the five compatible test splits into drift, input
+and cross terms. This is not a bound on rollout MSE. Reuse archived checkpoints;
+source/data identities are in the summary and source snapshot above.
+
+```bash
+.venv/bin/python - <<'PY'
+import torch
+from research.diagnostics import p2_robust_flow as m
+m.c.OUT=m.OUT
+torch.set_num_threads(1)
+rows=m.load(m.OUT/'summary.json')['runs']; result={}
+for row in rows:
+    if not row['name'].startswith('confirm-compatible-'): continue
+    train,_=m.c.generate(row['seed'],'train',True)
+    test,identity=m.c.generate(row['seed'],'test',True)
+    model=m.c.make_model(row['seed'])
+    checkpoint=row['archived_checkpoint']
+    assert m.sha256_file(m.ROOT/checkpoint['path'])==checkpoint['sha256']
+    model.load_state_dict(torch.load(m.ROOT/checkpoint['path'],weights_only=True))
+    X=torch.cat([torch.cat([r['x0'],r['x_seq'][:-1]]) for r in test])
+    U=torch.cat([r['u_seq'] for r in test]).double()
+    T=torch.cat([torch.cat([r['x0'],r['x_seq'][:-1]]) for r in train]).double()
+    with torch.no_grad():
+        A,B=m.c.matrices(model); z=model.model.encoder(X).double()
+        drift=(z@A.double().T)[:,:2]-X.double()@torch.tensor(m.c.F.T)
+        inputs=U@(B[:2].double()-torch.tensor([[0.],[1.]],dtype=torch.float64)).T
+        total=float((drift+inputs).square().mean())
+        d=float(drift.square().mean()); i=float(inputs.square().mean())
+        cross=float((2*drift*inputs).mean())
+        assert abs(total-d-i-cross)<1e-10
+        scale=T.std(0).clamp_min(1e-8)
+        coverage=torch.cdist(X.double()/scale,T/scale).min(1).values
+    result[str(row['seed'])]={'test_data':identity,'drift_mse':d,'input_mse':i,
+        'cross_term':cross,'total_vector_field_mse':total,
+        'nearest_train_distance_p95':float(torch.quantile(coverage,.95))}
+m.c.save(m.OUT/'posthoc_vector_field.json',{'scope':'POSTHOC_DIAGNOSTIC_ONLY_NO_RESELECTION',
+    'runs':result})
+print(result)
+PY
+```
+
+Robust-flow result: 21 finite runs /63,000 updates; 63 checkpoint-validation
+recomputations and15 curated-final validation/test verifications. Compatible
+validation5/5, test response5/5, joint prediction+response4/5 (seed56 H15ratio .284>.25).
+Original SPD/general each0/5; nonlinear sweep blocked as declared. Posthoc
+vector-field decomposition shows larger drift than input error on compatible test;
+seed56 drift=.01430 vs input=.000360. No config reselection. 82 tests PASS.
+See [short report](docs/superpowers/2026-11-16-p2-robust-flow.md) for the flow decision:
+coverage/drift controls and equal tuning budgets before architecture comparisons,
+not paper-score chasing. Only15 essential final checkpoints are curated in Git;
+raw runs and synthetic data remain ignored.
+
+Robust-flow review: Standards and Spec found no blocking issues; the pre-run
+development3/3 prerequisite is explicit in the frozen protocol.

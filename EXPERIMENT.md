@@ -329,3 +329,11 @@ Strong corrected fixed-B baseline is now available for a separately declared
 nonlinear stress protocol. Keep original SPD and general-head labels distinct;
 no exact paper reproduction, H2 superiority or H3 certificate is inferred.
 [Protocol/results](docs/superpowers/2026-11-16-p2-drift-coverage-tuning.md).
+
+**Baseline freeze — 2026-11-16:** [BASELINE.md](docs/BASELINE.md) is the canonical
+identity/configuration decision for subsequent controlled stress. Main comparator:
+general-head fixed-B Koopman, calibrated LR=.01; compatible SPD sanity control:
+LR=.001. Both use32train/8val/16test, 3000updates/192000presentations in the verified
+synthetic protocol. Freeze all five final seeds; keep upstream-SPD separate.
+Readiness is controlled nonlinear stress only, not H2/H3 training or exact paper
+reproduction. New tasks require equal tuning budgets and validation-based selection.

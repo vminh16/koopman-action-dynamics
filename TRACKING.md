@@ -822,3 +822,13 @@ and model/loss code unchanged. Curate only20 final controls plus compact metadat
 
 Fresh-export check PASS: `verify-saved` restored35 initially absent synthetic
 datasets and verified20 curated final checkpoints without raw run records.
+
+### Baseline frozen — 2026-11-16
+
+[Canonical baseline decision](docs/BASELINE.md): main general-head fixed-B Koopman,
+LR=.01; compatible upstream-SPD sanity control LR=.001. Verified synthetic settings:
+32train/8val/16test, 3000updates/192000presentations, original losses; retain all5seeds.
+General checkpoint loading/inference must use the geometry-aware helper, not direct
+unmodified upstream forward. Calibration closed; next controlled nonlinear stress.
+No further baseline score chasing, architecture training or historical gate change
+is implied. For another task, assign equal tuning budgets and freeze by validation.

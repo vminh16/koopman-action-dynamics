@@ -4,6 +4,8 @@
 **Version:** 0.5 · 2026-11-12  
 **Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
 **Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
+**Frozen research comparator:** general-head fixed-B Koopman; [identity, calibrated settings and loader](docs/BASELINE.md). Upstream-SPD remains a separately labeled diagnostic.
+
 **Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
 **Current state:** P1 CartPole 5% training/evaluation completed for seeds 42/43/44 (100 epochs each; open-loop H=15 MSE `0.09189450 ± 0.00237392`); reproduction remains NEEDS_INVESTIGATION due to the failed dataset transition audit and unresolved paper-protocol comparison. Structured output rank is 4/4, while the T=0.3 s Gramian is numerically near-singular. See [TRACKING §3.4](TRACKING.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14). P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training. The 2026-11-16 drift/coverage and equal-budget tuning follow-up now establishes reliable synthetic positive controls (N32 compatible LR=.001; original-general LR=.01, five new validation/test seeds). Next is preregistered nonlinear stress; historical gates remain unchanged.
 

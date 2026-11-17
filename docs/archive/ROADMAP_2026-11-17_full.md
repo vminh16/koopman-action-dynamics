@@ -1,0 +1,387 @@
+> Archived verbatim on 2026-11-17 when the live `ROADMAP.md` was shortened. Relative links were rebased; content is unchanged.
+
+# ROADMAP.md — Research Execution & Repository Architecture
+## `koopman-action-dynamics` · RRD v0.5 / EXPERIMENT v0.5
+
+**Version:** 0.5 · 2026-11-12  
+**Working paper title:** *Learning Action-Dependent Koopman Dynamics for Prediction and Control*.  
+**Primary baseline:** Miao et al., *Learning Koopman Representations with Controllability Guarantees*, ICLR 2026.  
+**Frozen research comparator:** general-head fixed-B Koopman; [identity, calibrated settings and loader](../../docs/BASELINE.md). Upstream-SPD remains a separately labeled diagnostic.
+
+**Upstream audit commit:** `ec131bb549c8f7b01519a99acca237b9fdc9c826` (public `KYMiao/Controllable-Koopman`, static review).  
+**Current state (2026-11-16):** P1 Table 1 mismatch is now explained by a preregistered 96-run fraction grid: the sign-free dense-P operator of upstream `91a47d0` plus the upstream start≤4 sampler (`dense_s5`) reaches paper scale (≤2×) in 7/8 cells and fails only CartPole 1% (3.30×, one of three seeds LR-collapsed); the released block-SPD operator fails CartPole at every fraction (12–188×). P1 exit is met as *documented mismatch*, not exact reproduction (NOT_CERTIFIED: dataset transition audit and Table 1 evaluator contract still open). See [grid report](../../outputs/reproduction/p1_upstream_faithful_2026-11-16/REPORT_grid.md). Historical: P1 CartPole 5% C02 runs (seeds 42/43/44; open-loop H=15 MSE `0.09189450 ± 0.00237392`). Structured output rank is 4/4, while the T=0.3 s Gramian is numerically near-singular. See [TRACKING §3.4](TRACKING_2026-11-17_full.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14). P0 Pendulum audit completed (verdict: CONFIG_DRIFT_CONFIRMED_PERFORMANCE_CAUSE_NOT_CONFIG, seed variance bimodal); P2 controlled stress tests & baseline diagnosis COMPLETED using official baseline `KoopmanLitModule` (Gate P2: PASS, P2 verification: PASS after checkpoint/dataset recompute; Gate H2 Fixed-B limitation: NOT_CONFIRMED, Readiness: NO-GO; Gate H3: NO-GO due to lack of certificate margin window). H2/H3 tracks remain paused without model training. The 2026-11-16 drift/coverage and equal-budget tuning follow-up now establishes reliable synthetic positive controls (N32 compatible LR=.001; original-general LR=.01, five new validation/test seeds). Next is preregistered nonlinear stress; historical gates remain unchanged.
+
+> **Do not drift:** RRD defines scientific hypotheses. EXPERIMENT defines evidence and measurements. ROADMAP defines execution order, code boundaries and release gates. H2 and H3 are independent research tracks. Through P2, only **the author's Koopman method** is trained, including when that same method is run on new synthetic systems; explicitly labeled diagnostic ablations of its losses/parameterization are allowed to isolate failure causes. Do not reproduce external model baselines or train H2/H3 methods at this stage.
+
+---
+
+## 0. Decisions and repository name
+
+**Recommended repository:** `koopman-action-dynamics` (availability on GitHub not checked).  
+**Research direction:** expressive and controllability-aware Koopman latent dynamics with two independent hypotheses:
+
+- **H2 — Dynamics-Factorized Learning:** compare factorization as a *learning mechanism* against matched-model-class alternatives; do not claim two branches themselves are novel.
+- **H3 — Certified State-Dependent Input Maps:** characterize and measure fidelity–controllability–MPC tractability trade-off; an abstract surrogate certificate alone does not suffice.
+
+**Primary code strategy: minimal-change overlay.** Keep upstream top-level modules in their original paths so all absolute imports remain valid. Put all new researcher-owned code under `research/`, reusable command wrappers under `scripts/`, and documents at root. No mass move/rename, no bulk formatting of original files, no import rewrites in P0/P1.
+
+**License/provenance caveat:** no `LICENSE` file was visible in the audited upstream tree. Before publishing a derivative repository with original source copied, verify reuse/distribution permissions and retain the author's citation/history. Public access on GitHub does not by itself give an open-source license. If permissions remain unclear, prefer a separate repository containing only your code plus a documented upstream checkout/submodule (Alternative B below).
+
+---
+
+## 1. Audit of real upstream code and minimum required adjustments
+
+### 1.1. Confirmed by static inspection (not runtime)
+
+| Priority | Upstream source | Finding | Decision |
+|---|---|---|---|
+| **BLOCKER** | `experiments/run_train.py` | Active model constructor is `MLPLitModule`; `KoopmanLitModule` commented. Flag `--koopman_mode` alone **does not** make this a Koopman run. | First verify existing Pendulum checkpoint; write an **independent Koopman runner** under `research/baseline/` using official modules. Leave upstream untouched. |
+| **BLOCKER** | `experiments/run_eval.py` | Loader constructs `KoopmanLitModule` unconditionally. | Validate checkpoint class/key compatibility before evaluation. |
+| HIGH | `experiments/run_train.py` | `--lr` parsed but not passed to current MLP module; script selects `30%` of window dataset. | Explicit run manifest and effective optimizer LR/data fraction in new runner. |
+| HIGH | `my_utils/dataset.py` | Window starts limited to `0..4` by hardcoded `max_start=5`. | Preserve behavior only for exact-script audit; a corrected sampler lives in research layer and is separately labeled as a protocol variant. |
+| HIGH | `training/loss.py` | Controllability-loss horizon argument overwritten with `15*dt`. | Record effective training horizon; use independent float64 Gramian diagnostics for H3. |
+| HIGH | `training/loss.py` | Zero-weighted condition-number term (`beta=0`) backpropagates through `1/(min_eig+1e-8)`, producing NaN gradients on near-singular Gramians. | Removed the dead term (forward value unchanged); full-budget quadrotor training now completes. |
+| HIGH | `experiments/run_control.py` | Empty. | Build verified MPC evaluation **outside upstream** before any closed-loop claims; paper's table is not reproduced by this file. |
+| MEDIUM | `dynamics/cartpole.py` | In-place angle overwrite on input state in `dynamics()`. | Test for mutation/autograd before dataset generation or derivatives; if fixed, do so in a documented adapter/fork patch, not silently. |
+| MEDIUM | `my_utils/dataset.py` | Simulator data saved to `data/{system}_{split}.pt`; generation CLI does not seed itself. | Seed externally + hash data; retain flat `data/` path for compatibility. |
+| HIGH | `experiments/run_train.py` | Save checkpoint vào `checkpoints/` nhưng không tự tạo folder; ghi config chỉ sau lệnh save. | Kiểm tra tồn tại checkpoint thực tế và tạo folder từ wrapper trước khi train; tránh xem log epochs là successful saved run. |
+| MEDIUM | `README.md` | Example `window_len=50`; reproduction notes indicate paper uses 15. | Freeze and document **paper-vs-repo protocol** instead of treating README examples as canonical paper settings. |
+| MEDIUM | Repo tree | No tracked environment lockfile/LICENSE visible; `.pyc` tracked upstream. | Add own env lockfile and gitignore; don't rewrite upstream history in bulk. |
+
+**Important:** The audited code is the upstream commit named above. Your local repository may contain modifications. All conclusions about what your Pendulum run *actually did* remain open until local verification.
+
+### 1.2. Upstream modules to reuse (no copy, no imports rewritten)
+
+| Path | Role | How research code should call it |
+|---|---|---|
+| `dynamics/__init__.py` | `SYSTEM_REGISTRY`, four registered simulators | Use unchanged for official Pendulum/CartPole reproduction. |
+| `dynamics/{pendulum,cartpole,mountaincar,grn}.py` | Continuous-time physical dynamics | Import for official datasets and oracle **evaluation**; do not embed oracle gradients in observational training. |
+| `my_utils/dataset.py`, `my_utils/simulate.py` | Generation, `.pt` files, window dataset | Wrapper for deterministic generation; audit legacy window sampler. |
+| `models/encoder.py` | `StructuredEncoder`, `UEncoder` | Shared observed-state lift and existing Appendix G.5 input encoder. |
+| `models/koopman_operator.py` | Free/controllable operator, multi-input support | Extract/inspect actual `(A,B)`, maintain canonical parameterization; no baseline edits. |
+| `models/model_builder.py` | Builds `KoopmanModel`, ODE solver | Reuse from research runner; configure via explicit validated dict. |
+| `training/train.py`, `training/loss.py` | Lightning modules, prediction/encoder/Gramian losses | Prefer reuse for faithful baseline; corrected variants require labeled protocol. |
+| `training/evaluate.py` | Open-loop/re-encode metrics | Reuse after checking metric semantics, do independent recomputation. |
+| `experiments/*.py` | Upstream CLIs (not uniformly coherent) | Preserve as reference, **not** as unquestioned production pipeline. |
+
+---
+
+## 2. Recommended repository structure — minimum import disruption
+
+```text
+koopman-action-dynamics/
+├── README.md                         # Your project README + attribution + quickstart
+├── RRD_v0.5.md                     # Theory; update by explicit versioned revisions
+├── EXPERIMENT.md                    # Measured evidence, experiment registry
+├── ROADMAP.md                       # This document
+├── .gitignore                       # Ignore outputs, data, checkpoints, pycache
+├── environment/                     # Your reproducibility lock / environment manifest
+│   └── README.md
+├── docs/
+│   ├── UPSTREAM_AUDIT.md            # Optional: code findings and local patch register
+│   └── decision_log.md
+│
+├── dynamics/                        # UPSTREAM — keep path, source names, imports
+├── models/                          # UPSTREAM — keep path
+├── training/                        # UPSTREAM — keep path
+├── my_utils/                        # UPSTREAM — keep path
+├── experiments/                     # UPSTREAM — keep path
+│
+├── research/                        # ALL USER-OWNED IMPLEMENTATION
+│   ├── __init__.py
+│   ├── baseline/
+│   │   ├── __init__.py
+│   │   ├── verify_checkpoint.py     # Identify MLP vs Koopman, consistency checks
+│   │   ├── train_koopman.py         # Correct, explicit baseline runner
+│   │   ├── eval_koopman.py          # Evaluation wrapper and reproducibility manifest
+│   │   └── model_adapter.py         # Thin adapter only, no duplicated physics/model
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── generate.py              # Seeds, splits, hashes, manifests
+│   │   └── validate.py
+│   ├── benchmarks/
+│   │   ├── __init__.py
+│   │   ├── registry.py              # Research registry; DO NOT edit upstream registry
+│   │   ├── rotation_family.py
+│   │   ├── unicycle.py
+│   │   └── planar_quadrotor.py
+│   ├── diagnostics/
+│   │   ├── __init__.py
+│   │   ├── prediction.py
+│   │   ├── action_response.py
+│   │   ├── lifted_input_map.py
+│   │   ├── controllability_margin.py
+│   │   ├── coverage.py
+│   │   └── candidate_regret.py
+│   ├── control/
+│   │   ├── __init__.py
+│   │   ├── qp_mpc.py                # Baseline LTI QP and controlled solver tests
+│   │   └── solver_checks.py
+│   ├── methods/
+│   │   ├── h2/                      # EMPTY until H2 gate
+│   │   └── h3/                      # EMPTY until H3 gate
+│   └── common/
+│       └── provenance.py
+│
+├── configs/
+│   └── research/                    # Your configs; don't overwrite generated upstream YAML
+├── scripts/
+│   ├── audit_local.sh
+│   ├── reproduce_pendulum.sh
+│   └── reproduce_cartpole.sh
+├── tests/
+│   ├── test_upstream_interface.py
+│   ├── test_dataset_contract.py
+│   ├── test_checkpoint_class.py
+│   ├── test_gramian_numeric.py
+│   └── test_benchmark_oracles.py
+│
+├── data/                             # Existing upstream expects flat data/{system}_*.pt
+├── checkpoints/                     # Existing upstream output; gitignored
+├── lightning_logs/                  # Existing upstream output; gitignored
+└── outputs/                         # Research results & immutable manifests; large gitignored
+```
+
+**Compatibility rule:** the only dependencies of `research/` on upstream are public import surfaces, e.g. `from training.train import KoopmanLitModule`, `from models.model_builder import build_model`, `from dynamics import SYSTEM_REGISTRY`; upstream never imports from `research/`. Use `PYTHONPATH=.` from project root. Do not create another top-level package named `models`, `training`, `dynamics` inside `research/` that causes ambiguous imports.
+
+**Ownership rules:** For each original file, keep it byte-for-byte unchanged whenever practical; new modules go to `research/`. If a verified correctness fix *must* touch upstream, make one minimal focused patch with test, note changed lines and a clear commit message. No upstream mass refactor until P1 is verified. Changes in `research/` must be reviewable separately from source of [P1].
+
+**Alternative B — physical vendor separation:** `vendor/Controllable-Koopman/` as pinned Git submodule; execute wrappers with `PYTHONPATH=vendor/Controllable-Koopman:.` from root (or run upstream scripts from submodule directory). This keeps upstream imports textually unchanged but complicates cwd-relative `data/`, `configs/`, `checkpoints/`, and environment setup. Prefer only if public redistribution rights require keeping original source outside your repository, or when upstream updates become frequent. **Do not migrate during P0/P1.**
+
+---
+
+## 3. Phase sequence and evidence gates
+
+### P0 — Local Pendulum forensic audit (COMPLETED: MISMATCH)
+
+**Goal:** determine what was trained and whether existing result is valid baseline evidence.
+
+- [x] `git rev-parse HEAD`, `git status --short`, model class, effective flags and optimizer LR recorded.
+- [x] Checkpoint keys and architecture compatibility audited; the completed local runs use `KoopmanLitModule`.
+- [x] Data hashes, sampled window range, train fractions, train/test split, time step, model dimensions and evaluation script recorded.
+- [x] Re-evaluated open-loop on 1,000 test trajectories; results and source manifest saved.
+- [x] Protocol mismatch classified honestly; exact paper reproduction remains a follow-up, without overwriting existing runs.
+
+**Output:** historical [E00 manifest](../../outputs/reproduction/E00/manifest.yaml), [E01 config-drift audit](../../outputs/reproduction/E01/manifest.yaml), checkpoint verification and local-protocol `MISMATCH` verdict.
+**Exit:** completed for the actual local model, effective training config and checked artifact identities. Unknown legacy generation details remain explicit; P0 does not certify exact paper reproduction. The E01 verdict refers specifically to the recorded 0.01 versus effective 0.005 drift, not to every possible objective/scheduler choice. See [current P0/P1 status](../../docs/superpowers/2026-11-15-p0-p1-status.md).
+
+### P1 — Dataset and original-model reproduction (fraction grid COMPLETED; mismatch EXPLAINED; exact reproduction NOT_CERTIFIED)
+
+- [ ] Freeze author commit and package versions. Audit paper vs README settings (`window_len`, optimizer, sampling, Gramian effective horizon). Training source commit `5701981ce63517637f9e7cdbb1dafc7bf68e9d6f` and environment versions are recorded in each C02 manifest; full paper-protocol equivalence remains open.
+- [ ] Use author's simulator to **generate** CartPole dataset, not assume an external download. Existing 10,000/1,000 trajectory files are hashed and audited; generation seeds/manifest and the requested prior smoke-generation evidence remain to be established.
+- [ ] Validate sample shape, no NaNs, physical input range, state mutation in CartPole ODE, `.pt` hashes, train/test separation. Those checks pass, but **transition audit FAILS**: train RK4 max error `0.000160761215 > 0.0001`. Preserve this failure; do not certify the whole dataset or silently relax tolerance. [Audit report](../../outputs/reproduction/cartpole_data_audit.yaml).
+- [x] Implement the *correct Koopman* training entrypoint in `research/baseline/train_koopman.py`, instantiate `KoopmanLitModule`, pass effective LR and record sampling seeds, selected-index hash and sampler provenance. Reuse official encoder/operator/loss code; locked YAML/provenance wrapper is the labeled divergence from upstream entrypoint. C02 manifests verify effective hyperparameters and saved checkpoint hashes.
+- [ ] Evaluate Pendulum (if needed) and CartPole with same protocol as paper; distinguish open-loop/periodic re-encode; repeat runs for robust reported results.
+  - [x] CartPole 5%: seeds 42/43/44, 100 epochs each; same 1,000 test trajectories, final checkpoints, open-loop H=15/H=250 and predicted-state re-encode H=250/K=50. Mean, sample std and 95% t intervals are recorded in [TRACKING §3.4](TRACKING_2026-11-17_full.md#34-cartpole-5--completed-runs-and-independent-evaluation-2026-11-14).
+  - [x] Obtain 1%/5%/10%/30% multi-seed results (2026-11-16, 96 runs, 3 seeds, preregistered ≤2× rule): `dense_s5` passes 7/8 cells, fails CartPole 1%; block-SPD fails all CartPole cells. [Grid report](../../outputs/reproduction/p1_upstream_faithful_2026-11-16/REPORT_grid.md).
+  - [ ] Exact paper comparability: Table 1 evaluator contract not confirmed by authors; the paper-scale variant is a labeled code variant (`91a47d0` operator), not the released code.
+- [x] Independently measure learned `(A,B)` structure and output controllability in float64 on all three C02 checkpoints: similarity identities and positive-definite `P` pass; first-four-block and scaled-A tests give output rank 4/4. Gramian block-exponential computation matches independent adaptive quadrature. At T=0.3 s, `lambda_min(Wy)=2.50e-12..4.74e-12` and numerical rank is 3/4 at tolerance `1e-10`; `rho_T=null`. This records weak short-horizon conditioning, not a positive usable-margin certificate or a nonlinear-plant guarantee.
+
+**Recorded CartPole 5% results (mean ± sample std across seeds):** open-loop H=15 `0.09189450 ± 0.00237392`; open-loop H=250 `44.44596358 ± 5.62472149`; predicted-state re-encode H=250/K=50 `65.30979356 ± 3.04836531`. Re-encoding is worse than open-loop H=250 for all three seeds. Metrics are raw physical-state MSE, without angle wrapping/normalization; weighted training loss is a different metric.
+
+**Controlled follow-up (2026-11-15):** 28 runs × 100 epochs on Pendulum/CartPole
+5% support causal effects of encoder objectives/scheduler semantics and the
+CartPole input-sign/window-selection interaction. Paired three-seed test H=15:
+Pendulum baseline `0.08619425 ± 0.04338556` → noenc
+`0.01447501 ± 0.01196399`; CartPole baseline `0.09179632 ± 0.00259836` →
+negative physical block `0.06004065 ± 0.00180977`. The CartPole start0 diagnostic
+reaches `0.00087518 ± 0.00012415` but changes the stated paper sampler, so it is
+not faithful-reproduction evidence. Pendulum noenc worsens long rollouts.
+Exact paper reproduction remains **NOT_CERTIFIED / NEEDS_INVESTIGATION**;
+no H2/H3 gate changes. See [controlled audit](../../docs/superpowers/2026-11-15-p1-controlled-reproduction-audit.md)
+and [TRACKING §3.5](TRACKING_2026-11-17_full.md#35-p1-controlled-causal-audit-2026-11-15).
+
+**Scope of completion:** the 28-run 5% causal batch is finished; the full paper fraction grid and exact-protocol certification are not. [P0/P1 status](../../docs/superpowers/2026-11-15-p0-p1-status.md).
+
+**Output:** [summary](../../outputs/reproduction/cartpole_frac0.05_summary.md), [JSON](../../outputs/reproduction/cartpole_frac0.05_summary.json), [CSV](../../outputs/reproduction/cartpole_frac0.05_summary.csv), per-run manifests/evaluation/controllability reports under `outputs/reproduction/C02-s{42,43,44}/`, and saved checkpoints. CartPole E05/P2 inclusion has not been rerun; earlier P2 evidence and gates remain unchanged.
+**Exit:** author model truly reproduced or precise reason/documentation of remaining mismatch; do not hide failed replication. **Met by documented mismatch (2026-11-16):** sign-restricted block-SPD input column + window sampler explain the CartPole gap; one named failing cell (CartPole 1%) and the transition-audit failure remain recorded, not hidden. Exact reproduction stays NOT_CERTIFIED.
+
+### P2 — Baseline diagnosis on original + research stress-test systems
+
+**Goal:** isolate failure modes without training any H2/H3 methods.
+
+- [x] Build `rotation_family.py`: state-dependent input-direction with tunable rotation parameter `a`; analytic `f0,Gx`; test `a=0` and a preregistered sweep of stronger rotations.
+- [x] Build Unicycle: full-state, heading-dependent input direction. Declare controls as `(v,ω)` and state `(x,y,θ)`; do not silently change to steering-angle vehicle model.
+- [x] Build Planar Quadrotor: orientation-dependent thrust, mass/gravity/inertia, full state and actuator bounds; compare in same control setting.
+- [x] Use **the same original Koopman architecture** trained on the new simulator datasets; report parameters, data budget, action distribution and coverage.
+- [x] Measure response error, `CB` vs physical `Gx`, `B` vs lifted `JφGx`, manifold/drift errors, `d_orient`, constrained `d_star`, `ρ_T` vs `T/N`, state coverage, candidate regret.
+- [x] Implement/test baseline convex QP MPC in `research/control/` (upstream `run_control.py` is empty); verify constraints and objective on an analytically simple LTI toy before using learned models.
+- [x] Plot stress-strength vs response error, prediction error and closed-loop cost. Separate **model-class limitation**, **data coverage** and **solver numerical issues**.
+- [x] Add a full-evidence verification gate: per-run manifest, hashed artifacts outside the source tree, recorded command/solver versions/device, checkpoints+datasets for E05, shared E06 probe, and a checkpoint/dataset recompute entrypoint (`research.diagnostics.recompute_p2`). Quick runs stay `SMOKE_ONLY`; only a recomputed full run may set `PASS`.
+
+**Output:** `outputs/diagnosis/` with explicit failure-mode report and positive/negative controls.  
+**Exit:** a testable reason to improve model, or evidence to pivot. Negative Pendulum/CartPole result alone is **not** a veto.
+
+### P2 follow-up — 2026-11-16
+
+**COMPLETED:** refreshed E05 on Pendulum and all three C02 checkpoints; fixed
+explicit CartPole registration; completed 140 paired rotation diagnostic runs
+(25/100 epochs, five seeds, 65,000 updates). Checkpoint recomputation,
+source hashes, pairing/prefix checks, independent float64 rank/Gramian checks and
+80 tests pass. [Report](../../outputs/diagnosis/p2_followup_2026-11-16/REPORT.md).
+
+**Interpretation:** the easy constant-map positive control still has response
+error near the ignore-input reference. The old one-step-MSE optimization gate
+cannot establish input-map fitting. Verified weighted fixed-B floors and SPD-head
+restrictions clarify the confounding; they do not establish H2 learning superiority.
+Historical P2 PASS and H2/H3 verdicts remain unchanged. Next prerequisite is a
+well-fitted constant-map control and a separately preregistered response-based
+optimization check, before renewed stress/excitation experiments. Unicycle,
+Quadrotor and variant MPC were not rerun in this follow-up.
+
+### Gate H2 — Independent architecture/learning hypothesis
+
+**Gate Verdict: NOT_CONFIRMED (Readiness: NO-GO).**
+- **2026-11-17 diagnosis (supersedes the 1.030 ratio as evidence of the disease; gate still open):** with the calibrated baseline, the fixed-B failure is confirmed on rotation (response 0.0004 → 1.009 for a=0 → 2, at the best-constant-map floor, not fixed by 4× data or 2–4× latent). The author's G.5 input encoder halves it (0.46) but cannot represent direction rotation (own floor 0.40). Next: preregistered tests with G.5 as comparator on rotation residual, unicycle, planar quadrotor, CartPole. [Report](../../outputs/diagnosis/h2_diagnosis_2026-11-17/REPORT.md).
+- Historical (under-fitted baseline): measured response growth ratio $E_{\text{response}}(a=2.0)/E_{\text{response}}(a=0.0) = 1.030 \pm 0.01 < 1.5$ (monotone but weak across $a \in \{0.0, 0.5, 1.0, 2.0\}$, 5 seeds) under the official baseline `KoopmanLitModule`.
+- Coverage ($\text{state distance p95} \le 0.635 \le 3.0$) and optimization ($\text{one-step MSE} \approx 2.8 \times 10^{-4} \le 0.05$) pass pre-registered gates.
+- Previous 4.82x degradation report was an artifact of fitting an unconstrained linear surrogate on misaligned transitions.
+- Latest drift/coverage + equal-budget tuning establishes reliable synthetic positive controls on five new validation/test seeds (N32 compatible and original-general). Next preregister nonlinear stress using these strong baselines; the fixed-B floor alone still does not establish H2 learning superiority. Historical gate results remain archived and H2 training awaits the new stress/matched-class protocol.
+
+### Gate H3 — Independent control-theory/certificate hypothesis
+
+**Gate Verdict: NO-GO.**
+- Controllability margin $\rho_T \approx 0.0068 > 0$ is well-defined at the MPC horizon ($T=0.24$ s, 5 seeds), and QP MPC achieves 100% solver success with P95 latency $\approx 3.9$ ms.
+- However, orientation error $d_{\text{orient,p95}} \approx 0.121-0.131 > \rho_T$.
+- No certified correction window exists under singular-value bounds $\sigma(M) \in [0.5, 2.0]$.
+- Track H3 remains closed on this baseline architecture.
+
+### P3-H2 — Research method, only after H2 gate
+
+Train input-affine one-branch, factorized two-branch, and matched-class monolithic control-affine ablations with identical dataset/sampler/solver/param and compute constraints. Evaluate counterfactual action fidelity, prediction and MPC; report practical identifiability. Controlled intervention training is an **optional separate protocol** with equal privileges to all compared models. This track can succeed or fail independently of H3.
+
+### P3-H3 — Research method, only after H3 gate
+
+Implement S1 (existing input scaling), S2 (free state-dependent input map), S3 (certified constrained map), with fixed baseline definitions and independently tested certificates. Evaluate actual finite-horizon tractability: full NMPC, approximate scheduled QP, potential virtual-input QP with conservative physical bounds. Record validity conditions of `M(z)` singular values and `ΔB` norm, stability/conditioning, `δ/T/N` sweeps and extra solver cost. Do not inherit original global QP guarantee when dynamics is nonlinear in state.
+
+### P4–P5 — Research evidence and optional combination
+
+P4: independent H2 and H3 reports, statistical significance, failure cases, baselines if publication competition requires them, novelty audit. P5 optional: only if both tracks are independently supported, open a **new** scoped RRD for H2+H3 or online adaptation. No automatic feature creep.
+
+---
+
+## 4. Immediate work queue and commands
+
+**Order (not a time estimate):**
+
+1. **Resolve CartPole dataset audit:** explain/fix the transition mismatch under a separately recorded protocol; retain the existing failed report and dataset hashes. Establish generation seeds/manifest and smoke evidence before certifying new data.
+2. **Reconcile paper vs locked repo protocol:** window sampling, optimizer/scheduler, encoder losses, evaluation horizon/metric and re-encode semantics. Pendulum P0 evidence and CartPole 5% results are already recorded; avoid unnecessary retraining.
+3. **Complete CartPole fraction coverage:** 5% seeds 42/43/44 are done; 1%/10%/30% remain. If the data or protocol changes, use separate run identities and new provenance rather than overwriting C02 evidence.
+4. **Investigate short-horizon conditioning:** output rank 4/4 is established, but Wy(0.3 s) is numerically near-singular. Keep this distinct from the unstable raw 25-power rank computation.
+5. **DONE — separate P2 E05 refresh:** Pendulum and C02 seeds 42/43/44 verified in the 2026-11-16 follow-up. Historical `missing_checkpoint` snapshot and H2/H3 gates are preserved.
+6. **DONE — drift/coverage and equal-budget tuning:** N32 compatible (LR=.001) and original-general (LR=.01) now pass five new validation/test seeds. Next preregister controlled nonlinear stress with these frozen strong baselines, keeping upstream-SPD as a labeled diagnostic; see [report](../../docs/superpowers/2026-11-16-p2-drift-coverage-tuning.md). No automatic H2/H3 training gate change.
+
+Safe inspection commands for existing checkout:
+
+```bash
+# In repository root
+pwd
+git rev-parse HEAD
+git status --short
+git diff --stat
+python --version
+python -m pip freeze > outputs_or_local_environment.freeze.txt
+python -m my_utils.dataset --help
+# WARNING: scripts in upstream are NOT interchangeable as currently written.
+# Do NOT assume `python experiments/run_train.py --koopman_mode controllable`
+# really instantiates the Koopman model before verifying local implementation.
+```
+
+Do not commit `outputs_or_local_environment.freeze.txt` if it exposes local paths or private package indexes; create sanitized lock/manifest in `environment/` instead.
+
+**Recommended `.gitignore` additions** (new generated artifacts, preserve source):
+
+```gitignore
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+data/*.pt
+checkpoints/
+lightning_logs/
+outputs/
+figures/
+*.log
+```
+
+Keep `.gitkeep` in empty output directories if desired. **Do not remove already tracked upstream `.pyc` in the same code-change commit**; clean them in a separate housekeeping commit after baseline audit.
+
+---
+
+## 5. Git provenance and branching policy
+
+Preferred if licensing and attribution are resolved: fork the original project and preserve its history, then keep researcher code isolated in `research/`. Record `UPSTREAM_COMMIT` in README/manifest and keep upstream remote. Example for a fork/clone that already points to author's project:
+
+```bash
+# Example only: inspect remotes before changing them
+git remote -v
+git remote rename origin upstream
+# git remote add origin git@github.com:<YOUR_USER>/koopman-action-dynamics.git
+# git push -u origin main
+```
+
+If using GitHub's fork feature, origin may already be your fork and upstream remote configured: **do not run remote rename mechanically**. If rights are not clarified, use a separate user-owned repo with an upstream checkout/submodule and document the environment-boundary workaround; do not implicitly license or relicense the author's files.
+
+Branch/commit convention (suggested): `audit/pendulum-run`, `repro/cartpole`, `diagnostics/input-rotation`, `track/h2-*`, `track/h3-*`. Keep method-implementation commits separate from dataset/protocol fixes. No rename of upstream package until source provenance and P1 metrics are locked.
+
+**Code verification contract for later review:** a PR/commit should include changed files, exact command, expected outputs, reproducibility manifest, unit tests and checkpoint/data provenance. Review order: source audit → shape/physics/math tests → training/evaluation reproducibility → statistical/control interpretation. A successful program exit alone does not meet acceptance.
+
+---
+
+## 6. Stop conditions, risks and decisions to record
+
+| Risk | Detection | Action |
+|---|---|---|
+| Pendulum is MLP | `model.net` keys / script ctor | Reclassify run; reproduce Koopman correctly; preserve old results |
+| Paper protocol inaccessible/ambiguous | README-vs-paper/code mismatches | Label protocol variant, inspect authors' sources, don't invent exact claims |
+| CartPole input mutation/gradient error | Mutation unit test, autograd anomaly | Isolate minimal repair, record diff and test |
+| Dataset coverage too narrow | Window starts, local `Cov(u\mid x)`, state-distance plots | Fix data protocol as explicit variant; don't call branch failing evidence |
+| Fixed input direction not harmful in closed loop | Candidate regret and MPC still good | Report negative result; pivot stress case rather than tune to cherry-pick |
+| H3 certificate margin vacuous | `rho`/bounded factorization report | Stop or scope to local/trajectory certificate after new mathematical review |
+| H3 destroys control efficiency | NMPC P95 latency, infeasibility vs baseline QP | Do not claim Koopman/QP advantage; pivot or stop |
+| Source license unclear for public repo | No verified original LICENSE | Clarify rights, use fork mechanism or private/local checkout as appropriate |
+
+**Decision log:**
+- 2026-11-12: v0.5 synchronized to RRD: shared P0–P2, H2 and H3 independent, no external baselines before diagnostics.
+- 2026-11-12: Pendulum reported finished; verification remains open due to upstream `MLPLitModule`/`KoopmanLitModule` entrypoint mismatch.
+- 2026-11-12: Select minimal-change overlay for import stability; new code in `research/` and untouched upstream roots.
+- 2026-11-13: P0 Pendulum config and seed variance probe completed. Effective config is verified; seed variance is bimodal.
+- 2026-11-13: P2 re-run with official baseline `KoopmanLitModule` (fixing surrogate substitution, transition off-by-one, benchmark dt, and multi-input operator device/H buffer bugs). Gate P2 PASS. Gate H2 Fixed-B limitation NOT_CONFIRMED (readiness NO-GO); Gate H3 NO-GO. H2/H3 tracks remain closed.
+- 2026-11-14: P2 full verification: 5 seeds, per-run manifest + hashed artifacts, E05 verified Pendulum / CartPole missing, shared E06 probe, E07 fixed-state closed-loop sweep, E08 fallback/residual/ZOH-vs-Euler checks, E09 local/MPC coverage + reduced excitation, recompute entrypoint PASS. `p2_verification` PASS; gate verdicts unchanged. Removed a zero-weighted condition-number term in `training/loss.py` that produced NaN gradients on near-singular Gramians.
+
+- 2026-11-15: closed the 28-run P1 causal batch (two environments, 5%, 100 epochs/run); verified 353,800 updates, paired test effects and independent rank/Gramian checks. Preserve P0 forensic completion, exact-reproduction NOT_CERTIFIED, existing dataset-audit failure and unchanged P2/H2/H3 gates. Diagnostic start0 scores do not certify paper sampling.
+
+---
+
+## 7. References
+
+- [RRD v0.5](../RRD_v0.5.md) — definitions, theory and independent hypotheses.
+- [EXPERIMENT v0.5](../../EXPERIMENT.md) — exact metrics, experiment registry, data protocols.
+- [Original ICLR 2026 paper](https://proceedings.iclr.cc/paper_files/paper/2026/file/e3781fb5d2c17ea7283cc2a543793bdb-Paper-Conference.pdf).
+- [Author code at audited commit](https://github.com/KYMiao/Controllable-Koopman/tree/ec131bb549c8f7b01519a99acca237b9fdc9c826).
+
+- 2026-11-16: P2 follow-up completed E05 refresh and 140 paired rotation runs (65,000 updates); full checkpoint/source/pairing verification and 80 tests PASS. Mathematical input-map decomposition shows weak easy-system fitting masks interpretation of the stress ratio. H2/H3 remain NO-GO; historical report unchanged.
+
+- 2026-11-16: compatible-control config check executed 22 runs (18,100 updates):
+  original baseline/loss can learn the compatible system, but the selected
+  LR=.01/100-epoch configuration passes only 4/5 validation seeds. Original-coordinate
+  SPD/general controls fail the locked-budget gate; nonlinear stress remains
+  blocked by protocol. No H2/H3 gate change. See
+  [short report](../../docs/superpowers/2026-11-16-p2-config-check.md).
+
+- 2026-11-16: multi-seed robust-flow completed21 runs/63,000updates. LR=.001 fixed1000
+  selected on3dev seeds; compatible new52–56 validation5/5, test input-map5/5 but
+  joint fidelity4/5. Original-coordinate SPD/general each0/5, so stress stays closed.
+  Posthoc drift/input decomposition locates a state-fidelity/generalization issue;
+  next are drift/coverage controls and equal-budget per-parameterization tuning,
+  not forcing paper MSE or immediately training a new architecture. Historical
+  H2/H3 verdicts unchanged. [Report](../../docs/superpowers/2026-11-16-p2-robust-flow.md).
+
+- 2026-11-16: drift/coverage and equal-budget per-head tuning COMPLETE (32runs,
+  96,000updates, equal192,000presentations/run,84testsPASS). Compatible N32 beats
+  N8 on test at fixed budget (joint5/5 vs1/5; H15 52.3×lower). Original-general
+  LR=.01 passes5new val/test seeds; upstream-SPD0/5. Freeze these calibrated
+  positive controls for nonlinear stress, then matched-class architecture design.
+  Do not use upstream-SPD alone as a strong comparator on the original system.
+  [Report](../../docs/superpowers/2026-11-16-p2-drift-coverage-tuning.md).

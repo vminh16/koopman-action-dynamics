@@ -1,6 +1,8 @@
 - Keep baseline code in `models/`, `training/`, `dynamics/`; research code in `research/`.
-- Read `ROADMAP.md` for scope, `EXPERIMENT.md` for protocol, `TRACKING.md` for evidence and replay.
+- Start with `docs/HANDOFF.md`; update it when the project state changes. Read `ROADMAP.md` for scope, `EXPERIMENT.md` for protocol, `TRACKING.md` for evidence and replay.
 - Before experiments, log exact run/verify commands, config, seeds and source/data hashes in `TRACKING.md`.
 - Commit concise evidence and essential checkpoints; keep reproducible data, histories, plots and bulk runs ignored in `outputs/`. Never force-add whole output folders.
 - Preserve scientific checkpoints and user artifacts; untrack generated files instead of deleting local data. Rewrite Git history only when requested.
 - Verify code changes with `.venv/bin/python -m unittest discover -s tests`.
+- Every run you start (training, evaluation, sweep, smoke test, aborted attempt) gets a `TRACKING.md` entry: what it tests and why, the command, then the outcome with numbers and verdict. Record failures and crashes too; an unrecorded run did not happen.
+- Run grids on CPU (`OMP_NUM_THREADS=1`, `CUDA_VISIBLE_DEVICES=`) inside a memory-capped `systemd-run --user --scope`; this machine has 15 GB RAM and no swap.

@@ -1,6 +1,8 @@
 # Koopman Action Dynamics
 
-# Controllable Koopman
+Research overlay on the ICLR 2026 *Controllable Koopman* code. Start here: [docs/HANDOFF.md](docs/HANDOFF.md) (status, layout, rules, next step); agent rules in [AGENTS.md](AGENTS.md).
+
+## Upstream: Controllable Koopman
 
 Code for learning controllability-aware Koopman representations for nonlinear control systems.
 
@@ -8,7 +10,7 @@ The learned model has the form
 
 $\dot z = A z + B u$
 
-where the lifted state $begin:math:text$z$end:math:text$ contains the original physical state $begin:math:text$x$end:math:text$ as its first components. This allows the learned Koopman model to be evaluated not only by prediction accuracy, but also by controllability properties related to the original state.
+where the lifted state $z$ contains the original physical state $x$ as its first components. This allows the learned Koopman model to be evaluated not only by prediction accuracy, but also by controllability properties related to the original state.
 
 ## Structure
 
@@ -19,14 +21,14 @@ koopman-action-dynamics/
 ├── models/         # Encoders, Koopman operators, and baseline models
 ├── my_utils/       # Dataset, simulation, and visualization utilities
 ├── training/       # Losses and training modules
-├── docs/            # Original paper and source documentation
+├── docs/            # HANDOFF, BASELINE, RRD theory, paper PDF, reports, archive
 ├── research/        # Research implementation and extensions
 ├── configs/         # Experiment configurations
-├── scripts/         # Reproducible command wrappers
 ├── tests/           # Tests
 ├── data/            # Local datasets
 ├── checkpoints/     # Trained checkpoints
 ├── outputs/         # Generated logs, figures, and reports
+├── AGENTS.md        # Rules for agents working in this repo
 ├── TRACKING.md      # Run registry and results
 ├── EXPERIMENT.md    # Experimental protocol
 └── ROADMAP.md       # Research roadmap

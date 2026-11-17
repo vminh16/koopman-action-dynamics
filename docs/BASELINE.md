@@ -4,6 +4,17 @@
 controlled nonlinear stress tiếp theo. Giữ upstream-SPD như đối chứng code gốc;
 không dùng nó làm comparator duy nhất khi chưa qua positive control.
 
+**Bằng chứng bổ sung (P1 grid 2026-11-16):** head SPD đã phát hành không đạt Table 1
+CartPole ở mọi fraction (12–188×) vì ép dấu cột input; head sign-free (dense-P `91a47d0`)
+đạt ≤2× ở 7/8 ô. Điều này ủng hộ việc dùng head không ép dấu làm comparator.
+[Grid report](../outputs/reproduction/p1_upstream_faithful_2026-11-16/REPORT_grid.md).
+
+**Comparator thứ hai cho H2 (2026-11-17):** input encoder G.5 của tác giả (`use_modulated_u`,
+hệ số vô hướng `g(x)⊙u`) cùng config/ngân sách, chọn LR bằng validation. Mọi kết luận H2 phải
+vượt cả fixed-B lẫn G.5. Config ở đây chỉ đã hiệu chỉnh cho rotation; unicycle/quadrotor cần
+hiệu chỉnh riêng trước khi so sánh. [H2 diagnosis](../outputs/diagnosis/h2_diagnosis_2026-11-17/REPORT.md),
+[G.5 tests](../outputs/diagnosis/h2_g5_tests_2026-11-17/REPORT.md).
+
 ## Cấu hình đã xác nhận
 
 | Thành phần | Main comparator: original coordinates | Compatible sanity control |

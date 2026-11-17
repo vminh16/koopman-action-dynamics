@@ -1,0 +1,484 @@
+{
+  "rotation": {
+    "base/s102": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s102-N16-T50.pt",
+        "sha256": "23185d8d99f7b2ee5cf319b99d51776caeb20886e797179fce6678fc5bab4143"
+      },
+      "response": 0.938385804315389,
+      "fixed_B_floor": 0.9250600574266896,
+      "excess": 0.013325746888699364,
+      "drift_mse": 0.023952182916150835,
+      "input_mse": 0.630789812982997,
+      "H15": 0.005148757635284224,
+      "H15_ratio_to_ignore_input": 1.575737424785352,
+      "coverage_p95": 0.3683789281082673,
+      "CB": [
+        0.30223414301872253,
+        0.23882350325584412
+      ],
+      "scalar_gain_floor": 0.4255855695993481
+    },
+    "base/s103": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s103-N16-T50.pt",
+        "sha256": "d4618e83c166d257b978a33e96127dfebf0e142550a9a9228672df5af47ce95e"
+      },
+      "response": 0.8589267880870307,
+      "fixed_B_floor": 0.8386380571610283,
+      "excess": 0.020288730926002363,
+      "drift_mse": 0.006605308494658588,
+      "input_mse": 0.5710451650190117,
+      "H15": 0.0018348778795653766,
+      "H15_ratio_to_ignore_input": 0.7448195250031603,
+      "coverage_p95": 0.3535489137779868,
+      "CB": [
+        0.286786824464798,
+        0.026286838576197624
+      ],
+      "scalar_gain_floor": 0.41330138534674876
+    },
+    "base/s104": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s104-N16-T50.pt",
+        "sha256": "b4fdec5edd34b616843dd783c7ed3913f332abdc0c72e961a4172270c74bac64"
+      },
+      "response": 0.9384114274055351,
+      "fixed_B_floor": 0.7853677203454013,
+      "excess": 0.15304370706013382,
+      "drift_mse": 0.01208756755687356,
+      "input_mse": 0.5982544423744478,
+      "H15": 0.001894244289947344,
+      "H15_ratio_to_ignore_input": 0.9242050965941321,
+      "coverage_p95": 0.35406499906207883,
+      "CB": [
+        0.1286494880914688,
+        0.23955857753753662
+      ],
+      "scalar_gain_floor": 0.40720361388585236
+    },
+    "base/s105": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s105-N16-T50.pt",
+        "sha256": "c77247d0ec6f18d8479ad0b636824372cebfcea1b009efd216da964dfb3c3afc"
+      },
+      "response": 0.9580264696401284,
+      "fixed_B_floor": 0.9540627132551416,
+      "excess": 0.003963756384986805,
+      "drift_mse": 0.006290730147458821,
+      "input_mse": 0.6716539500898611,
+      "H15": 0.0020137036298383012,
+      "H15_ratio_to_ignore_input": 1.2938379068298889,
+      "coverage_p95": 0.277559797050803,
+      "CB": [
+        0.22229468822479248,
+        0.11405587196350098
+      ],
+      "scalar_gain_floor": 0.3702392524311009
+    },
+    "base/s106": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s106-N16-T50.pt",
+        "sha256": "c726f2235f4e87e42d3572c8ce779a886163ab394143b87ff2644ea4e0d5f3c2"
+      },
+      "response": 0.8863066572346289,
+      "fixed_B_floor": 0.8681268792729919,
+      "excess": 0.018179777961636945,
+      "drift_mse": 0.03274585597581001,
+      "input_mse": 0.6342449585501393,
+      "H15": 0.002243534660237641,
+      "H15_ratio_to_ignore_input": 0.9030617964329232,
+      "coverage_p95": 0.31526919243335744,
+      "CB": [
+        0.32082778215408325,
+        -0.016219358891248703
+      ],
+      "scalar_gain_floor": 0.4784628620232747
+    },
+    "g5/s102": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s102-N16-T50.pt",
+        "sha256": "23185d8d99f7b2ee5cf319b99d51776caeb20886e797179fce6678fc5bab4143"
+      },
+      "response": 0.43377834657092945,
+      "fixed_B_floor": 0.9250600574266896,
+      "excess": -0.49128171085576017,
+      "drift_mse": 0.0004010424169315137,
+      "input_mse": 0.29107811332499756,
+      "H15": 0.001436573118326787,
+      "H15_ratio_to_ignore_input": 0.4396520843155116,
+      "coverage_p95": 0.3683789281082673,
+      "CB": [
+        0.018792398273944855,
+        0.16957342624664307
+      ],
+      "scalar_gain_floor": 0.4255855695993481
+    },
+    "g5/s103": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s103-N16-T50.pt",
+        "sha256": "d4618e83c166d257b978a33e96127dfebf0e142550a9a9228672df5af47ce95e"
+      },
+      "response": 0.46900435043198113,
+      "fixed_B_floor": 0.8386380571610283,
+      "excess": -0.3696337067290472,
+      "drift_mse": 0.0003520100602426829,
+      "input_mse": 0.3116443502485147,
+      "H15": 0.0008498250102928879,
+      "H15_ratio_to_ignore_input": 0.34496369897493334,
+      "coverage_p95": 0.3535489137779868,
+      "CB": [
+        0.0780036523938179,
+        0.11704829335212708
+      ],
+      "scalar_gain_floor": 0.41330138534674876
+    },
+    "g5/s104": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s104-N16-T50.pt",
+        "sha256": "b4fdec5edd34b616843dd783c7ed3913f332abdc0c72e961a4172270c74bac64"
+      },
+      "response": 0.45913778257885063,
+      "fixed_B_floor": 0.7853677203454013,
+      "excess": -0.3262299377665506,
+      "drift_mse": 0.00040336556202476113,
+      "input_mse": 0.29754681863101884,
+      "H15": 0.0009492377730425224,
+      "H15_ratio_to_ignore_input": 0.4631347669259439,
+      "coverage_p95": 0.35406499906207883,
+      "CB": [
+        -0.14515037834644318,
+        0.11301430314779282
+      ],
+      "scalar_gain_floor": 0.40720361388585236
+    },
+    "g5/s105": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s105-N16-T50.pt",
+        "sha256": "c77247d0ec6f18d8479ad0b636824372cebfcea1b009efd216da964dfb3c3afc"
+      },
+      "response": 0.39454461490265,
+      "fixed_B_floor": 0.9540627132551416,
+      "excess": -0.5595180983524916,
+      "drift_mse": 0.00013664110650733933,
+      "input_mse": 0.2866321333794463,
+      "H15": 0.0007381439054653003,
+      "H15_ratio_to_ignore_input": 0.4742696747600104,
+      "coverage_p95": 0.277559797050803,
+      "CB": [
+        -0.05677076801657677,
+        0.16979119181632996
+      ],
+      "scalar_gain_floor": 0.3702392524311009
+    },
+    "g5/s106": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/rotation/data/original-a2.0-rk4-test-s106-N16-T50.pt",
+        "sha256": "c726f2235f4e87e42d3572c8ce779a886163ab394143b87ff2644ea4e0d5f3c2"
+      },
+      "response": 0.4858178051067227,
+      "fixed_B_floor": 0.8681268792729919,
+      "excess": -0.38230907416626925,
+      "drift_mse": 0.00014967814830722207,
+      "input_mse": 0.3495467424369235,
+      "H15": 0.00132993089349285,
+      "H15_ratio_to_ignore_input": 0.5353203599190581,
+      "coverage_p95": 0.31526919243335744,
+      "CB": [
+        0.12571389973163605,
+        0.09658341109752655
+      ],
+      "scalar_gain_floor": 0.4784628620232747
+    }
+  },
+  "cartpole": {
+    "g5_dense_full/s42/theta[0.00,0.52)": {
+      "n": 3150,
+      "H15_wrapped": 0.05905768813702426,
+      "normalized_response_error": 0.05120020293903844
+    },
+    "g5_dense_full/s42/theta[0.52,1.57)": {
+      "n": 3784,
+      "H15_wrapped": 0.1613830004127802,
+      "normalized_response_error": 0.3359504203335314
+    },
+    "g5_dense_full/s42/theta[1.57,3.14)": {
+      "n": 3066,
+      "H15_wrapped": 0.15818919030954567,
+      "normalized_response_error": 0.9650519740059214
+    },
+    "g5_dense_full/s43/theta[0.00,0.52)": {
+      "n": 3150,
+      "H15_wrapped": 0.029289134307943502,
+      "normalized_response_error": 0.033290496638045314
+    },
+    "g5_dense_full/s43/theta[0.52,1.57)": {
+      "n": 3784,
+      "H15_wrapped": 0.09405876874700649,
+      "normalized_response_error": 0.2510159146204334
+    },
+    "g5_dense_full/s43/theta[1.57,3.14)": {
+      "n": 3066,
+      "H15_wrapped": 0.12303602396178026,
+      "normalized_response_error": 0.9849879246843706
+    },
+    "g5_dense_full/s44/theta[0.00,0.52)": {
+      "n": 3150,
+      "H15_wrapped": 0.03396541411307674,
+      "normalized_response_error": 0.045440766590748936
+    },
+    "g5_dense_full/s44/theta[0.52,1.57)": {
+      "n": 3784,
+      "H15_wrapped": 0.11479768035387328,
+      "normalized_response_error": 0.3175557077467827
+    },
+    "g5_dense_full/s44/theta[1.57,3.14)": {
+      "n": 3066,
+      "H15_wrapped": 0.13631112862430214,
+      "normalized_response_error": 0.9648953216944378
+    }
+  },
+  "confirm": {
+    "unicycle/base/s102": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s102.pt",
+        "sha256": "6e89c8f32fb72f3e7dd76c83e9e5ff3401ce4bf7453af2a2ff6310b343c9bf37"
+      },
+      "response": 0.951267657837282,
+      "fixed_B_floor": 0.9273280135494388,
+      "scalar_gain_floor": 0.3573870449644034,
+      "H15": 0.0025288879759849227,
+      "coverage_p95": 1.2977367725960918
+    },
+    "unicycle/base/s103": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s103.pt",
+        "sha256": "87992e80d641bcdd713c11b3d417968679b0dae9a65e7f38af1c7f10d72e8a3c"
+      },
+      "response": 1.0208574648573416,
+      "fixed_B_floor": 0.9308063193405195,
+      "scalar_gain_floor": 0.42255560743008136,
+      "H15": 0.0037428187199717413,
+      "coverage_p95": 1.4058087688360095
+    },
+    "unicycle/base/s104": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s104.pt",
+        "sha256": "e7c344e33b8df201a2c5cb95cbd19e5ecde275b011104b86cbc6dbecf1855308"
+      },
+      "response": 1.1800799412315175,
+      "fixed_B_floor": 0.7836051012499599,
+      "scalar_gain_floor": 0.42827089302629673,
+      "H15": 0.003111607058853914,
+      "coverage_p95": 1.078133734476075
+    },
+    "unicycle/base/s105": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s105.pt",
+        "sha256": "800bc6089c6073b8c5633ab8fef84b0eedb485706c342b7ac66f892905f4884d"
+      },
+      "response": 0.8807799666544143,
+      "fixed_B_floor": 0.8795581577690398,
+      "scalar_gain_floor": 0.26120412400070664,
+      "H15": 0.002492038855799358,
+      "coverage_p95": 0.8909230801515177
+    },
+    "unicycle/base/s106": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s106.pt",
+        "sha256": "da3873976443f00276b6bb0daa22b99c40d19df8a5b5ccf162a6c11cc3757cd4"
+      },
+      "response": 1.328226889001694,
+      "fixed_B_floor": 0.8413991842670415,
+      "scalar_gain_floor": 0.2832960092812979,
+      "H15": 0.003985586091315396,
+      "coverage_p95": 0.7599445317296077
+    },
+    "unicycle/g5/s102": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s102.pt",
+        "sha256": "6e89c8f32fb72f3e7dd76c83e9e5ff3401ce4bf7453af2a2ff6310b343c9bf37"
+      },
+      "response": 0.6378238083463881,
+      "fixed_B_floor": 0.9273280135494388,
+      "scalar_gain_floor": 0.3573870449644034,
+      "H15": 0.0015617949125776738,
+      "coverage_p95": 1.2977367725960918
+    },
+    "unicycle/g5/s103": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s103.pt",
+        "sha256": "87992e80d641bcdd713c11b3d417968679b0dae9a65e7f38af1c7f10d72e8a3c"
+      },
+      "response": 0.5367429388318438,
+      "fixed_B_floor": 0.9308063193405195,
+      "scalar_gain_floor": 0.42255560743008136,
+      "H15": 0.0016141053862633906,
+      "coverage_p95": 1.4058087688360095
+    },
+    "unicycle/g5/s104": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s104.pt",
+        "sha256": "e7c344e33b8df201a2c5cb95cbd19e5ecde275b011104b86cbc6dbecf1855308"
+      },
+      "response": 0.5584710192845873,
+      "fixed_B_floor": 0.7836051012499599,
+      "scalar_gain_floor": 0.42827089302629673,
+      "H15": 0.0016205131520419976,
+      "coverage_p95": 1.078133734476075
+    },
+    "unicycle/g5/s105": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s105.pt",
+        "sha256": "800bc6089c6073b8c5633ab8fef84b0eedb485706c342b7ac66f892905f4884d"
+      },
+      "response": 0.6915883183508255,
+      "fixed_B_floor": 0.8795581577690398,
+      "scalar_gain_floor": 0.26120412400070664,
+      "H15": 0.001490947680351512,
+      "coverage_p95": 0.8909230801515177
+    },
+    "unicycle/g5/s106": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/unicycle-test-s106.pt",
+        "sha256": "da3873976443f00276b6bb0daa22b99c40d19df8a5b5ccf162a6c11cc3757cd4"
+      },
+      "response": 0.49522208612484536,
+      "fixed_B_floor": 0.8413991842670415,
+      "scalar_gain_floor": 0.2832960092812979,
+      "H15": 0.0033412041984793427,
+      "coverage_p95": 0.7599445317296077
+    },
+    "planar_quadrotor/base/s102": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s102.pt",
+        "sha256": "1654033f014b9e04f7aa14f7a37213a1b88b8464f23f22396690f19489bc973c"
+      },
+      "response": 0.5272357215621665,
+      "fixed_B_floor": 0.0027446178465252466,
+      "scalar_gain_floor": 0.0023956517083872178,
+      "H15": 0.0039635062236676255,
+      "coverage_p95": 2.585327795852842
+    },
+    "planar_quadrotor/base/s103": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s103.pt",
+        "sha256": "ee9feec0888c0d205585f45316127df83e8a4909e2f534447235ad92a42057b2"
+      },
+      "response": 0.18928395885347876,
+      "fixed_B_floor": 0.0013810440184891873,
+      "scalar_gain_floor": 0.0012088749774974148,
+      "H15": 0.001954563779826645,
+      "coverage_p95": 1.7172034950488893
+    },
+    "planar_quadrotor/base/s104": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s104.pt",
+        "sha256": "1d5f41d65af377fbaca9755f2faa49da1c618c837c8f2bbdcde7a3dac738bd50"
+      },
+      "response": 0.5686374218607536,
+      "fixed_B_floor": 0.00428305688357244,
+      "scalar_gain_floor": 0.003536097649515375,
+      "H15": 0.002716253955966472,
+      "coverage_p95": 2.4070943298920486
+    },
+    "planar_quadrotor/base/s105": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s105.pt",
+        "sha256": "f5d013a23858b61d31c8a9a6a453504edb4a99a27df05019f7eff631301a88c6"
+      },
+      "response": 1.7899564936791545,
+      "fixed_B_floor": 0.0011079892265108964,
+      "scalar_gain_floor": 0.0010627853036299022,
+      "H15": 0.004162408996298229,
+      "coverage_p95": 1.7452109476773532
+    },
+    "planar_quadrotor/base/s106": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s106.pt",
+        "sha256": "a0e953faa78a4a3424250d39727317315201adae179eae1ff47bf98fbbedbbd5"
+      },
+      "response": 0.5441266898623549,
+      "fixed_B_floor": 0.006111035023387932,
+      "scalar_gain_floor": 0.005061216925176609,
+      "H15": 0.0012244118402965965,
+      "coverage_p95": 1.779611950532129
+    },
+    "planar_quadrotor/g5/s102": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s102.pt",
+        "sha256": "1654033f014b9e04f7aa14f7a37213a1b88b8464f23f22396690f19489bc973c"
+      },
+      "response": 0.37224514809092246,
+      "fixed_B_floor": 0.0027446178465252466,
+      "scalar_gain_floor": 0.0023956517083872178,
+      "H15": 0.0038886889546490997,
+      "coverage_p95": 2.585327795852842
+    },
+    "planar_quadrotor/g5/s103": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s103.pt",
+        "sha256": "ee9feec0888c0d205585f45316127df83e8a4909e2f534447235ad92a42057b2"
+      },
+      "response": 0.3042561052212345,
+      "fixed_B_floor": 0.0013810440184891873,
+      "scalar_gain_floor": 0.0012088749774974148,
+      "H15": 0.004471265825065506,
+      "coverage_p95": 1.7172034950488893
+    },
+    "planar_quadrotor/g5/s104": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s104.pt",
+        "sha256": "1d5f41d65af377fbaca9755f2faa49da1c618c837c8f2bbdcde7a3dac738bd50"
+      },
+      "response": 0.3058456173783584,
+      "fixed_B_floor": 0.00428305688357244,
+      "scalar_gain_floor": 0.003536097649515375,
+      "H15": 0.006939008776721571,
+      "coverage_p95": 2.4070943298920486
+    },
+    "planar_quadrotor/g5/s105": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s105.pt",
+        "sha256": "f5d013a23858b61d31c8a9a6a453504edb4a99a27df05019f7eff631301a88c6"
+      },
+      "response": 0.3857355056018191,
+      "fixed_B_floor": 0.0011079892265108964,
+      "scalar_gain_floor": 0.0010627853036299022,
+      "H15": 0.01206540688056096,
+      "coverage_p95": 1.7452109476773532
+    },
+    "planar_quadrotor/g5/s106": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_g5_tests_2026-11-17/data/planar_quadrotor-test-s106.pt",
+        "sha256": "a0e953faa78a4a3424250d39727317315201adae179eae1ff47bf98fbbedbbd5"
+      },
+      "response": 0.4085474598192484,
+      "fixed_B_floor": 0.006111035023387932,
+      "scalar_gain_floor": 0.005061216925176609,
+      "H15": 0.003363080266719796,
+      "coverage_p95": 1.779611950532129
+    }
+  },
+  "selected_lr": {
+    "unicycle/base": 0.01,
+    "unicycle/g5": 0.01,
+    "planar_quadrotor/base": 0.01,
+    "planar_quadrotor/g5": 0.01
+  },
+  "rules": {
+    "T1_rotation_residual": true,
+    "T2_cartpole_G5_fixes_sign_flip": false,
+    "T3_unicycle": {
+      "fixed_B_disease": false,
+      "G5_does_not_fix": true
+    },
+    "T4_quadrotor": {
+      "fixed_B_disease": false,
+      "G5_does_not_fix": false
+    },
+    "coverage_ok": true,
+    "H2_diagnosis": "NOT_CONFIRMED_BEYOND_G5"
+  },
+  "script_sha256": "99f5b581c2494254d5fc1c0b8f84afdb4291abb3ef8309223802637be85670b3"
+}

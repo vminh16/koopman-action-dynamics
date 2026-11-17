@@ -1,0 +1,18 @@
+{
+  "unicycle/base": {
+    "lr": 0.003,
+    "budget": 12000
+  },
+  "unicycle/g5": {
+    "lr": 0.01,
+    "budget": 3000
+  },
+  "planar_quadrotor/base": {
+    "lr": 0.01,
+    "budget": 12000
+  },
+  "planar_quadrotor/g5": {
+    "lr": 0.01,
+    "budget": 12000
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "unicycle/base": 0.01,
+  "unicycle/g5": 0.01,
+  "planar_quadrotor/base": 0.01,
+  "planar_quadrotor/g5": 0.01
+}

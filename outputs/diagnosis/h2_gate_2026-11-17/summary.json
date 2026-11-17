@@ -1,0 +1,393 @@
+{
+  "confirm": {
+    "unicycle/base/s112": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/unicycle-test-s112.pt",
+        "sha256": "12f96cfbb17e4cdab52b867caa7f023a239b2c46f51ed5cd3fa37a351e5be025"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 0.9945781985898399,
+      "fixed_B_floor": 0.9373208078577684,
+      "scalar_gain_floor": 0.3833456112440314,
+      "H15": 0.003939281646306766,
+      "coverage_p95": 0.9605246627615325
+    },
+    "unicycle/base/s113": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/unicycle-test-s113.pt",
+        "sha256": "87175eae0032d1660fe03534bc09da85f2eaf573c795f2ce14f29b9227f25342"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 1.0845714241607207,
+      "fixed_B_floor": 0.9280220490531224,
+      "scalar_gain_floor": 0.4385696749590182,
+      "H15": 0.008442730062019869,
+      "coverage_p95": 0.7786184394354088
+    },
+    "unicycle/base/s114": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/unicycle-test-s114.pt",
+        "sha256": "17121afb5b376085ffd4bf87e0b217c1a95fa550d30cf0a1d33b31035560cce5"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 1.0437607249174274,
+      "fixed_B_floor": 0.9258672350572014,
+      "scalar_gain_floor": 0.3829681009752814,
+      "H15": 0.00930051396772617,
+      "coverage_p95": 1.280059774972465
+    },
+    "unicycle/base/s115": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/unicycle-test-s115.pt",
+        "sha256": "3a99977aa79efbdd4bfa48514cd11c7dd2ff71e5fcd8404931928dcc531be557"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 1.1749598446827485,
+      "fixed_B_floor": 0.8738549111206634,
+      "scalar_gain_floor": 0.42160518553687687,
+      "H15": 0.0045097938585725635,
+      "coverage_p95": 0.9125380369764281
+    },
+    "unicycle/base/s116": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/unicycle-test-s116.pt",
+        "sha256": "c43cf032d4446f32ed0e04da578565411865b682e42bf3efde01bdd1d0406cdd"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 1.0550788320243438,
+      "fixed_B_floor": 0.8216078983044012,
+      "scalar_gain_floor": 0.3990496274029438,
+      "H15": 0.005068692893577472,
+      "coverage_p95": 1.3594948681221297
+    },
+    "unicycle/g5/s112": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u3000/data/unicycle-test-s112.pt",
+        "sha256": "12f96cfbb17e4cdab52b867caa7f023a239b2c46f51ed5cd3fa37a351e5be025"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 0.5999999423200384,
+      "fixed_B_floor": 0.9373208078577684,
+      "scalar_gain_floor": 0.3833456112440314,
+      "H15": 0.000987414807182785,
+      "coverage_p95": 0.9605246627615325
+    },
+    "unicycle/g5/s113": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u3000/data/unicycle-test-s113.pt",
+        "sha256": "87175eae0032d1660fe03534bc09da85f2eaf573c795f2ce14f29b9227f25342"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 0.5822893258339831,
+      "fixed_B_floor": 0.9280220490531224,
+      "scalar_gain_floor": 0.4385696749590182,
+      "H15": 0.0024734992404592754,
+      "coverage_p95": 0.7786184394354088
+    },
+    "unicycle/g5/s114": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u3000/data/unicycle-test-s114.pt",
+        "sha256": "17121afb5b376085ffd4bf87e0b217c1a95fa550d30cf0a1d33b31035560cce5"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 0.5653902886616299,
+      "fixed_B_floor": 0.9258672350572014,
+      "scalar_gain_floor": 0.3829681009752814,
+      "H15": 0.0009516277785501971,
+      "coverage_p95": 1.280059774972465
+    },
+    "unicycle/g5/s115": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u3000/data/unicycle-test-s115.pt",
+        "sha256": "3a99977aa79efbdd4bfa48514cd11c7dd2ff71e5fcd8404931928dcc531be557"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 0.5389467174582292,
+      "fixed_B_floor": 0.8738549111206634,
+      "scalar_gain_floor": 0.42160518553687687,
+      "H15": 0.0018924951124715385,
+      "coverage_p95": 0.9125380369764281
+    },
+    "unicycle/g5/s116": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u3000/data/unicycle-test-s116.pt",
+        "sha256": "c43cf032d4446f32ed0e04da578565411865b682e42bf3efde01bdd1d0406cdd"
+      },
+      "rows": [
+        0,
+        1,
+        2
+      ],
+      "response": 0.4230476060522439,
+      "fixed_B_floor": 0.8216078983044012,
+      "scalar_gain_floor": 0.3990496274029438,
+      "H15": 0.0019028141996796132,
+      "coverage_p95": 1.3594948681221297
+    },
+    "planar_quadrotor/base/s112": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s112.pt",
+        "sha256": "f1f6f11f808e1da3741c7006354e084e45ddfe085a4518e8a9913fd4835c8094"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 0.7522529026085041,
+      "fixed_B_floor": 0.00926725808070786,
+      "scalar_gain_floor": 0.007307355846594184,
+      "H15": 0.0008505486128032333,
+      "coverage_p95": 1.9503220673478887
+    },
+    "planar_quadrotor/base/s113": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s113.pt",
+        "sha256": "4989b4c767c7bc3a1354fe817e11e814058547b911bb26a99b96674fd80c0913"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 1.0502765741692235,
+      "fixed_B_floor": 0.007970834878219918,
+      "scalar_gain_floor": 0.004554675362265766,
+      "H15": 0.0005209000568719615,
+      "coverage_p95": 1.4263533090449345
+    },
+    "planar_quadrotor/base/s114": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s114.pt",
+        "sha256": "ff3efd1bcbad2b6ed2e2589af8c5a5ad35eac39e2345e9fd5912851e35a72dc4"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 1.331917718978164,
+      "fixed_B_floor": 0.0076426843485991975,
+      "scalar_gain_floor": 0.0031888906498776857,
+      "H15": 0.0011652986172817905,
+      "coverage_p95": 2.1471716156667977
+    },
+    "planar_quadrotor/base/s115": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s115.pt",
+        "sha256": "371ed25b003a3347722037923b044393ef110c7c36cf73eca5e80b22930c266f"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 0.5082943064250697,
+      "fixed_B_floor": 0.012256827295639872,
+      "scalar_gain_floor": 0.008019220678890611,
+      "H15": 0.002126093118892427,
+      "coverage_p95": 1.8645606654124998
+    },
+    "planar_quadrotor/base/s116": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s116.pt",
+        "sha256": "19852fd86786fd77b3d82c80dfffb86dc21898d1bfefe032f25096799d429691"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 1.0998190546089597,
+      "fixed_B_floor": 0.00947332840366236,
+      "scalar_gain_floor": 0.005214920813599338,
+      "H15": 0.0005454916857063992,
+      "coverage_p95": 2.065589751966517
+    },
+    "planar_quadrotor/g5/s112": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s112.pt",
+        "sha256": "f1f6f11f808e1da3741c7006354e084e45ddfe085a4518e8a9913fd4835c8094"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 0.3183222226807544,
+      "fixed_B_floor": 0.00926725808070786,
+      "scalar_gain_floor": 0.007307355846594184,
+      "H15": 0.002644281856515083,
+      "coverage_p95": 1.9503220673478887
+    },
+    "planar_quadrotor/g5/s113": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s113.pt",
+        "sha256": "4989b4c767c7bc3a1354fe817e11e814058547b911bb26a99b96674fd80c0913"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 0.045564492242317026,
+      "fixed_B_floor": 0.007970834878219918,
+      "scalar_gain_floor": 0.004554675362265766,
+      "H15": 0.001881522057212767,
+      "coverage_p95": 1.4263533090449345
+    },
+    "planar_quadrotor/g5/s114": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s114.pt",
+        "sha256": "ff3efd1bcbad2b6ed2e2589af8c5a5ad35eac39e2345e9fd5912851e35a72dc4"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 0.029545296547267574,
+      "fixed_B_floor": 0.0076426843485991975,
+      "scalar_gain_floor": 0.0031888906498776857,
+      "H15": 0.001214948507351769,
+      "coverage_p95": 2.1471716156667977
+    },
+    "planar_quadrotor/g5/s115": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s115.pt",
+        "sha256": "371ed25b003a3347722037923b044393ef110c7c36cf73eca5e80b22930c266f"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 0.4038004796823512,
+      "fixed_B_floor": 0.012256827295639872,
+      "scalar_gain_floor": 0.008019220678890611,
+      "H15": 0.0034776000877093805,
+      "coverage_p95": 1.8645606654124998
+    },
+    "planar_quadrotor/g5/s116": {
+      "test_data": {
+        "path": "outputs/diagnosis/h2_gate_2026-11-17/u12000/data/planar_quadrotor-test-s116.pt",
+        "sha256": "19852fd86786fd77b3d82c80dfffb86dc21898d1bfefe032f25096799d429691"
+      },
+      "rows": [
+        3,
+        4
+      ],
+      "response": 0.44037965168654447,
+      "fixed_B_floor": 0.00947332840366236,
+      "scalar_gain_floor": 0.005214920813599338,
+      "H15": 0.0019364015418206794,
+      "coverage_p95": 2.065589751966517
+    }
+  },
+  "cartpole": {
+    "g5_dense_full/s42/theta[0.00,0.52)": {
+      "n": 3150,
+      "H15_wrapped": 0.05528186691580083,
+      "normalized_response_error": 0.05539194201842895
+    },
+    "g5_dense_full/s42/theta[0.52,1.57)": {
+      "n": 3784,
+      "H15_wrapped": 0.14719665635715032,
+      "normalized_response_error": 0.31930276790397666
+    },
+    "g5_dense_full/s42/theta[1.57,3.14)": {
+      "n": 3066,
+      "H15_wrapped": 0.1480484374554187,
+      "normalized_response_error": 0.8456194730775317
+    },
+    "g5_dense_full/s43/theta[0.00,0.52)": {
+      "n": 3150,
+      "H15_wrapped": 0.031602953929338304,
+      "normalized_response_error": 0.03649933421875554
+    },
+    "g5_dense_full/s43/theta[0.52,1.57)": {
+      "n": 3784,
+      "H15_wrapped": 0.10463206119849804,
+      "normalized_response_error": 0.27823233469090075
+    },
+    "g5_dense_full/s43/theta[1.57,3.14)": {
+      "n": 3066,
+      "H15_wrapped": 0.12273435274681159,
+      "normalized_response_error": 0.8746666542832835
+    },
+    "g5_dense_full/s44/theta[0.00,0.52)": {
+      "n": 3150,
+      "H15_wrapped": 0.034185505290616675,
+      "normalized_response_error": 0.043170199878549066
+    },
+    "g5_dense_full/s44/theta[0.52,1.57)": {
+      "n": 3784,
+      "H15_wrapped": 0.10980540091264045,
+      "normalized_response_error": 0.2977067154343542
+    },
+    "g5_dense_full/s44/theta[1.57,3.14)": {
+      "n": 3066,
+      "H15_wrapped": 0.12614511717693397,
+      "normalized_response_error": 0.8657197495251635
+    }
+  },
+  "selected": {
+    "unicycle/base": {
+      "lr": 0.003,
+      "budget": 12000
+    },
+    "unicycle/g5": {
+      "lr": 0.01,
+      "budget": 3000
+    },
+    "planar_quadrotor/base": {
+      "lr": 0.01,
+      "budget": 12000
+    },
+    "planar_quadrotor/g5": {
+      "lr": 0.01,
+      "budget": 12000
+    }
+  },
+  "rules": {
+    "C1_unicycle": {
+      "fixed_B_disease": false,
+      "G5_does_not_fix": true
+    },
+    "C2_quadrotor_thrust_rows": {
+      "fixed_B_disease": false,
+      "G5_does_not_fix": false
+    },
+    "C3_cos_G5_fixes_cartpole": false,
+    "coverage_ok": true,
+    "H2_readiness": "NOT_YET"
+  },
+  "script_sha256": "06de7e0b450d9136cda454e67e905812c51b33c478f54c54f980fdaa3e769c09"
+}

@@ -1,0 +1,87 @@
+{
+  "run_id": "cartpole-f0.05-dense_s5-s44",
+  "system": "cartpole",
+  "fraction": 0.05,
+  "arm": "dense_s5",
+  "seed": 44,
+  "operator": "dense",
+  "sampler": "traj_s5",
+  "device": "cpu",
+  "windows": 2500,
+  "trajectories": 500,
+  "max_start": 4,
+  "script_sha256": "9bf7ae531597077a07d97ddf0bcb780bd95e48ea60428c70994eeb42f1ebd138",
+  "history": [
+    {
+      "epoch": 1,
+      "steps": 40,
+      "lr": 0.001,
+      "val_first15": 0.11445486333446372
+    },
+    {
+      "epoch": 10,
+      "steps": 400,
+      "lr": 0.001,
+      "val_first15": 0.004849465591220503
+    },
+    {
+      "epoch": 20,
+      "steps": 800,
+      "lr": 0.001,
+      "val_first15": 0.0028539428605397436
+    },
+    {
+      "epoch": 30,
+      "steps": 1200,
+      "lr": 0.001,
+      "val_first15": 0.0027713713933563847
+    },
+    {
+      "epoch": 40,
+      "steps": 1600,
+      "lr": 0.001,
+      "val_first15": 0.0019311815328819665
+    },
+    {
+      "epoch": 50,
+      "steps": 2000,
+      "lr": 0.0001,
+      "val_first15": 0.0016391022008109678
+    },
+    {
+      "epoch": 60,
+      "steps": 2400,
+      "lr": 1e-05,
+      "val_first15": 0.0015981075800145673
+    },
+    {
+      "epoch": 70,
+      "steps": 2800,
+      "lr": 1e-05,
+      "val_first15": 0.0016053857923873955
+    },
+    {
+      "epoch": 80,
+      "steps": 3200,
+      "lr": 1.0000000000000002e-06,
+      "val_first15": 0.0015903306187331071
+    },
+    {
+      "epoch": 90,
+      "steps": 3600,
+      "lr": 1.0000000000000002e-07,
+      "val_first15": 0.001589236940645139
+    },
+    {
+      "epoch": 100,
+      "steps": 4000,
+      "lr": 1.0000000000000002e-07,
+      "val_first15": 0.001590103891645381
+    }
+  ],
+  "status": "complete",
+  "steps": 4000,
+  "elapsed_seconds": 38.059510132996365,
+  "final_lr": 1.0000000000000002e-07,
+  "checkpoint_sha256": "7708f3622ddf2c9a317be0e67caa90518c0627c27154f42c5899e5dab349eacb"
+}

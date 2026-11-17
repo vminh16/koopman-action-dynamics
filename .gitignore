@@ -17,6 +17,9 @@ outputs/**
 !outputs/**/verification.json
 !outputs/**/source_snapshot.json
 !outputs/**/selected_config.json
+!outputs/**/summary_grid.json
+!outputs/**/selected_lr.json
+!outputs/**/selected.json
 !outputs/**/stage_gates.json
 !outputs/reproduction/*_summary.json
 !outputs/reproduction/cartpole_data_audit.yaml
